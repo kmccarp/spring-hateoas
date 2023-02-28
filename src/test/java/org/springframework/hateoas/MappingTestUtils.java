@@ -81,8 +81,8 @@ public class MappingTestUtils {
 
 			try {
 				return mapper.writeValueAsString(source);
-			} catch (JsonProcessingException o_O) {
-				throw new RuntimeException(o_O);
+			} catch (JsonProcessingException oO) {
+				throw new RuntimeException(oO);
 			}
 		}
 
