@@ -154,10 +154,12 @@ public interface LinkRelationProvider extends Plugin<LookupContext> {
 		@Override
 		public boolean equals(Object o) {
 
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof LookupContext))
+			}
+			if (!(o instanceof LookupContext)) {
 				return false;
+			}
 			LookupContext that = (LookupContext) o;
 			return Objects.equals(this.type, that.type) && this.resourceType == that.resourceType;
 		}

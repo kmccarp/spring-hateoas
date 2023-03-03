@@ -94,7 +94,7 @@ public class HidingClassLoader extends ShadowingClassLoader {
 
 	private void checkIfHidden(String name) throws ClassNotFoundException {
 
-		if (hidden.stream().anyMatch(it -> name.startsWith(it))) {
+		if (hidden.stream().anyMatch(name::startsWith)) {
 			throw new ClassNotFoundException();
 		}
 	}
