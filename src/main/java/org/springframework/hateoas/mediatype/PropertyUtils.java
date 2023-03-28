@@ -346,7 +346,7 @@ public class PropertyUtils {
 					.orElseThrow(() -> new IllegalStateException("Could not resolve value!"));
 
 			this.annotations = Stream.of(property.getReadMethod(), property.getWriteMethod(), field) //
-					.filter(it -> it != null) //
+					.filter(Objects::nonNull) //
 					.map(MergedAnnotations::from) //
 					.collect(Collectors.toList());
 
@@ -420,7 +420,7 @@ public class PropertyUtils {
 	 *
 	 * @author Oliver Drotbohm
 	 */
-	private static class DefaultPropertyMetadata implements PropertyMetadata, Comparable<DefaultPropertyMetadata> {
+	private static final class DefaultPropertyMetadata implements PropertyMetadata, Comparable<DefaultPropertyMetadata> {
 
 		private static final Comparator<PropertyMetadata> BY_NAME = Comparator.comparing(PropertyMetadata::getName);
 		private static final InputTypeFactory INPUT_TYPE_FACTORY;
@@ -540,10 +540,11 @@ public class PropertyUtils {
 	 *
 	 * @author Oliver Drotbohm
 	 */
-	private static class Jsr303AwarePropertyMetadata extends DefaultPropertyMetadata {
+	private static final class Jsr303AwarePropertyMetadata extends DefaultPropertyMetadata {
 
 		private static final Optional<Class<? extends Annotation>> LENGTH_ANNOTATION;
-		private static final @Nullable Class<? extends Annotation> URL_ANNOTATION, RANGE_ANNOTATION;
+		private static final  @Nullable Class<? extends Annotation> URL_ANNOTATION;
+		private static final  @Nullable Class<? extends Annotation> RANGE_ANNOTATION;
 		private static final Map<Class<? extends Annotation>, String> TYPE_MAP;
 
 		static {
