@@ -113,8 +113,8 @@ public class JsonPathLinkDiscoverer implements LinkDiscoverer {
 			Object parseResult = getExpression(relation).read(representation);
 			return createLinksFrom(parseResult, relation);
 
-		} catch (IOException o_O) {
-			throw new RuntimeException(o_O);
+		} catch (IOException oO) {
+			throw new RuntimeException(oO);
 		} catch (PathNotFoundException o_O) {
 			return Links.NONE;
 		}
