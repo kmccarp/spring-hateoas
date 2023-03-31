@@ -124,7 +124,7 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 				LOGGER.info("Created proxy type {} for {}", proxyType, beanClass);
 			}
 
-			ReflectionUtils.doWithMethods(beanClass, (method) -> {
+			ReflectionUtils.doWithMethods(beanClass, method -> {
 
 				Class<?> returnType = method.getReturnType();
 
@@ -196,10 +196,10 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 
 				return factory.getProxyClass(type.getClassLoader());
 
-			} catch (AopConfigException o_O) {
+			} catch (AopConfigException oO) {
 
 				LOGGER.info("Could not create proxy class for {} (via {}). Reason {}", type, beanClass,
-						o_O.getMessage());
+						oO.getMessage());
 			}
 
 			return null;

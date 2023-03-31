@@ -455,7 +455,7 @@ class HypermediaWebFluxConfigurerTest {
 
 	@Configuration
 	@EnableWebFlux
-	static abstract class BaseConfig {
+	abstract static class BaseConfig {
 
 		@Bean
 		TestController testController() {
