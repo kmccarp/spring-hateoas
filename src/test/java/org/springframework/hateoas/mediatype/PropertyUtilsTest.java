@@ -231,7 +231,7 @@ class PropertyUtilsTest {
 	void exposesMinAndMaxFromJsr303AtSizeAnnotation() {
 
 		InputPayloadMetadata metadata = PropertyUtils.getExposedProperties(Jsr303SamplePayload.class);
-		Optional<PropertyMetadata> property = metadata.stream().filter(it -> it.getName().equals("sized")).findFirst();
+		Optional<PropertyMetadata> property = metadata.stream().filter(it -> "sized".equals(it.getName())).findFirst();
 
 		assertThat(property).hasValueSatisfying(it -> {
 			assertThat(it.getMin()).isEqualTo(41);

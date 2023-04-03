@@ -465,8 +465,8 @@ class EnableHypermediaSupportIntegrationTest {
 				doReturn(new Resource[0]).when(spy).getResources("classpath:rest-default-messages.properties");
 				doReturn(new Resource[] { resource }).when(spy).getResources(contains("rest-messages"));
 
-			} catch (IOException o_O) {
-				fail("Couldn't mock resource lookup!", o_O);
+			} catch (IOException oO) {
+				fail("Couldn't mock resource lookup!", oO);
 			}
 
 			return spy;
