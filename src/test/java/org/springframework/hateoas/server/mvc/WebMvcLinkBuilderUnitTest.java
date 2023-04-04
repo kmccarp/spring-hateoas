@@ -626,7 +626,7 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 
 			ReflectionTestUtils.setField(MethodParameters.class, "DISCOVERER", null);
 
-			Stream.of(null, new HashMap<String, String>()).forEach(it -> {
+			Stream.of(null, new HashMap<>()).forEach(it -> {
 
 				Link link = linkTo(methodOn(ControllerWithMethods.class).methodWithMapRequestParam(it)).withSelfRel();
 
