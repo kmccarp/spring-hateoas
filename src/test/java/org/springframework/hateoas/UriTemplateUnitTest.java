@@ -607,7 +607,7 @@ class UriTemplateUnitTest {
 				of("/foo/b%22ar{?x}", "/foo/b%22ar?x=1").param("x", 1));
 	}
 
-	static class EncodingFixture {
+	static final class EncodingFixture {
 
 		private final String template;
 		private final URI uri;

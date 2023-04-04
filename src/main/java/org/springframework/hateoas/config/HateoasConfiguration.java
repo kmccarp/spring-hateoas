@@ -163,8 +163,8 @@ public class HateoasConfiguration {
 			factory.afterPropertiesSet();
 			return factory.getObject();
 
-		} catch (IOException o_O) {
-			throw new IllegalStateException("Could not load default properties from resources!", o_O);
+		} catch (IOException oO) {
+			throw new IllegalStateException("Could not load default properties from resources!", oO);
 		}
 	}
 
