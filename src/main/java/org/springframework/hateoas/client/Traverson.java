@@ -65,17 +65,17 @@ public class Traverson {
 
 	static {
 
-		List<TraversonDefaults> ALL_DEFAULTS = SpringFactoriesLoader.loadFactories(TraversonDefaults.class,
+		List<TraversonDefaults> allDefaults = SpringFactoriesLoader.loadFactories(TraversonDefaults.class,
 				Traverson.class.getClassLoader());
 
-		Assert.isTrue(ALL_DEFAULTS.size() == 1,
+		Assert.isTrue(allDefaults.size() == 1,
 				() -> String.format("Expected to find only one TraversonDefaults instance, but found: %s", //
-						ALL_DEFAULTS.stream() //
+						allDefaults.stream() //
 								.map(Object::getClass) //
 								.map(Class::getName) //
 								.collect(Collectors.joining(", "))));
 
-		DEFAULTS = ALL_DEFAULTS.get(0);
+		DEFAULTS = allDefaults.get(0);
 	}
 
 	private final URI baseUri;
@@ -204,7 +204,7 @@ public class Traverson {
 	 *
 	 * @author Oliver Gierke
 	 */
-	public class TraversalBuilder {
+	public final class TraversalBuilder {
 
 		private static final String MEDIA_TYPE_HEADER_NOT_FOUND = "Response for request to %s did not expose a content type! Unable to identify links!";
 		private static final String LINK_NOT_FOUND = "Expected to find link with rel '%s' in response %s!";
@@ -373,7 +373,7 @@ public class Traverson {
 
 		private Link traverseToLink(boolean expandFinalUrl) {
 
-			Assert.isTrue(rels.size() > 0, "At least one rel needs to be provided!");
+			Assert.isTrue(!rels.isEmpty(), "At least one rel needs to be provided!");
 
 			return Link.of(expandFinalUrl ? traverseToExpandedFinalUrl().getUri().toString() : traverseToFinalUrl().getUri(),
 					rels.get(rels.size() - 1).getRel());

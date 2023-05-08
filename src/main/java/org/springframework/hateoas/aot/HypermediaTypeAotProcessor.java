@@ -180,7 +180,7 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 		}
 	}
 
-	static abstract class TraversingTypeFilter implements TypeFilter {
+	abstract static class TraversingTypeFilter implements TypeFilter {
 
 		/*
 		 * (non-Javadoc)
