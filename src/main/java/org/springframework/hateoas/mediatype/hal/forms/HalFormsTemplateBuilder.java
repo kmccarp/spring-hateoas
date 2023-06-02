@@ -57,28 +57,28 @@ class HalFormsTemplateBuilder {
 		Link selfLink = resource.getLink(IanaLinkRelations.SELF).orElse(null);
 
 		resource.getLinks().stream() //
-				.flatMap(it -> it.getAffordances().stream()) //
-				.map(it -> it.getAffordanceModel(MediaTypes.HAL_FORMS_JSON)) //
-				.peek(it -> {
-					Assert.notNull(it, "No HAL Forms affordance model found but expected!");
-				}) //
-				.map(HalFormsAffordanceModel.class::cast) //
-				.filter(it -> !it.hasHttpMethod(HttpMethod.GET)) //
-				.forEach(it -> {
+	.flatMap(it -> it.getAffordances().stream()) //
+	.map(it -> it.getAffordanceModel(MediaTypes.HAL_FORMS_JSON)) //
+	.peek(it -> {
+		Assert.notNull(it, "No HAL Forms affordance model found but expected!");
+	}) //
+	.map(HalFormsAffordanceModel.class::cast) //
+	.filter(it -> !it.hasHttpMethod(HttpMethod.GET)) //
+	.forEach(it -> {
 
-					HalFormsTemplate template = HalFormsTemplate.forMethod(it.getHttpMethod()) //
-							.withProperties(factory.createProperties(it))
-							.withContentType(it.getInput().getPrimaryMediaType());
+		HalFormsTemplate template = HalFormsTemplate.forMethod(it.getHttpMethod()) //
+	.withProperties(factory.createProperties(it))
+	.withContentType(it.getInput().getPrimaryMediaType());
 
-					String target = it.getLink().expand().getHref();
+		String target = it.getLink().expand().getHref();
 
-					if (selfLink == null || !target.equals(selfLink.getHref())) {
-						template = template.withTarget(target);
-					}
+		if (selfLink == null || !target.equals(selfLink.getHref())) {
+			template = template.withTarget(target);
+		}
 
-					template = applyTo(template, TemplateTitle.of(it, templates.isEmpty()));
-					templates.put(templates.isEmpty() ? "default" : it.getName(), template);
-				});
+		template = applyTo(template, TemplateTitle.of(it, templates.isEmpty()));
+		templates.put(templates.isEmpty() ? "default" : it.getName(), template);
+	});
 
 		return templates;
 	}
@@ -86,9 +86,9 @@ class HalFormsTemplateBuilder {
 	private HalFormsTemplate applyTo(HalFormsTemplate template, HalFormsTemplateBuilder.TemplateTitle templateTitle) {
 
 		return Optional.ofNullable(resolver.resolve(templateTitle)) //
-				.filter(StringUtils::hasText) //
-				.map(template::withTitle) //
-				.orElse(template);
+	.filter(StringUtils::hasText) //
+	.map(template::withTitle) //
+	.orElse(template);
 	}
 
 	private static class TemplateTitle implements MessageSourceResolvable {
@@ -117,11 +117,11 @@ class HalFormsTemplateBuilder {
 		public String[] getCodes() {
 
 			Stream<String> seed = Stream.concat(//
-					Stream.of(affordance.getName()), //
-					soleTemplate ? Stream.of("default") : Stream.empty());
+		Stream.of(affordance.getName()), //
+		soleTemplate ? Stream.of("default") : Stream.empty());
 
 			return seed.flatMap(it -> getCodesFor(it, affordance.getInput())) //
-					.toArray(String[]::new);
+		.toArray(String[]::new);
 		}
 
 		private static Stream<String> getCodesFor(String name, InputPayloadMetadata type) {
@@ -129,7 +129,7 @@ class HalFormsTemplateBuilder {
 			String global = String.format(TEMPLATE_TEMPLATE, name);
 
 			Stream<String> inputBased = type.getI18nCodes().stream() //
-					.map(it -> String.format("%s.%s", it, global));
+		.map(it -> String.format("%s.%s", it, global));
 
 			return Stream.concat(inputBased, Stream.of(global));
 		}

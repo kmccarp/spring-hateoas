@@ -46,5 +46,6 @@ class XmlConfigurationIntegrationTest {
 
 	@Configuration
 	@EnableHypermediaSupport(type = HypermediaType.HAL)
-	static class HypermediaConfiguration {}
+	static class HypermediaConfiguration {
+	}
 }

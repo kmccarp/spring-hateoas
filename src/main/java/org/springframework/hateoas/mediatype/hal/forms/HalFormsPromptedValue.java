@@ -112,7 +112,7 @@ public class HalFormsPromptedValue {
 		private static final long serialVersionUID = 7262804826421266153L;
 
 		I18nizedPrompt(String promptKey, Object value) {
-			super(new String[] { promptKey }, new Object[] { value }, promptKey);
+			super(new String[]{promptKey}, new Object[]{value}, promptKey);
 		}
 	}
 }

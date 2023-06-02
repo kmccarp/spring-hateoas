@@ -43,6 +43,7 @@ class UberLinkDiscovererUnitTest extends LinkDiscovererUnitTest {
 		this.discoverer = new UberLinkDiscoverer();
 		this.sample = read(new ClassPathResource("link-discovery.json", getClass()));
 	}
+
 	/**
 	 * @see #314
 	 * @see #784

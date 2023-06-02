@@ -44,8 +44,8 @@ class HalLinkDiscovererUnitTest extends LinkDiscovererUnitTest {
 	void discoversFullyQualifiedRel() {
 
 		assertThat(getDiscoverer().findLinkWithRel("http://www.foo.com/bar", getInputString())) //
-				.map(Link::getHref) //
-				.hasValue("fullRelHref");
+	.map(Link::getHref) //
+	.hasValue("fullRelHref");
 	}
 
 	/**
@@ -57,17 +57,17 @@ class HalLinkDiscovererUnitTest extends LinkDiscovererUnitTest {
 		String linkText = read(new ClassPathResource("hal-link.json", getClass()));
 
 		Link expected = Link.valueOf("</customer/1>;" //
-				+ "rel=\"self\";" //
-				+ "hreflang=\"en\";" //
-				+ "media=\"pdf\";" //
-				+ "title=\"pdf customer copy\";" //
-				+ "type=\"portable document\";" //
-				+ "deprecation=\"https://example.com/customers/deprecated\";" //
-				+ "profile=\"my-profile\";" //
-				+ "name=\"my-name\"");
+	+ "rel=\"self\";" //
+	+ "hreflang=\"en\";" //
+	+ "media=\"pdf\";" //
+	+ "title=\"pdf customer copy\";" //
+	+ "type=\"portable document\";" //
+	+ "deprecation=\"https://example.com/customers/deprecated\";" //
+	+ "profile=\"my-profile\";" //
+	+ "name=\"my-name\"");
 
 		assertThat(getDiscoverer().findLinkWithRel(IanaLinkRelations.SELF.value(), linkText)) //
-				.hasValue(expected);
+	.hasValue(expected);
 	}
 
 	@Override

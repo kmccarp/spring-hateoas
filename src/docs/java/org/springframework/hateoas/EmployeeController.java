@@ -59,18 +59,18 @@ public class EmployeeController {
 
 		// Generate an "Affordance" based on this method (the "self" link)
 		Link selfLink = linkTo(methodOn(controllerClass).all()).withSelfRel() // <1>
-				.andAffordance(afford(methodOn(controllerClass).newEmployee(null))); // <2>
+	.andAffordance(afford(methodOn(controllerClass).newEmployee(null))); // <2>
 
 		// Return the collection of employee resources along with the composite affordance
 		return IntStream.range(0, EMPLOYEES.size()) //
-				.mapToObj(this::findOne) //
-				.collect(Collectors.collectingAndThen(Collectors.toList(), //
-						it -> CollectionModel.of(it, selfLink)));
+	.mapToObj(this::findOne) //
+	.collect(Collectors.collectingAndThen(Collectors.toList(), //
+it -> CollectionModel.of(it, selfLink)));
 	}
 
 	@GetMapping("/employees/search")
 	public CollectionModel<EntityModel<Employee>> search(@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "role", required = false) String role) {
+@RequestParam(value = "role", required = false) String role) {
 
 		// Create a list of Resource<Employee>'s to return
 		List<EntityModel<Employee>> employees = new ArrayList<>();
@@ -81,12 +81,12 @@ public class EmployeeController {
 			EntityModel<Employee> employeeResource = findOne(i);
 
 			boolean nameMatches = Optional.ofNullable(name) //
-					.map(s -> employeeResource.getContent().getName().contains(s)) //
-					.orElse(true);
+		.map(s -> employeeResource.getContent().getName().contains(s)) //
+		.orElse(true);
 
 			boolean roleMatches = Optional.ofNullable(role) //
-					.map(s -> employeeResource.getContent().getRole().contains(s)) //
-					.orElse(true);
+		.map(s -> employeeResource.getContent().getRole().contains(s)) //
+		.orElse(true);
 
 			if (nameMatches && roleMatches) {
 				employees.add(employeeResource);
@@ -95,9 +95,9 @@ public class EmployeeController {
 
 		// Generate an "Affordance" based on this method (the "self" link)
 		Link selfLink = linkTo(methodOn(EmployeeController.class).all()) //
-				.withSelfRel() //
-				.andAffordance(afford(methodOn(EmployeeController.class).newEmployee(null))) //
-				.andAffordance(afford(methodOn(EmployeeController.class).search(null, null)));
+	.withSelfRel() //
+	.andAffordance(afford(methodOn(EmployeeController.class).newEmployee(null))) //
+	.andAffordance(afford(methodOn(EmployeeController.class).search(null, null)));
 
 		// Return the collection of employee resources along with the composite affordance
 		return CollectionModel.of(employees, selfLink);
@@ -114,10 +114,11 @@ public class EmployeeController {
 
 		// Return the affordance + a link back to the entire collection resource.
 		return EntityModel.of(EMPLOYEES.get(id), //
-				findOneLink //
-						.andAffordance(afford(methodOn(controllerClass).updateEmployee(null, id))) // <2>
-						.andAffordance(afford(methodOn(controllerClass).partiallyUpdateEmployee(null, id)))); // <3>
+	findOneLink //
+.andAffordance(afford(methodOn(controllerClass).updateEmployee(null, id))) // <2>
+.andAffordance(afford(methodOn(controllerClass).partiallyUpdateEmployee(null, id)))); // <3>
 	}
+
 	// end::get[]
 
 	@PostMapping("/employees")
@@ -130,12 +131,13 @@ public class EmployeeController {
 
 		return ResponseEntity.created(link.toUri()).build();
 	}
+
 	// end::new[]
 
 	// tag::put[]
 	@PutMapping("/employees/{id}")
 	public ResponseEntity<?> updateEmployee( //
-			@RequestBody EntityModel<Employee> employee, @PathVariable Integer id)
+@RequestBody EntityModel<Employee> employee, @PathVariable Integer id)
 	// end::put[]
 	{
 
@@ -144,14 +146,14 @@ public class EmployeeController {
 		Link link = linkTo(methodOn(getClass()).findOne(id)).withSelfRel().expand();
 
 		return ResponseEntity.noContent() //
-				.location(link.toUri()) //
-				.build();
+	.location(link.toUri()) //
+	.build();
 	}
 
 	// tag::patch[]
 	@PatchMapping("/employees/{id}")
 	public ResponseEntity<?> partiallyUpdateEmployee( //
-			@RequestBody EntityModel<Employee> employee, @PathVariable Integer id)
+@RequestBody EntityModel<Employee> employee, @PathVariable Integer id)
 	// end::patch[]
 	{
 
@@ -168,8 +170,8 @@ public class EmployeeController {
 		EMPLOYEES.put(id, newEmployee);
 
 		return ResponseEntity //
-				.noContent() //
-				.location(findOne(id).getRequiredLink(IanaLinkRelations.SELF).toUri()) //
-				.build();
+	.noContent() //
+	.location(findOne(id).getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+	.build();
 	}
 }

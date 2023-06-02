@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @see http://alps.io
  * @see http://alps.io/spec/#prop-alps
  */
-@JsonPropertyOrder({ "version", "doc", "descriptor" })
+@JsonPropertyOrder({"version", "doc", "descriptor"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class Alps {
 
@@ -46,7 +46,7 @@ public final class Alps {
 
 	@JsonCreator
 	private Alps(@JsonProperty("version") String version, @JsonProperty("doc") Doc doc,
-			@JsonProperty("descriptor") List<Descriptor> descriptor) {
+@JsonProperty("descriptor") List<Descriptor> descriptor) {
 
 		this.version = "1.0";
 		this.doc = doc;
@@ -110,7 +110,7 @@ public final class Alps {
 			return false;
 		Alps alps = (Alps) o;
 		return Objects.equals(this.version, alps.version) && Objects.equals(this.doc, alps.doc)
-				&& Objects.equals(this.descriptor, alps.descriptor);
+	&& Objects.equals(this.descriptor, alps.descriptor);
 	}
 
 	@Override
@@ -128,7 +128,8 @@ public final class Alps {
 		private Doc doc;
 		private List<Descriptor> descriptor;
 
-		AlpsBuilder() {}
+		AlpsBuilder() {
+		}
 
 		public Alps.AlpsBuilder version(String version) {
 

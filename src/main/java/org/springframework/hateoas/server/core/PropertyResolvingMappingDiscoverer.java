@@ -111,7 +111,7 @@ class PropertyResolvingMappingDiscoverer implements MappingDiscoverer {
 		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 
 		return context == null //
-				? mapping //
-				: context.getEnvironment().resolvePlaceholders(mapping);
+	? mapping //
+	: context.getEnvironment().resolvePlaceholders(mapping);
 	}
 }

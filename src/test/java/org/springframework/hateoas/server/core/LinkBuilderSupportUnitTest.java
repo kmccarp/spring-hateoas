@@ -38,7 +38,7 @@ class LinkBuilderSupportUnitTest extends TestUtils {
 	void callingSlashWithEmptyStringIsNoOp() {
 
 		SampleLinkBuilder builder = new SampleLinkBuilder(UriComponentsBuilder.newInstance().build(),
-				Collections.emptyList());
+	Collections.emptyList());
 		assertThat(builder.slash("")).isEqualTo(builder);
 	}
 
@@ -46,7 +46,7 @@ class LinkBuilderSupportUnitTest extends TestUtils {
 	void appendsFragmentCorrectly() {
 
 		SampleLinkBuilder builder = new SampleLinkBuilder(UriComponentsBuilder.newInstance().build(),
-				Collections.emptyList());
+	Collections.emptyList());
 		builder = builder.slash("foo#bar");
 		assertThat(builder.toString()).endsWith("foo#bar");
 		builder = builder.slash("bar");
@@ -66,7 +66,7 @@ class LinkBuilderSupportUnitTest extends TestUtils {
 	void appendsPathContainingColonsCorrectly() {
 
 		SampleLinkBuilder builder = new SampleLinkBuilder(UriComponentsBuilder.newInstance().build(),
-				Collections.emptyList());
+	Collections.emptyList());
 
 		builder = builder.slash("47:11");
 

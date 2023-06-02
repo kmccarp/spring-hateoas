@@ -92,13 +92,13 @@ public class RepresentationModelProcessorIntegrationTest {
 	public void collectionModelProcessorShouldWork() throws Exception {
 
 		String results = this.mockMvc.perform(get("/employees").accept(HAL_JSON)) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, HAL_JSON.toString())) //
-				.andReturn() //
-				.getResponse() //
-				.getContentAsString();
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, HAL_JSON.toString())) //
+	.andReturn() //
+	.getResponse() //
+	.getContentAsString();
 
 		assertThat(DISCOVERER.findRequiredLinkWithRel(COLLECTION_LINK_RELATION, results).getHref())
-				.isEqualTo("/collection/link");
+	.isEqualTo("/collection/link");
 
 		assertThat(DISCOVERER.findLinkWithRel(ENTITY_LINK_RELATION, results)).isEmpty();
 
@@ -111,12 +111,12 @@ public class RepresentationModelProcessorIntegrationTest {
 	public void problemReturningControllerMethod() throws Exception {
 
 		this.mockMvc.perform(get("/employees/problem").accept(HTTP_PROBLEM_DETAILS_JSON)) //
-				.andExpect(content().contentType(HTTP_PROBLEM_DETAILS_JSON)) //
-				.andExpect(status().is(HttpStatus.BAD_REQUEST.value())) //
-				.andExpect(jsonPath("$.type", is("http://example.com/problem"))) //
-				.andExpect(jsonPath("$.title", is("Employee-based problem"))) //
-				.andExpect(jsonPath("$.status", is(HttpStatus.BAD_REQUEST.value()))) //
-				.andExpect(jsonPath("$.detail", is("This is a test case")));
+	.andExpect(content().contentType(HTTP_PROBLEM_DETAILS_JSON)) //
+	.andExpect(status().is(HttpStatus.BAD_REQUEST.value())) //
+	.andExpect(jsonPath("$.type", is("http://example.com/problem"))) //
+	.andExpect(jsonPath("$.title", is("Employee-based problem"))) //
+	.andExpect(jsonPath("$.status", is(HttpStatus.BAD_REQUEST.value()))) //
+	.andExpect(jsonPath("$.detail", is("This is a test case")));
 
 	}
 
@@ -124,10 +124,10 @@ public class RepresentationModelProcessorIntegrationTest {
 	public void entityModelProcessorShouldWork() throws Exception {
 
 		String results = this.mockMvc.perform(get("/employees/1").accept(HAL_JSON)) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, HAL_JSON.toString())) //
-				.andReturn() //
-				.getResponse() //
-				.getContentAsString();
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, HAL_JSON.toString())) //
+	.andReturn() //
+	.getResponse() //
+	.getContentAsString();
 
 		assertThat(DISCOVERER.findRequiredLinkWithRel(ENTITY_LINK_RELATION, results).getHref()).isEqualTo("/entity/link");
 
@@ -140,13 +140,13 @@ public class RepresentationModelProcessorIntegrationTest {
 	public void wildcardProcessorShouldNotWork() throws Exception {
 
 		String results = this.mockMvc.perform(get("/employees").accept(HAL_JSON)) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, HAL_JSON.toString())) //
-				.andReturn() //
-				.getResponse() //
-				.getContentAsString();
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, HAL_JSON.toString())) //
+	.andReturn() //
+	.getResponse() //
+	.getContentAsString();
 
 		assertThat(DISCOVERER.findRequiredLinkWithRel(WILDCARD_LINK_RELATION, results).getHref())
-				.isEqualTo("/non-specific-collection/link");
+	.isEqualTo("/non-specific-collection/link");
 
 		assertThat(collectionModelProcessor.isTriggered()).isTrue();
 		assertThat(entityModelProcessor.isTriggered()).isTrue();
@@ -167,7 +167,7 @@ public class RepresentationModelProcessorIntegrationTest {
 	}
 
 	static class CollectionModelProcessor
-			implements RepresentationModelProcessor<CollectionModel<EntityModel<Employee>>> {
+implements RepresentationModelProcessor<CollectionModel<EntityModel<Employee>>> {
 
 		private @Getter @Setter boolean triggered = false;
 

@@ -74,9 +74,9 @@ public class PropertyUtils {
 	private static final Map<ResolvableType, InputPayloadMetadata> METADATA_CACHE = new ConcurrentReferenceHashMap<>();
 	private static final Set<String> FIELDS_TO_IGNORE = new HashSet<>(Arrays.asList("class", "links"));
 	private static final boolean JSR_303_PRESENT = ClassUtils.isPresent("jakarta.validation.constraints.Email",
-			PropertyUtils.class.getClassLoader());
+PropertyUtils.class.getClassLoader());
 	private static final List<Class<?>> TYPES_TO_UNWRAP = new ArrayList<>(
-			Arrays.asList(EntityModel.class, CollectionModel.class, HttpEntity.class));
+Arrays.asList(EntityModel.class, CollectionModel.class, HttpEntity.class));
 	private static final ResolvableType OBJECT_TYPE = ResolvableType.forClass(Object.class);
 
 	static final String NOT_BLANK_REGEX = "^(?=\\s*\\S).*$";
@@ -104,18 +104,18 @@ public class PropertyUtils {
 
 		properties.forEach((key, value) -> {
 			Optional.ofNullable(BeanUtils.getPropertyDescriptor(clazz, key)) //
-					.ifPresent(property -> {
+		.ifPresent(property -> {
 
-						try {
+			try {
 
-							Method writeMethod = property.getWriteMethod();
-							ReflectionUtils.makeAccessible(writeMethod);
-							writeMethod.invoke(obj, value);
+				Method writeMethod = property.getWriteMethod();
+				ReflectionUtils.makeAccessible(writeMethod);
+				writeMethod.invoke(obj, value);
 
-						} catch (IllegalAccessException | InvocationTargetException e) {
-							throw new RuntimeException(e);
-						}
-					});
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				throw new RuntimeException(e);
+			}
+		});
 		});
 
 		return obj;
@@ -143,8 +143,8 @@ public class PropertyUtils {
 			Class<?> resolved = domainType.resolve(Object.class);
 
 			return Object.class.equals(resolved) //
-					? InputPayloadMetadata.NONE //
-					: new TypeBasedPayloadMetadata(resolved, lookupExposedProperties(resolved));
+		? InputPayloadMetadata.NONE //
+		: new TypeBasedPayloadMetadata(resolved, lookupExposedProperties(resolved));
 		});
 	}
 
@@ -154,9 +154,9 @@ public class PropertyUtils {
 		Method readMethod = wrapper.getPropertyDescriptor(propertyName).getReadMethod();
 
 		MergedAnnotation<JsonUnwrapped> unwrappedAnnotation = Stream.of(descriptorField, readMethod)
-				.filter(Objects::nonNull).map(MergedAnnotations::from)
-				.flatMap(mergedAnnotations -> mergedAnnotations.stream(JsonUnwrapped.class))
-				.filter(it -> it.getBoolean("enabled")).findFirst().orElse(null);
+	.filter(Objects::nonNull).map(MergedAnnotations::from)
+	.flatMap(mergedAnnotations -> mergedAnnotations.stream(JsonUnwrapped.class))
+	.filter(it -> it.getBoolean("enabled")).findFirst().orElse(null);
 
 		Object propertyValue = wrapper.getPropertyValue(propertyName);
 
@@ -170,7 +170,7 @@ public class PropertyUtils {
 		Map<String, Object> properties = new HashMap<>();
 
 		extractPropertyValues(propertyValue, true) //
-				.forEach((name, value) -> properties.put(prefix + name + suffix, value));
+	.forEach((name, value) -> properties.put(prefix + name + suffix, value));
 
 		return properties;
 	}
@@ -188,12 +188,12 @@ public class PropertyUtils {
 		BeanWrapper wrapper = PropertyAccessorFactory.forBeanPropertyAccess(object);
 
 		return getExposedProperties(object.getClass()).stream() //
-				.map(PropertyMetadata::getName) //
-				.map(name -> unwrapEligibleProperties //
-						? unwrapPropertyIfNeeded(name, wrapper) //
-						: Collections.singletonMap(name, wrapper.getPropertyValue(name))) //
-				.flatMap(it -> it.entrySet().stream()) //
-				.collect(HashMap::new, (map, it) -> map.put(it.getKey(), it.getValue()), HashMap::putAll);
+	.map(PropertyMetadata::getName) //
+	.map(name -> unwrapEligibleProperties //
+? unwrapPropertyIfNeeded(name, wrapper) //
+: Collections.singletonMap(name, wrapper.getPropertyValue(name))) //
+	.flatMap(it -> it.entrySet().stream()) //
+	.collect(HashMap::new, (map, it) -> map.put(it.getKey(), it.getValue()), HashMap::putAll);
 	}
 
 	private static ResolvableType unwrapDomainType(ResolvableType type) {
@@ -207,7 +207,7 @@ public class PropertyUtils {
 		}
 
 		return DOMAIN_TYPE_CACHE.computeIfAbsent(type,
-				it -> replaceIfUnwrappable(it, () -> unwrapDomainType(it.getGeneric(0))));
+	it -> replaceIfUnwrappable(it, () -> unwrapDomainType(it.getGeneric(0))));
 	}
 
 	/**
@@ -224,17 +224,17 @@ public class PropertyUtils {
 		Class<?> resolved = type.resolve(Object.class);
 
 		return TYPES_TO_UNWRAP.stream().anyMatch(it -> it.isAssignableFrom(resolved)) //
-				? mapper.get() //
-				: type;
+	? mapper.get() //
+	: type;
 	}
 
 	private static Stream<PropertyMetadata> lookupExposedProperties(@Nullable Class<?> type) {
 
 		return type == null //
-				? Stream.empty() //
-				: getPropertyDescriptors(type) //
-						.map(it -> new AnnotatedProperty(new Property(type, it.getReadMethod(), it.getWriteMethod(), it.getName())))
-						.map(it -> JSR_303_PRESENT ? new Jsr303AwarePropertyMetadata(it) : new DefaultPropertyMetadata(it));
+	? Stream.empty() //
+	: getPropertyDescriptors(type) //
+	.map(it -> new AnnotatedProperty(new Property(type, it.getReadMethod(), it.getWriteMethod(), it.getName())))
+	.map(it -> JSR_303_PRESENT ? new Jsr303AwarePropertyMetadata(it) : new DefaultPropertyMetadata(it));
 	}
 
 	/**
@@ -246,10 +246,10 @@ public class PropertyUtils {
 	private static Stream<PropertyDescriptor> getPropertyDescriptors(Class<?> type) {
 
 		return Arrays.stream(BeanUtils.getPropertyDescriptors(type))
-				.filter(descriptor -> !FIELDS_TO_IGNORE.contains(descriptor.getName()))
-				.filter(descriptor -> !descriptorToBeIgnoredByJackson(type, descriptor))
-				.filter(descriptor -> !toBeIgnoredByJackson(type, descriptor.getName()))
-				.filter(descriptor -> !readerIsToBeIgnoredByJackson(descriptor));
+	.filter(descriptor -> !FIELDS_TO_IGNORE.contains(descriptor.getName()))
+	.filter(descriptor -> !descriptorToBeIgnoredByJackson(type, descriptor))
+	.filter(descriptor -> !toBeIgnoredByJackson(type, descriptor.getName()))
+	.filter(descriptor -> !readerIsToBeIgnoredByJackson(descriptor));
 	}
 
 	/**
@@ -264,8 +264,8 @@ public class PropertyUtils {
 		Field descriptorField = ReflectionUtils.findField(clazz, descriptor.getName());
 
 		return descriptorField == null //
-				? false //
-				: toBeIgnoredByJackson(MergedAnnotations.from(descriptorField));
+	? false //
+	: toBeIgnoredByJackson(MergedAnnotations.from(descriptorField));
 	}
 
 	/**
@@ -290,9 +290,9 @@ public class PropertyUtils {
 	private static boolean toBeIgnoredByJackson(MergedAnnotations annotations) {
 
 		return annotations.stream(JsonIgnore.class) //
-				.findFirst() //
-				.map(it -> it.getBoolean("value")) //
-				.orElse(false);
+	.findFirst() //
+	.map(it -> it.getBoolean("value")) //
+	.orElse(false);
 	}
 
 	/**
@@ -307,9 +307,9 @@ public class PropertyUtils {
 		MergedAnnotations annotations = MergedAnnotations.from(clazz);
 
 		return annotations.stream(JsonIgnoreProperties.class) //
-				.map(it -> it.getStringArray("value")) //
-				.flatMap(Arrays::stream) //
-				.anyMatch(it -> it.equalsIgnoreCase(field));
+	.map(it -> it.getStringArray("value")) //
+	.flatMap(Arrays::stream) //
+	.anyMatch(it -> it.equalsIgnoreCase(field));
 	}
 
 	/**
@@ -341,14 +341,14 @@ public class PropertyUtils {
 			Field field = ReflectionUtils.findField(property.getObjectType(), property.getName());
 
 			this.type = Optional.ofNullable(property.getReadMethod()).map(ResolvableType::forMethodReturnType)
-					.or(() -> Optional.ofNullable(property.getWriteMethod()).map(it -> ResolvableType.forMethodParameter(it, 0))) //
-					.or(() -> Optional.ofNullable(field).map(ResolvableType::forField))
-					.orElseThrow(() -> new IllegalStateException("Could not resolve value!"));
+		.or(() -> Optional.ofNullable(property.getWriteMethod()).map(it -> ResolvableType.forMethodParameter(it, 0))) //
+		.or(() -> Optional.ofNullable(field).map(ResolvableType::forField))
+		.orElseThrow(() -> new IllegalStateException("Could not resolve value!"));
 
 			this.annotations = Stream.of(property.getReadMethod(), property.getWriteMethod(), field) //
-					.filter(it -> it != null) //
-					.map(MergedAnnotations::from) //
-					.collect(Collectors.toList());
+		.filter(it -> it != null) //
+		.map(MergedAnnotations::from) //
+		.collect(Collectors.toList());
 
 			this.typeAnnotations = MergedAnnotations.from(this.type.resolve(Object.class));
 		}
@@ -407,10 +407,10 @@ public class PropertyUtils {
 		private <T extends Annotation> MergedAnnotation<T> lookupAnnotation(Class<T> type) {
 
 			return this.annotations.stream() //
-					.map(it -> it.get(type)) //
-					.filter(it -> it != null && it.isPresent()) //
-					.findFirst() //
-					.orElse(MergedAnnotation.missing());
+		.map(it -> it.get(type)) //
+		.filter(it -> it != null && it.isPresent()) //
+		.findFirst() //
+		.orElse(MergedAnnotation.missing());
 		}
 	}
 
@@ -428,7 +428,7 @@ public class PropertyUtils {
 		static {
 
 			INPUT_TYPE_FACTORY = SpringFactoriesLoader.loadFactories(InputTypeFactory.class, //
-					DefaultPropertyMetadata.class.getClassLoader()).get(0);
+		DefaultPropertyMetadata.class.getClassLoader()).get(0);
 		}
 
 		private final AnnotatedProperty property;
@@ -478,8 +478,8 @@ public class PropertyUtils {
 			MergedAnnotation<JsonProperty> annotation = property.getAnnotation(JsonProperty.class);
 
 			return !annotation.isPresent() //
-					? false //
-					: Access.READ_ONLY.equals(annotation.getEnum("access", Access.class));
+		? false //
+		: Access.READ_ONLY.equals(annotation.getEnum("access", Access.class));
 		}
 
 		/*
@@ -521,8 +521,8 @@ public class PropertyUtils {
 			String annotatedInputType = getAnnotatedInputType();
 
 			return annotatedInputType != null //
-					? annotatedInputType //
-					: INPUT_TYPE_FACTORY.getInputType(getType().resolve(Object.class));
+		? annotatedInputType //
+		: INPUT_TYPE_FACTORY.getInputType(getType().resolve(Object.class));
 		}
 
 		@Nullable
@@ -549,13 +549,13 @@ public class PropertyUtils {
 		static {
 
 			LENGTH_ANNOTATION = Optional.ofNullable(
-					org.springframework.hateoas.support.ClassUtils.loadIfPresent("org.hibernate.validator.constraints.Length"));
+		org.springframework.hateoas.support.ClassUtils.loadIfPresent("org.hibernate.validator.constraints.Length"));
 
 			URL_ANNOTATION = org.springframework.hateoas.support.ClassUtils
-					.loadIfPresent("org.hibernate.validator.constraints.URL");
+		.loadIfPresent("org.hibernate.validator.constraints.URL");
 
 			RANGE_ANNOTATION = org.springframework.hateoas.support.ClassUtils
-					.loadIfPresent("org.hibernate.validator.constraints.Range");
+		.loadIfPresent("org.hibernate.validator.constraints.Range");
 
 			Map<Class<? extends Annotation>, String> typeMap = new HashMap<>();
 			typeMap.put(Email.class, "email");
@@ -596,8 +596,8 @@ public class PropertyUtils {
 		public boolean isRequired() {
 
 			return super.isRequired() //
-					|| property.getAnnotation(NotNull.class).isPresent() //
-					|| property.getAnnotation(NotBlank.class).isPresent();
+		|| property.getAnnotation(NotNull.class).isPresent() //
+		|| property.getAnnotation(NotBlank.class).isPresent();
 		}
 
 		/*
@@ -608,7 +608,7 @@ public class PropertyUtils {
 		public Optional<String> getPattern() {
 
 			return getAnnotationAttribute(Pattern.class, "regexp", String.class) //
-					.or(this::getDefaultPatternForNonBlank);
+		.or(this::getDefaultPatternForNonBlank);
 		}
 
 		/*
@@ -620,11 +620,11 @@ public class PropertyUtils {
 		public Number getMin() {
 
 			return getAnnotationAttribute(Size.class, "min", Number.class) //
-					.or(() -> Optional.ofNullable(RANGE_ANNOTATION)
-							.flatMap(it -> getAnnotationAttribute(it, "min", Number.class))) //
-					.or(() -> getAnnotationAttribute(Min.class, "value", Number.class)) //
-					.or(() -> parsePropertyAnnotationValue(DecimalMin.class)) //
-					.orElse(null);
+		.or(() -> Optional.ofNullable(RANGE_ANNOTATION)
+	.flatMap(it -> getAnnotationAttribute(it, "min", Number.class))) //
+		.or(() -> getAnnotationAttribute(Min.class, "value", Number.class)) //
+		.or(() -> parsePropertyAnnotationValue(DecimalMin.class)) //
+		.orElse(null);
 		}
 
 		/*
@@ -636,11 +636,11 @@ public class PropertyUtils {
 		public Number getMax() {
 
 			return getAnnotationAttribute(Size.class, "max", Number.class) //
-					.or(() -> Optional.ofNullable(RANGE_ANNOTATION)
-							.flatMap(it -> getAnnotationAttribute(it, "max", Number.class))) //
-					.or(() -> getAnnotationAttribute(Max.class, "value", Number.class)) //
-					.or(() -> parsePropertyAnnotationValue(DecimalMax.class)) //
-					.orElse(null);
+		.or(() -> Optional.ofNullable(RANGE_ANNOTATION)
+	.flatMap(it -> getAnnotationAttribute(it, "max", Number.class))) //
+		.or(() -> getAnnotationAttribute(Max.class, "value", Number.class)) //
+		.or(() -> parsePropertyAnnotationValue(DecimalMax.class)) //
+		.orElse(null);
 		}
 
 		/*
@@ -651,8 +651,8 @@ public class PropertyUtils {
 		@Override
 		public Long getMinLength() {
 			return LENGTH_ANNOTATION.flatMap(it -> getAnnotationAttribute(it, "min", Integer.class)) //
-					.map(Integer::longValue) //
-					.orElse(null);
+		.map(Integer::longValue) //
+		.orElse(null);
 		}
 
 		/*
@@ -663,8 +663,8 @@ public class PropertyUtils {
 		@Override
 		public Long getMaxLength() {
 			return LENGTH_ANNOTATION.flatMap(it -> getAnnotationAttribute(it, "max", Integer.class)) //
-					.map(Integer::longValue) //
-					.orElse(null);
+		.map(Integer::longValue) //
+		.orElse(null);
 		}
 
 		/*
@@ -693,14 +693,14 @@ public class PropertyUtils {
 		private Optional<String> getDefaultPatternForNonBlank() {
 
 			return Optional.of(property.getAnnotation(NotBlank.class))
-					.filter(MergedAnnotation::isPresent)
-					.map(__ -> NOT_BLANK_REGEX);
+		.filter(MergedAnnotation::isPresent)
+		.map(__ -> NOT_BLANK_REGEX);
 		}
 
 		private Optional<Number> parsePropertyAnnotationValue(Class<? extends Annotation> type) {
 
 			return getAnnotationAttribute(type, "value", String.class)
-					.map(BigDecimal::new);
+		.map(BigDecimal::new);
 		}
 
 		private String cacheAndReturn(String value) {
@@ -713,18 +713,18 @@ public class PropertyUtils {
 		private String lookupFromTypeMap() {
 
 			return TYPE_MAP.entrySet().stream() //
-					.flatMap(it -> {
+		.flatMap(it -> {
 
-						MergedAnnotation<? extends Annotation> annotation = property.getAnnotation(it.getKey());
+			MergedAnnotation<? extends Annotation> annotation = property.getAnnotation(it.getKey());
 
-						return annotation.isPresent() ? Stream.of(it.getValue()) : Stream.empty();
-					}) //
-					.findFirst() //
-					.orElse(null);
+			return annotation.isPresent() ? Stream.of(it.getValue()) : Stream.empty();
+		}) //
+		.findFirst() //
+		.orElse(null);
 		}
 
 		private <T> Optional<T> getAnnotationAttribute(Class<? extends Annotation> annotation, String attribute,
-				Class<T> type) {
+	Class<T> type) {
 
 			MergedAnnotation<? extends Annotation> mergedAnnotation = property.getAnnotation(annotation);
 

@@ -36,10 +36,10 @@ public class RepresentationModelProcessorInvokerUnitTests {
 	void doesNotInvokeGenericProcessorForCollectionModel() {
 
 		RepresentationModelProcessorInvoker invoker = new RepresentationModelProcessorInvoker(
-				singletonList(new GenericPostProcessor<>()));
+	singletonList(new GenericPostProcessor<>()));
 
 		assertThatCode(() -> invoker.invokeProcessorsFor(CollectionModel.empty())) //
-				.doesNotThrowAnyException();
+	.doesNotThrowAnyException();
 	}
 
 	@Test // #1379
@@ -47,7 +47,7 @@ public class RepresentationModelProcessorInvokerUnitTests {
 
 		FirstEntityProcessor processor = new FirstEntityProcessor();
 		RepresentationModelProcessorInvoker invoker = new RepresentationModelProcessorInvoker(
-				singletonList(processor));
+	singletonList(processor));
 
 		EntityModel<SecondEntity> entityModel = EntityModel.of(new SecondEntity());
 		invoker.invokeProcessorsFor(CollectionModel.of(singleton(entityModel)));
@@ -61,7 +61,7 @@ public class RepresentationModelProcessorInvokerUnitTests {
 		FirstEntityProcessor firstProcessor = new FirstEntityProcessor();
 
 		RepresentationModelProcessorInvoker invoker = new RepresentationModelProcessorInvoker(
-				singletonList(firstProcessor));
+	singletonList(firstProcessor));
 
 		EntityModel<SecondEntity> entityModel = EntityModel.of(new SecondEntity());
 		invoker.invokeProcessorsFor(new MyCollectionModelInheritor<>(singletonList(entityModel)));
@@ -74,7 +74,7 @@ public class RepresentationModelProcessorInvokerUnitTests {
 
 		CollectionModelOfGenericModelProcessor processor = new CollectionModelOfGenericModelProcessor();
 		RepresentationModelProcessorInvoker invoker = new RepresentationModelProcessorInvoker(
-				singletonList(processor));
+	singletonList(processor));
 
 		GenericModel<?> model = new GenericModel<>();
 
@@ -105,11 +105,14 @@ public class RepresentationModelProcessorInvokerUnitTests {
 		}
 	}
 
-	static class GenericModel<T extends RepresentationModel<T>> extends RepresentationModel<T> {}
+	static class GenericModel<T extends RepresentationModel<T>> extends RepresentationModel<T> {
+	}
 
-	static class FirstEntity {}
+	static class FirstEntity {
+	}
 
-	static class SecondEntity {};
+	static class SecondEntity {
+	}
 
 	static class FirstEntityProcessor implements RepresentationModelProcessor<CollectionModel<EntityModel<FirstEntity>>> {
 
@@ -126,7 +129,7 @@ public class RepresentationModelProcessorInvokerUnitTests {
 
 	// 1425
 	static class CollectionModelOfGenericModelProcessor
-			implements RepresentationModelProcessor<CollectionModel<GenericModel<?>>> {
+implements RepresentationModelProcessor<CollectionModel<GenericModel<?>>> {
 
 		boolean invoked = false;
 

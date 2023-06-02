@@ -31,27 +31,29 @@ public class SampleAppConfiguration {
 	@Bean
 	public HalConfiguration globalPolicy() {
 		return new HalConfiguration() //
-				.withRenderSingleLinks(RenderSingleLinks.AS_ARRAY); // <1>
+	.withRenderSingleLinks(RenderSingleLinks.AS_ARRAY); // <1>
 	}
+
 	// end::1[]
 
 	// tag::2[]
 	@Bean
 	public HalConfiguration linkRelationBasedPolicy() {
 		return new HalConfiguration() //
-				.withRenderSingleLinksFor( //
-						IanaLinkRelations.ITEM, RenderSingleLinks.AS_ARRAY) // <1>
-				.withRenderSingleLinksFor( //
-						LinkRelation.of("prev"), RenderSingleLinks.AS_SINGLE); // <2>
+	.withRenderSingleLinksFor( //
+IanaLinkRelations.ITEM, RenderSingleLinks.AS_ARRAY) // <1>
+	.withRenderSingleLinksFor( //
+LinkRelation.of("prev"), RenderSingleLinks.AS_SINGLE); // <2>
 	}
+
 	// end::2[]
 
 	// tag::3[]
 	@Bean
 	public HalConfiguration patternBasedPolicy() {
 		return new HalConfiguration() //
-				.withRenderSingleLinksFor( //
-						"http*", RenderSingleLinks.AS_ARRAY); // <1>
+	.withRenderSingleLinksFor( //
+"http*", RenderSingleLinks.AS_ARRAY); // <1>
 	}
 	// end::3[]
 

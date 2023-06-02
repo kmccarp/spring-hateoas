@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Jens Schauder
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(value = { "templated", "template" }, ignoreUnknown = true)
+@JsonIgnoreProperties(value = {"templated", "template"}, ignoreUnknown = true)
 public class Link implements Serializable {
 
 	private static final long serialVersionUID = -9037755944661782121L;
@@ -108,8 +108,8 @@ public class Link implements Serializable {
 	}
 
 	private Link(LinkRelation rel, String href, @Nullable String hreflang, @Nullable String media, @Nullable String title,
-			@Nullable String type, @Nullable String deprecation, @Nullable String profile, @Nullable String name,
-			@Nullable UriTemplate template, List<Affordance> affordances) {
+@Nullable String type, @Nullable String deprecation, @Nullable String profile, @Nullable String name,
+@Nullable UriTemplate template, List<Affordance> affordances) {
 
 		this.rel = rel;
 		this.href = href;
@@ -249,7 +249,7 @@ public class Link implements Serializable {
 	public Link withAffordances(List<Affordance> affordances) {
 
 		return new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, this.deprecation,
-				this.profile, this.name, this.template, affordances);
+	this.profile, this.name, this.template, affordances);
 	}
 
 	/**
@@ -419,7 +419,7 @@ public class Link implements Serializable {
 			String name = attributes.get("name");
 
 			return new Link(rel, href, hrefLang, media, title, type, deprecation, profile, name, templateOrNull(href),
-					Collections.emptyList());
+		Collections.emptyList());
 
 		} else {
 			throw new IllegalArgumentException(String.format("Given link header %s is not RFC-8288 compliant!", element));
@@ -466,8 +466,8 @@ public class Link implements Serializable {
 	public Link withHref(String href) {
 
 		return this.href == href ? this
-				: new Link(this.rel, href, this.hreflang, this.media, this.title, this.type, this.deprecation, this.profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, href, this.hreflang, this.media, this.title, this.type, this.deprecation, this.profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -479,8 +479,8 @@ public class Link implements Serializable {
 	public Link withHreflang(String hreflang) {
 
 		return this.hreflang == hreflang ? this
-				: new Link(this.rel, this.href, hreflang, this.media, this.title, this.type, this.deprecation, this.profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, this.href, hreflang, this.media, this.title, this.type, this.deprecation, this.profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -492,8 +492,8 @@ public class Link implements Serializable {
 	public Link withMedia(String media) {
 
 		return this.media == media ? this
-				: new Link(this.rel, this.href, this.hreflang, media, this.title, this.type, this.deprecation, this.profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, this.href, this.hreflang, media, this.title, this.type, this.deprecation, this.profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -505,8 +505,8 @@ public class Link implements Serializable {
 	public Link withTitle(String title) {
 
 		return this.title == title ? this
-				: new Link(this.rel, this.href, this.hreflang, this.media, title, this.type, this.deprecation, this.profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, this.href, this.hreflang, this.media, title, this.type, this.deprecation, this.profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -518,8 +518,8 @@ public class Link implements Serializable {
 	public Link withType(String type) {
 
 		return this.type == type ? this
-				: new Link(this.rel, this.href, this.hreflang, this.media, this.title, type, this.deprecation, this.profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, this.href, this.hreflang, this.media, this.title, type, this.deprecation, this.profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -531,8 +531,8 @@ public class Link implements Serializable {
 	public Link withDeprecation(String deprecation) {
 
 		return this.deprecation == deprecation ? this
-				: new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, deprecation, this.profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, deprecation, this.profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -544,8 +544,8 @@ public class Link implements Serializable {
 	public Link withProfile(String profile) {
 
 		return this.profile == profile ? this
-				: new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, this.deprecation, profile,
-						this.name, this.template, this.affordances);
+	: new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, this.deprecation, profile,
+	this.name, this.template, this.affordances);
 	}
 
 	/**
@@ -557,8 +557,8 @@ public class Link implements Serializable {
 	public Link withName(String name) {
 
 		return this.name == name ? this
-				: new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, this.deprecation,
-						this.profile, name, this.template, this.affordances);
+	: new Link(this.rel, this.href, this.hreflang, this.media, this.title, this.type, this.deprecation,
+	this.profile, name, this.template, this.affordances);
 	}
 
 	@JsonProperty
@@ -636,10 +636,10 @@ public class Link implements Serializable {
 		}
 		Link link = (Link) o;
 		return Objects.equals(this.rel, link.rel) && Objects.equals(this.href, link.href)
-				&& Objects.equals(this.hreflang, link.hreflang) && Objects.equals(this.media, link.media)
-				&& Objects.equals(this.title, link.title) && Objects.equals(this.type, link.type)
-				&& Objects.equals(this.deprecation, link.deprecation) && Objects.equals(this.profile, link.profile)
-				&& Objects.equals(this.name, link.name) && Objects.equals(this.affordances, link.affordances);
+	&& Objects.equals(this.hreflang, link.hreflang) && Objects.equals(this.media, link.media)
+	&& Objects.equals(this.title, link.title) && Objects.equals(this.type, link.type)
+	&& Objects.equals(this.deprecation, link.deprecation) && Objects.equals(this.profile, link.profile)
+	&& Objects.equals(this.name, link.name) && Objects.equals(this.affordances, link.affordances);
 	}
 
 	/*
@@ -650,7 +650,7 @@ public class Link implements Serializable {
 	public int hashCode() {
 
 		return Objects.hash(this.rel, this.href, this.hreflang, this.media, this.title, this.type, this.deprecation,
-				this.profile, this.name, this.affordances);
+	this.profile, this.name, this.affordances);
 	}
 
 	/*

@@ -37,13 +37,10 @@ import org.springframework.util.ReflectionUtils;
 public class DummyInvocationUtils {
 
 	private static final ThreadLocal<ConcurrentLruCache<CacheKey, Object>> CACHE = ThreadLocal
-			.withInitial(() -> new ConcurrentLruCache<CacheKey, Object>(256,
-					it -> {
+.withInitial(() -> new ConcurrentLruCache<CacheKey, Object>(256,it -> {
 
-						InvocationRecordingMethodInterceptor interceptor = new InvocationRecordingMethodInterceptor(it.type,
-								it.arguments);
-						return getProxyWithInterceptor(it.type, interceptor, it.type.getClassLoader());
-					}));
+InvocationRecordingMethodInterceptor interceptor = new InvocationRecordingMethodInterceptor(it.type,it.arguments);
+return getProxyWithInterceptor(it.type, interceptor, it.type.getClassLoader());}));
 
 	/**
 	 * Method interceptor that records the last method invocation and creates a proxy for the return value that exposes
@@ -151,8 +148,8 @@ public class DummyInvocationUtils {
 		}
 
 		return (LastInvocationAware) (Advised.class.isInstance(source)
-				? ((Advised) source).getAdvisors()[0].getAdvice()
-				: source);
+	? ((Advised) source).getAdvisors()[0].getAdvice()
+	: source);
 	}
 
 	/**
@@ -186,7 +183,7 @@ public class DummyInvocationUtils {
 
 	@SuppressWarnings("unchecked")
 	private static <T> T getProxyWithInterceptor(Class<?> type, InvocationRecordingMethodInterceptor interceptor,
-			ClassLoader classLoader) {
+ClassLoader classLoader) {
 
 		if (type.equals(Object.class)) {
 			return (T) interceptor;
@@ -240,7 +237,7 @@ public class DummyInvocationUtils {
 			CacheKey cacheKey = (CacheKey) o;
 
 			return Objects.equals(this.type, cacheKey.type) //
-					&& Arrays.equals(this.arguments, cacheKey.arguments);
+		&& Arrays.equals(this.arguments, cacheKey.arguments);
 		}
 
 		/*
@@ -263,8 +260,8 @@ public class DummyInvocationUtils {
 		public String toString() {
 
 			return "DummyInvocationUtils.CacheKey(type=" + this.type //
-					+ ", arguments=" + Arrays.deepToString(this.arguments) //
-					+ ")";
+		+ ", arguments=" + Arrays.deepToString(this.arguments) //
+		+ ")";
 		}
 	}
 }

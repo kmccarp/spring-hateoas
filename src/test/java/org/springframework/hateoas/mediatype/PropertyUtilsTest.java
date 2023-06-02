@@ -97,8 +97,8 @@ class PropertyUtilsTest {
 		MethodParameters parameters = MethodParameters.of(method);
 
 		ResolvableType resolvableType = parameters.getParametersWith(RequestBody.class).stream() //
-				.findFirst().map(it -> ResolvableType.forMethodParameter(it.getMethod(), it.getParameterIndex()))
-				.orElseThrow(() -> new RuntimeException("Didn't find a parameter annotated with @RequestBody!"));
+	.findFirst().map(it -> ResolvableType.forMethodParameter(it.getMethod(), it.getParameterIndex()))
+	.orElseThrow(() -> new RuntimeException("Didn't find a parameter annotated with @RequestBody!"));
 
 		InputPayloadMetadata metadata = PropertyUtils.getExposedProperties(resolvableType);
 
@@ -110,17 +110,17 @@ class PropertyUtilsTest {
 	void objectWithIgnorableAttributes() {
 
 		EmployeeWithCustomizedReaders employee = new EmployeeWithCustomizedReaders("Frodo", "Baggins", "ring bearer",
-				"password", "fbaggins", "ignore this one");
+	"password", "fbaggins", "ignore this one");
 
 		Map<String, Object> properties = PropertyUtils.extractPropertyValues(employee);
 
 		assertThat(properties).hasSize(6);
 		assertThat(properties.keySet()).containsExactlyInAnyOrder("firstName", "lastName", "role", "username", "fullName",
-				"usernameAndLastName");
+	"usernameAndLastName");
 		assertThat(properties.entrySet()).containsExactlyInAnyOrder(new SimpleEntry<>("firstName", "Frodo"),
-				new SimpleEntry<>("lastName", "Baggins"), new SimpleEntry<>("role", "ring bearer"),
-				new SimpleEntry<>("username", "fbaggins"), new SimpleEntry<>("fullName", "Frodo Baggins"),
-				new SimpleEntry<>("usernameAndLastName", "fbaggins+++Baggins"));
+	new SimpleEntry<>("lastName", "Baggins"), new SimpleEntry<>("role", "ring bearer"),
+	new SimpleEntry<>("username", "fbaggins"), new SimpleEntry<>("fullName", "Frodo Baggins"),
+	new SimpleEntry<>("usernameAndLastName", "fbaggins+++Baggins"));
 	}
 
 	@Test
@@ -133,7 +133,7 @@ class PropertyUtilsTest {
 		assertThat(properties).hasSize(2);
 		assertThat(properties.keySet()).containsExactlyInAnyOrder("name", "father");
 		assertThat(properties.entrySet()).containsExactlyInAnyOrder(new SimpleEntry<>("name", "Frodo"),
-				new SimpleEntry<>("father", null));
+	new SimpleEntry<>("father", null));
 	}
 
 	@Test
@@ -142,12 +142,12 @@ class PropertyUtilsTest {
 		PayloadMetadata metadata = PropertyUtils.getExposedProperties(MethodExposurePayload.class);
 
 		assertThat(getProperty(metadata, "readWrite")) //
-				.map(PropertyMetadata::isReadOnly) //
-				.hasValue(false);
+	.map(PropertyMetadata::isReadOnly) //
+	.hasValue(false);
 
 		assertThat(getProperty(metadata, "readOnly")) //
-				.map(PropertyMetadata::isReadOnly) //
-				.hasValue(true);
+	.map(PropertyMetadata::isReadOnly) //
+	.hasValue(true);
 	}
 
 	@Test
@@ -180,15 +180,15 @@ class PropertyUtilsTest {
 	Stream<DynamicTest> exposesInputTypeForProperties() {
 
 		Stream<InputTypes> source = Stream.of( //
-				InputTypes.of("firstname", HtmlInputType.TEXT), //
-				InputTypes.of("comment", HtmlInputType.TEXTAREA), //
-				InputTypes.of("email", HtmlInputType.EMAIL), //
-				InputTypes.of("uri", HtmlInputType.URL), //
-				InputTypes.of("url", HtmlInputType.URL), //
-				InputTypes.of("stringUrl", HtmlInputType.URL), //
-				InputTypes.of("email", HtmlInputType.EMAIL), //
-				InputTypes.of("ranged", HtmlInputType.RANGE),
-				InputTypes.of("sized", HtmlInputType.RANGE));
+	InputTypes.of("firstname", HtmlInputType.TEXT), //
+	InputTypes.of("comment", HtmlInputType.TEXTAREA), //
+	InputTypes.of("email", HtmlInputType.EMAIL), //
+	InputTypes.of("uri", HtmlInputType.URL), //
+	InputTypes.of("url", HtmlInputType.URL), //
+	InputTypes.of("stringUrl", HtmlInputType.URL), //
+	InputTypes.of("email", HtmlInputType.EMAIL), //
+	InputTypes.of("ranged", HtmlInputType.RANGE),
+	InputTypes.of("sized", HtmlInputType.RANGE));
 
 		InputPayloadMetadata metadata = PropertyUtils.getExposedProperties(InputTypeSample.class);
 
@@ -207,7 +207,7 @@ class PropertyUtilsTest {
 	void detectesPropertiesWithRecordStyleAccessorsCorrectly() {
 
 		assertThatNoException()
-				.isThrownBy(() -> PropertyUtils.getExposedProperties(TypeWithRecordStyleAccessors.class));
+	.isThrownBy(() -> PropertyUtils.getExposedProperties(TypeWithRecordStyleAccessors.class));
 	}
 
 	@Test // #1753
@@ -240,14 +240,16 @@ class PropertyUtilsTest {
 
 	@Data
 	@AllArgsConstructor
-	@JsonIgnoreProperties({ "ignoreThisProperty" })
+	@JsonIgnoreProperties({"ignoreThisProperty"})
 	static class EmployeeWithCustomizedReaders {
 
 		private String firstName;
 		private String lastName;
 		private String role;
-		@JsonIgnore private String password;
-		@JsonIgnore(false) private String username;
+		@JsonIgnore
+		private String password;
+		@JsonIgnore(false)
+		private String username;
 		private String ignoreThisProperty;
 
 		public String getFullName() {
@@ -279,21 +281,31 @@ class PropertyUtilsTest {
 	@Value
 	static class Jsr303SamplePayload {
 
-		@NotNull String nonNull;
-		@NotBlank String nonBlank;
-		@Pattern(regexp = "\\w") String pattern;
-		@NotBlank @Pattern(regexp = "\\w") String nonBlankPattern;
+		@NotNull
+		String nonNull;
+		@NotBlank
+		String nonBlank;
+		@Pattern(regexp = "\\w")
+		String pattern;
+		@NotBlank
+		@Pattern(regexp = "\\w")
+		String nonBlankPattern;
 		TypeAnnotated annotated;
-		@Size(min = 41, max = 4711) int sized;
+		@Size(min = 41, max = 4711)
+		int sized;
 	}
 
 	@Pattern(regexp = "regex")
-	static class TypeAnnotated {}
+	static class TypeAnnotated {
+	}
 
 	static class MethodExposurePayload {
 
-		@Getter @Setter String readWrite;
-		@Getter String readOnly;
+		@Getter
+		@Setter
+		String readWrite;
+		@Getter
+		String readOnly;
 	}
 
 	@RestController
@@ -319,24 +331,30 @@ class PropertyUtilsTest {
 
 		String firstname;
 
-		@InputType(HtmlInputType.TEXTAREA_VALUE) String comment;
+		@InputType(HtmlInputType.TEXTAREA_VALUE)
+		String comment;
 
-		@Email String email;
+		@Email
+		String email;
 
 		URI uri;
 
 		java.net.URL url;
 
-		@URL String stringUrl;
+		@URL
+		String stringUrl;
 
-		@Range int ranged;
+		@Range
+		int ranged;
 
-		@Size int sized;
+		@Size
+		int sized;
 	}
 
 	@Value
 	static class JacksonCustomizations {
-		@JsonProperty("renamed") String property;
+		@JsonProperty("renamed")
+		String property;
 	}
 
 	// Test fixtures
@@ -350,8 +368,8 @@ class PropertyUtilsTest {
 		public void verify(InputPayloadMetadata metadata) {
 
 			assertThat(PropertyUtilsTest.getProperty(metadata, property))
-					.map(PropertyMetadata::getInputType)
-					.hasValue(type.toString());
+		.map(PropertyMetadata::getInputType)
+		.hasValue(type.toString());
 		}
 
 		@Override

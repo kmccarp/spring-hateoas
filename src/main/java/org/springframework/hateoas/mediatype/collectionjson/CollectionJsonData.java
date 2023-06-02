@@ -36,8 +36,8 @@ final class CollectionJsonData {
 
 	@JsonCreator
 	CollectionJsonData(@JsonProperty("name") @Nullable String name, //
-			@JsonProperty("value") @Nullable Object value, //
-			@JsonProperty("prompt") @Nullable String prompt) {
+@JsonProperty("value") @Nullable Object value, //
+@JsonProperty("prompt") @Nullable String prompt) {
 
 		this.name = name;
 		this.value = value;
@@ -87,7 +87,7 @@ final class CollectionJsonData {
 			return false;
 		CollectionJsonData that = (CollectionJsonData) o;
 		return Objects.equals(this.name, that.name) && Objects.equals(this.value, that.value)
-				&& Objects.equals(this.prompt, that.prompt);
+	&& Objects.equals(this.prompt, that.prompt);
 	}
 
 	@Override

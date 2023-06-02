@@ -70,7 +70,7 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 	 * @param controllerAnnotationType must not be {@literal null}.
 	 */
 	protected ControllerMethodReturnTypeAotProcessor(
-			Class<? extends Annotation> controllerAnnotationType) {
+Class<? extends Annotation> controllerAnnotationType) {
 
 		Assert.notNull(controllerAnnotationType, "Controller anntotation type must not be null!");
 
@@ -88,8 +88,8 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 		var beanClass = registeredBean.getBeanClass();
 
 		return AnnotatedElementUtils.isAnnotated(beanClass, controllerAnnotationType)
-				? new ProxyRegisteringAotContribution(beanClass)
-				: null;
+	? new ProxyRegisteringAotContribution(beanClass)
+	: null;
 	}
 
 	/**
@@ -129,10 +129,10 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 				Class<?> returnType = method.getReturnType();
 
 				if (ReflectionUtils.isObjectMethod(method)
-						|| method.isSynthetic()
-						|| method.isBridge()
-						|| Modifier.isPrivate(method.getModifiers())
-						|| ClassUtils.isAssignable(returnType, void.class)) {
+			|| method.isSynthetic()
+			|| method.isBridge()
+			|| Modifier.isPrivate(method.getModifiers())
+			|| ClassUtils.isAssignable(returnType, void.class)) {
 					return;
 				}
 
@@ -160,8 +160,8 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 			// Wee need to find at least one non-private constructor to be able to create a CGLib proxy in the first
 			// place
 			var anyNonPrivateConstructor = Arrays.stream(type.getDeclaredConstructors())
-					.map(Constructor::getModifiers)
-					.anyMatch(Predicate.not(Modifier::isPrivate));
+		.map(Constructor::getModifiers)
+		.anyMatch(Predicate.not(Modifier::isPrivate));
 
 			if (!anyNonPrivateConstructor) {
 				return null;
@@ -199,7 +199,7 @@ public class ControllerMethodReturnTypeAotProcessor implements BeanRegistrationA
 			} catch (AopConfigException o_O) {
 
 				LOGGER.info("Could not create proxy class for {} (via {}). Reason {}", type, beanClass,
-						o_O.getMessage());
+			o_O.getMessage());
 			}
 
 			return null;

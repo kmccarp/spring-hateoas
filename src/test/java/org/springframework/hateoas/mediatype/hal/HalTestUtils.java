@@ -56,12 +56,12 @@ public class HalTestUtils {
 		ObjectMapper mapper = MappingTestUtils.defaultObjectMapper();
 
 		LinkRelationProvider provider = new DelegatingLinkRelationProvider(new AnnotationLinkRelationProvider(),
-				HalTestUtils.DefaultLinkRelationProvider.INSTANCE);
+	HalTestUtils.DefaultLinkRelationProvider.INSTANCE);
 
 		mapper.registerModule(new Jackson2HalModule());
 		mapper.setHandlerInstantiator(
-				new HalHandlerInstantiator(provider, CurieProvider.NONE, MessageResolver.DEFAULTS_ONLY, configuration,
-						new DefaultListableBeanFactory()));
+	new HalHandlerInstantiator(provider, CurieProvider.NONE, MessageResolver.DEFAULTS_ONLY, configuration,
+new DefaultListableBeanFactory()));
 
 		return mapper;
 	}

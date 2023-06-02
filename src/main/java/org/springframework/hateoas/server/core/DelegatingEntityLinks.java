@@ -106,8 +106,7 @@ public class DelegatingEntityLinks implements EntityLinks {
 	private EntityLinks getPluginFor(Class<?> type) {
 
 		return delegates.getPluginFor(type) //
-				.orElseThrow(() -> new IllegalArgumentException(
-						String.format("Cannot determine link for %s! No EntityLinks instance found supporting the domain type!",
-								type.getName())));
+	.orElseThrow(() -> new IllegalArgumentException(
+String.format("Cannot determine link for %s! No EntityLinks instance found supporting the domain type!",type.getName())));
 	}
 }

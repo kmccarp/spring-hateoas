@@ -48,12 +48,12 @@ final class CollectionJson<T> {
 
 	@JsonCreator
 	CollectionJson(@JsonProperty("version") String version, //
-			@JsonProperty("href") @Nullable String href, //
-			@JsonProperty("links") @Nullable Links links, //
-			@JsonProperty("items") @Nullable List<CollectionJsonItem<T>> items, //
-			@JsonProperty("queries") @Nullable List<CollectionJsonQuery> queries, //
-			@JsonProperty("template") @Nullable CollectionJsonTemplate template, //
-			@JsonProperty("error") @Nullable CollectionJsonError error) {
+@JsonProperty("href") @Nullable String href, //
+@JsonProperty("links") @Nullable Links links, //
+@JsonProperty("items") @Nullable List<CollectionJsonItem<T>> items, //
+@JsonProperty("queries") @Nullable List<CollectionJsonQuery> queries, //
+@JsonProperty("template") @Nullable CollectionJsonTemplate template, //
+@JsonProperty("error") @Nullable CollectionJsonError error) {
 
 		this.version = version;
 		this.href = href;
@@ -77,7 +77,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withVersion(String version) {
 
 		return this.version == version ? this
-				: new CollectionJson<T>(version, this.href, this.links, this.items, this.queries, this.template, this.error);
+	: new CollectionJson<T>(version, this.href, this.links, this.items, this.queries, this.template, this.error);
 	}
 
 	/**
@@ -89,7 +89,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withHref(@Nullable String href) {
 
 		return this.href == href ? this
-				: new CollectionJson<T>(this.version, href, this.links, this.items, this.queries, this.template, this.error);
+	: new CollectionJson<T>(this.version, href, this.links, this.items, this.queries, this.template, this.error);
 	}
 
 	/**
@@ -111,7 +111,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withLinks(Links links) {
 
 		return this.links == links ? this
-				: new CollectionJson<T>(this.version, this.href, links, this.items, this.queries, this.template, this.error);
+	: new CollectionJson<T>(this.version, this.href, links, this.items, this.queries, this.template, this.error);
 	}
 
 	/**
@@ -151,7 +151,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withItems(List<CollectionJsonItem<T>> items) {
 
 		return this.items == items ? this
-				: new CollectionJson<T>(this.version, this.href, this.links, items, this.queries, this.template, this.error);
+	: new CollectionJson<T>(this.version, this.href, this.links, items, this.queries, this.template, this.error);
 	}
 
 	/**
@@ -163,7 +163,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withQueries(List<CollectionJsonQuery> queries) {
 
 		return this.queries == queries ? this
-				: new CollectionJson<T>(this.version, this.href, this.links, this.items, queries, this.template, this.error);
+	: new CollectionJson<T>(this.version, this.href, this.links, this.items, queries, this.template, this.error);
 	}
 
 	/**
@@ -175,7 +175,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withTemplate(@Nullable CollectionJsonTemplate template) {
 
 		return this.template == template ? this
-				: new CollectionJson<T>(this.version, this.href, this.links, this.items, this.queries, template, this.error);
+	: new CollectionJson<T>(this.version, this.href, this.links, this.items, this.queries, template, this.error);
 	}
 
 	/**
@@ -187,7 +187,7 @@ final class CollectionJson<T> {
 	CollectionJson<T> withError(@Nullable CollectionJsonError error) {
 
 		return this.error == error ? this
-				: new CollectionJson<T>(this.version, this.href, this.links, this.items, this.queries, this.template, error);
+	: new CollectionJson<T>(this.version, this.href, this.links, this.items, this.queries, this.template, error);
 	}
 
 	/**
@@ -246,9 +246,9 @@ final class CollectionJson<T> {
 			return false;
 		CollectionJson<?> that = (CollectionJson<?>) o;
 		return Objects.equals(this.version, that.version) && Objects.equals(this.href, that.href)
-				&& Objects.equals(this.links, that.links) && Objects.equals(this.items, that.items)
-				&& Objects.equals(this.queries, that.queries) && Objects.equals(this.template, that.template)
-				&& Objects.equals(this.error, that.error);
+	&& Objects.equals(this.links, that.links) && Objects.equals(this.items, that.items)
+	&& Objects.equals(this.queries, that.queries) && Objects.equals(this.template, that.template)
+	&& Objects.equals(this.error, that.error);
 	}
 
 	@Override
@@ -260,7 +260,7 @@ final class CollectionJson<T> {
 	public String toString() {
 
 		return "CollectionJson{" + "version='" + this.version + '\'' + ", href='" + this.href + '\'' + ", links="
-				+ this.links + ", items=" + this.items + ", queries=" + this.queries + ", template=" + this.template
-				+ ", error=" + this.error + '}';
+	+ this.links + ", items=" + this.items + ", queries=" + this.queries + ", template=" + this.template
+	+ ", error=" + this.error + '}';
 	}
 }

@@ -67,21 +67,21 @@ class HypermediaWebFilterTest {
 	void webFilterShouldEmbedExchangeIntoContext() {
 
 		this.testClient.get().uri("https://example.com/api") //
-				.accept(MediaTypes.HAL_JSON) //
-				.exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(MediaTypes.HAL_JSON) //
-				.returnResult(RepresentationModel.class) //
-				.getResponseBody() //
-				.as(StepVerifier::create) //
-				.expectNextMatches(resourceSupport -> {
+	.accept(MediaTypes.HAL_JSON) //
+	.exchange() //
+	.expectStatus().isOk() //
+	.expectHeader().contentType(MediaTypes.HAL_JSON) //
+	.returnResult(RepresentationModel.class) //
+	.getResponseBody() //
+	.as(StepVerifier::create) //
+	.expectNextMatches(resourceSupport -> {
 
-					assertThat(resourceSupport.getLinks())//
-							.containsExactly(Link.of("https://example.com/api", IanaLinkRelations.SELF));
+		assertThat(resourceSupport.getLinks())//
+	.containsExactly(Link.of("https://example.com/api", IanaLinkRelations.SELF));
 
-					return true;
-				}) //
-				.verifyComplete();
+		return true;
+	}) //
+	.verifyComplete();
 	}
 
 	@RestController

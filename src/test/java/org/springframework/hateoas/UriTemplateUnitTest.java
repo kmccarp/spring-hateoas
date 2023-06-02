@@ -105,7 +105,7 @@ class UriTemplateUnitTest {
 		UriTemplate template = UriTemplate.of("/foo{?bar,foobar}");
 
 		assertVariables(template, new TemplateVariable("bar", VariableType.REQUEST_PARAM),
-				new TemplateVariable("foobar", VariableType.REQUEST_PARAM_CONTINUED));
+	new TemplateVariable("foobar", VariableType.REQUEST_PARAM_CONTINUED));
 	}
 
 	@Test // #137
@@ -146,7 +146,7 @@ class UriTemplateUnitTest {
 	@Test // #137
 	void correctlyExpandsFullUri() {
 		assertThat(UriTemplate.of("http://localhost:8080/foo{?bar}").expand().toString())
-				.isEqualTo("http://localhost:8080/foo");
+	.isEqualTo("http://localhost:8080/foo");
 	}
 
 	@Test // #137
@@ -221,40 +221,40 @@ class UriTemplateUnitTest {
 	void expandsCompositeValueAsAssociativeArray() {
 
 		of("/foo{?bar,foobar*}", "/foo?bar=barExpanded&city=Clarksville&state=TN") //
-				.param("bar", "barExpanded") //
-				.param("foobar", new HashMap<String, String>() {
-					{
-						put("city", "Clarksville");
-						put("state", "TN");
-					}
-				}) //
-				.verify();
+	.param("bar", "barExpanded") //
+	.param("foobar", new HashMap<String, String>() {
+		{
+			put("city", "Clarksville");
+			put("state", "TN");
+		}
+	}) //
+	.verify();
 	}
 
 	@Test // #483
 	void expandsCompositeValueAsList() {
 
 		of("/foo{?bar,foobar*}", "/foo?bar=barExpanded&foobar=foo1&foobar=foo2") //
-				.param("bar", "barExpanded") //
-				.param("foobar", Arrays.asList("foo1", "foo2")) //
-				.verify();
+	.param("bar", "barExpanded") //
+	.param("foobar", Arrays.asList("foo1", "foo2")) //
+	.verify();
 	}
 
 	@Test // #483
 	void handlesCompositeValueAsSingleValue() {
 
 		of("/foo{?bar,foobar*}", "/foo?bar=barExpanded&foobar=singleValue") //
-				.param("bar", "barExpanded") //
-				.param("foobar", "singleValue") //
-				.verify();
+	.param("bar", "barExpanded") //
+	.param("foobar", "singleValue") //
+	.verify();
 	}
 
 	@Test // #1127
 	void escapesBaseUriProperly() {
 
 		of("https://example.org/foo and bar/{baz}", "https://example.org/foo%20and%20bar/xyzzy") //
-				.param("baz", "xyzzy") //
-				.verify();
+	.param("baz", "xyzzy") //
+	.verify();
 
 		of("/foo?foo=bar{&baz}", "/foo?foo=bar&baz=xyz").param("baz", "xyz").verify();
 		of("?foo=bar{&baz}", "?foo=bar&baz=xyz").param("baz", "xyz").verify();
@@ -291,7 +291,7 @@ class UriTemplateUnitTest {
 	void expandsTemplateWithAddedVariable() {
 
 		UriTemplate template = UriTemplate.of("/foo") //
-				.with(new TemplateVariable("bar", VariableType.REQUEST_PARAM));
+	.with(new TemplateVariable("bar", VariableType.REQUEST_PARAM));
 
 		assertThat(template.expand("value").toString()).isEqualTo("/foo?bar=value");
 	}
@@ -300,40 +300,40 @@ class UriTemplateUnitTest {
 	void useHelperMethodsToBuildUriTemplates() {
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(pathVariable("var")) //
-				.getVariableNames()) //
-						.containsExactly("var");
+	.with(pathVariable("var")) //
+	.getVariableNames()) //
+	.containsExactly("var");
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(requestParameter("var")) //
-				.with(requestParameterContinued("var2")) //
-				.toString()) //
-						.isEqualTo("/foo{?var,var2}");
+	.with(requestParameter("var")) //
+	.with(requestParameterContinued("var2")) //
+	.toString()) //
+	.isEqualTo("/foo{?var,var2}");
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(requestParameter("var")) //
-				.with(requestParameter("var2")) //
-				.toString()) //
-						.isEqualTo("/foo{?var,var2}");
+	.with(requestParameter("var")) //
+	.with(requestParameter("var2")) //
+	.toString()) //
+	.isEqualTo("/foo{?var,var2}");
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(requestParameterContinued("var2")) //
-				.toString()).isEqualTo("/foo{&var2}");
+	.with(requestParameterContinued("var2")) //
+	.toString()).isEqualTo("/foo{&var2}");
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(segment("var")) //
-				.toString()) //
-						.isEqualTo("/foo{/var}");
+	.with(segment("var")) //
+	.toString()) //
+	.isEqualTo("/foo{/var}");
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(fragment("var")) //
-				.toString()) //
-						.isEqualTo("/foo{#var}");
+	.with(fragment("var")) //
+	.toString()) //
+	.isEqualTo("/foo{#var}");
 
 		assertThat(UriTemplate.of("/foo") //
-				.with(compositeParameter("var")) //
-				.toString()) //
-						.isEqualTo("/foo{*var}");
+	.with(compositeParameter("var")) //
+	.toString()) //
+	.isEqualTo("/foo{*var}");
 	}
 
 	@Test // #227
@@ -347,21 +347,21 @@ class UriTemplateUnitTest {
 	void variablesWithPercentEncodingShouldWork() {
 
 		assertThat(UriTemplate.of("http://localhost/foo/bar/{%24filter}").expand("value"))
-				.isEqualTo(URI.create("http://localhost/foo/bar/value"));
+	.isEqualTo(URI.create("http://localhost/foo/bar/value"));
 	}
 
 	@Test // #475
 	void variablesWithUnderscoresShouldWork() {
 
 		assertThat(UriTemplate.of("http://localhost/foo/bar/{_filter}").expand("value"))
-				.isEqualTo(URI.create("http://localhost/foo/bar/value"));
+	.isEqualTo(URI.create("http://localhost/foo/bar/value"));
 	}
 
 	@Test
 	void expandsCompositePaths() {
 
 		URI uri = UriTemplate.of("/foo{/bar*}") //
-				.expand(Collections.singletonMap("bar", Arrays.asList("first", "second")));
+	.expand(Collections.singletonMap("bar", Arrays.asList("first", "second")));
 
 		assertThat(uri).isEqualTo(URI.create("/foo/first/second"));
 	}
@@ -370,7 +370,7 @@ class UriTemplateUnitTest {
 	void adaptsRequestParamVariableToContinuationIfBaseUriContainsParameter() {
 
 		UriTemplate template = UriTemplate.of("/path/{bar}/foo.zip?type=foo")
-				.with(new TemplateVariable("foobar", VariableType.REQUEST_PARAM));
+	.with(new TemplateVariable("foobar", VariableType.REQUEST_PARAM));
 
 		assertThat(template.toString()).isEqualTo("/path/{bar}/foo.zip?type=foo{&foobar}");
 	}
@@ -379,7 +379,7 @@ class UriTemplateUnitTest {
 	void supportsVariableInHostName() {
 
 		assertThatCode(() -> UriTemplate.of("https://{somehost}/somepath"))
-				.doesNotThrowAnyException();
+	.doesNotThrowAnyException();
 	}
 
 	@Test // #1800
@@ -436,175 +436,175 @@ class UriTemplateUnitTest {
 		values.put("undef", null);
 
 		return Stream.of( //
-				// 3.2.1
-				of("{count}", "one,two,three"),
-				of("{count*}", "one,two,three"),
-				of("{/count}", "/one,two,three"),
-				of("{/count*}", "/one/two/three"),
-				of("{;count}", ";count=one,two,three"),
-				of("{;count*}", ";count=one;count=two;count=three"),
-				of("{?count}", "?count=one,two,three"),
-				of("{?count*}", "?count=one&count=two&count=three"),
-				of("?bar={&count*}", "?bar=&count=one&count=two&count=three"), //
+	// 3.2.1
+	of("{count}", "one,two,three"),
+	of("{count*}", "one,two,three"),
+	of("{/count}", "/one,two,three"),
+	of("{/count*}", "/one/two/three"),
+	of("{;count}", ";count=one,two,three"),
+	of("{;count*}", ";count=one;count=two;count=three"),
+	of("{?count}", "?count=one,two,three"),
+	of("{?count*}", "?count=one&count=two&count=three"),
+	of("?bar={&count*}", "?bar=&count=one&count=two&count=three"), //
 
-				// 3.2.2
-				of("{var}", "value"),
-				of("{hello}", "Hello%20World%21"),
-				of("{half}", "50%25"),
-				of("O{empty}X", "OX"),
-				of("O{undef}X", "OX"),
-				of("{x,y}", "1024,768"),
-				of("{x,hello,y}", "1024,Hello%20World%21,768"),
-				of("?{x,empty}", "?1024,"),
-				of("?{x,undef}", "?1024"),
-				of("?{undef,y}", "?768"),
-				of("{var:3}", "val"),
-				of("{var:30}", "value"),
-				of("{list}", "red,green,blue"),
-				of("{list*}", "red,green,blue"),
-				of("{keys}", "semi,%3B,dot,.,comma,%2C"),
-				of("{keys*}", "semi=%3B,dot=.,comma=%2C"), //
+	// 3.2.2
+	of("{var}", "value"),
+	of("{hello}", "Hello%20World%21"),
+	of("{half}", "50%25"),
+	of("O{empty}X", "OX"),
+	of("O{undef}X", "OX"),
+	of("{x,y}", "1024,768"),
+	of("{x,hello,y}", "1024,Hello%20World%21,768"),
+	of("?{x,empty}", "?1024,"),
+	of("?{x,undef}", "?1024"),
+	of("?{undef,y}", "?768"),
+	of("{var:3}", "val"),
+	of("{var:30}", "value"),
+	of("{list}", "red,green,blue"),
+	of("{list*}", "red,green,blue"),
+	of("{keys}", "semi,%3B,dot,.,comma,%2C"),
+	of("{keys*}", "semi=%3B,dot=.,comma=%2C"), //
 
-				// 3.2.3
-				of("{+var}", "value"),
-				of("{+hello}", "Hello%20World!"),
-				of("{+half}", "50%25"),
-				of("{base}index", "http%3A%2F%2Fexample.com%2Fhome%2Findex"),
-				of("{+base}index", "http://example.com/home/index"),
-				of("O{+empty}X", "OX"),
-				of("O{+undef}X", "OX"),
-				of("{+path}/here", "/foo/bar/here"),
-				of("here?ref={+path}", "here?ref=/foo/bar"),
-				of("up{+path}{var}/here", "up/foo/barvalue/here"),
-				of("{+x,hello,y}", "1024,Hello%20World!,768"),
-				of("{+path,x}/here", "/foo/bar,1024/here"),
-				of("{+path:6}/here", "/foo/b/here"),
-				of("{+list}", "red,green,blue"),
-				of("{+list*}", "red,green,blue"),
-				of("{+keys}", "semi,;,dot,.,comma,,"),
-				of("{+keys*}", "semi=;,dot=.,comma=,"), //
+	// 3.2.3
+	of("{+var}", "value"),
+	of("{+hello}", "Hello%20World!"),
+	of("{+half}", "50%25"),
+	of("{base}index", "http%3A%2F%2Fexample.com%2Fhome%2Findex"),
+	of("{+base}index", "http://example.com/home/index"),
+	of("O{+empty}X", "OX"),
+	of("O{+undef}X", "OX"),
+	of("{+path}/here", "/foo/bar/here"),
+	of("here?ref={+path}", "here?ref=/foo/bar"),
+	of("up{+path}{var}/here", "up/foo/barvalue/here"),
+	of("{+x,hello,y}", "1024,Hello%20World!,768"),
+	of("{+path,x}/here", "/foo/bar,1024/here"),
+	of("{+path:6}/here", "/foo/b/here"),
+	of("{+list}", "red,green,blue"),
+	of("{+list*}", "red,green,blue"),
+	of("{+keys}", "semi,;,dot,.,comma,,"),
+	of("{+keys*}", "semi=;,dot=.,comma=,"), //
 
-				// 3.2.4
-				of("{#var}", "#value"),
-				of("{#hello}", "#Hello%20World!"),
-				of("{#half}", "#50%25"),
-				of("foo{#empty}", "foo#"),
-				of("foo{#undef}", "foo"),
-				of("{#x,hello,y}", "#1024,Hello%20World!,768"),
-				of("{#path,x}/here", "#/foo/bar,1024/here"),
-				of("{#path:6}/here", "#/foo/b/here"),
-				of("{#list}", "#red,green,blue"),
-				of("{#list*}", "#red,green,blue"),
-				of("{#keys}", "#semi,;,dot,.,comma,,"),
-				of("{#keys*}", "#semi=;,dot=.,comma=,"), //
+	// 3.2.4
+	of("{#var}", "#value"),
+	of("{#hello}", "#Hello%20World!"),
+	of("{#half}", "#50%25"),
+	of("foo{#empty}", "foo#"),
+	of("foo{#undef}", "foo"),
+	of("{#x,hello,y}", "#1024,Hello%20World!,768"),
+	of("{#path,x}/here", "#/foo/bar,1024/here"),
+	of("{#path:6}/here", "#/foo/b/here"),
+	of("{#list}", "#red,green,blue"),
+	of("{#list*}", "#red,green,blue"),
+	of("{#keys}", "#semi,;,dot,.,comma,,"),
+	of("{#keys*}", "#semi=;,dot=.,comma=,"), //
 
-				// 3.2.5
-				of("{.who}", ".fred"),
-				of("{.who,who}", ".fred.fred"),
-				of("{.half,who}", ".50%25.fred"),
-				of("www{.dom*}", "www.example.com"),
-				of("X{.var}", "X.value"),
-				of("X{.empty}", "X."),
-				of("X{.undef}", "X"),
-				of("X{.var:3}", "X.val"),
-				of("X{.list}", "X.red,green,blue"),
-				of("X{.list*}", "X.red.green.blue"),
-				of("X{.keys}", "X.semi,%3B,dot,.,comma,%2C"),
-				of("X{.keys*}", "X.semi=%3B.dot=..comma=%2C"),
-				of("X{.empty_keys}", "X"),
-				of("X{.empty_keys*}", "X"),
+	// 3.2.5
+	of("{.who}", ".fred"),
+	of("{.who,who}", ".fred.fred"),
+	of("{.half,who}", ".50%25.fred"),
+	of("www{.dom*}", "www.example.com"),
+	of("X{.var}", "X.value"),
+	of("X{.empty}", "X."),
+	of("X{.undef}", "X"),
+	of("X{.var:3}", "X.val"),
+	of("X{.list}", "X.red,green,blue"),
+	of("X{.list*}", "X.red.green.blue"),
+	of("X{.keys}", "X.semi,%3B,dot,.,comma,%2C"),
+	of("X{.keys*}", "X.semi=%3B.dot=..comma=%2C"),
+	of("X{.empty_keys}", "X"),
+	of("X{.empty_keys*}", "X"),
 
-				// 3.2.6 - Path segments
-				of("{/who}", "/fred"),
-				of("{/who,who}", "/fred/fred"),
-				of("{/half,who}", "/50%25/fred"),
-				of("{/who,dub}", "/fred/me%2Ftoo"),
-				of("{/var}", "/value"),
-				of("{/var,empty}", "/value/"),
-				of("{/var,undef}", "/value"),
-				of("{/var,x}/here", "/value/1024/here"),
-				of("{/var:1,var}", "/v/value"),
-				of("{/list}", "/red,green,blue"),
-				of("{/list*}", "/red/green/blue"),
-				of("{/list*,path:4}", "/red/green/blue/%2Ffoo"),
-				of("{/keys}", "/semi,%3B,dot,.,comma,%2C"),
-				of("{/keys*}", "/semi=%3B/dot=./comma=%2C"),
+	// 3.2.6 - Path segments
+	of("{/who}", "/fred"),
+	of("{/who,who}", "/fred/fred"),
+	of("{/half,who}", "/50%25/fred"),
+	of("{/who,dub}", "/fred/me%2Ftoo"),
+	of("{/var}", "/value"),
+	of("{/var,empty}", "/value/"),
+	of("{/var,undef}", "/value"),
+	of("{/var,x}/here", "/value/1024/here"),
+	of("{/var:1,var}", "/v/value"),
+	of("{/list}", "/red,green,blue"),
+	of("{/list*}", "/red/green/blue"),
+	of("{/list*,path:4}", "/red/green/blue/%2Ffoo"),
+	of("{/keys}", "/semi,%3B,dot,.,comma,%2C"),
+	of("{/keys*}", "/semi=%3B/dot=./comma=%2C"),
 
-				// 3.2.7 -
-				of("{;who}", ";who=fred"),
-				of("{;half}", ";half=50%25"),
-				of("{;empty}", ";empty"),
-				of("{;v,empty,who}", ";v=6;empty;who=fred"),
-				of("{;v,bar,who}", ";v=6;who=fred"),
-				of("{;x,y}", ";x=1024;y=768"),
-				of("{;x,y,empty}", ";x=1024;y=768;empty"),
-				of("{;x,y,undef}", ";x=1024;y=768"),
-				of("{;hello:5}", ";hello=Hello"),
-				of("{;list}", ";list=red,green,blue"),
-				of("{;list*}", ";list=red;list=green;list=blue"),
-				of("{;keys}", ";keys=semi,%3B,dot,.,comma,%2C"),
-				of("{;keys*}", ";semi=%3B;dot=.;comma=%2C"),
+	// 3.2.7 -
+	of("{;who}", ";who=fred"),
+	of("{;half}", ";half=50%25"),
+	of("{;empty}", ";empty"),
+	of("{;v,empty,who}", ";v=6;empty;who=fred"),
+	of("{;v,bar,who}", ";v=6;who=fred"),
+	of("{;x,y}", ";x=1024;y=768"),
+	of("{;x,y,empty}", ";x=1024;y=768;empty"),
+	of("{;x,y,undef}", ";x=1024;y=768"),
+	of("{;hello:5}", ";hello=Hello"),
+	of("{;list}", ";list=red,green,blue"),
+	of("{;list*}", ";list=red;list=green;list=blue"),
+	of("{;keys}", ";keys=semi,%3B,dot,.,comma,%2C"),
+	of("{;keys*}", ";semi=%3B;dot=.;comma=%2C"),
 
-				// 3.2.8 - Form-Style Query Expansion
-				of("{?who}", "?who=fred"),
-				of("{?half}", "?half=50%25"),
-				of("{?x,y}", "?x=1024&y=768"),
-				of("{?x,y,empty}", "?x=1024&y=768&empty="),
-				of("{?x,y,undef}", "?x=1024&y=768"),
-				of("{?var:3}", "?var=val"),
-				of("{?list}", "?list=red,green,blue"),
-				of("{?list*}", "?list=red&list=green&list=blue"),
-				of("{?keys}", "?keys=semi,%3B,dot,.,comma,%2C"),
-				of("{?keys*}", "?semi=%3B&dot=.&comma=%2C"),
+	// 3.2.8 - Form-Style Query Expansion
+	of("{?who}", "?who=fred"),
+	of("{?half}", "?half=50%25"),
+	of("{?x,y}", "?x=1024&y=768"),
+	of("{?x,y,empty}", "?x=1024&y=768&empty="),
+	of("{?x,y,undef}", "?x=1024&y=768"),
+	of("{?var:3}", "?var=val"),
+	of("{?list}", "?list=red,green,blue"),
+	of("{?list*}", "?list=red&list=green&list=blue"),
+	of("{?keys}", "?keys=semi,%3B,dot,.,comma,%2C"),
+	of("{?keys*}", "?semi=%3B&dot=.&comma=%2C"),
 
-				//
-				of("?foo={&who}", "?foo=&who=fred"),
-				of("?foo={&half}", "?foo=&half=50%25"),
-				of("?fixed=yes{&x}", "?fixed=yes&x=1024"),
-				of("?foo={&x,y,empty}", "?foo=&x=1024&y=768&empty="),
-				of("?foo={&x,y,undef}", "?foo=&x=1024&y=768"),
-				of("?foo={&var:3}", "?foo=&var=val"),
-				of("?foo={&list}", "?foo=&list=red,green,blue"),
-				of("?foo={&list*}", "?foo=&list=red&list=green&list=blue"),
-				of("?foo={&keys}", "?foo=&keys=semi,%3B,dot,.,comma,%2C"),
-				of("?foo={&keys*}", "?foo=&semi=%3B&dot=.&comma=%2C")
+	//
+	of("?foo={&who}", "?foo=&who=fred"),
+	of("?foo={&half}", "?foo=&half=50%25"),
+	of("?fixed=yes{&x}", "?fixed=yes&x=1024"),
+	of("?foo={&x,y,empty}", "?foo=&x=1024&y=768&empty="),
+	of("?foo={&x,y,undef}", "?foo=&x=1024&y=768"),
+	of("?foo={&var:3}", "?foo=&var=val"),
+	of("?foo={&list}", "?foo=&list=red,green,blue"),
+	of("?foo={&list*}", "?foo=&list=red&list=green&list=blue"),
+	of("?foo={&keys}", "?foo=&keys=semi,%3B,dot,.,comma,%2C"),
+	of("?foo={&keys*}", "?foo=&semi=%3B&dot=.&comma=%2C")
 
 		//
 		) //
 
-				.map(EncodingFixture::skipVarArgsVerification)
-				.map(it -> it.params(values));
+	.map(EncodingFixture::skipVarArgsVerification)
+	.map(it -> it.params(values));
 	}
 
 	private static Stream<EncodingFixture> getEncodingFixtures() {
 
 		return Stream.of(//
-				of("/foo/bar/{?x}", "/foo/bar/?x=1").param("x", 1), //
-				of("/foo/bar/{?x,y}", "/foo/bar/?x=1&y=2").param("x", 1).param("y", 2),
-				of("/foo/bar{?x}{&y}", "/foo/bar?x=1&y=2").param("x", 1).param("y", 2),
-				of("/foo/bar?x=1{&y}", "/foo/bar?x=1&y=2").param("y", 2), //
-				of("/foo/bar?x=1{&y,z}", "/foo/bar?x=1&y=2&z=3").param("y", 2).param("z", 3L),
-				of("/foo{/x}", "/foo/1").param("x", 1), //
-				of("/foo{/x,y}", "/foo/1/2").param("x", 1).param("y", "2"),
-				of("/foo{/x}{/y}", "/foo/1/2").param("x", 1).param("y", "2"),
-				of("/foo{/x}{/y}{?z}", "/foo/1/2?z=3").param("x", 1).param("y", "2").param("z", 3L),
-				of("/foo/{x}", "/foo/1").param("x", 1), //
-				of("/foo/{x}/bar", "/foo/1/bar").param("x", 1), //
-				of("/services/foo/{x}/bar/{y}/gaz", "/services/foo/1/bar/2/gaz").param("x", 1).param("y", "2"),
-				of("/foo/{x}/bar/{y}/bar{?z}", "/foo/1/bar/2/bar?z=3").param("x", 1).param("y", "2").param("z", 3),
-				of("/foo/{x}/bar/{y}/bar{?z}", "/foo/1/bar/2/bar").param("x", 1).param("y", "2"),
-				of("/foo/{x}/bar/{y}/bar{?z}", "/foo/1/bar/2/bar").param("x", 1).param("y", "2"),
-				of("/foo/bar{?x,y,z}", "/foo/bar?x=1").param("x", 1), //
-				of("/foo/bar{?x,y,z}", "/foo/bar?x=1&y=2").param("x", 1).param("y", "2"),
-				of("/foo/bar{?x,y,z}", "/foo/bar?x=1&z=3").param("x", 1).param("z", 3L).skipVarArgsVerification(),
-				of("/foo/{x}/bar{/y}{?z}", "/foo/1/bar/2?z=3").param("x", 1).param("y", "2").param("z", 3L),
-				of("/foo/{x}/bar{/y}{?z}", "/foo/1/bar?z=3").param("x", 1).param("z", 3L).skipVarArgsVerification(),
-				of("/foo/{x}/bar{?y}{#z}", "/foo/1/bar?y=2").param("x", 1).param("y", "2"),
-				of("/foo/{x}/bar{?y}{#z}", "/foo/1/bar?y=2#3").param("x", 1).param("y", "2").param("z", 3L),
-				of("/foo/{x}/bar{?y}{#z}", "/foo/1/bar#3").param("x", 1).param("z", 3L).skipVarArgsVerification(),
-				of("/foo/b%20ar{?x}", "/foo/b%20ar?x=1").param("x", 1), //
-				of("/foo/b\"ar{?x}", "/foo/b%22ar?x=1").param("x", 1), //
-				of("/foo/b%22ar{?x}", "/foo/b%22ar?x=1").param("x", 1));
+	of("/foo/bar/{?x}", "/foo/bar/?x=1").param("x", 1), //
+	of("/foo/bar/{?x,y}", "/foo/bar/?x=1&y=2").param("x", 1).param("y", 2),
+	of("/foo/bar{?x}{&y}", "/foo/bar?x=1&y=2").param("x", 1).param("y", 2),
+	of("/foo/bar?x=1{&y}", "/foo/bar?x=1&y=2").param("y", 2), //
+	of("/foo/bar?x=1{&y,z}", "/foo/bar?x=1&y=2&z=3").param("y", 2).param("z", 3L),
+	of("/foo{/x}", "/foo/1").param("x", 1), //
+	of("/foo{/x,y}", "/foo/1/2").param("x", 1).param("y", "2"),
+	of("/foo{/x}{/y}", "/foo/1/2").param("x", 1).param("y", "2"),
+	of("/foo{/x}{/y}{?z}", "/foo/1/2?z=3").param("x", 1).param("y", "2").param("z", 3L),
+	of("/foo/{x}", "/foo/1").param("x", 1), //
+	of("/foo/{x}/bar", "/foo/1/bar").param("x", 1), //
+	of("/services/foo/{x}/bar/{y}/gaz", "/services/foo/1/bar/2/gaz").param("x", 1).param("y", "2"),
+	of("/foo/{x}/bar/{y}/bar{?z}", "/foo/1/bar/2/bar?z=3").param("x", 1).param("y", "2").param("z", 3),
+	of("/foo/{x}/bar/{y}/bar{?z}", "/foo/1/bar/2/bar").param("x", 1).param("y", "2"),
+	of("/foo/{x}/bar/{y}/bar{?z}", "/foo/1/bar/2/bar").param("x", 1).param("y", "2"),
+	of("/foo/bar{?x,y,z}", "/foo/bar?x=1").param("x", 1), //
+	of("/foo/bar{?x,y,z}", "/foo/bar?x=1&y=2").param("x", 1).param("y", "2"),
+	of("/foo/bar{?x,y,z}", "/foo/bar?x=1&z=3").param("x", 1).param("z", 3L).skipVarArgsVerification(),
+	of("/foo/{x}/bar{/y}{?z}", "/foo/1/bar/2?z=3").param("x", 1).param("y", "2").param("z", 3L),
+	of("/foo/{x}/bar{/y}{?z}", "/foo/1/bar?z=3").param("x", 1).param("z", 3L).skipVarArgsVerification(),
+	of("/foo/{x}/bar{?y}{#z}", "/foo/1/bar?y=2").param("x", 1).param("y", "2"),
+	of("/foo/{x}/bar{?y}{#z}", "/foo/1/bar?y=2#3").param("x", 1).param("y", "2").param("z", 3L),
+	of("/foo/{x}/bar{?y}{#z}", "/foo/1/bar#3").param("x", 1).param("z", 3L).skipVarArgsVerification(),
+	of("/foo/b%20ar{?x}", "/foo/b%20ar?x=1").param("x", 1), //
+	of("/foo/b\"ar{?x}", "/foo/b%22ar?x=1").param("x", 1), //
+	of("/foo/b%22ar{?x}", "/foo/b%22ar?x=1").param("x", 1));
 	}
 
 	static class EncodingFixture {

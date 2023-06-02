@@ -56,17 +56,17 @@ class HalFormsLinkDiscovererUnitTest extends LinkDiscovererUnitTest {
 		String linkText = mapper.readFileContent("hal-forms-link.json");
 
 		Link expected = Link.valueOf("</customer/1>;" //
-				+ "rel=\"self\";" //
-				+ "hreflang=\"en\";" //
-				+ "media=\"pdf\";" //
-				+ "title=\"pdf customer copy\";" //
-				+ "type=\"portable document\";" //
-				+ "deprecation=\"https://example.com/customers/deprecated\";" //
-				+ "profile=\"my-profile\";" //
-				+ "name=\"my-name\"");
+	+ "rel=\"self\";" //
+	+ "hreflang=\"en\";" //
+	+ "media=\"pdf\";" //
+	+ "title=\"pdf customer copy\";" //
+	+ "type=\"portable document\";" //
+	+ "deprecation=\"https://example.com/customers/deprecated\";" //
+	+ "profile=\"my-profile\";" //
+	+ "name=\"my-name\"");
 
 		assertThat(getDiscoverer().findLinkWithRel(IanaLinkRelations.SELF, linkText)) //
-				.hasValue(expected);
+	.hasValue(expected);
 	}
 
 	@Override

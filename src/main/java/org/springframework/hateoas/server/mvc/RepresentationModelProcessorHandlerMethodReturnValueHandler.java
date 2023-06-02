@@ -63,7 +63,7 @@ public class RepresentationModelProcessorHandlerMethodReturnValueHandler impleme
 	private boolean rootLinksAsHeaders = false;
 
 	public RepresentationModelProcessorHandlerMethodReturnValueHandler(HandlerMethodReturnValueHandler delegate,
-			Supplier<RepresentationModelProcessorInvoker> invoker) {
+Supplier<RepresentationModelProcessorInvoker> invoker) {
 
 		Assert.notNull(delegate, "delegate must not be null!");
 		Assert.notNull(invoker, "invoker must not be null!");
@@ -93,9 +93,9 @@ public class RepresentationModelProcessorHandlerMethodReturnValueHandler impleme
 	 * @see org.springframework.web.method.support.HandlerMethodReturnValueHandler#handleReturnValue(java.lang.Object, org.springframework.core.MethodParameter, org.springframework.web.method.support.ModelAndViewContainer, org.springframework.web.context.request.NativeWebRequest)
 	 */
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void handleReturnValue(@Nullable Object returnValue, MethodParameter returnType,
-			ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
+ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
 
 		Object value = returnValue;
 

@@ -60,7 +60,7 @@ public class PagedModel<T> extends CollectionModel<T> {
 	}
 
 	protected PagedModel(Collection<T> content, @Nullable PageMetadata metadata, Iterable<Link> links,
-			@Nullable ResolvableType fallbackType) {
+@Nullable ResolvableType fallbackType) {
 
 		super(content, links, fallbackType);
 
@@ -352,7 +352,7 @@ public class PagedModel<T> extends CollectionModel<T> {
 	@Override
 	public String toString() {
 		return String.format("PagedModel { content: %s, fallbackType: %s, metadata: %s, links: %s }", //
-				getContent(), fallbackType, metadata, getLinks());
+	getContent(), fallbackType, metadata, getLinks());
 	}
 
 	/*
@@ -373,7 +373,7 @@ public class PagedModel<T> extends CollectionModel<T> {
 		PagedModel<?> that = (PagedModel<?>) obj;
 
 		return Objects.equals(this.metadata, that.metadata) //
-				&& super.equals(obj);
+	&& super.equals(obj);
 	}
 
 	/*
@@ -392,10 +392,14 @@ public class PagedModel<T> extends CollectionModel<T> {
 	 */
 	public static class PageMetadata {
 
-		@JsonProperty private long size;
-		@JsonProperty private long totalElements;
-		@JsonProperty private long totalPages;
-		@JsonProperty private long number;
+		@JsonProperty
+		private long size;
+		@JsonProperty
+		private long totalElements;
+		@JsonProperty
+		private long totalPages;
+		@JsonProperty
+		private long number;
 
 		protected PageMetadata() {
 
@@ -476,7 +480,7 @@ public class PagedModel<T> extends CollectionModel<T> {
 		@Override
 		public String toString() {
 			return String.format("Metadata { number: %d, total pages: %d, total elements: %d, size: %d }", number, totalPages,
-					totalElements, size);
+		totalElements, size);
 		}
 
 		/*
@@ -497,7 +501,7 @@ public class PagedModel<T> extends CollectionModel<T> {
 			PageMetadata that = (PageMetadata) obj;
 
 			return this.number == that.number && this.size == that.size && this.totalElements == that.totalElements
-					&& this.totalPages == that.totalPages;
+		&& this.totalPages == that.totalPages;
 		}
 
 		/*

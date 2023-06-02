@@ -39,9 +39,9 @@ public class HypermediaWebTestClientConfigurerTest {
 			WebTestClient webTestClient = WebTestClient.bindToServer().apply(configurer).build();
 
 			assertThat(exchangeStrategies(webTestClient).messageReaders())
-					.flatExtracting(HttpMessageReader::getReadableMediaTypes) //
-					.contains(HAL_JSON) //
-					.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
+		.flatExtracting(HttpMessageReader::getReadableMediaTypes) //
+		.contains(HAL_JSON) //
+		.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
 		});
 	}
 
@@ -55,8 +55,8 @@ public class HypermediaWebTestClientConfigurerTest {
 			WebTestClient webTestClient = WebTestClient.bindToServer().apply(configurer).build();
 
 			assertThat(exchangeStrategies(webTestClient).messageReaders())
-					.flatExtracting(HttpMessageReader::getReadableMediaTypes) //
-					.contains(HAL_JSON, HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
+		.flatExtracting(HttpMessageReader::getReadableMediaTypes) //
+		.contains(HAL_JSON, HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
 		});
 	}
 
@@ -70,9 +70,9 @@ public class HypermediaWebTestClientConfigurerTest {
 			WebTestClient webTestClient = WebTestClient.bindToServer().apply(configurer).build();
 
 			assertThat(exchangeStrategies(webTestClient).messageReaders())
-					.flatExtracting(HttpMessageReader::getReadableMediaTypes) //
-					.contains(HAL_JSON, FRODO_JSON) //
-					.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
+		.flatExtracting(HttpMessageReader::getReadableMediaTypes) //
+		.contains(HAL_JSON, FRODO_JSON) //
+		.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
 		});
 	}
 
@@ -97,17 +97,19 @@ public class HypermediaWebTestClientConfigurerTest {
 
 		// Exercise the controller.
 		client.get().uri("http://localhost/employees").accept(HAL_JSON) //
-				.exchange() //
-				.expectStatus().isOk() //
-				.expectBody(new TypeReferences.CollectionModelType<EntityModel<Employee>>() {}) // <3>
-				.consumeWith(result -> {
-					CollectionModel<EntityModel<Employee>> model = result.getResponseBody(); // <4>
+	.exchange() //
+	.expectStatus().isOk() //
+	.expectBody(new TypeReferences.CollectionModelType<EntityModel<Employee>>() {
+	}) // <3>
+	.consumeWith(result -> {
+		CollectionModel<EntityModel<Employee>> model = result.getResponseBody(); // <4>
 
-					// Assert against the hypermedia model.
-					assertThat(model.getRequiredLink(IanaLinkRelations.SELF)).isEqualTo(Link.of("http://localhost/employees"));
-					assertThat(model.getContent()).hasSize(2);
-				});
+		// Assert against the hypermedia model.
+		assertThat(model.getRequiredLink(IanaLinkRelations.SELF)).isEqualTo(Link.of("http://localhost/employees"));
+		assertThat(model.getContent()).hasSize(2);
+	});
 	}
+
 	// end::web-test-client[]
 
 	/**
@@ -137,7 +139,7 @@ public class HypermediaWebTestClientConfigurerTest {
 	}
 
 	@EnableHypermediaSupport(
-			type = { HypermediaType.HAL, HypermediaType.HAL_FORMS, HypermediaType.COLLECTION_JSON, HypermediaType.UBER })
+type = {HypermediaType.HAL, HypermediaType.HAL_FORMS, HypermediaType.COLLECTION_JSON, HypermediaType.UBER})
 	static class AllHypermediaConfig {
 
 	}

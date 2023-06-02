@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * @author Oliver Gierke
  * @author Greg Turnquist
  */
-@JsonPropertyOrder({ "content", "links" })
+@JsonPropertyOrder({"content", "links"})
 public abstract class CollectionModelMixin<T> extends CollectionModel<T> {
 
 	@Override

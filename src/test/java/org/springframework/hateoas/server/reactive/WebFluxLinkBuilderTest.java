@@ -51,7 +51,8 @@ import org.springframework.web.server.ServerWebExchange;
 @ExtendWith(MockitoExtension.class)
 class WebFluxLinkBuilderTest {
 
-	@Mock ServerWebExchange exchange;
+	@Mock
+	ServerWebExchange exchange;
 
 	/**
 	 * @see #728
@@ -193,8 +194,8 @@ class WebFluxLinkBuilderTest {
 	void considersContextPath() {
 
 		MockServerHttpRequest request = MockServerHttpRequest.get("http://localhost:8080/context/api") //
-				.contextPath("/context") //
-				.build();
+	.contextPath("/context") //
+	.build();
 
 		WebFluxLink link = linkTo(methodOn(TestController.class).deep()).withSelfRel();
 
@@ -207,7 +208,7 @@ class WebFluxLinkBuilderTest {
 	void allowsAppendingPathSegments() {
 
 		MockServerHttpRequest request = MockServerHttpRequest.get("http://localhost:8080/api") //
-				.build();
+	.build();
 
 		WebFluxLink link = linkTo(methodOn(TestController.class).deep()).slash("foo").withSelfRel();
 
@@ -220,7 +221,7 @@ class WebFluxLinkBuilderTest {
 	void removesIncomingQueryParameters() {
 
 		MockServerHttpRequest request = MockServerHttpRequest.get("http://localhost:8080/api?some=parameter") //
-				.build();
+	.build();
 
 		WebFluxLink link = linkTo(methodOn(TestController.class).deep()).withSelfRel();
 

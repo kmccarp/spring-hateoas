@@ -28,8 +28,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 public class ContextTester {
 
 	public static <E extends Exception> void withContext(Class<?> configuration, //
-			ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer, //
-			@Nullable ClassLoader classLoader) throws E {
+ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer, //
+@Nullable ClassLoader classLoader) throws E {
 
 		try (AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext()) {
 
@@ -45,19 +45,19 @@ public class ContextTester {
 	}
 
 	public static <E extends Exception> void withContext(Class<?> configuration,
-			ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer) throws E {
+ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer) throws E {
 		withContext(configuration, consumer, null);
 	}
 
 	public static <E extends Exception> void withServletContext(Class<?> configuration,
-			ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer) throws E {
+ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer) throws E {
 
 		withServletContext(configuration, Function.identity(), consumer);
 	}
 
 	public static <E extends Exception> void withServletContext(Class<?> configuration,
-			Function<AnnotationConfigWebApplicationContext, AnnotationConfigWebApplicationContext> preparer,
-			ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer) throws E {
+Function<AnnotationConfigWebApplicationContext, AnnotationConfigWebApplicationContext> preparer,
+ConsumerWithException<AnnotationConfigWebApplicationContext, E> consumer) throws E {
 
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(configuration);

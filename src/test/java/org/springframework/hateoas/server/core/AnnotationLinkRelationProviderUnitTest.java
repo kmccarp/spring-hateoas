@@ -33,9 +33,10 @@ class AnnotationLinkRelationProviderUnitTest {
 
 		assertThat(linkRelationProvider.getItemResourceRelFor(Resource.class)).isEqualTo(IanaLinkRelations.ITEM);
 		assertThat(linkRelationProvider.getCollectionResourceRelFor(Resource.class))
-				.isEqualTo(IanaLinkRelations.COLLECTION);
+	.isEqualTo(IanaLinkRelations.COLLECTION);
 	}
 
 	@Relation(itemRelation = IanaLinkRelations.ITEM_VALUE, collectionRelation = IanaLinkRelations.COLLECTION_VALUE)
-	static class Resource {}
+	static class Resource {
+	}
 }

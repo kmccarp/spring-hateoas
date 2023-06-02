@@ -260,8 +260,8 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	void linksToMethodWithPathVariableAndMultiValueRequestParams() {
 
 		Link link = linkTo(
-				methodOn(ControllerWithMethods.class).methodWithMultiValueRequestParams("1", Arrays.asList(3, 7), 5))
-						.withSelfRel();
+	methodOn(ControllerWithMethods.class).methodWithMultiValueRequestParams("1", Arrays.asList(3, 7), 5))
+	.withSelfRel();
 
 		UriComponents components = toComponents(link);
 		assertThat(components.getPath()).isEqualTo("/something/1/foo");
@@ -278,7 +278,7 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	void returnsUriComponentsBuilder() {
 
 		UriComponents components = linkTo(PersonController.class).slash("something?foo=bar").toUriComponentsBuilder()
-				.build();
+	.build();
 
 		assertThat(components.getPath()).isEqualTo("/people/something");
 		assertThat(components.getQuery()).isEqualTo("foo=bar");
@@ -395,8 +395,8 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	void usesRootMappingOfTargetClassForMethodsOfParentClass() {
 
 		Link link = linkTo(methodOn(ChildControllerWithRootMapping.class) //
-				.someEmptyMappedMethod()) //
-						.withSelfRel();
+	.someEmptyMappedMethod()) //
+	.withSelfRel();
 
 		assertThat(link.getHref()).endsWith("/root");
 	}
@@ -440,7 +440,7 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		for (String proto : Arrays.asList("http", "https")) {
 
 			setUp();
-			request.addHeader("Forwarded", new String[] { "proto=" + proto });
+			request.addHeader("Forwarded", new String[]{"proto=" + proto});
 
 			adaptRequestFromForwardedHeaders();
 
@@ -494,7 +494,7 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	void createsPartiallyExpandedLink() {
 
 		Link link = linkTo(methodOn(PersonsAddressesController.class, "some id").getAddressesForCountry(null))
-				.withSelfRel();
+	.withSelfRel();
 
 		assertThat(link.isTemplated()).isTrue();
 		assertThat(link.getHref()).contains("some%20id");
@@ -509,7 +509,7 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		Link link = linkTo(methodOn(ControllerWithMethods.class).methodForNextPage("1", null, 5)).withSelfRel();
 
 		assertThat(link.getVariables())
-				.containsExactly(new TemplateVariable("offset", VariableType.REQUEST_PARAM_CONTINUED));
+	.containsExactly(new TemplateVariable("offset", VariableType.REQUEST_PARAM_CONTINUED));
 
 		UriComponents components = toComponents(link);
 
@@ -644,14 +644,14 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		Method method = ControllerWithMethods.class.getDeclaredMethod("methodWithRequestParam", String.class);
 
 		assertThat(linkTo(method, "someString").withSelfRel().getHref()).endsWith("?id=someString");
-		assertThat(linkTo(method, new Object[] { null }).withSelfRel().getHref()).endsWith("?id={id}");
+		assertThat(linkTo(method, new Object[]{null}).withSelfRel().getHref()).endsWith("?id={id}");
 	}
 
 	@Test // #1575
 	void buildsNonCompositeRequestParamUri() {
 
 		Link link = linkTo(methodOn(ControllerWithMethods.class).nonCompositeRequestParam(Arrays.asList("first", "second")))
-				.withSelfRel();
+	.withSelfRel();
 
 		assertThat(link.getHref()).endsWith("?foo=first,second");
 	}
@@ -663,22 +663,22 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		Link link = linkTo(methodOn(ControllerWithMethods.class).methodWithOffsetDateTime(reference)).withSelfRel();
 
 		assertThat(UriComponentsBuilder.fromUriString(link.getHref()).build().getQuery())
-				.contains("%3A", "%2B")
-				.doesNotContain(":", "+");
+	.contains("%3A", "%2B")
+	.doesNotContain(":", "+");
 	}
 
 	@Test // #1598
 	void usesRegisteredConverterForCollectionValues() {
 
 		ConfigurableConversionService conversionService = //
-				(ConfigurableConversionService) ReflectionTestUtils.getField(WebMvcLinkBuilderFactory.class,
-						"FALLBACK_CONVERSION_SERVICE");
+	(ConfigurableConversionService) ReflectionTestUtils.getField(WebMvcLinkBuilderFactory.class,
+"FALLBACK_CONVERSION_SERVICE");
 
 		conversionService.addConverter(SampleConverter.INSTANCE);
 
 		Link result = linkTo(
-				methodOn(ControllerWithMethods.class).methodWithCustomEnum(Collections.singletonList(Sample.ENUM)))
-						.withSelfRel();
+	methodOn(ControllerWithMethods.class).methodWithCustomEnum(Collections.singletonList(Sample.ENUM)))
+	.withSelfRel();
 
 		assertThat(result.getHref()).endsWith("?param=first");
 	}
@@ -688,16 +688,16 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 
 		Method method = ControllerWithMethods.class.getDeclaredMethod("myMethod", Object.class);
 
-		Stream.<ThrowingCallable> of( //
-				() -> linkTo(method, new Object[0]), //
-				() -> linkTo(ControllerWithMethods.class, method, new Object[0]) //
+		Stream.<ThrowingCallable>of( //
+	() -> linkTo(method, new Object[0]), //
+	() -> linkTo(ControllerWithMethods.class, method, new Object[0]) //
 		) //
-				.map(assertThatIllegalArgumentException()::isThrownBy)
-				.forEach(it -> it.withMessageContaining("Expected 1, got 0"));
+	.map(assertThatIllegalArgumentException()::isThrownBy)
+	.forEach(it -> it.withMessageContaining("Expected 1, got 0"));
 
-		Stream.<ThrowingCallable> of( //
-				() -> linkTo(method), //
-				() -> linkTo(ControllerWithMethods.class, method) //
+		Stream.<ThrowingCallable>of( //
+	() -> linkTo(method), //
+	() -> linkTo(ControllerWithMethods.class, method) //
 		).forEach(assertThatNoException()::isThrownBy);
 	}
 
@@ -730,23 +730,23 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	void toUriDoesNotDoubleEncodeRequestParameters() {
 
 		assertThat(linkTo(methodOn(MyController.class).test("I+will:be+double+encoded")).toUri().toString())
-				.endsWith(UriUtils.encode("I+will:be+double+encoded", Charset.defaultCharset()));
+	.endsWith(UriUtils.encode("I+will:be+double+encoded", Charset.defaultCharset()));
 	}
 
 	@TestFactory // #1793
 	Stream<DynamicTest> bindsCatchAllPathVariableCorrectly() {
 
 		Stream<Named<String[]>> tests = Stream.of(//
-				Named.of("Appends single", new String[] { "second", "/second" }),
-				Named.of("Appends multiple", new String[] { "second/second", "/second/second" }),
-				Named.of("Appends empty", new String[] { "", "/" }),
-				Named.of("Appends null", new String[] { null, "/first{/second*}" }));
+	Named.of("Appends single", new String[]{"second", "/second"}),
+	Named.of("Appends multiple", new String[]{"second/second", "/second/second"}),
+	Named.of("Appends empty", new String[]{"", "/"}),
+	Named.of("Appends null", new String[]{null, "/first{/second*}"}));
 
 		return DynamicTest.stream(tests, it -> {
 
 			assertThat(
-					linkTo(methodOn(ControllerWithPathVariableCatchAll.class).test("first", it[0])).withSelfRel().getHref())
-							.endsWith(it[1]);
+		linkTo(methodOn(ControllerWithPathVariableCatchAll.class).test("first", it[0])).withSelfRel().getHref())
+		.endsWith(it[1]);
 		});
 	}
 
@@ -756,10 +756,10 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		var controller = methodOn(PersonController.class);
 
 		assertThat(linkTo(controller.getMappingWithoutPath()).toString())
-				.isEqualTo("http://localhost/people");
+	.isEqualTo("http://localhost/people");
 
 		assertThat(linkTo(controller.getMappingWithEmptyPath()).toString())
-				.isEqualTo("http://localhost/people");
+	.isEqualTo("http://localhost/people");
 	}
 
 	private static UriComponents toComponents(Link link) {
@@ -784,7 +784,8 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		}
 	}
 
-	class PersonControllerImpl implements PersonController {}
+	class PersonControllerImpl implements PersonController {
+	}
 
 	@RequestMapping("/people/{id}/addresses")
 	static class PersonsAddressesController {
@@ -795,7 +796,7 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 		}
 	}
 
-	@RequestMapping({ "/persons", "/people" })
+	@RequestMapping({"/persons", "/people"})
 	class InvalidController {
 
 	}
@@ -822,20 +823,20 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 			return null;
 		}
 
-		@RequestMapping(path = "/foo", params = { "a=1", "b=2", "c!=4", "!d" })
+		@RequestMapping(path = "/foo", params = {"a=1", "b=2", "c!=4", "!d"})
 		HttpEntity<Void> methodWithPrimaryParams() {
 			return null;
 		}
 
 		@RequestMapping(value = "/{id}/foo")
 		HttpEntity<Void> methodForNextPage(@PathVariable String id, @RequestParam(required = false) Integer offset,
-				@RequestParam Integer limit) {
+	@RequestParam Integer limit) {
 			return null;
 		}
 
 		@RequestMapping(value = "/{id}/foo")
 		HttpEntity<Void> methodWithMultiValueRequestParams(@PathVariable String id, @RequestParam List<Integer> items,
-				@RequestParam Integer limit) {
+	@RequestParam Integer limit) {
 			return null;
 		}
 
@@ -892,7 +893,8 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	}
 
 	@RequestMapping("/parent")
-	interface ParentController {}
+	interface ParentController {
+	}
 
 	interface ChildController extends ParentController {
 
@@ -907,7 +909,8 @@ class WebMvcLinkBuilderUnitTest extends TestUtils {
 	}
 
 	@RequestMapping("/child")
-	interface ChildWithTypeMapping extends ParentWithMethod {}
+	interface ChildWithTypeMapping extends ParentWithMethod {
+	}
 
 	interface ParentControllerWithoutRootMapping {
 

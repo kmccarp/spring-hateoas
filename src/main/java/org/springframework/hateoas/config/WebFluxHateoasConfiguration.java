@@ -40,13 +40,13 @@ class WebFluxHateoasConfiguration {
 
 	@Bean
 	HypermediaWebFluxConfigurer hypermediaWebFluxConfigurer(ObjectProvider<ObjectMapper> mapper,
-			List<HypermediaMappingInformation> mappingInformation,
-			Optional<HypermediaMappingInformationComparator> comparator) {
+List<HypermediaMappingInformation> mappingInformation,
+Optional<HypermediaMappingInformationComparator> comparator) {
 
 		comparator.ifPresent(mappingInformation::sort);
 
 		WebfluxCodecCustomizer customizer = new WebfluxCodecCustomizer(mappingInformation,
-				mapper.getIfAvailable(ObjectMapper::new));
+	mapper.getIfAvailable(ObjectMapper::new));
 
 		return new HypermediaWebFluxConfigurer(customizer);
 	}

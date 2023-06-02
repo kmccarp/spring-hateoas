@@ -56,8 +56,8 @@ public class CollectionJsonLinkDiscoverer extends JsonPathLinkDiscoverer {
 		Assert.notNull(representation, "Representation must not be null!");
 
 		return relation.isSameAs(IanaLinkRelations.SELF) //
-				? findSelfLink(representation) //
-				: super.findLinkWithRel(relation, representation);
+	? findSelfLink(representation) //
+	: super.findLinkWithRel(relation, representation);
 	}
 
 	/*
@@ -71,8 +71,8 @@ public class CollectionJsonLinkDiscoverer extends JsonPathLinkDiscoverer {
 		Assert.notNull(representation, "InputStream must not be null!");
 
 		return relation.isSameAs(IanaLinkRelations.SELF) //
-				? findSelfLink(representation) //
-				: super.findLinkWithRel(relation, representation);
+	? findSelfLink(representation) //
+	: super.findLinkWithRel(relation, representation);
 	}
 
 	/*
@@ -86,8 +86,8 @@ public class CollectionJsonLinkDiscoverer extends JsonPathLinkDiscoverer {
 		Assert.notNull(representation, "Representation must not be null!");
 
 		return relation.isSameAs(IanaLinkRelations.SELF) //
-				? addSelfLink(super.findLinksWithRel(relation, representation), representation) //
-				: super.findLinksWithRel(relation, representation);
+	? addSelfLink(super.findLinksWithRel(relation, representation), representation) //
+	: super.findLinksWithRel(relation, representation);
 	}
 
 	/*
@@ -98,8 +98,8 @@ public class CollectionJsonLinkDiscoverer extends JsonPathLinkDiscoverer {
 	public Links findLinksWithRel(LinkRelation relation, InputStream representation) {
 
 		return relation.isSameAs(IanaLinkRelations.SELF) //
-				? addSelfLink(super.findLinksWithRel(relation, representation), representation) //
-				: super.findLinksWithRel(relation, representation);
+	? addSelfLink(super.findLinksWithRel(relation, representation), representation) //
+	: super.findLinksWithRel(relation, representation);
 
 	}
 
@@ -118,17 +118,17 @@ public class CollectionJsonLinkDiscoverer extends JsonPathLinkDiscoverer {
 	private Links addSelfLink(Links links, String representation) {
 
 		return findSelfLink(representation) //
-				.map(Links::of) //
-				.map(it -> it.and(links)) //
-				.orElse(links);
+	.map(Links::of) //
+	.map(it -> it.and(links)) //
+	.orElse(links);
 	}
 
 	private Links addSelfLink(Links links, InputStream representation) {
 
 		return findSelfLink(representation) //
-				.map(Links::of) //
-				.map(it -> it.and(links)) //
-				.orElse(links);
+	.map(Links::of) //
+	.map(it -> it.and(links)) //
+	.orElse(links);
 	}
 
 	/**

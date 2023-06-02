@@ -53,8 +53,8 @@ class HalTraversonDefaults implements TraversonDefaults {
 		converters.add(new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
 		List<MediaType> halFlavors = mediaTypes.stream() //
-				.filter(HAL_FLAVORS::contains) //
-				.collect(Collectors.toList());
+	.filter(HAL_FLAVORS::contains) //
+	.collect(Collectors.toList());
 
 		if (!halFlavors.isEmpty()) {
 			converters.add(getHalConverter(halFlavors));
@@ -71,8 +71,8 @@ class HalTraversonDefaults implements TraversonDefaults {
 	public List<LinkDiscoverer> getLinkDiscoverers(Collection<MediaType> mediaTypes) {
 
 		return mediaTypes.stream().anyMatch(it -> it.isCompatibleWith(MediaTypes.HAL_JSON)) //
-				? Collections.singletonList(new HalLinkDiscoverer()) //
-				: Collections.emptyList();
+	? Collections.singletonList(new HalLinkDiscoverer()) //
+	: Collections.emptyList();
 	}
 
 	/**

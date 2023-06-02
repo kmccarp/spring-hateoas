@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @since 0.15
  * @see http://alps.io/spec/#prop-ext
  */
-@JsonPropertyOrder({ "id", "href", "value" })
+@JsonPropertyOrder({"id", "href", "value"})
 public final class Ext {
 
 	private final String id;
@@ -69,7 +69,7 @@ public final class Ext {
 			return false;
 		Ext ext = (Ext) o;
 		return Objects.equals(this.id, ext.id) && Objects.equals(this.href, ext.href)
-				&& Objects.equals(this.value, ext.value);
+	&& Objects.equals(this.value, ext.value);
 	}
 
 	@Override
@@ -87,7 +87,8 @@ public final class Ext {
 		private String href;
 		private String value;
 
-		ExtBuilder() {}
+		ExtBuilder() {
+		}
 
 		public Ext.ExtBuilder id(String id) {
 

@@ -46,8 +46,8 @@ class DelegatingEntityLinksUnitTest extends TestUtils {
 		EntityLinks links = new DelegatingEntityLinks(SimplePluginRegistry.empty());
 
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> links.linkFor(String.class)) //
-				.withMessageContaining(String.class.getName());
+	.isThrownBy(() -> links.linkFor(String.class)) //
+	.withMessageContaining(String.class.getName());
 	}
 
 	@Test
@@ -89,5 +89,6 @@ class DelegatingEntityLinksUnitTest extends TestUtils {
 
 	@ExposesResourceFor(String.class)
 	@RequestMapping("/string")
-	static class Controller {}
+	static class Controller {
+	}
 }

@@ -66,10 +66,10 @@ final class HalFormsProperty implements Named {
 	}
 
 	private HalFormsProperty(String name, boolean readOnly, @Nullable Object value, String prompt, String regex,
-			boolean templated, //
-			boolean required, boolean multi, String placeholder, @Nullable Number min, @Nullable Number max,
-			@Nullable Long minLength, @Nullable Long maxLength, @Nullable String type,
-			@Nullable HalFormsOptions options) {
+boolean templated, //
+boolean required, boolean multi, String placeholder, @Nullable Number min, @Nullable Number max,
+@Nullable Long minLength, @Nullable Long maxLength, @Nullable String type,
+@Nullable HalFormsOptions options) {
 
 		Assert.notNull(name, "Name must not be null!");
 
@@ -111,8 +111,8 @@ final class HalFormsProperty implements Named {
 		Assert.notNull(name, "name must not be null!");
 
 		return this.name == name ? this
-				: new HalFormsProperty(name, this.readOnly, this.value, this.prompt, this.regex, this.templated, this.required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(name, this.readOnly, this.value, this.prompt, this.regex, this.templated, this.required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -124,8 +124,8 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withReadOnly(boolean readOnly) {
 
 		return this.readOnly == readOnly ? this
-				: new HalFormsProperty(this.name, readOnly, this.value, this.prompt, this.regex, this.templated, this.required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(this.name, readOnly, this.value, this.prompt, this.regex, this.templated, this.required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -137,8 +137,8 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withValue(@Nullable Object value) {
 
 		return this.value == value ? this
-				: new HalFormsProperty(this.name, this.readOnly, value, this.prompt, this.regex, this.templated, this.required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(this.name, this.readOnly, value, this.prompt, this.regex, this.templated, this.required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -150,8 +150,8 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withPrompt(String prompt) {
 
 		return this.prompt == prompt ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, prompt, this.regex, this.templated, this.required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, prompt, this.regex, this.templated, this.required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -163,8 +163,8 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withRegex(String regex) {
 
 		return this.regex == regex ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, regex, this.templated, this.required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, regex, this.templated, this.required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -186,8 +186,8 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withTemplated(boolean templated) {
 
 		return this.templated == templated ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, templated, this.required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, templated, this.required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -199,8 +199,8 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withRequired(boolean required) {
 
 		return this.required == required ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated, required,
-						this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated, required,
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/**
@@ -212,9 +212,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withMulti(boolean multi) {
 
 		return this.multi == multi ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type,
+	this.options);
 	}
 
 	/**
@@ -226,9 +226,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withPlaceholder(String placeholder) {
 
 		return this.placeholder == placeholder ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, placeholder, this.min, this.max, this.minLength, this.maxLength, this.type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, placeholder, this.min, this.max, this.minLength, this.maxLength, this.type,
+	this.options);
 	}
 
 	/**
@@ -240,9 +240,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withMin(@Nullable Number min) {
 
 		return Objects.equals(this.min, min) ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, this.placeholder, min, this.max, this.minLength, this.maxLength, this.type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, this.placeholder, min, this.max, this.minLength, this.maxLength, this.type,
+	this.options);
 	}
 
 	/**
@@ -254,9 +254,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withMax(@Nullable Number max) {
 
 		return Objects.equals(this.max, max) ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, this.placeholder, this.min, max, this.minLength, this.maxLength, this.type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, this.placeholder, this.min, max, this.minLength, this.maxLength, this.type,
+	this.options);
 	}
 
 	/**
@@ -268,9 +268,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withMinLength(@Nullable Long minLength) {
 
 		return Objects.equals(this.minLength, minLength) ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, this.placeholder, this.min, this.max, minLength, this.maxLength, this.type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, this.placeholder, this.min, this.max, minLength, this.maxLength, this.type,
+	this.options);
 	}
 
 	/**
@@ -282,9 +282,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withMaxLength(@Nullable Long maxLength) {
 
 		return Objects.equals(this.maxLength, maxLength) ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, this.placeholder, this.min, this.max, this.minLength, maxLength, this.type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, this.placeholder, this.min, this.max, this.minLength, maxLength, this.type,
+	this.options);
 	}
 
 	/**
@@ -296,9 +296,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withType(@Nullable String type) {
 
 		return Objects.equals(this.type, type) ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, type,
-						this.options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, type,
+	this.options);
 	}
 
 	/**
@@ -311,9 +311,9 @@ final class HalFormsProperty implements Named {
 	HalFormsProperty withOptions(@Nullable HalFormsOptions options) {
 
 		return Objects.equals(this.options, options) ? this
-				: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
-						this.required, this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type,
-						options);
+	: new HalFormsProperty(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated,
+	this.required, this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type,
+	options);
 	}
 
 	/*
@@ -441,16 +441,16 @@ final class HalFormsProperty implements Named {
 		HalFormsProperty that = (HalFormsProperty) o;
 
 		return this.readOnly == that.readOnly //
-				&& this.templated == that.templated //
-				&& this.required == that.required //
-				&& this.multi == that.multi //
-				&& Objects.equals(this.name, that.name) //
-				&& Objects.equals(this.value, that.value) //
-				&& Objects.equals(this.prompt, that.prompt) //
-				&& Objects.equals(this.regex, that.regex) //
-				&& Objects.equals(this.placeholder, that.placeholder) //
-				&& Objects.equals(this.type, that.type) //
-				&& Objects.equals(this.options, that.options);
+	&& this.templated == that.templated //
+	&& this.required == that.required //
+	&& this.multi == that.multi //
+	&& Objects.equals(this.name, that.name) //
+	&& Objects.equals(this.value, that.value) //
+	&& Objects.equals(this.prompt, that.prompt) //
+	&& Objects.equals(this.regex, that.regex) //
+	&& Objects.equals(this.placeholder, that.placeholder) //
+	&& Objects.equals(this.type, that.type) //
+	&& Objects.equals(this.options, that.options);
 	}
 
 	/*
@@ -461,7 +461,7 @@ final class HalFormsProperty implements Named {
 	public int hashCode() {
 
 		return Objects.hash(this.name, this.readOnly, this.value, this.prompt, this.regex, this.templated, this.required,
-				this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
+	this.multi, this.placeholder, this.min, this.max, this.minLength, this.maxLength, this.type, this.options);
 	}
 
 	/*
@@ -472,20 +472,20 @@ final class HalFormsProperty implements Named {
 	public String toString() {
 
 		return "HalFormsProperty(name=" + this.name //
-				+ ", readOnly=" + this.readOnly //
-				+ ", value=" + this.value //
-				+ ", prompt=" + this.prompt //
-				+ ", regex=" + this.regex //
-				+ ", templated=" + this.templated //
-				+ ", required=" + this.required //
-				+ ", multi=" + this.multi //
-				+ ", placeholder=" + this.placeholder //
-				+ ", min=" + this.min //
-				+ ", max=" + this.max //
-				+ ", minLength=" + this.minLength //
-				+ ", maxLength=" + this.maxLength //
-				+ ", type=" + this.type //
-				+ ", options=" + this.options //
-				+ ")";
+	+ ", readOnly=" + this.readOnly //
+	+ ", value=" + this.value //
+	+ ", prompt=" + this.prompt //
+	+ ", regex=" + this.regex //
+	+ ", templated=" + this.templated //
+	+ ", required=" + this.required //
+	+ ", multi=" + this.multi //
+	+ ", placeholder=" + this.placeholder //
+	+ ", min=" + this.min //
+	+ ", max=" + this.max //
+	+ ", minLength=" + this.minLength //
+	+ ", maxLength=" + this.maxLength //
+	+ ", type=" + this.type //
+	+ ", options=" + this.options //
+	+ ")";
 	}
 }

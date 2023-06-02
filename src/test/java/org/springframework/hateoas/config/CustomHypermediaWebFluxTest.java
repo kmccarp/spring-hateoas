@@ -55,22 +55,22 @@ class CustomHypermediaWebFluxTest {
 		HypermediaWebClientConfigurer webClientConfigurer = ctx.getBean(HypermediaWebClientConfigurer.class);
 
 		this.testClient = WebTestClient.bindToApplicationContext(ctx).build() //
-				.mutate() //
-				.exchangeStrategies(
-						it -> it.codecs(inner -> inner.defaultCodecs().configureDefaultCodec(webClientConfigurer.customizer))) //
-				.build();
+	.mutate() //
+	.exchangeStrategies(
+it -> it.codecs(inner -> inner.defaultCodecs().configureDefaultCodec(webClientConfigurer.customizer))) //
+	.build();
 	}
 
 	@Test // #833
 	void getUsingCustomMediaType() throws IOException {
 
 		this.testClient.get().uri("http://localhost/employees/1") //
-				.accept(FRODO_MEDIATYPE) //
-				.exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(FRODO_MEDIATYPE.toString()) //
-				.expectBody(String.class) //
-				.isEqualTo(read(new ClassPathResource("webflux-frodo.json", getClass())));
+	.accept(FRODO_MEDIATYPE) //
+	.exchange() //
+	.expectStatus().isOk() //
+	.expectHeader().contentType(FRODO_MEDIATYPE.toString()) //
+	.expectBody(String.class) //
+	.isEqualTo(read(new ClassPathResource("webflux-frodo.json", getClass())));
 	}
 
 	@Configuration
@@ -96,8 +96,8 @@ class CustomHypermediaWebFluxTest {
 		public Mono<EntityModel<Employee>> findOne() {
 
 			return linkTo(methodOn(EmployeeController.class).findOne()).withSelfRel() //
-					.toMono() //
-					.map(link -> EntityModel.of(new Employee("Frodo Baggins", "ring bearer"), link)); //
+		.toMono() //
+		.map(link -> EntityModel.of(new Employee("Frodo Baggins", "ring bearer"), link)); //
 		}
 	}
 }

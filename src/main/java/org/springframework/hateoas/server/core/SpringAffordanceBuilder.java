@@ -47,10 +47,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SpringAffordanceBuilder {
 
 	public static final MappingDiscoverer DISCOVERER = CachingMappingDiscoverer
-			.of(new PropertyResolvingMappingDiscoverer(new AnnotationMappingDiscoverer(RequestMapping.class)));
+.of(new PropertyResolvingMappingDiscoverer(new AnnotationMappingDiscoverer(RequestMapping.class)));
 
 	private static final ConcurrentLruCache<AffordanceKey, Function<Affordances, List<Affordance>>> AFFORDANCES_CACHE = new ConcurrentLruCache<>(
-			256, key -> SpringAffordanceBuilder.create(key.type, key.method));
+256, key -> SpringAffordanceBuilder.create(key.type, key.method));
 
 	/**
 	 * Returns all {@link Affordance}s for the given type's method and base URI.
@@ -66,8 +66,8 @@ public class SpringAffordanceBuilder {
 		Link affordanceLink = Link.of(href, LinkRelation.of(methodName));
 
 		return AFFORDANCES_CACHE
-				.get(new AffordanceKey(type, method))
-				.apply(Affordances.of(affordanceLink));
+	.get(new AffordanceKey(type, method))
+	.apply(Affordances.of(affordanceLink));
 	}
 
 	/**
@@ -116,25 +116,25 @@ public class SpringAffordanceBuilder {
 		MethodParameters parameters = MethodParameters.of(method);
 
 		ResolvableType inputType = parameters.getParametersWith(RequestBody.class).stream() //
-				.findFirst() //
-				.map(ResolvableType::forMethodParameter) //
-				.orElse(ResolvableType.NONE);
+	.findFirst() //
+	.map(ResolvableType::forMethodParameter) //
+	.orElse(ResolvableType.NONE);
 
 		List<QueryParameter> queryMethodParameters = parameters.getParametersWith(RequestParam.class).stream() //
-				.filter(it -> !Map.class.isAssignableFrom(it.getParameterType()))
-				.map(QueryParameter::of) //
-				.collect(Collectors.toList());
+	.filter(it -> !Map.class.isAssignableFrom(it.getParameterType()))
+	.map(QueryParameter::of) //
+	.collect(Collectors.toList());
 
 		return affordances -> requestMethods.stream() //
-				.flatMap(it -> affordances.afford(it) //
-						.withInput(inputType) //
-						.withOutput(outputType) //
-						.withParameters(queryMethodParameters) //
-						.withName(methodName) //
-						.withInputMediaTypes(inputMediaTypes) //
-						.build() //
-						.stream()) //
-				.collect(Collectors.toList());
+	.flatMap(it -> affordances.afford(it) //
+.withInput(inputType) //
+.withOutput(outputType) //
+.withParameters(queryMethodParameters) //
+.withName(methodName) //
+.withInputMediaTypes(inputMediaTypes) //
+.build() //
+.stream()) //
+	.collect(Collectors.toList());
 	}
 
 	private static final class AffordanceKey {
@@ -166,7 +166,7 @@ public class SpringAffordanceBuilder {
 			AffordanceKey that = (AffordanceKey) o;
 
 			return Objects.equals(this.type, that.type) //
-					&& Objects.equals(this.method, that.method);
+		&& Objects.equals(this.method, that.method);
 		}
 
 		/*

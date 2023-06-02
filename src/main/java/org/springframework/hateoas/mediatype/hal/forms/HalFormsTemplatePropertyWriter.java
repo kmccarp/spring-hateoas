@@ -55,7 +55,7 @@ class HalFormsTemplatePropertyWriter extends VirtualBeanPropertyWriter {
 	 * @param type
 	 */
 	public HalFormsTemplatePropertyWriter(HalFormsTemplateBuilder builder, MapperConfig<?> config,
-			Annotations annotations, BeanPropertyDefinition propDef, JavaType type) {
+Annotations annotations, BeanPropertyDefinition propDef, JavaType type) {
 
 		super(propDef, annotations, type);
 
@@ -80,7 +80,7 @@ class HalFormsTemplatePropertyWriter extends VirtualBeanPropertyWriter {
 	 */
 	@Override
 	public VirtualBeanPropertyWriter withConfig(MapperConfig<?> config, AnnotatedClass declaringClass,
-			BeanPropertyDefinition propDef, JavaType type) {
+BeanPropertyDefinition propDef, JavaType type) {
 		return new HalFormsTemplatePropertyWriter(builder, config, declaringClass.getAnnotations(), propDef, type);
 	}
 }

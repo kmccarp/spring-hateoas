@@ -240,7 +240,8 @@ class AnnotationMappingDiscovererUnitTest {
 	}
 
 	@RequestMapping("/child")
-	interface ChildWithTypeMapping extends ParentWithMethod {}
+	interface ChildWithTypeMapping extends ParentWithMethod {
+	}
 
 	@RequestMapping("slashes")
 	interface ControllerWithoutSlashes {
@@ -269,10 +270,10 @@ class AnnotationMappingDiscovererUnitTest {
 		void withslash();
 	}
 
-	@RequestMapping({ "/type", "/typeAlias" })
+	@RequestMapping({"/type", "/typeAlias"})
 	interface MultipleMappingsController {
 
-		@RequestMapping({ "/method", "/methodAlias" })
+		@RequestMapping({"/method", "/methodAlias"})
 		void method();
 	}
 

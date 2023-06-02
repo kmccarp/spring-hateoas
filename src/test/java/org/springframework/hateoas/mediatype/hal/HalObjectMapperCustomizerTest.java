@@ -46,7 +46,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @ContextConfiguration
 class HalObjectMapperCustomizerTest {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	MockMvc mockMvc;
 
@@ -77,7 +78,7 @@ class HalObjectMapperCustomizerTest {
 		@Bean
 		HalConfiguration halConfiguration() {
 			return new HalConfiguration()
-					.withObjectMapperCustomizer(objectMapper -> objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true));
+		.withObjectMapperCustomizer(objectMapper -> objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true));
 		}
 	}
 }

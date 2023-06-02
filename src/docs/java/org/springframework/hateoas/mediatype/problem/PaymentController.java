@@ -45,6 +45,7 @@ class PaymentController {
 
 	private final PaymentService payments;
 	private final MessageSourceAccessor messages;
+
 	// tag::method[]
 
 	@PutMapping
@@ -58,24 +59,25 @@ class PaymentController {
 
 		String title = messages.getMessage("payment.out-of-credit");
 		String detail = messages.getMessage("payment.out-of-credit.details", //
-				new Object[] { result.getBalance(), result.getCost() });
+	new Object[]{result.getBalance(), result.getCost()});
 
 		Problem problem = Problem.create() // <1>
-				.withType(OUT_OF_CREDIT_URI) //
-				.withTitle(title) // <2>
-				.withDetail(detail) //
-				.withInstance(PAYMENT_ERROR_INSTANCE.expand(result.getPaymentId())) //
-				.withProperties(map -> { // <3>
-					map.put("balance", result.getBalance());
-					map.put("accounts", Arrays.asList( //
-							ACCOUNTS.expand(result.getSourceAccountId()), //
-							ACCOUNTS.expand(result.getTargetAccountId()) //
-					));
-				});
+	.withType(OUT_OF_CREDIT_URI) //
+	.withTitle(title) // <2>
+	.withDetail(detail) //
+	.withInstance(PAYMENT_ERROR_INSTANCE.expand(result.getPaymentId())) //
+	.withProperties(map -> { // <3>
+		map.put("balance", result.getBalance());
+		map.put("accounts", Arrays.asList( //
+	ACCOUNTS.expand(result.getSourceAccountId()), //
+	ACCOUNTS.expand(result.getTargetAccountId()) //
+		));
+	});
 
 		return ResponseEntity.status(HttpStatus.FORBIDDEN) //
-				.body(problem);
+	.body(problem);
 	}
+
 	// end::method[]
 
 	ResponseEntity<?> issuePaymentAlternative() {
@@ -102,6 +104,7 @@ class PaymentController {
 
 	// tag::footer[]
 }
+
 // end::footer[]
 
 class PaymentRequest {

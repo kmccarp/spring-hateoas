@@ -59,13 +59,13 @@ class WebMvcHateoasConfiguration {
 
 	@Bean
 	RepresentationModelProcessorInvoker representationModelProcessorInvoker(
-			List<RepresentationModelProcessor<?>> processors) {
+List<RepresentationModelProcessor<?>> processors) {
 		return new RepresentationModelProcessorInvoker(processors);
 	}
 
 	@Bean
 	static HypermediaRepresentationModelBeanProcessorPostProcessor hypermediaRepresentionModelProcessorConfigurator(
-			ObjectProvider<RepresentationModelProcessorInvoker> invoker) {
+ObjectProvider<RepresentationModelProcessorInvoker> invoker) {
 
 		return new HypermediaRepresentationModelBeanProcessorPostProcessor(invoker);
 	}
@@ -119,7 +119,7 @@ class WebMvcHateoasConfiguration {
 		private final ObjectProvider<RepresentationModelProcessorInvoker> invoker;
 
 		public HypermediaRepresentationModelBeanProcessorPostProcessor(
-				ObjectProvider<RepresentationModelProcessorInvoker> invoker) {
+	ObjectProvider<RepresentationModelProcessorInvoker> invoker) {
 			this.invoker = invoker;
 		}
 
@@ -139,7 +139,7 @@ class WebMvcHateoasConfiguration {
 				delegate.addHandlers(adapter.getReturnValueHandlers());
 
 				RepresentationModelProcessorHandlerMethodReturnValueHandler handler = new RepresentationModelProcessorHandlerMethodReturnValueHandler(
-						delegate, () -> invoker.getObject());
+			delegate, () -> invoker.getObject());
 
 				adapter.setReturnValueHandlers(Collections.singletonList(handler));
 			}
@@ -163,7 +163,7 @@ class WebMvcHateoasConfiguration {
 		 */
 		@Override
 		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-				throws Exception {
+	throws Exception {
 
 			DummyInvocationUtils.resetCache();
 		}

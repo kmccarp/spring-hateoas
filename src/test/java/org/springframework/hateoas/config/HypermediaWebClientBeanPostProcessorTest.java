@@ -86,16 +86,16 @@ class HypermediaWebClientBeanPostProcessorTest {
 			WebClient webClient = context.getBean(WebClient.class);
 
 			webClient //
-					.get().uri(this.baseUri) //
-					.accept(MediaTypes.HAL_JSON) //
-					.retrieve() //
-					.bodyToMono(RepresentationModel.class) //
-					.as(StepVerifier::create) //
-					.expectNextMatches(root -> { //
-						assertThat(root.getLinks()).hasSize(2);
-						return true;
+		.get().uri(this.baseUri) //
+		.accept(MediaTypes.HAL_JSON) //
+		.retrieve() //
+		.bodyToMono(RepresentationModel.class) //
+		.as(StepVerifier::create) //
+		.expectNextMatches(root -> { //
+			assertThat(root.getLinks()).hasSize(2);
+			return true;
 
-					}).verifyComplete();
+		}).verifyComplete();
 		});
 	}
 
@@ -110,22 +110,23 @@ class HypermediaWebClientBeanPostProcessorTest {
 			WebClient webClient = context.getBean(WebClient.class);
 
 			webClient //
-					.get().uri(this.baseUri) //
-					.retrieve() //
-					.bodyToMono(RepresentationModel.class) //
-					.map(resourceSupport -> resourceSupport.getRequiredLink("actors")) //
-					.flatMap(link -> webClient //
-							.get().uri(link.expand().getHref()) //
-							.retrieve() //
-							.bodyToMono(RepresentationModel.class)) //
-					.map(resourceSupport -> resourceSupport.getLinks().toList().get(0)) //
-					.flatMap(link -> webClient //
-							.get().uri(link.expand().getHref()) //
-							.retrieve() //
-							.bodyToMono(new EntityModelType<Actor>() {})) //
-					.as(StepVerifier::create) //
-					.expectNext(EntityModel.of(new Actor("Keanu Reaves"))) //
-					.verifyComplete();
+		.get().uri(this.baseUri) //
+		.retrieve() //
+		.bodyToMono(RepresentationModel.class) //
+		.map(resourceSupport -> resourceSupport.getRequiredLink("actors")) //
+		.flatMap(link -> webClient //
+	.get().uri(link.expand().getHref()) //
+	.retrieve() //
+	.bodyToMono(RepresentationModel.class)) //
+		.map(resourceSupport -> resourceSupport.getLinks().toList().get(0)) //
+		.flatMap(link -> webClient //
+	.get().uri(link.expand().getHref()) //
+	.retrieve() //
+	.bodyToMono(new EntityModelType<Actor>() {
+	})) //
+		.as(StepVerifier::create) //
+		.expectNext(EntityModel.of(new Actor("Keanu Reaves"))) //
+		.verifyComplete();
 		});
 	}
 

@@ -70,8 +70,8 @@ public class HypermediaWebTestClientConfigurer implements WebTestClientConfigure
 	 */
 	@Override
 	public void afterConfigurerAdded(WebTestClient.Builder builder, //
-			@Nullable WebHttpHandlerBuilder webHttpHandlerBuilder, //
-			@Nullable ClientHttpConnector clientHttpConnector) {
+@Nullable WebHttpHandlerBuilder webHttpHandlerBuilder, //
+@Nullable ClientHttpConnector clientHttpConnector) {
 		builder.codecs(this.configurer);
 	}
 }

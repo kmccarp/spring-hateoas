@@ -72,27 +72,27 @@ public class WebHandler {
 	}
 
 	public static <T extends LinkBuilder> PreparedWebHandler<T> linkTo(Object invocationValue,
-			LinkBuilderCreator<T> creator) {
+LinkBuilderCreator<T> creator) {
 		return linkTo(invocationValue, creator,
-				(BiFunction<UriComponentsBuilder, MethodInvocation, UriComponentsBuilder>) null);
+	(BiFunction<UriComponentsBuilder, MethodInvocation, UriComponentsBuilder>) null);
 	}
 
 	public static <T extends LinkBuilder> T linkTo(Object invocationValue, LinkBuilderCreator<T> creator,
-			@Nullable BiFunction<UriComponentsBuilder, MethodInvocation, UriComponentsBuilder> additionalUriHandler,
-			Function<UriMapping, UriComponentsBuilder> finisher, Supplier<ConversionService> conversionService) {
+@Nullable BiFunction<UriComponentsBuilder, MethodInvocation, UriComponentsBuilder> additionalUriHandler,
+Function<UriMapping, UriComponentsBuilder> finisher, Supplier<ConversionService> conversionService) {
 
 		return linkTo(invocationValue, creator, additionalUriHandler).conclude(finisher,
-				conversionService.get());
+	conversionService.get());
 	}
 
 	private static <T extends LinkBuilder> PreparedWebHandler<T> linkTo(Object invocationValue,
-			LinkBuilderCreator<T> creator,
-			@Nullable BiFunction<UriComponentsBuilder, MethodInvocation, UriComponentsBuilder> additionalUriHandler) {
+LinkBuilderCreator<T> creator,
+@Nullable BiFunction<UriComponentsBuilder, MethodInvocation, UriComponentsBuilder> additionalUriHandler) {
 
 		Assert.isInstanceOf(LastInvocationAware.class, invocationValue);
 
 		LastInvocationAware invocations = (LastInvocationAware) DummyInvocationUtils
-				.getLastInvocationAware(invocationValue);
+	.getLastInvocationAware(invocationValue);
 
 		if (invocations == null) {
 			throw new IllegalStateException(String.format("Could not obtain previous invocation from %s!", invocationValue));
@@ -118,7 +118,7 @@ public class WebHandler {
 				Object source = classMappingParameters.next();
 
 				values.put(name.getKey(), name.toSegment().prepareAndEncode(
-						HandlerMethodParameter.prepareValue(source, factory, TypeDescriptor.forObject(source))));
+			HandlerMethodParameter.prepareValue(source, factory, TypeDescriptor.forObject(source))));
 			}
 
 			Method method = invocation.getMethod();
@@ -131,7 +131,7 @@ public class WebHandler {
 				MappingVariable mappingVariable = mappingVariables.getVariable(parameter.getVariableName());
 				Object verifiedValue = parameter.getVerifiedValue(arguments);
 				Object preparedValue = verifiedValue == null ? verifiedValue
-						: parameter.prepareValue(verifiedValue, factory);
+			: parameter.prepareValue(verifiedValue, factory);
 
 				// Handling for special catch-all path segments syntax in mappings {*…}.
 				TemplateVariable segment = mappingVariable.toSegment();
@@ -174,8 +174,8 @@ public class WebHandler {
 			}
 
 			UriComponents components = additionalUriHandler == null //
-					? builder.buildAndExpand(values) //
-					: additionalUriHandler.apply(builder, invocation).buildAndExpand(values);
+		? builder.buildAndExpand(values) //
+		: additionalUriHandler.apply(builder, invocation).buildAndExpand(values);
 
 			TemplateVariables variables = NONE;
 
@@ -183,12 +183,12 @@ public class WebHandler {
 
 				boolean previousRequestParameter = components.getQueryParams().isEmpty() && variables.equals(NONE);
 				TemplateVariable variable = new TemplateVariable(parameter,
-						previousRequestParameter ? REQUEST_PARAM : REQUEST_PARAM_CONTINUED);
+			previousRequestParameter ? REQUEST_PARAM : REQUEST_PARAM_CONTINUED);
 				variables = variables.concat(variable);
 			}
 
 			List<Affordance> affordances = SpringAffordanceBuilder.getAffordances(invocation.getTargetType(), method,
-					components.toUriString());
+		components.toUriString());
 
 			return creator.createBuilder(components, variables, affordances);
 		};
@@ -203,7 +203,7 @@ public class WebHandler {
 	 */
 	@SuppressWarnings("unchecked")
 	private static void bindRequestParameters(UriComponentsBuilder builder, HandlerMethodParameter parameter,
-			Object[] arguments, FormatterFactory factory) {
+Object[] arguments, FormatterFactory factory) {
 
 		Object value = parameter.getVerifiedValue(arguments);
 
@@ -284,7 +284,7 @@ public class WebHandler {
 	private static class HandlerMethodParameters {
 
 		private static final List<Class<? extends Annotation>> ANNOTATIONS = Arrays.asList(RequestParam.class,
-				PathVariable.class);
+	PathVariable.class);
 		private static final Map<Method, HandlerMethodParameters> CACHE = new ConcurrentHashMap<Method, HandlerMethodParameters>();
 
 		private final MultiValueMap<Class<? extends Annotation>, HandlerMethodParameter> byAnnotationCache;
@@ -296,9 +296,9 @@ public class WebHandler {
 			for (Class<? extends Annotation> annotation : ANNOTATIONS) {
 
 				this.byAnnotationCache.putAll(parameters.getParametersWith(annotation).stream() //
-						.map(it -> HandlerMethodParameter.of(it, annotation)) //
-						.collect(Collectors.groupingBy(HandlerMethodParameter::getAnnotationType, LinkedMultiValueMap::new,
-								Collectors.toList())));
+			.map(it -> HandlerMethodParameter.of(it, annotation)) //
+			.collect(Collectors.groupingBy(HandlerMethodParameter::getAnnotationType, LinkedMultiValueMap::new,
+		Collectors.toList())));
 			}
 		}
 
@@ -312,7 +312,7 @@ public class WebHandler {
 		}
 
 		public List<HandlerMethodParameter> getParameterAnnotatedWith(Class<? extends Annotation> annotation,
-				Object[] arguments) {
+	Object[] arguments) {
 
 			List<HandlerMethodParameter> parameters = byAnnotationCache.get(annotation);
 
@@ -370,12 +370,12 @@ public class WebHandler {
 			if (isNonComposite) {
 
 				Assert.isTrue(parameter.hasParameterAnnotation(RequestParam.class),
-						"@NonComposite can only be used in combination with @RequestParam!");
+			"@NonComposite can only be used in combination with @RequestParam!");
 
 				Class<?> parameterType = parameter.getParameterType();
 
 				Assert.isTrue(parameterType.isArray() || Collection.class.isAssignableFrom(parameterType),
-						"@NonComposite can only be used with collections or arrays!");
+			"@NonComposite can only be used with collections or arrays!");
 			}
 		}
 
@@ -429,7 +429,7 @@ public class WebHandler {
 		@Nullable
 		@SuppressWarnings("unchecked")
 		public static Object prepareValue(@Nullable Object value, FormatterFactory factory,
-				@Nullable TypeDescriptor descriptor) {
+	@Nullable TypeDescriptor descriptor) {
 
 			if (descriptor == null || value == null) {
 				return value;
@@ -464,7 +464,7 @@ public class WebHandler {
 					TypeDescriptor elementTypeDescriptor = descriptor.elementTypeDescriptor(entry.getValue());
 
 					prepared.put(prepareValue(entry.getKey(), factory, keyTypeDescriptor),
-							prepareValue(entry.getValue(), factory, elementTypeDescriptor));
+				prepareValue(entry.getValue(), factory, elementTypeDescriptor));
 				}
 
 				return prepared;
@@ -596,7 +596,7 @@ public class WebHandler {
 			}
 
 			return annotation != null && annotation.required() //
-					&& annotation.defaultValue().equals(ValueConstants.DEFAULT_NONE);
+		&& annotation.defaultValue().equals(ValueConstants.DEFAULT_NONE);
 		}
 
 		/*

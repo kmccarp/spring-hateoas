@@ -162,7 +162,7 @@ public class WebMvcLinkBuilder extends TemplateVariableAwareLinkBuilderSupport<W
 		int given = parameters.length;
 
 		Assert.isTrue(expected == given,
-				() -> String.format("Incorrect number of parameter values given. Expected %s, got %s!", expected, given));
+	() -> String.format("Incorrect number of parameter values given. Expected %s, got %s!", expected, given));
 
 		return linkTo(DummyInvocationUtils.getLastInvocationAware(controller, method, parameters));
 	}
@@ -243,7 +243,7 @@ public class WebMvcLinkBuilder extends TemplateVariableAwareLinkBuilderSupport<W
 	 */
 	@Override
 	protected WebMvcLinkBuilder createNewInstance(UriComponents components, List<Affordance> affordances,
-			TemplateVariables variables) {
+TemplateVariables variables) {
 		return new WebMvcLinkBuilder(components, variables, affordances);
 	}
 

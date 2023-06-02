@@ -64,8 +64,10 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
  */
 class HypermediaWebFluxConfigurerTest {
 
-	EntityModelType<Employee> resourceEmployeeType = new EntityModelType<Employee>() {};
-	CollectionModelType<EntityModel<Employee>> resourcesEmployeeType = new CollectionModelType<EntityModel<Employee>>() {};
+	EntityModelType<Employee> resourceEmployeeType = new EntityModelType<Employee>() {
+	};
+	CollectionModelType<EntityModel<Employee>> resourcesEmployeeType = new CollectionModelType<EntityModel<Employee>>() {
+	};
 
 	WebTestClient testClient;
 
@@ -272,11 +274,11 @@ class HypermediaWebFluxConfigurerTest {
 		setUp(HalWebFluxConfig.class);
 
 		this.testClient.get().uri("/").accept(MediaTypes.UBER_JSON) //
-				.exchange() //
-				.expectStatus().value(is(406))
-				.returnResult(String.class).getResponseBody() //
-				.as(StepVerifier::create) //
-				.verifyComplete();
+	.exchange() //
+	.expectStatus().value(is(406))
+	.returnResult(String.class).getResponseBody() //
+	.as(StepVerifier::create) //
+	.verifyComplete();
 	}
 
 	/**
@@ -288,49 +290,49 @@ class HypermediaWebFluxConfigurerTest {
 		setUp(HalWebFluxConfig.class);
 
 		this.testClient.get().uri("/reactive").accept(MediaTypes.HAL_JSON).exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(MediaTypes.HAL_JSON) //
-				.returnResult(RepresentationModel.class).getResponseBody().as(StepVerifier::create)
-				.expectNextMatches(resourceSupport -> {
+	.expectStatus().isOk() //
+	.expectHeader().contentType(MediaTypes.HAL_JSON) //
+	.returnResult(RepresentationModel.class).getResponseBody().as(StepVerifier::create)
+	.expectNextMatches(resourceSupport -> {
 
-					assertThat(resourceSupport.getLinks()).containsExactlyInAnyOrder(Link.of("/", IanaLinkRelations.SELF),
-							Link.of("/employees", "employees"));
+		assertThat(resourceSupport.getLinks()).containsExactlyInAnyOrder(Link.of("/", IanaLinkRelations.SELF),
+	Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 
 		this.testClient.get().uri("/reactive/employees").accept(MediaTypes.HAL_JSON).exchange() //
-				.expectStatus().isOk().expectHeader().contentType(MediaTypes.HAL_JSON) //
-				.returnResult(this.resourcesEmployeeType).getResponseBody() //
-				.as(StepVerifier::create).expectNextMatches(resources -> {
+	.expectStatus().isOk().expectHeader().contentType(MediaTypes.HAL_JSON) //
+	.returnResult(this.resourcesEmployeeType).getResponseBody() //
+	.as(StepVerifier::create).expectNextMatches(resources -> {
 
-					assertThat(resources.getLinks()).containsExactlyInAnyOrder(Link.of("/employees", IanaLinkRelations.SELF));
+			assertThat(resources.getLinks()).containsExactlyInAnyOrder(Link.of("/employees", IanaLinkRelations.SELF));
 
-					EntityModel<Employee> content = resources.getContent().iterator().next();
+			EntityModel<Employee> content = resources.getContent().iterator().next();
 
-					assertThat(content.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
-					assertThat(content.getLinks()) //
-							.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-									Link.of("/employees", "employees"));
+			assertThat(content.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
+			assertThat(content.getLinks()) //
+		.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
+	Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+			return true;
+		}).verifyComplete();
 
 		this.testClient.get() //
-				.uri("/reactive/employees/1") //
-				.accept(MediaTypes.HAL_JSON).exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(MediaTypes.HAL_JSON) //
-				.returnResult(this.resourceEmployeeType).getResponseBody() //
-				.as(StepVerifier::create) //
-				.expectNextMatches(employee -> {
+	.uri("/reactive/employees/1") //
+	.accept(MediaTypes.HAL_JSON).exchange() //
+	.expectStatus().isOk() //
+	.expectHeader().contentType(MediaTypes.HAL_JSON) //
+	.returnResult(this.resourceEmployeeType).getResponseBody() //
+	.as(StepVerifier::create) //
+	.expectNextMatches(employee -> {
 
-					assertThat(employee.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
-					assertThat(employee.getLinks()) //
-							.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-									Link.of("/employees", "employees"));
-					return true;
-				}).verifyComplete();
+		assertThat(employee.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
+		assertThat(employee.getLinks()) //
+	.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
+Link.of("/employees", "employees"));
+		return true;
+	}).verifyComplete();
 	}
 
 	@Test // #118
@@ -339,16 +341,16 @@ class HypermediaWebFluxConfigurerTest {
 		setUp(WithConversionService.class);
 
 		this.testClient.get().uri("/sample/4711").exchange() //
-				.expectStatus().isEqualTo(HttpStatus.I_AM_A_TEAPOT) //
-				.returnResult(String.class).getResponseBody() //
-				.as(StepVerifier::create) //
-				.expectNextMatches(it -> {
+	.expectStatus().isEqualTo(HttpStatus.I_AM_A_TEAPOT) //
+	.returnResult(String.class).getResponseBody() //
+	.as(StepVerifier::create) //
+	.expectNextMatches(it -> {
 
-					assertThat(it).isEqualTo("/sample/sample");
+		assertThat(it).isEqualTo("/sample/sample");
 
-					return true;
-				})
-				.verifyComplete();
+		return true;
+	})
+	.verifyComplete();
 	}
 
 	private void verifyRootUriServesHypermedia(MediaType mediaType) {
@@ -358,17 +360,17 @@ class HypermediaWebFluxConfigurerTest {
 	private void verifyRootUriServesHypermedia(MediaType requestType, MediaType responseType) {
 
 		this.testClient.get().uri("/").accept(requestType).exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(responseType) //
-				.returnResult(RepresentationModel.class) //
-				.getResponseBody().as(StepVerifier::create) //
-				.expectNextMatches(resourceSupport -> {
+	.expectStatus().isOk() //
+	.expectHeader().contentType(responseType) //
+	.returnResult(RepresentationModel.class) //
+	.getResponseBody().as(StepVerifier::create) //
+	.expectNextMatches(resourceSupport -> {
 
-					assertThat(resourceSupport.getLinks()) //
-							.containsExactlyInAnyOrder(Link.of("/", IanaLinkRelations.SELF), Link.of("/employees", "employees"));
+		assertThat(resourceSupport.getLinks()) //
+	.containsExactlyInAnyOrder(Link.of("/", IanaLinkRelations.SELF), Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 	}
 
 	private void verifyAggregateRootServesHypermedia(MediaType mediaType) {
@@ -378,23 +380,23 @@ class HypermediaWebFluxConfigurerTest {
 	private void verifyAggregateRootServesHypermedia(MediaType requestType, MediaType responseType) {
 
 		this.testClient.get().uri("/employees").accept(requestType).exchange().expectStatus().isOk().expectHeader()
-				.contentType(responseType).returnResult(this.resourcesEmployeeType).getResponseBody().as(StepVerifier::create)
-				.expectNextMatches(resources -> {
+	.contentType(responseType).returnResult(this.resourcesEmployeeType).getResponseBody().as(StepVerifier::create)
+	.expectNextMatches(resources -> {
 
-					assertThat(resources.getLinks()).containsExactlyInAnyOrder(Link.of("/employees", IanaLinkRelations.SELF));
+		assertThat(resources.getLinks()).containsExactlyInAnyOrder(Link.of("/employees", IanaLinkRelations.SELF));
 
-					Collection<EntityModel<Employee>> content = resources.getContent();
-					assertThat(content).hasSize(1);
+		Collection<EntityModel<Employee>> content = resources.getContent();
+		assertThat(content).hasSize(1);
 
-					EntityModel<Employee> resource = content.iterator().next();
+		EntityModel<Employee> resource = content.iterator().next();
 
-					assertThat(resource.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
-					assertThat(resource.getLinks()) //
-							.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-									Link.of("/employees", "employees"));
+		assertThat(resource.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
+		assertThat(resource.getLinks()) //
+	.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
+Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 	}
 
 	private void verifySingleItemResourceServesHypermedia(MediaType mediaType) {
@@ -404,18 +406,18 @@ class HypermediaWebFluxConfigurerTest {
 	private void verifySingleItemResourceServesHypermedia(MediaType requestType, MediaType responseType) {
 
 		this.testClient.get().uri("/employees/1") //
-				.accept(requestType).exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(responseType) //
-				.returnResult(this.resourceEmployeeType).getResponseBody().as(StepVerifier::create) //
-				.expectNextMatches(employeeResource -> {
+	.accept(requestType).exchange() //
+	.expectStatus().isOk() //
+	.expectHeader().contentType(responseType) //
+	.returnResult(this.resourceEmployeeType).getResponseBody().as(StepVerifier::create) //
+	.expectNextMatches(employeeResource -> {
 
-					assertThat(employeeResource.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
-					assertThat(employeeResource.getLinks()).containsExactlyInAnyOrder(
-							Link.of("/employees/1", IanaLinkRelations.SELF), Link.of("/employees", "employees"));
+		assertThat(employeeResource.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
+		assertThat(employeeResource.getLinks()).containsExactlyInAnyOrder(
+	Link.of("/employees/1", IanaLinkRelations.SELF), Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 	}
 
 	private void verifyCreatingNewEntityWorks(MediaType mediaType) {
@@ -437,20 +439,20 @@ class HypermediaWebFluxConfigurerTest {
 	private void verifyCreation(String uri, MediaType contentType, MediaType responseType) {
 
 		this.testClient.post().uri(uri) //
-				.accept(contentType).contentType(contentType)
-				.body(Mono.just(new Employee("Samwise Gamgee", "gardener")), Employee.class) //
-				.exchange() //
-				.expectStatus().isOk() //
-				.expectHeader().contentType(responseType).returnResult(this.resourceEmployeeType) //
-				.getResponseBody().as(StepVerifier::create).expectNextMatches(resource -> {
+	.accept(contentType).contentType(contentType)
+	.body(Mono.just(new Employee("Samwise Gamgee", "gardener")), Employee.class) //
+	.exchange() //
+	.expectStatus().isOk() //
+	.expectHeader().contentType(responseType).returnResult(this.resourceEmployeeType) //
+	.getResponseBody().as(StepVerifier::create).expectNextMatches(resource -> {
 
-					assertThat(resource.getContent()).isEqualTo(new Employee("Samwise Gamgee", "gardener"));
-					assertThat(resource.getLinks()) //
-							.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-									Link.of("/employees", "employees"));
+			assertThat(resource.getContent()).isEqualTo(new Employee("Samwise Gamgee", "gardener"));
+			assertThat(resource.getLinks()) //
+		.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
+	Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+			return true;
+		}).verifyComplete();
 	}
 
 	@Configuration
@@ -464,25 +466,32 @@ class HypermediaWebFluxConfigurerTest {
 	}
 
 	@EnableHypermediaSupport(type = HAL)
-	static class HalWebFluxConfig extends BaseConfig {}
+	static class HalWebFluxConfig extends BaseConfig {
+	}
 
 	@EnableHypermediaSupport(type = HAL_FORMS)
-	static class HalFormsWebFluxConfig extends BaseConfig {}
+	static class HalFormsWebFluxConfig extends BaseConfig {
+	}
 
 	@EnableHypermediaSupport(type = COLLECTION_JSON)
-	static class CollectionJsonWebFluxConfig extends BaseConfig {}
+	static class CollectionJsonWebFluxConfig extends BaseConfig {
+	}
 
 	@EnableHypermediaSupport(type = UBER)
-	static class UberWebFluxConfig extends BaseConfig {}
+	static class UberWebFluxConfig extends BaseConfig {
+	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS })
-	static class AllHalWebFluxConfig extends BaseConfig {}
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS})
+	static class AllHalWebFluxConfig extends BaseConfig {
+	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS, COLLECTION_JSON })
-	static class HalAndCollectionJsonWebFluxConfig extends BaseConfig {}
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS, COLLECTION_JSON})
+	static class HalAndCollectionJsonWebFluxConfig extends BaseConfig {
+	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS, COLLECTION_JSON, UBER })
-	static class AllHypermediaTypesWebFluxConfig extends BaseConfig {}
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS, COLLECTION_JSON, UBER})
+	static class AllHypermediaTypesWebFluxConfig extends BaseConfig {
+	}
 
 	@RestController
 	static class TestController {
@@ -542,8 +551,8 @@ class HypermediaWebFluxConfigurerTest {
 		Mono<CollectionModel<EntityModel<Employee>>> reactiveEmployees() {
 
 			return findAll() //
-					.collectList() //
-					.map(assembler::toCollectionModel);
+		.collectList() //
+		.map(assembler::toCollectionModel);
 		}
 
 		@PostMapping("/reactive/employees")
@@ -558,7 +567,7 @@ class HypermediaWebFluxConfigurerTest {
 		@GetMapping("/reactive/employees/{id}")
 		Mono<EntityModel<Employee>> reactiveEmployee(@PathVariable String id) {
 			return findById(0) //
-					.map(assembler::toModel);
+		.map(assembler::toModel);
 		}
 
 		Mono<Employee> findById(int id) {
@@ -600,7 +609,8 @@ class HypermediaWebFluxConfigurerTest {
 			registry.addConverter(String.class, Sample.class, source -> new Sample());
 		}
 
-		static class Sample {}
+		static class Sample {
+		}
 
 		@Controller
 		static class SampleController {
@@ -609,8 +619,8 @@ class HypermediaWebFluxConfigurerTest {
 			Mono<HttpEntity<?>> sample(@PathVariable Sample sample) {
 
 				return linkTo(methodOn(SampleController.class).sample(new Sample())).withSelfRel()
-						.toMono()
-						.map(it -> new ResponseEntity<>(it.getHref(), HttpStatus.I_AM_A_TEAPOT));
+			.toMono()
+			.map(it -> new ResponseEntity<>(it.getHref(), HttpStatus.I_AM_A_TEAPOT));
 			}
 		}
 	}

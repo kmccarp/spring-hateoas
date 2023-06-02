@@ -29,6 +29,6 @@ class HalFormsAffordanceModel extends AffordanceModel {
 
 	public HalFormsAffordanceModel(ConfiguredAffordance configured) {
 		super(configured.getNameOrDefault(), configured.getTarget(), configured.getMethod(), configured.getInputMetadata(),
-				configured.getQueryParameters(), configured.getOutputMetadata());
+	configured.getQueryParameters(), configured.getOutputMetadata());
 	}
 }

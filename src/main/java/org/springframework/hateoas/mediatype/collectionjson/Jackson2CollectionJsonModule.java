@@ -111,7 +111,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			JavaType type = provider.getTypeFactory().constructCollectionType(List.class, Link.class);
 
 			provider.findValueSerializer(type) //
-					.serialize(links.toList(), jgen, provider);
+		.serialize(links.toList(), jgen, provider);
 		}
 
 		/*
@@ -166,7 +166,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 	}
 
 	static class CollectionJsonResourceSupportSerializer extends ContainerSerializer<RepresentationModel<?>>
-			implements ContextualSerializer {
+implements ContextualSerializer {
 
 		private static final long serialVersionUID = 6127711241993352699L;
 
@@ -189,21 +189,21 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public void serialize(RepresentationModel<?> value, JsonGenerator jgen, SerializerProvider provider)
-				throws IOException {
+	throws IOException {
 
 			String href = value.getRequiredLink(IanaLinkRelations.SELF.value()).getHref();
 
 			CollectionJson<Object> collectionJson = new CollectionJson<>() //
-					.withVersion("1.0") //
-					.withHref(href) //
-					.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
-					.withQueries(findQueries(value)) //
-					.withTemplate(findTemplate(value));
+		.withVersion("1.0") //
+		.withHref(href) //
+		.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
+		.withQueries(findQueries(value)) //
+		.withTemplate(findTemplate(value));
 
 			CollectionJsonItem<Object> item = new CollectionJsonItem<>() //
-					.withHref(href) //
-					.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
-					.withRawData(value);
+		.withHref(href) //
+		.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
+		.withRawData(value);
 
 			if (!item.getData().isEmpty()) {
 				collectionJson = collectionJson.withItems(item);
@@ -221,7 +221,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public JsonSerializer<?> createContextual(SerializerProvider prov, BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 			return new CollectionJsonResourceSupportSerializer(property);
 		}
 
@@ -268,7 +268,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 	}
 
 	static class CollectionJsonResourceSerializer extends ContainerSerializer<EntityModel<?>>
-			implements ContextualSerializer {
+implements ContextualSerializer {
 
 		private static final long serialVersionUID = 2212535956767860364L;
 
@@ -296,20 +296,20 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			Links withoutSelfLink = value.getLinks().without(IanaLinkRelations.SELF);
 
 			CollectionJson<Object> collectionJson = new CollectionJson<>() //
-					.withVersion("1.0") //
-					.withHref(href) //
-					.withLinks(withoutSelfLink) //
-					.withItems(new CollectionJsonItem<>() //
-							.withHref(href) //
-							.withLinks(withoutSelfLink) //
-							.withRawData(value.getContent()))
-					.withQueries(findQueries(value)) //
-					.withTemplate(findTemplate(value));
+		.withVersion("1.0") //
+		.withHref(href) //
+		.withLinks(withoutSelfLink) //
+		.withItems(new CollectionJsonItem<>() //
+	.withHref(href) //
+	.withLinks(withoutSelfLink) //
+	.withRawData(value.getContent()))
+		.withQueries(findQueries(value)) //
+		.withTemplate(findTemplate(value));
 
 			CollectionJsonDocument<?> doc = new CollectionJsonDocument<>(collectionJson);
 
 			provider.findValueSerializer(CollectionJsonDocument.class, property) //
-					.serialize(doc, jgen, provider);
+		.serialize(doc, jgen, provider);
 		}
 
 		/*
@@ -319,7 +319,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public JsonSerializer<?> createContextual(SerializerProvider prov, BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 			return new CollectionJsonResourceSerializer(property);
 		}
 
@@ -380,20 +380,20 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public void serialize(CollectionModel<?> value, JsonGenerator jgen, SerializerProvider provider)
-				throws IOException {
+	throws IOException {
 
 			CollectionJson<Object> collectionJson = new CollectionJson<>() //
-					.withVersion("1.0") //
-					.withHref(value.getRequiredLink(IanaLinkRelations.SELF).getHref()) //
-					.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
-					.withItems(resourcesToCollectionJsonItems(value)) //
-					.withQueries(findQueries(value)) //
-					.withTemplate(findTemplate(value));
+		.withVersion("1.0") //
+		.withHref(value.getRequiredLink(IanaLinkRelations.SELF).getHref()) //
+		.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
+		.withItems(resourcesToCollectionJsonItems(value)) //
+		.withQueries(findQueries(value)) //
+		.withTemplate(findTemplate(value));
 
 			CollectionJsonDocument<?> doc = new CollectionJsonDocument<>(collectionJson);
 
 			provider.findValueSerializer(CollectionJsonDocument.class) //
-					.serialize(doc, jgen, provider);
+		.serialize(doc, jgen, provider);
 		}
 
 		/*
@@ -449,7 +449,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 	}
 
 	static class CollectionJsonPagedResourcesSerializer extends ContainerSerializer<PagedModel<?>>
-			implements ContextualSerializer {
+implements ContextualSerializer {
 
 		private static final long serialVersionUID = -6703190072925382402L;
 
@@ -474,12 +474,12 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		public void serialize(PagedModel<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 
 			CollectionJson<?> collectionJson = new CollectionJson<>() //
-					.withVersion("1.0") //
-					.withHref(value.getRequiredLink(IanaLinkRelations.SELF).getHref()) //
-					.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
-					.withItems(resourcesToCollectionJsonItems(value)) //
-					.withQueries(findQueries(value)) //
-					.withTemplate(findTemplate(value));
+		.withVersion("1.0") //
+		.withHref(value.getRequiredLink(IanaLinkRelations.SELF).getHref()) //
+		.withLinks(value.getLinks().without(IanaLinkRelations.SELF)) //
+		.withItems(resourcesToCollectionJsonItems(value)) //
+		.withQueries(findQueries(value)) //
+		.withTemplate(findTemplate(value));
 
 			CollectionJsonDocument<?> doc = new CollectionJsonDocument<>(collectionJson);
 
@@ -493,7 +493,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public JsonSerializer<?> createContextual(SerializerProvider prov, BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 			return new CollectionJsonPagedResourcesSerializer(property);
 		}
 
@@ -587,12 +587,12 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 
 			JavaType type = ctx.getTypeFactory().constructCollectionLikeType(List.class, Link.class);
 
-			return Links.of(jp.getCodec().<List<Link>> readValue(jp, type));
+			return Links.of(jp.getCodec().<List<Link>>readValue(jp, type));
 		}
 	}
 
 	static class CollectionJsonResourceSupportDeserializer extends ContainerDeserializerBase<RepresentationModel<?>>
-			implements ContextualDeserializer {
+implements ContextualDeserializer {
 
 		private static final long serialVersionUID = 502737712634617739L;
 
@@ -638,7 +638,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 
 			TypeFactory typeFactory = ctxt.getTypeFactory();
 
-			JavaType rootType = typeFactory.constructSimpleType(Object.class, new JavaType[] {});
+			JavaType rootType = typeFactory.constructSimpleType(Object.class, new JavaType[]{});
 			JavaType wrappedType = typeFactory.constructParametricType(CollectionJsonDocument.class, rootType);
 
 			CollectionJsonDocument<?> document = jp.getCodec().readValue(jp, wrappedType);
@@ -652,10 +652,10 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			if (!items.isEmpty()) {
 
 				Links merged = items.stream() //
-						.map(CollectionJsonItem::getLinks) //
-						.reduce(links, //
-								(left, right) -> left.merge(right), //
-								(left, right) -> right);
+			.map(CollectionJsonItem::getLinks) //
+			.reduce(links, //
+		(left, right) -> left.merge(right), //
+		(left, right) -> right);
 
 				CollectionJsonItem<?> firstItem = items.get(0).withOwnSelfLink();
 				RepresentationModel<?> resource = (RepresentationModel<?>) firstItem.toRawData(this.contentType);
@@ -672,10 +672,10 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			if (template != null) {
 
 				Map<String, Object> properties = template.getData().stream()
-						.collect(Collectors.toMap(CollectionJsonData::getName, CollectionJsonData::getValue));
+			.collect(Collectors.toMap(CollectionJsonData::getName, CollectionJsonData::getValue));
 
 				RepresentationModel<?> resourceSupport = (RepresentationModel<?>) PropertyUtils
-						.createObjectFromProperties(this.contentType.getRawClass(), properties);
+			.createObjectFromProperties(this.contentType.getRawClass(), properties);
 
 				return resourceSupport.add(withOwnSelfLink.getLinks());
 
@@ -691,18 +691,18 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public JsonDeserializer<?> createContextual(DeserializationContext context, @Nullable BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 
 			JavaType type = property == null //
-					? context.getContextualType() //
-					: property.getType().getContentType();
+		? context.getContextualType() //
+		: property.getType().getContentType();
 
 			return new CollectionJsonResourceSupportDeserializer(type);
 		}
 	}
 
 	static class CollectionJsonResourceDeserializer extends ContainerDeserializerBase<EntityModel<?>>
-			implements ContextualDeserializer {
+implements ContextualDeserializer {
 
 		private static final long serialVersionUID = -5911687423054932523L;
 
@@ -758,7 +758,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			if (items.isEmpty() && template != null) {
 
 				Map<String, Object> properties = template.getData().stream()
-						.collect(Collectors.toMap(CollectionJsonData::getName, CollectionJsonData::getValue));
+			.collect(Collectors.toMap(CollectionJsonData::getName, CollectionJsonData::getValue));
 
 				Object obj = PropertyUtils.createObjectFromProperties(rootType.getRawClass(), properties);
 
@@ -767,15 +767,15 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			} else {
 
 				Links merged = items.stream() //
-						.map(CollectionJsonItem::getLinks) //
-						.reduce(links, //
-								(left, right) -> left.merge(MergeMode.REPLACE_BY_REL, right), //
-								(left, right) -> right);
+			.map(CollectionJsonItem::getLinks) //
+			.reduce(links, //
+		(left, right) -> left.merge(MergeMode.REPLACE_BY_REL, right), //
+		(left, right) -> right);
 
 				CollectionJsonItem<?> firstItem = items.get(0).withOwnSelfLink();
 
 				return EntityModel.of(firstItem.toRawData(rootType),
-						merged.merge(MergeMode.REPLACE_BY_REL, firstItem.getLinks()));
+			merged.merge(MergeMode.REPLACE_BY_REL, firstItem.getLinks()));
 			}
 		}
 
@@ -786,15 +786,15 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public JsonDeserializer<?> createContextual(DeserializationContext ctxt, BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 
 			return new CollectionJsonResourceDeserializer(
-					property == null ? ctxt.getContextualType() : property.getType().getContentType());
+		property == null ? ctxt.getContextualType() : property.getType().getContentType());
 		}
 	}
 
 	static abstract class CollectionJsonDeserializerBase<T extends CollectionModel<?>>
-			extends ContainerDeserializerBase<T> implements ContextualDeserializer {
+extends ContainerDeserializerBase<T> implements ContextualDeserializer {
 
 		private static final long serialVersionUID = 1007769482339850545L;
 
@@ -803,12 +803,12 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		private final Function<JavaType, CollectionJsonDeserializerBase<T>> creator;
 
 		CollectionJsonDeserializerBase(BiFunction<List<Object>, Links, T> finalizer,
-				Function<JavaType, CollectionJsonDeserializerBase<T>> creator) {
+	Function<JavaType, CollectionJsonDeserializerBase<T>> creator) {
 			this(TypeFactory.defaultInstance().constructType(CollectionJson.class), finalizer, creator);
 		}
 
 		private CollectionJsonDeserializerBase(JavaType contentType, BiFunction<List<Object>, Links, T> finalizer,
-				Function<JavaType, CollectionJsonDeserializerBase<T>> creator) {
+	Function<JavaType, CollectionJsonDeserializerBase<T>> creator) {
 
 			super(contentType);
 
@@ -843,11 +843,11 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		@Override
 		@SuppressWarnings("null")
 		public JsonDeserializer<?> createContextual(DeserializationContext ctxt, @Nullable BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 
 			JavaType contextualType = property == null //
-					? ctxt.getContextualType() //
-					: property.getType().getContentType();
+		? ctxt.getContextualType() //
+		: property.getType().getContentType();
 
 			return creator.apply(contextualType);
 		}
@@ -875,11 +875,11 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			boolean isResource = contentType.hasGenericTypes() && contentType.containedType(0).hasRawClass(EntityModel.class);
 
 			return collection.getItems().stream() //
-					.map(CollectionJsonItem::withOwnSelfLink) //
-					.map(it -> isResource //
-							? RepresentationModel.of(it.toRawData(rootType), it.getLinks()) //
-							: it.toRawData(rootType)) //
-					.collect(Collectors.collectingAndThen(Collectors.toList(), it -> finalizer.apply(it, links)));
+		.map(CollectionJsonItem::withOwnSelfLink) //
+		.map(it -> isResource //
+	? RepresentationModel.of(it.toRawData(rootType), it.getLinks()) //
+	: it.toRawData(rootType)) //
+		.collect(Collectors.collectingAndThen(Collectors.toList(), it -> finalizer.apply(it, links)));
 		}
 	}
 
@@ -902,7 +902,7 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 
 		private static final long serialVersionUID = -7465448422501330790L;
 		private static final BiFunction<List<Object>, Links, PagedModel<?>> FINISHER = (content, links) -> PagedModel
-				.of(content, null, links);
+	.of(content, null, links);
 		private static final Function<JavaType, CollectionJsonDeserializerBase<PagedModel<?>>> CONTEXTUAL_CREATOR = CollectionJsonPagedResourcesDeserializer::new;
 
 		CollectionJsonPagedResourcesDeserializer() {
@@ -925,9 +925,9 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 			EntityModel<?> resource = (EntityModel<?>) content;
 
 			return new CollectionJsonItem<>() //
-					.withHref(resource.getRequiredLink(IanaLinkRelations.SELF).getHref())
-					.withLinks(resource.getLinks().without(IanaLinkRelations.SELF)) //
-					.withRawData(resource.getContent());
+		.withHref(resource.getRequiredLink(IanaLinkRelations.SELF).getHref())
+		.withLinks(resource.getLinks().without(IanaLinkRelations.SELF)) //
+		.withRawData(resource.getContent());
 
 		}).collect(Collectors.toList());
 	}
@@ -947,16 +947,16 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		Link selfLink = resource.getRequiredLink(IanaLinkRelations.SELF);
 
 		return selfLink.getAffordances().stream() //
-				.map(it -> it.getAffordanceModel(MediaTypes.COLLECTION_JSON)) //
-				.peek(it -> Assert.notNull(it, "No Collection/JSON affordance model found but expected!"))
-				.map(CollectionJsonAffordanceModel.class::cast) //
-				.filter(it -> !it.hasHttpMethod(HttpMethod.GET)) //
-				.filter(it -> !it.pointsToTargetOf(selfLink)) //
-				.map(it -> new CollectionJsonQuery() //
-						.withRel(it.getName()) //
-						.withHref(it.getURI()) //
-						.withData(it.getQueryProperties())) //
-				.collect(Collectors.toList());
+	.map(it -> it.getAffordanceModel(MediaTypes.COLLECTION_JSON)) //
+	.peek(it -> Assert.notNull(it, "No Collection/JSON affordance model found but expected!"))
+	.map(CollectionJsonAffordanceModel.class::cast) //
+	.filter(it -> !it.hasHttpMethod(HttpMethod.GET)) //
+	.filter(it -> !it.pointsToTargetOf(selfLink)) //
+	.map(it -> new CollectionJsonQuery() //
+.withRel(it.getName()) //
+.withHref(it.getURI()) //
+.withData(it.getQueryProperties())) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -973,11 +973,11 @@ public class Jackson2CollectionJsonModule extends SimpleModule {
 		}
 
 		return resource.getRequiredLink(IanaLinkRelations.SELF).getAffordances() //
-				.stream() //
-				.map(it -> it.getAffordanceModel(MediaTypes.COLLECTION_JSON)) //
-				.map(CollectionJsonAffordanceModel.class::cast) //
-				.filter(it -> !it.hasHttpMethod(HttpMethod.GET)) //
-				.map(it -> new CollectionJsonTemplate().withData(it.getInputProperties())) //
-				.findFirst().orElse(null);
+	.stream() //
+	.map(it -> it.getAffordanceModel(MediaTypes.COLLECTION_JSON)) //
+	.map(CollectionJsonAffordanceModel.class::cast) //
+	.filter(it -> !it.hasHttpMethod(HttpMethod.GET)) //
+	.map(it -> new CollectionJsonTemplate().withData(it.getInputProperties())) //
+	.findFirst().orElse(null);
 	}
 }

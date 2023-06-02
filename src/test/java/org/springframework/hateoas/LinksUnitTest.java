@@ -52,7 +52,7 @@ class LinksUnitTest {
 
 	static final Links reference = Links.of(Link.of("/something", "foo"), Link.of("/somethingElse", "bar"));
 	static final Links reference2 = Links.of(Link.of("/something", "foo").withHreflang("en"),
-			Link.of("/somethingElse", "bar").withHreflang("de"));
+Link.of("/somethingElse", "bar").withHreflang("de"));
 
 	// #1899
 	static final String FIVE = "</somethingElse?foo=one,two>;rel=boo";
@@ -60,8 +60,8 @@ class LinksUnitTest {
 	static final String SEVEN = "</somethingElse>;rel=beeboo;title=sometitle";
 	static final String LINKS3 = StringUtils.collectionToCommaDelimitedString(Arrays.asList(FIVE, SIX, SEVEN));
 	static final Links reference3 = Links.of(Link.of("/somethingElse?foo=one,two", "boo"), //
-			Link.of("/somethingElse", "bee"),
-			Link.of("/somethingElse", "beeboo").withTitle("sometitle"));
+Link.of("/somethingElse", "bee"),
+Link.of("/somethingElse", "beeboo").withTitle("sometitle"));
 
 	@Test
 	void parsesLinkHeaderLinks() {
@@ -134,8 +134,8 @@ class LinksUnitTest {
 		Links links = Links.of();
 
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> links.getRequiredLink("self")) //
-				.withMessageContaining("self");
+	.isThrownBy(() -> links.getRequiredLink("self")) //
+	.withMessageContaining("self");
 	}
 
 	@Test
@@ -159,18 +159,18 @@ class LinksUnitTest {
 		Link link = Link.of("/foo");
 
 		List<NamedLinks> adders = Arrays.asList(//
-				NamedLinks.of("adds via varargs", links.andIf(true, link)), //
-				NamedLinks.of("adds via Supplier", links.andIf(true, () -> link)), //
-				NamedLinks.of("adds via Stream", links.andIf(true, Stream.of(link))));
+	NamedLinks.of("adds via varargs", links.andIf(true, link)), //
+	NamedLinks.of("adds via Supplier", links.andIf(true, () -> link)), //
+	NamedLinks.of("adds via Stream", links.andIf(true, Stream.of(link))));
 
 		Stream<DynamicTest> adderTests = DynamicTest.stream(adders.iterator(), NamedLinks::getName, it -> {
 			assertThat(it.links.getRequiredLink(IanaLinkRelations.SELF).getHref()).isEqualTo("/foo");
 		});
 
 		List<NamedLinks> nonAdders = Arrays.asList(//
-				NamedLinks.of("does not add via varargs", links.andIf(false, link)), //
-				NamedLinks.of("does not add via Supplier", links.andIf(false, () -> link)), //
-				NamedLinks.of("does not add via Stream", links.andIf(false, Stream.of(link))));
+	NamedLinks.of("does not add via varargs", links.andIf(false, link)), //
+	NamedLinks.of("does not add via Supplier", links.andIf(false, () -> link)), //
+	NamedLinks.of("does not add via Stream", links.andIf(false, Stream.of(link))));
 
 		Stream<DynamicTest> nonAdderTests = DynamicTest.stream(nonAdders.iterator(), NamedLinks::getName, it -> {
 			assertThat(it.links).isEmpty();
@@ -194,12 +194,12 @@ class LinksUnitTest {
 		Link link = Link.of("/foo");
 
 		List<NamedLinks> sources = Arrays.asList(//
-				NamedLinks.of("via varargs", links.and(link)), //
-				NamedLinks.of("via Iterable", links.and(Arrays.asList(link))), //
-				NamedLinks.of("via Stream", links.and(Stream.of(link))));
+	NamedLinks.of("via varargs", links.and(link)), //
+	NamedLinks.of("via Iterable", links.and(Arrays.asList(link))), //
+	NamedLinks.of("via Stream", links.and(Stream.of(link))));
 
 		return DynamicTest.stream(sources.iterator(), NamedLinks::getName,
-				it -> assertThat(it.links.getRequiredLink(IanaLinkRelations.SELF)).isNotNull());
+	it -> assertThat(it.links.getRequiredLink(IanaLinkRelations.SELF)).isNotNull());
 	}
 
 	@TestFactory // #1340
@@ -210,14 +210,14 @@ class LinksUnitTest {
 		Link sameRel = Link.of("/bar");
 
 		List<NamedLinks> sources = Arrays.asList(//
-				NamedLinks.of("merge same via varargs", links.merge(same)),
-				NamedLinks.of("merge same rel via varargs", links.merge(MergeMode.SKIP_BY_REL, sameRel)),
-				NamedLinks.of("merge same via Stream", links.merge(Stream.of(same))),
-				NamedLinks.of("merge same rel via Stream", links.merge(MergeMode.SKIP_BY_REL, Stream.of(sameRel))));
+	NamedLinks.of("merge same via varargs", links.merge(same)),
+	NamedLinks.of("merge same rel via varargs", links.merge(MergeMode.SKIP_BY_REL, sameRel)),
+	NamedLinks.of("merge same via Stream", links.merge(Stream.of(same))),
+	NamedLinks.of("merge same rel via Stream", links.merge(MergeMode.SKIP_BY_REL, Stream.of(sameRel))));
 
 		return DynamicTest.stream(sources.iterator(), NamedLinks::getName,
-				it -> assertThat(it.links).hasSize(1) //
-						.element(0).extracting(Link::getHref).isEqualTo("/foo"));
+	it -> assertThat(it.links).hasSize(1) //
+.element(0).extracting(Link::getHref).isEqualTo("/foo"));
 	}
 
 	@TestFactory // #1340
@@ -227,12 +227,12 @@ class LinksUnitTest {
 		Link sameRel = Link.of("/bar");
 
 		List<NamedLinks> sources = Arrays.asList(//
-				NamedLinks.of("replace same rel via varargs", links.merge(MergeMode.REPLACE_BY_REL, sameRel)),
-				NamedLinks.of("replace same rel via Stream", links.merge(MergeMode.REPLACE_BY_REL, Stream.of(sameRel))));
+	NamedLinks.of("replace same rel via varargs", links.merge(MergeMode.REPLACE_BY_REL, sameRel)),
+	NamedLinks.of("replace same rel via Stream", links.merge(MergeMode.REPLACE_BY_REL, Stream.of(sameRel))));
 
 		return DynamicTest.stream(sources.iterator(), NamedLinks::getName,
-				it -> assertThat(it.links).hasSize(1) //
-						.element(0).extracting(Link::getHref).isEqualTo("/bar"));
+	it -> assertThat(it.links).hasSize(1) //
+.element(0).extracting(Link::getHref).isEqualTo("/bar"));
 	}
 
 	@Test
@@ -270,7 +270,7 @@ class LinksUnitTest {
 	void supportsUnquotedAttributes() {
 
 		assertThat(Links.parse("<https://url.com?page=1>; rel=first").getRequiredLink("first").getHref())
-				.isEqualTo("https://url.com?page=1");
+	.isEqualTo("https://url.com?page=1");
 	}
 
 	@Test // #1899

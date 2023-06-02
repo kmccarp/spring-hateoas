@@ -72,8 +72,8 @@ class WebStackImportSelectorUnitTest {
 		AnnotationMetadata metadata = AnnotationMetadata.introspect(NoStacksHypermedia.class);
 
 		assertThatExceptionOfType(IllegalStateException.class) //
-				.isThrownBy(() -> selector.selectImports(metadata)) //
-				.withMessageContaining(NoStacksHypermedia.class.getName());
+	.isThrownBy(() -> selector.selectImports(metadata)) //
+	.withMessageContaining(NoStacksHypermedia.class.getName());
 	}
 
 	@Test // #1080
@@ -82,19 +82,23 @@ class WebStackImportSelectorUnitTest {
 		try (ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(WebFluxHypermedia.class)) {
 
 			assertThatExceptionOfType(NoSuchBeanDefinitionException.class) //
-					.isThrownBy(() -> context.getBean(EntityLinks.class));
+		.isThrownBy(() -> context.getBean(EntityLinks.class));
 		}
 	}
 
 	@EnableHypermediaSupport(type = HypermediaType.HAL)
-	static class DefaultHypermedia {}
+	static class DefaultHypermedia {
+	}
 
 	@EnableHypermediaSupport(type = HypermediaType.HAL, stacks = WebStack.WEBMVC)
-	static class WebMvcHypermedia {}
+	static class WebMvcHypermedia {
+	}
 
 	@EnableHypermediaSupport(type = HypermediaType.HAL, stacks = WebStack.WEBFLUX)
-	static class WebFluxHypermedia {}
+	static class WebFluxHypermedia {
+	}
 
 	@EnableHypermediaSupport(type = HypermediaType.HAL, stacks = {})
-	static class NoStacksHypermedia {}
+	static class NoStacksHypermedia {
+	}
 }

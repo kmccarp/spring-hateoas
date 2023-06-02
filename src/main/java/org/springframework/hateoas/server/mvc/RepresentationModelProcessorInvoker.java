@@ -106,7 +106,7 @@ public class RepresentationModelProcessorInvoker {
 
 		// For Resources implementations, process elements first
 		if (RepresentationModelProcessorHandlerMethodReturnValueHandler.COLLECTION_MODEL_TYPE
-				.isAssignableFrom(referenceType)) {
+	.isAssignableFrom(referenceType)) {
 
 			CollectionModel<?> collectionModel = (CollectionModel<?>) value;
 			Class<?> rawClass = referenceType.getRawClass();
@@ -132,9 +132,9 @@ public class RepresentationModelProcessorInvoker {
 			if (RepresentationModelProcessorHandlerMethodReturnValueHandler.CONTENT_FIELD != null) {
 
 				ReflectionUtils.setField( //
-						RepresentationModelProcessorHandlerMethodReturnValueHandler.CONTENT_FIELD, //
-						collectionModel, //
-						result //
+			RepresentationModelProcessorHandlerMethodReturnValueHandler.CONTENT_FIELD, //
+			collectionModel, //
+			result //
 				);
 			}
 		}
@@ -241,7 +241,7 @@ public class RepresentationModelProcessorInvoker {
 		@SuppressWarnings("unchecked")
 		public Object invokeProcessor(Object object) {
 			return ((RepresentationModelProcessor<RepresentationModel<?>>) processor)
-					.process((RepresentationModel<?>) object);
+		.process((RepresentationModel<?>) object);
 		}
 
 		/*
@@ -317,7 +317,7 @@ public class RepresentationModelProcessorInvoker {
 			ResolvableType type = findGenericType(target, EntityModel.class);
 
 			return target.isAssignableFrom(content.getClass()) || //
-					type != null && type.getGeneric(0).isAssignableFrom(ResolvableType.forClass(content.getClass()));
+		type != null && type.getGeneric(0).isAssignableFrom(ResolvableType.forClass(content.getClass()));
 		}
 
 		@Nullable
@@ -348,7 +348,7 @@ public class RepresentationModelProcessorInvoker {
 	 * @author Oliver Gierke
 	 */
 	public static class CollectionModelProcessorWrapper
-			extends RepresentationModelProcessorInvoker.DefaultProcessorWrapper {
+extends RepresentationModelProcessorInvoker.DefaultProcessorWrapper {
 
 		/**
 		 * Creates a new {@link CollectionModelProcessorWrapper} for the given {@link RepresentationModelProcessor}.
@@ -371,7 +371,7 @@ public class RepresentationModelProcessorInvoker {
 			}
 
 			return super.supports(type, value) //
-					&& isValueTypeMatch((CollectionModel<?>) value, getTargetType());
+		&& isValueTypeMatch((CollectionModel<?>) value, getTargetType());
 		}
 
 		/**
@@ -396,7 +396,7 @@ public class RepresentationModelProcessorInvoker {
 
 			ResolvableType superType = null;
 
-			for (Class<?> collectionModelType : Arrays.<Class<?>> asList(collectionModel.getClass(), CollectionModel.class)) {
+			for (Class<?> collectionModelType : Arrays.<Class<?>>asList(collectionModel.getClass(), CollectionModel.class)) {
 
 				superType = getSuperType(target, collectionModelType);
 

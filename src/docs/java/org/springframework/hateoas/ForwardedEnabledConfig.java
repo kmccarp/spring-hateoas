@@ -27,17 +27,18 @@ import org.springframework.web.server.adapter.ForwardedHeaderTransformer;
 @Configuration
 public class ForwardedEnabledConfig {
 
-    // tag::code-1[]
-    @Bean
-    ForwardedHeaderFilter forwardedHeaderFilter() {
-        return new ForwardedHeaderFilter();
-    }
-    // end::code-1[]
+	// tag::code-1[]
+	@Bean
+	ForwardedHeaderFilter forwardedHeaderFilter() {
+		return new ForwardedHeaderFilter();
+	}
 
-    // tag::code-2[]
-    @Bean
-    ForwardedHeaderTransformer forwardedHeaderTransformer() {
-        return new ForwardedHeaderTransformer();
-    }
-    // end::code-2[]
+	// end::code-1[]
+
+	// tag::code-2[]
+	@Bean
+	ForwardedHeaderTransformer forwardedHeaderTransformer() {
+		return new ForwardedHeaderTransformer();
+	}
+	// end::code-2[]
 }

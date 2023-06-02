@@ -82,9 +82,9 @@ public class MethodParameters {
 		Assert.notNull(method, "Method must not be null!");
 
 		this.parameters = IntStream.range(0, method.getParameterTypes().length) //
-				.mapToObj(it -> new AnnotationNamingMethodParameter(method, it, namingAnnotation)) //
-				.peek(it -> it.initParameterNameDiscovery(DISCOVERER)) //
-				.collect(Collectors.toList());
+	.mapToObj(it -> new AnnotationNamingMethodParameter(method, it, namingAnnotation)) //
+	.peek(it -> it.initParameterNameDiscovery(DISCOVERER)) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class MethodParameters {
 		Assert.hasText(name, "Parameter name must not be null!");
 
 		return getParameters().stream() //
-				.filter(it -> name.equals(it.getParameterName())) //
-				.findFirst();
+	.filter(it -> name.equals(it.getParameterName())) //
+	.findFirst();
 	}
 
 	/**
@@ -123,8 +123,8 @@ public class MethodParameters {
 		Assert.notNull(type, "Type must not be null!");
 
 		return getParameters().stream() //
-				.filter(it -> it.getParameterType().equals(type)) //
-				.collect(Collectors.toList());
+	.filter(it -> it.getParameterType().equals(type)) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -141,8 +141,8 @@ public class MethodParameters {
 		return parametersWithAnnotationCache.computeIfAbsent(annotation, key -> {
 
 			return getParameters().stream()//
-					.filter(it -> it.hasParameterAnnotation((Class<? extends Annotation>) key))//
-					.collect(Collectors.toList());
+		.filter(it -> it.hasParameterAnnotation((Class<? extends Annotation>) key))//
+		.collect(Collectors.toList());
 		});
 	}
 
@@ -227,13 +227,13 @@ public class MethodParameters {
 			MethodParameter interfaceParameter = new MethodParameter(interfaceMethod, getParameterIndex());
 			List<Annotation> originalAnnotations = new ArrayList<>(Arrays.asList(original));
 			Set<Class<?>> originalAnnotationTypes = originalAnnotations.stream() //
-					.map(Object::getClass) //
-					.collect(Collectors.toSet());
+		.map(Object::getClass) //
+		.collect(Collectors.toSet());
 
 			// Add annotations which have not been declared on the target method
 			Arrays.stream(interfaceParameter.getParameterAnnotations()) //
-					.filter(it -> !originalAnnotationTypes.contains(it.annotationType())) //
-					.forEach(originalAnnotations::add);
+		.filter(it -> !originalAnnotationTypes.contains(it.annotationType())) //
+		.forEach(originalAnnotations::add);
 
 			return cacheAndReturn(originalAnnotations);
 		}

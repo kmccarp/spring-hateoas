@@ -44,11 +44,11 @@ class TypeBasedPayloadMetadata implements InputPayloadMetadata {
 
 	TypeBasedPayloadMetadata(Class<?> type, Stream<PropertyMetadata> properties) {
 		this(type, new TreeMap<>(
-				properties.collect(Collectors.toMap(PropertyMetadata::getName, Function.identity()))), Collections.emptyList());
+	properties.collect(Collectors.toMap(PropertyMetadata::getName, Function.identity()))), Collections.emptyList());
 	}
 
 	TypeBasedPayloadMetadata(Class<?> type, SortedMap<String, PropertyMetadata> properties,
-			List<MediaType> mediaTypes) {
+List<MediaType> mediaTypes) {
 
 		Assert.notNull(type, "Type must not be null!");
 		Assert.notNull(properties, "Properties must not be null!");
@@ -134,8 +134,8 @@ class TypeBasedPayloadMetadata implements InputPayloadMetadata {
 		TypeBasedPayloadMetadata that = (TypeBasedPayloadMetadata) obj;
 
 		return this.type.equals(that.type)
-				&& this.properties.equals(that.properties)
-				&& this.mediaTypes.equals(that.mediaTypes);
+	&& this.properties.equals(that.properties)
+	&& this.mediaTypes.equals(that.mediaTypes);
 	}
 
 	/*

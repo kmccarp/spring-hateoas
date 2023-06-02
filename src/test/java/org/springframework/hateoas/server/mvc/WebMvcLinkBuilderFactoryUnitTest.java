@@ -159,7 +159,7 @@ class WebMvcLinkBuilderFactoryUnitTest extends TestUtils {
 		assertPointsToMockServer(link);
 		assertThat(link.getRel()).isEqualTo(IanaLinkRelations.SELF);
 		assertThat(link.getHref()) //
-				.endsWith("/sample/multivaluemapsupport?key1=value1a&key1=value1b&key2=value2a&key2=value2b");
+	.endsWith("/sample/multivaluemapsupport?key1=value1a&key1=value1b&key2=value2a&key2=value2b");
 	}
 
 	/**

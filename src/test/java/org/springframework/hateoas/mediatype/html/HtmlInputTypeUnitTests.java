@@ -49,15 +49,15 @@ public class HtmlInputTypeUnitTests {
 	Stream<DynamicTest> derivesInputTypesFromType() {
 
 		Stream<$> numbers = HtmlInputType.NUMERIC_TYPES.stream() //
-				.map(it -> $.of(it, HtmlInputType.NUMBER));
+	.map(it -> $.of(it, HtmlInputType.NUMBER));
 
 		Stream<$> others = Stream.of( //
-				$.of(LocalDate.class, HtmlInputType.DATE), //
-				$.of(LocalDateTime.class, HtmlInputType.DATETIME_LOCAL), //
-				$.of(String.class, HtmlInputType.TEXT), //
-				$.of(LocalTime.class, HtmlInputType.TIME), //
-				$.of(URL.class, HtmlInputType.URL), //
-				$.of(URI.class, HtmlInputType.URL) //
+	$.of(LocalDate.class, HtmlInputType.DATE), //
+	$.of(LocalDateTime.class, HtmlInputType.DATETIME_LOCAL), //
+	$.of(String.class, HtmlInputType.TEXT), //
+	$.of(LocalTime.class, HtmlInputType.TIME), //
+	$.of(URL.class, HtmlInputType.URL), //
+	$.of(URI.class, HtmlInputType.URL) //
 		);
 
 		return DynamicTest.stream(Stream.concat(numbers, others), $::toString, $::verify);

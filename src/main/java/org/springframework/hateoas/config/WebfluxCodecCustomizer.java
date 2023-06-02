@@ -45,7 +45,7 @@ class WebfluxCodecCustomizer implements Consumer<Object> {
 	}
 
 	private WebfluxCodecCustomizer(List<HypermediaMappingInformation> mappingInformations, ObjectMapper mapper,
-			boolean withGenericJsonTypes) {
+boolean withGenericJsonTypes) {
 
 		this.mappingInformations = mappingInformations;
 		this.mapper = mapper;

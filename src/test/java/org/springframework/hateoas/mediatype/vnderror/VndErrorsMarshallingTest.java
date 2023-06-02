@@ -56,7 +56,7 @@ class VndErrorsMarshallingTest {
 		this.mapper = new ObjectMapper();
 		this.mapper.registerModule(new Jackson2HalModule());
 		this.mapper.setHandlerInstantiator(
-				new HalHandlerInstantiator(relProvider, CurieProvider.NONE, MessageResolver.DEFAULTS_ONLY));
+	new HalHandlerInstantiator(relProvider, CurieProvider.NONE, MessageResolver.DEFAULTS_ONLY));
 		this.mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 	}
 
@@ -66,9 +66,9 @@ class VndErrorsMarshallingTest {
 		String expected = read(new ClassPathResource("vnderror-single-item.json", getClass()));
 
 		VndError actual = new VndError("Validation failed", "/username", 42,
-				Link.of("http://path.to/user/resource/1", IanaLinkRelations.ABOUT),
-				Link.of("http://path.to/describes", IanaLinkRelations.DESCRIBES),
-				Link.of("http://path.to/help", IanaLinkRelations.HELP));
+	Link.of("http://path.to/user/resource/1", IanaLinkRelations.ABOUT),
+	Link.of("http://path.to/describes", IanaLinkRelations.DESCRIBES),
+	Link.of("http://path.to/help", IanaLinkRelations.HELP));
 
 		assertThat(this.mapper.readValue(expected, VndError.class)).isEqualTo(actual);
 	}
@@ -77,9 +77,9 @@ class VndErrorsMarshallingTest {
 	public void singleItemVndErrorShouldSerialize() throws IOException {
 
 		VndError error = new VndError("Validation failed", "/username", 42, //
-				Link.of("http://path.to/user/resource/1", IanaLinkRelations.ABOUT),
-				Link.of("http://path.to/describes", IanaLinkRelations.DESCRIBES),
-				Link.of("http://path.to/help", IanaLinkRelations.HELP));
+	Link.of("http://path.to/user/resource/1", IanaLinkRelations.ABOUT),
+	Link.of("http://path.to/describes", IanaLinkRelations.DESCRIBES),
+	Link.of("http://path.to/help", IanaLinkRelations.HELP));
 
 		String json = read(new ClassPathResource("vnderror-single-item.json", getClass()));
 
@@ -92,10 +92,10 @@ class VndErrorsMarshallingTest {
 		String json = read(new ClassPathResource("vnderror-multiple-items.json", getClass()));
 
 		VndError error1 = new VndError("\"username\" field validation failed", null, 50, //
-				Link.of("http://.../", IanaLinkRelations.HELP));
+	Link.of("http://.../", IanaLinkRelations.HELP));
 
 		VndError error2 = new VndError("\"postcode\" field validation failed", null, 55, //
-				Link.of("http://.../", IanaLinkRelations.HELP));
+	Link.of("http://.../", IanaLinkRelations.HELP));
 
 		VndErrors vndErrors = new VndErrors().withError(error1).withError(error2);
 
@@ -106,10 +106,10 @@ class VndErrorsMarshallingTest {
 	public void multipleItemVndErrorsShouldSerialize() throws IOException {
 
 		VndError error1 = new VndError("\"username\" field validation failed", null, 50, //
-				Link.of("http://.../", IanaLinkRelations.HELP));
+	Link.of("http://.../", IanaLinkRelations.HELP));
 
 		VndError error2 = new VndError("\"postcode\" field validation failed", null, 55, //
-				Link.of("http://.../", IanaLinkRelations.HELP));
+	Link.of("http://.../", IanaLinkRelations.HELP));
 
 		VndErrors vndErrors = new VndErrors().withError(error1).withError(error2);
 
@@ -122,13 +122,13 @@ class VndErrorsMarshallingTest {
 	public void nestedVndErrorsShouldSerialize() throws IOException {
 
 		VndError error = new VndError("Username must contain at least three characters", "/username", (Integer) null, //
-				Link.of("http://path.to/user/resource/1", IanaLinkRelations.ABOUT));
+	Link.of("http://path.to/user/resource/1", IanaLinkRelations.ABOUT));
 
 		VndErrors vndErrors = new VndErrors().withError(error)
-				.withLink(Link.of("http://path.to/describes").withRel(IanaLinkRelations.DESCRIBES))
-				.withLink(Link.of("http://path.to/help").withRel(IanaLinkRelations.HELP))
-				.withLink(Link.of("http://path.to/user/resource/1").withRel(IanaLinkRelations.ABOUT))
-				.withMessage("Validation failed").withLogref(42);
+	.withLink(Link.of("http://path.to/describes").withRel(IanaLinkRelations.DESCRIBES))
+	.withLink(Link.of("http://path.to/help").withRel(IanaLinkRelations.HELP))
+	.withLink(Link.of("http://path.to/user/resource/1").withRel(IanaLinkRelations.ABOUT))
+	.withMessage("Validation failed").withLogref(42);
 
 		String json = read(new ClassPathResource("vnderror-nested.json", getClass()));
 

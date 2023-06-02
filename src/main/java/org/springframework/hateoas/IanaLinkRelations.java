@@ -1229,11 +1229,11 @@ public final class IanaLinkRelations {
 	static {
 
 		LINK_RELATIONS = Arrays.stream(IanaLinkRelations.class.getDeclaredFields()) //
-				.filter(ReflectionUtils::isPublicStaticFinal) //
-				.filter(field -> LinkRelation.class.equals(field.getType())) //
-				.map(it -> ReflectionUtils.getField(it, null)) //
-				.map(LinkRelation.class::cast) //
-				.collect(Collectors.toSet());
+	.filter(ReflectionUtils::isPublicStaticFinal) //
+	.filter(field -> LinkRelation.class.equals(field.getType())) //
+	.map(it -> ReflectionUtils.getField(it, null)) //
+	.map(LinkRelation.class::cast) //
+	.collect(Collectors.toSet());
 	}
 
 	private IanaLinkRelations() {
@@ -1251,7 +1251,7 @@ public final class IanaLinkRelations {
 		Assert.notNull(relation, "Link relation must not be null!");
 
 		return LINK_RELATIONS.stream() //
-				.anyMatch(it -> it.value().equalsIgnoreCase(relation));
+	.anyMatch(it -> it.value().equalsIgnoreCase(relation));
 	}
 
 	/**
@@ -1265,7 +1265,7 @@ public final class IanaLinkRelations {
 		Assert.notNull(relation, "Link relation must not be null!");
 
 		return LINK_RELATIONS.contains(relation) //
-				|| LINK_RELATIONS.stream().anyMatch(it -> it.isSameAs(relation));
+	|| LINK_RELATIONS.stream().anyMatch(it -> it.isSameAs(relation));
 
 	}
 
@@ -1279,8 +1279,8 @@ public final class IanaLinkRelations {
 	public static LinkRelation parse(String relation) {
 
 		return LINK_RELATIONS.stream() //
-				.filter(it -> it.value().equalsIgnoreCase(relation)) //
-				.findFirst() //
-				.orElseThrow(() -> new IllegalArgumentException(relation + " is not a valid IANA link relation!"));
+	.filter(it -> it.value().equalsIgnoreCase(relation)) //
+	.findFirst() //
+	.orElseThrow(() -> new IllegalArgumentException(relation + " is not a valid IANA link relation!"));
 	}
 }

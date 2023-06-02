@@ -63,7 +63,7 @@ class LinkRelationUnitTest {
 	void appliesMapper() {
 
 		assertThat(LinkRelation.of("someRelation").map(it -> it.toLowerCase(Locale.US))) //
-				.isEqualTo(LinkRelation.of("somerelation"));
+	.isEqualTo(LinkRelation.of("somerelation"));
 	}
 
 	@Test // #1132

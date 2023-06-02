@@ -124,9 +124,9 @@ public class UriMapping {
 			Assert.hasText(name, "Variable must not be null or empty!");
 
 			return variables.stream()
-					.filter(it -> it.hasName(name))
-					.findFirst()
-					.orElseThrow(() -> new IllegalArgumentException("No variable named " + name + " found!"));
+		.filter(it -> it.hasName(name))
+		.findFirst()
+		.orElseThrow(() -> new IllegalArgumentException("No variable named " + name + " found!"));
 		}
 
 		/*
@@ -162,8 +162,8 @@ public class UriMapping {
 			Assert.hasText(source, "Variable source must not be null or empty!");
 
 			return source.startsWith("*") //
-					? new MappingVariable(source.substring(1), true) //
-					: new MappingVariable(source, false);
+		? new MappingVariable(source.substring(1), true) //
+		: new MappingVariable(source, false);
 		}
 
 		private MappingVariable(String name, boolean composite) {

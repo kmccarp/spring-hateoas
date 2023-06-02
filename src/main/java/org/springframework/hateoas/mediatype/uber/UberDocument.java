@@ -35,7 +35,7 @@ final class UberDocument {
 
 	@JsonCreator
 	UberDocument(@JsonProperty("version") String version, @JsonProperty("data") @Nullable List<UberData> data,
-			@JsonProperty("error") @Nullable UberError error) {
+@JsonProperty("error") @Nullable UberError error) {
 		this.uber = new Uber(version, data, error);
 	}
 

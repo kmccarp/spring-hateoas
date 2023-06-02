@@ -30,8 +30,7 @@ import org.springframework.web.server.ServerWebExchange;
  * @author Greg Turnquist
  * @author Oliver Drotbohm
  */
-public interface SimpleReactiveRepresentationModelAssembler<T>
-		extends ReactiveRepresentationModelAssembler<T, EntityModel<T>> {
+public interface SimpleReactiveRepresentationModelAssembler<T>extends ReactiveRepresentationModelAssembler<T, EntityModel<T>> {
 
 	/**
 	 * Converts the given entity into a {@link EntityModel} wrapped in a {@link Mono}.
@@ -66,13 +65,13 @@ public interface SimpleReactiveRepresentationModelAssembler<T>
 	 * @return {@link CollectionModel} containing {@link EntityModel} of {@code T}, will never be {@literal null}..
 	 */
 	default Mono<CollectionModel<EntityModel<T>>> toCollectionModel(Flux<? extends T> entities,
-			ServerWebExchange exchange) {
+ServerWebExchange exchange) {
 
 		return entities //
-				.flatMap(entity -> toModel(entity, exchange)) //
-				.collectList() //
-				.map(CollectionModel::of) //
-				.map(it -> addLinks(it, exchange));
+	.flatMap(entity -> toModel(entity, exchange)) //
+	.collectList() //
+	.map(CollectionModel::of) //
+	.map(it -> addLinks(it, exchange));
 	}
 
 	/**
@@ -82,7 +81,7 @@ public interface SimpleReactiveRepresentationModelAssembler<T>
 	 * @return will never be {@literal null}.
 	 */
 	default CollectionModel<EntityModel<T>> addLinks(CollectionModel<EntityModel<T>> resources,
-			ServerWebExchange exchange) {
+ServerWebExchange exchange) {
 		return resources;
 	}
 }

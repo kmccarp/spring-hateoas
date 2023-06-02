@@ -36,6 +36,6 @@ class WebConvertersUnitTests {
 		WebConverters converters = WebConverters.of(new ObjectMapper(), Collections.emptyList());
 
 		assertThatNoException() //
-				.isThrownBy(() -> converters.augmentClient(Collections.emptyList()));
+	.isThrownBy(() -> converters.augmentClient(Collections.emptyList()));
 	}
 }

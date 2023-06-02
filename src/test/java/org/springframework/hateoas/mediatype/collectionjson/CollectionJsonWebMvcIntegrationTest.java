@@ -70,7 +70,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ContextConfiguration
 class CollectionJsonWebMvcIntegrationTest {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	MockMvc mockMvc;
 
@@ -85,67 +86,67 @@ class CollectionJsonWebMvcIntegrationTest {
 	void singleEmployee() throws Exception {
 
 		this.mockMvc.perform(get("/employees/0") //
-				.accept(MediaTypes.COLLECTION_JSON_VALUE)) //
-				.andExpect(status().isOk()) //
+	.accept(MediaTypes.COLLECTION_JSON_VALUE)) //
+	.andExpect(status().isOk()) //
 
-				.andExpect(jsonPath("$.collection.version", is("1.0")))
-				.andExpect(jsonPath("$.collection.href", is("http://localhost/employees/0")))
+	.andExpect(jsonPath("$.collection.version", is("1.0")))
+	.andExpect(jsonPath("$.collection.href", is("http://localhost/employees/0")))
 
-				.andExpect(jsonPath("$.collection.links.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.links[0].rel", is("employees")))
-				.andExpect(jsonPath("$.collection.links[0].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.links.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.links[0].rel", is("employees")))
+	.andExpect(jsonPath("$.collection.links[0].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.items.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.items[0].data[1].name", is("name")))
-				.andExpect(jsonPath("$.collection.items[0].data[1].value", is("Frodo Baggins")))
-				.andExpect(jsonPath("$.collection.items[0].data[0].name", is("role")))
-				.andExpect(jsonPath("$.collection.items[0].data[0].value", is("ring bearer")))
+	.andExpect(jsonPath("$.collection.items.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.items[0].data[1].name", is("name")))
+	.andExpect(jsonPath("$.collection.items[0].data[1].value", is("Frodo Baggins")))
+	.andExpect(jsonPath("$.collection.items[0].data[0].name", is("role")))
+	.andExpect(jsonPath("$.collection.items[0].data[0].value", is("ring bearer")))
 
-				.andExpect(jsonPath("$.collection.items[0].links.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.items[0].links[0].rel", is("employees")))
-				.andExpect(jsonPath("$.collection.items[0].links[0].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.items[0].links.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.items[0].links[0].rel", is("employees")))
+	.andExpect(jsonPath("$.collection.items[0].links[0].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.template.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.template.data[0].name", is("name")))
-				.andExpect(jsonPath("$.collection.template.data[0].value", is("")))
-				.andExpect(jsonPath("$.collection.template.data[1].name", is("role")))
-				.andExpect(jsonPath("$.collection.template.data[1].value", is("")));
+	.andExpect(jsonPath("$.collection.template.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.template.data[0].name", is("name")))
+	.andExpect(jsonPath("$.collection.template.data[0].value", is("")))
+	.andExpect(jsonPath("$.collection.template.data[1].name", is("role")))
+	.andExpect(jsonPath("$.collection.template.data[1].value", is("")));
 	}
 
 	@Test
 	void collectionOfEmployees() throws Exception {
 
 		this.mockMvc.perform(get("/employees") //
-				.accept(MediaTypes.COLLECTION_JSON_VALUE)) //
-				.andExpect(status().isOk()) //
+	.accept(MediaTypes.COLLECTION_JSON_VALUE)) //
+	.andExpect(status().isOk()) //
 
-				.andExpect(jsonPath("$.collection.version", is("1.0")))
-				.andExpect(jsonPath("$.collection.href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.version", is("1.0")))
+	.andExpect(jsonPath("$.collection.href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.items.*", hasSize(2)))
-				.andExpect(jsonPath("$.collection.items[0].data[1].name", is("name")))
-				.andExpect(jsonPath("$.collection.items[0].data[1].value", is("Frodo Baggins")))
-				.andExpect(jsonPath("$.collection.items[0].data[0].name", is("role")))
-				.andExpect(jsonPath("$.collection.items[0].data[0].value", is("ring bearer")))
+	.andExpect(jsonPath("$.collection.items.*", hasSize(2)))
+	.andExpect(jsonPath("$.collection.items[0].data[1].name", is("name")))
+	.andExpect(jsonPath("$.collection.items[0].data[1].value", is("Frodo Baggins")))
+	.andExpect(jsonPath("$.collection.items[0].data[0].name", is("role")))
+	.andExpect(jsonPath("$.collection.items[0].data[0].value", is("ring bearer")))
 
-				.andExpect(jsonPath("$.collection.items[0].links.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.items[0].links[0].rel", is("employees")))
-				.andExpect(jsonPath("$.collection.items[0].links[0].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.items[0].links.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.items[0].links[0].rel", is("employees")))
+	.andExpect(jsonPath("$.collection.items[0].links[0].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.items[1].data[1].name", is("name")))
-				.andExpect(jsonPath("$.collection.items[1].data[1].value", is("Bilbo Baggins")))
-				.andExpect(jsonPath("$.collection.items[1].data[0].name", is("role")))
-				.andExpect(jsonPath("$.collection.items[1].data[0].value", is("burglar")))
+	.andExpect(jsonPath("$.collection.items[1].data[1].name", is("name")))
+	.andExpect(jsonPath("$.collection.items[1].data[1].value", is("Bilbo Baggins")))
+	.andExpect(jsonPath("$.collection.items[1].data[0].name", is("role")))
+	.andExpect(jsonPath("$.collection.items[1].data[0].value", is("burglar")))
 
-				.andExpect(jsonPath("$.collection.items[1].links.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.items[1].links[0].rel", is("employees")))
-				.andExpect(jsonPath("$.collection.items[1].links[0].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.items[1].links.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.items[1].links[0].rel", is("employees")))
+	.andExpect(jsonPath("$.collection.items[1].links[0].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.template.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.template.data[0].name", is("name")))
-				.andExpect(jsonPath("$.collection.template.data[0].value", is("")))
-				.andExpect(jsonPath("$.collection.template.data[1].name", is("role")))
-				.andExpect(jsonPath("$.collection.template.data[1].value", is("")));
+	.andExpect(jsonPath("$.collection.template.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.template.data[0].name", is("name")))
+	.andExpect(jsonPath("$.collection.template.data[0].value", is("")))
+	.andExpect(jsonPath("$.collection.template.data[1].name", is("role")))
+	.andExpect(jsonPath("$.collection.template.data[1].value", is("")));
 	}
 
 	@Test
@@ -154,36 +155,36 @@ class CollectionJsonWebMvcIntegrationTest {
 		String specBasedJson = MappingUtils.read(new ClassPathResource("spec-part7-adjusted.json", getClass()));
 
 		this.mockMvc.perform(post("/employees") //
-				.content(specBasedJson) //
-				.contentType(MediaTypes.COLLECTION_JSON_VALUE)) //
-				.andExpect(status().isCreated()) //
-				.andExpect(header().stringValues(HttpHeaders.LOCATION, "http://localhost/employees/2"));
+	.content(specBasedJson) //
+	.contentType(MediaTypes.COLLECTION_JSON_VALUE)) //
+	.andExpect(status().isCreated()) //
+	.andExpect(header().stringValues(HttpHeaders.LOCATION, "http://localhost/employees/2"));
 
 		this.mockMvc.perform(get("/employees/2").accept(MediaTypes.COLLECTION_JSON)) //
-				.andExpect(status().isOk()) //
+	.andExpect(status().isOk()) //
 
-				.andExpect(jsonPath("$.collection.version", is("1.0")))
-				.andExpect(jsonPath("$.collection.href", is("http://localhost/employees/2")))
+	.andExpect(jsonPath("$.collection.version", is("1.0")))
+	.andExpect(jsonPath("$.collection.href", is("http://localhost/employees/2")))
 
-				.andExpect(jsonPath("$.collection.links.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.links[0].rel", is("employees")))
-				.andExpect(jsonPath("$.collection.links[0].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.links.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.links[0].rel", is("employees")))
+	.andExpect(jsonPath("$.collection.links[0].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.items.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.items[0].data[1].name", is("name")))
-				.andExpect(jsonPath("$.collection.items[0].data[1].value", is("W. Chandry")))
-				.andExpect(jsonPath("$.collection.items[0].data[0].name", is("role")))
-				.andExpect(jsonPath("$.collection.items[0].data[0].value", is("developer")))
+	.andExpect(jsonPath("$.collection.items.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.items[0].data[1].name", is("name")))
+	.andExpect(jsonPath("$.collection.items[0].data[1].value", is("W. Chandry")))
+	.andExpect(jsonPath("$.collection.items[0].data[0].name", is("role")))
+	.andExpect(jsonPath("$.collection.items[0].data[0].value", is("developer")))
 
-				.andExpect(jsonPath("$.collection.items[0].links.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.items[0].links[0].rel", is("employees")))
-				.andExpect(jsonPath("$.collection.items[0].links[0].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$.collection.items[0].links.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.items[0].links[0].rel", is("employees")))
+	.andExpect(jsonPath("$.collection.items[0].links[0].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$.collection.template.*", hasSize(1)))
-				.andExpect(jsonPath("$.collection.template.data[0].name", is("name")))
-				.andExpect(jsonPath("$.collection.template.data[0].value", is("")))
-				.andExpect(jsonPath("$.collection.template.data[1].name", is("role")))
-				.andExpect(jsonPath("$.collection.template.data[1].value", is("")));
+	.andExpect(jsonPath("$.collection.template.*", hasSize(1)))
+	.andExpect(jsonPath("$.collection.template.data[0].name", is("name")))
+	.andExpect(jsonPath("$.collection.template.data[0].value", is("")))
+	.andExpect(jsonPath("$.collection.template.data[1].name", is("role")))
+	.andExpect(jsonPath("$.collection.template.data[1].value", is("")));
 	}
 
 	@RestController
@@ -204,8 +205,8 @@ class CollectionJsonWebMvcIntegrationTest {
 
 			// Generate an "Affordance" based on this method (the "self" link)
 			Link selfLink = linkTo(methodOn(EmployeeController.class).all()).withSelfRel()
-					.andAffordance(afford(methodOn(EmployeeController.class).newEmployee(null)))
-					.andAffordance(afford(methodOn(EmployeeController.class).search(null, null)));
+		.andAffordance(afford(methodOn(EmployeeController.class).newEmployee(null)))
+		.andAffordance(afford(methodOn(EmployeeController.class).search(null, null)));
 
 			// Return the collection of employee resources along with the composite affordance
 			return CollectionModel.of(employees, selfLink);
@@ -213,7 +214,7 @@ class CollectionJsonWebMvcIntegrationTest {
 
 		@GetMapping("/employees/search")
 		public CollectionModel<EntityModel<Employee>> search(@RequestParam(value = "name", required = false) String name,
-				@RequestParam(value = "role", required = false) String role) {
+	@RequestParam(value = "role", required = false) String role) {
 
 			// Create a list of Resource<Employee>'s to return
 			List<EntityModel<Employee>> employees = new ArrayList<>();
@@ -223,10 +224,10 @@ class CollectionJsonWebMvcIntegrationTest {
 				EntityModel<Employee> employeeResource = findOne(i);
 
 				boolean nameMatches = Optional.ofNullable(name).map(s -> employeeResource.getContent().getName().contains(s))
-						.orElse(true);
+			.orElse(true);
 
 				boolean roleMatches = Optional.ofNullable(role).map(s -> employeeResource.getContent().getRole().contains(s))
-						.orElse(true);
+			.orElse(true);
 
 				if (nameMatches && roleMatches) {
 					employees.add(employeeResource);
@@ -235,8 +236,8 @@ class CollectionJsonWebMvcIntegrationTest {
 
 			// Generate an "Affordance" based on this method (the "self" link)
 			Link selfLink = linkTo(methodOn(EmployeeController.class).all()).withSelfRel()
-					.andAffordance(afford(methodOn(EmployeeController.class).newEmployee(null)))
-					.andAffordance(afford(methodOn(EmployeeController.class).search(null, null)));
+		.andAffordance(afford(methodOn(EmployeeController.class).newEmployee(null)))
+		.andAffordance(afford(methodOn(EmployeeController.class).search(null, null)));
 
 			// Return the collection of employee resources along with the composite affordance
 			return CollectionModel.of(employees, selfLink);
@@ -253,9 +254,9 @@ class CollectionJsonWebMvcIntegrationTest {
 
 			// Return the affordance + a link back to the entire collection resource.
 			return EntityModel.of(EMPLOYEES.get(id),
-					findOneLink.andAffordance(afford(methodOn(EmployeeController.class).updateEmployee(null, id))) //
-							.andAffordance(afford(methodOn(EmployeeController.class).partiallyUpdateEmployee(null, id))),
-					employeesLink);
+		findOneLink.andAffordance(afford(methodOn(EmployeeController.class).updateEmployee(null, id))) //
+	.andAffordance(afford(methodOn(EmployeeController.class).partiallyUpdateEmployee(null, id))),
+		employeesLink);
 		}
 
 		@PostMapping("/employees")
@@ -266,9 +267,9 @@ class CollectionJsonWebMvcIntegrationTest {
 			EMPLOYEES.put(newEmployeeId, employee.getContent());
 
 			return ResponseEntity.created(findOne(newEmployeeId) //
-					.getRequiredLink(IanaLinkRelations.SELF) //
-					.toUri()) //
-					.build();
+		.getRequiredLink(IanaLinkRelations.SELF) //
+		.toUri()) //
+		.build();
 		}
 
 		@PutMapping("/employees/{id}")
@@ -277,15 +278,15 @@ class CollectionJsonWebMvcIntegrationTest {
 			EMPLOYEES.put(id, employee.getContent());
 
 			return ResponseEntity.noContent() //
-					.location(findOne(id) //
-							.getRequiredLink(IanaLinkRelations.SELF) //
-							.toUri()) //
-					.build();
+		.location(findOne(id) //
+	.getRequiredLink(IanaLinkRelations.SELF) //
+	.toUri()) //
+		.build();
 		}
 
 		@PatchMapping("/employees/{id}")
 		public ResponseEntity<?> partiallyUpdateEmployee(@RequestBody EntityModel<Employee> employee,
-				@PathVariable Integer id) {
+	@PathVariable Integer id) {
 
 			Employee newEmployee = EMPLOYEES.get(id);
 
@@ -300,16 +301,16 @@ class CollectionJsonWebMvcIntegrationTest {
 			EMPLOYEES.put(id, newEmployee);
 
 			return ResponseEntity.noContent() //
-					.location(findOne(id) //
-							.getRequiredLink(IanaLinkRelations.SELF) //
-							.toUri()) //
-					.build();
+		.location(findOne(id) //
+	.getRequiredLink(IanaLinkRelations.SELF) //
+	.toUri()) //
+		.build();
 		}
 	}
 
 	@Configuration
 	@EnableWebMvc
-	@EnableHypermediaSupport(type = { HypermediaType.COLLECTION_JSON })
+	@EnableHypermediaSupport(type = {HypermediaType.COLLECTION_JSON})
 	static class TestConfig {
 
 		@Bean

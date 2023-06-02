@@ -38,7 +38,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import({ HypermediaConfigurationImportSelector.class, HateoasConfiguration.class, WebStackImportSelector.class })
+@Import({HypermediaConfigurationImportSelector.class, HateoasConfiguration.class, WebStackImportSelector.class})
 public @interface EnableHypermediaSupport {
 
 	/**
@@ -55,7 +55,7 @@ public @interface EnableHypermediaSupport {
 	 *
 	 * @return
 	 */
-	WebStack[] stacks() default { WebStack.WEBMVC, WebStack.WEBFLUX };
+	WebStack[] stacks() default {WebStack.WEBMVC, WebStack.WEBFLUX};
 
 	/**
 	 * Hypermedia representation types supported.

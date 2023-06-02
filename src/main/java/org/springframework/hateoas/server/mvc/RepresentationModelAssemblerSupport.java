@@ -34,8 +34,7 @@ import org.springframework.util.Assert;
  * @author Oliver Gierke
  * @author Greg Turnquist
  */
-public abstract class RepresentationModelAssemblerSupport<T, D extends RepresentationModel<?>>
-		implements RepresentationModelAssembler<T, D> {
+public abstract class RepresentationModelAssemblerSupport<T, D extends RepresentationModel<?>>implements RepresentationModelAssembler<T, D> {
 
 	private final Class<?> controllerClass;
 	private final Class<D> resourceType;

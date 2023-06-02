@@ -48,27 +48,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @ExtendWith(MockitoExtension.class)
 class ControllerEntityLinksUnitTest extends TestUtils {
 
-	@Mock LinkBuilderFactory<LinkBuilder> linkBuilderFactory;
+	@Mock
+	LinkBuilderFactory<LinkBuilder> linkBuilderFactory;
 
 	@Test
 	void rejectsUnannotatedController() {
 
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> new ControllerEntityLinks(singletonList(InvalidController.class), linkBuilderFactory)) //
-				.withMessageContaining(InvalidController.class.getName());
+	.isThrownBy(() -> new ControllerEntityLinks(singletonList(InvalidController.class), linkBuilderFactory)) //
+	.withMessageContaining(InvalidController.class.getName());
 	}
 
 	@Test
 	void rejectsNullControllerList() {
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> new ControllerEntityLinks(null, linkBuilderFactory));
+	.isThrownBy(() -> new ControllerEntityLinks(null, linkBuilderFactory));
 	}
 
 	@Test
 	void rejectsNullLinkBuilderFactory() {
 
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> new ControllerEntityLinks(singletonList(SampleController.class), null));
+	.isThrownBy(() -> new ControllerEntityLinks(singletonList(SampleController.class), null));
 	}
 
 	@Test
@@ -85,10 +86,10 @@ class ControllerEntityLinksUnitTest extends TestUtils {
 	void returnsLinkBuilderForParameterizedController() {
 
 		when(linkBuilderFactory.linkTo(eq(ControllerWithParameters.class), (Object[]) any())) //
-				.thenReturn(linkTo(ControllerWithParameters.class, "1"));
+	.thenReturn(linkTo(ControllerWithParameters.class, "1"));
 
 		ControllerEntityLinks links = new ControllerEntityLinks(singletonList(ControllerWithParameters.class),
-				linkBuilderFactory);
+	linkBuilderFactory);
 		LinkBuilder builder = links.linkFor(Order.class, "1");
 
 		assertThat(builder.withSelfRel().getHref()).endsWith("/person/1");
@@ -98,16 +99,16 @@ class ControllerEntityLinksUnitTest extends TestUtils {
 	void rejectsUnmanagedEntity() {
 
 		EntityLinks links = new ControllerEntityLinks(Arrays.asList(SampleController.class, ControllerWithParameters.class),
-				linkBuilderFactory);
+	linkBuilderFactory);
 
 		assertThat(links.supports(Person.class)).isTrue();
 		assertThat(links.supports(Order.class)).isTrue();
 		assertThat(links.supports(SampleController.class)).isFalse();
 
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> links.linkFor(SampleController.class)) //
-				.withMessageContaining(SampleController.class.getName()) //
-				.withMessageContaining(ExposesResourceFor.class.getName());
+	.isThrownBy(() -> links.linkFor(SampleController.class)) //
+	.withMessageContaining(SampleController.class.getName()) //
+	.withMessageContaining(ExposesResourceFor.class.getName());
 	}
 
 	@Test // #843
@@ -116,7 +117,7 @@ class ControllerEntityLinksUnitTest extends TestUtils {
 		when(linkBuilderFactory.linkTo(SampleController.class, new Object[0])).thenReturn(linkTo(SampleController.class));
 
 		ControllerEntityLinks entityLinks = new ControllerEntityLinks(singleton(SampleController.class),
-				linkBuilderFactory);
+	linkBuilderFactory);
 
 		assertThat(entityLinks.linkToItemResource(new Person(42L), Person::getId).getHref()).endsWith("/person/42");
 	}
@@ -127,7 +128,7 @@ class ControllerEntityLinksUnitTest extends TestUtils {
 		when(linkBuilderFactory.linkTo(SampleController.class, new Object[0])).thenReturn(linkTo(SampleController.class));
 
 		TypedEntityLinks<Person> entityLinks = new ControllerEntityLinks(singleton(SampleController.class),
-				linkBuilderFactory).forType(Person::getId);
+	linkBuilderFactory).forType(Person::getId);
 
 		Person person = new Person(42L);
 
@@ -141,7 +142,7 @@ class ControllerEntityLinksUnitTest extends TestUtils {
 		when(linkBuilderFactory.linkTo(SampleController.class, new Object[0])).thenReturn(linkTo(SampleController.class));
 
 		ExtendedTypedEntityLinks<Person> entityLinks = new ControllerEntityLinks(singleton(SampleController.class),
-				linkBuilderFactory).forType(Person.class, Person::getId);
+	linkBuilderFactory).forType(Person.class, Person::getId);
 
 		assertThat(entityLinks.linkToCollectionResource().getHref()).endsWith("/person");
 	}
@@ -149,19 +150,23 @@ class ControllerEntityLinksUnitTest extends TestUtils {
 	@Controller
 	@ExposesResourceFor(Person.class)
 	@RequestMapping("/person")
-	static class SampleController {}
+	static class SampleController {
+	}
 
 	@Controller
 	@ExposesResourceFor(Order.class)
 	@RequestMapping("/person/{id}")
-	static class ControllerWithParameters {}
+	static class ControllerWithParameters {
+	}
 
-	static class InvalidController {}
+	static class InvalidController {
+	}
 
 	@Value
 	static class Person {
 		Long id;
 	}
 
-	static class Order {}
+	static class Order {
+	}
 }

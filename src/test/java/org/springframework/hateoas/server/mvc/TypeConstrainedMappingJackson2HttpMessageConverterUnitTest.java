@@ -48,7 +48,7 @@ class TypeConstrainedMappingJackson2HttpMessageConverterUnitTest {
 	void canReadTypeIfAssignableToConfiguredType() {
 
 		GenericHttpMessageConverter<Object> converter = new TypeConstrainedMappingJackson2HttpMessageConverter(
-				RepresentationModel.class);
+	RepresentationModel.class);
 
 		assertCanRead(converter, Object.class, false);
 		assertCanRead(converter, RepresentationModel.class, true);
@@ -62,7 +62,7 @@ class TypeConstrainedMappingJackson2HttpMessageConverterUnitTest {
 	void canWriteTypeIfAssignableToConfiguredType() {
 
 		GenericHttpMessageConverter<Object> converter = new TypeConstrainedMappingJackson2HttpMessageConverter(
-				RepresentationModel.class);
+	RepresentationModel.class);
 
 		assertCanWrite(converter, Object.class, false);
 		assertCanWrite(converter, RepresentationModel.class, true);

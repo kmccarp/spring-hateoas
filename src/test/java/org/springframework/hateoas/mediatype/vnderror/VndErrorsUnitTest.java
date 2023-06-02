@@ -59,7 +59,7 @@ class VndErrorsUnitTest {
 		assertThat(errors.getTotal()).isNull();
 		assertThat(errors.getContent()).hasSize(1);
 		assertThat(errors.getContent())
-				.containsExactly(new VndError("message", "/path", 50, Link.of("/link").withSelfRel()));
+	.containsExactly(new VndError("message", "/path", 50, Link.of("/link").withSelfRel()));
 	}
 
 	/**
@@ -88,7 +88,7 @@ class VndErrorsUnitTest {
 
 		VndErrors errors = new VndErrors(new VndError("message", "path", 42, Link.of("foo", "bar")));
 		assertThat(errors.toString())
-				.isEqualTo("VndErrors[VndError[logref: 42, message: message, links: [<foo>;rel=\"bar\"]]]");
+	.isEqualTo("VndErrors[VndError[logref: 42, message: message, links: [<foo>;rel=\"bar\"]]]");
 	}
 
 	@Test // #1291

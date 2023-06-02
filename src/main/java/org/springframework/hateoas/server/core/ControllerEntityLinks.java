@@ -65,7 +65,7 @@ public class ControllerEntityLinks extends AbstractEntityLinks {
 	 * @param linkBuilderFactory the {@link LinkBuilder} to use to create links, must not be {@literal null}.
 	 */
 	public ControllerEntityLinks(Iterable<? extends Class<?>> controllerTypes,
-			LinkBuilderFactory<? extends LinkBuilder> linkBuilderFactory) {
+LinkBuilderFactory<? extends LinkBuilder> linkBuilderFactory) {
 
 		Assert.notNull(controllerTypes, "ControllerTypes must not be null!");
 		Assert.notNull(linkBuilderFactory, "LinkBuilderFactory must not be null!");
@@ -85,7 +85,7 @@ public class ControllerEntityLinks extends AbstractEntityLinks {
 			entityToController.put(annotation.value(), controllerType);
 		} else {
 			throw new IllegalArgumentException(
-					String.format("Controller %s must be annotated with @ExposesResourceFor!", controllerType.getName()));
+		String.format("Controller %s must be annotated with @ExposesResourceFor!", controllerType.getName()));
 		}
 	}
 
@@ -111,8 +111,8 @@ public class ControllerEntityLinks extends AbstractEntityLinks {
 
 		if (controllerType == null) {
 			throw new IllegalArgumentException(String.format(
-					"Type %s is not managed by a Spring MVC controller. Make sure you have annotated your controller with %s!",
-					entity.getName(), ExposesResourceFor.class.getName()));
+		"Type %s is not managed by a Spring MVC controller. Make sure you have annotated your controller with %s!",
+		entity.getName(), ExposesResourceFor.class.getName()));
 		}
 
 		return linkBuilderFactory.linkTo(controllerType, parameters);

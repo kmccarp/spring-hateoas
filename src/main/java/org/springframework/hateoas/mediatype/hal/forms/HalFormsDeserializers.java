@@ -42,7 +42,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 class HalFormsDeserializers {
 
 	static class HalFormsCollectionModelDeserializer extends ContainerDeserializerBase<List<Object>>
-			implements ContextualDeserializer {
+implements ContextualDeserializer {
 
 		private static final long serialVersionUID = -7325599536381465624L;
 
@@ -117,10 +117,10 @@ class HalFormsDeserializers {
 		@Override
 		@SuppressWarnings("null")
 		public JsonDeserializer<?> createContextual(DeserializationContext ctxt, BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 
 			return new HalFormsCollectionModelDeserializer(
-					property == null ? ctxt.getContextualType() : property.getType().getContentType());
+		property == null ? ctxt.getContextualType() : property.getType().getContentType());
 		}
 	}
 

@@ -28,14 +28,14 @@ import org.springframework.util.ClassUtils;
 public enum WebStack {
 
 	WEBMVC("org.springframework.web.servlet.DispatcherServlet", //
-			"org.springframework.hateoas.config.WebMvcHateoasConfiguration", //
-			"org.springframework.web.client.RestTemplate", //
-			"org.springframework.hateoas.config.RestTemplateHateoasConfiguration"),
+"org.springframework.hateoas.config.WebMvcHateoasConfiguration", //
+"org.springframework.web.client.RestTemplate", //
+"org.springframework.hateoas.config.RestTemplateHateoasConfiguration"),
 
 	WEBFLUX("org.springframework.web.reactive.DispatcherHandler", //
-			"org.springframework.hateoas.config.WebFluxHateoasConfiguration", //
-			"org.springframework.web.reactive.function.client.WebClient", //
-			"org.springframework.hateoas.config.WebClientHateoasConfiguration");
+"org.springframework.hateoas.config.WebFluxHateoasConfiguration", //
+"org.springframework.web.reactive.function.client.WebClient", //
+"org.springframework.hateoas.config.WebClientHateoasConfiguration");
 
 	private final boolean isServerAvailable;
 	private final String serverConfiguration;
@@ -47,7 +47,7 @@ public enum WebStack {
 	 * Initialize the {@link #isAvailable} based upon a defined signature class.
 	 */
 	WebStack(String serverAvailableClazz, String serverConfigurationClazz, String clientAvailableClazz,
-			String clientConfigurationClazz) {
+String clientConfigurationClazz) {
 
 		this.isServerAvailable = ClassUtils.isPresent(serverAvailableClazz, null);
 		this.serverConfiguration = serverConfigurationClazz;

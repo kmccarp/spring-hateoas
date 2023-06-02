@@ -69,7 +69,7 @@ class HopUnitTest {
 		Hop hop = Hop.rel("rel").withParameter("key", "value");
 
 		assertThat(hop.getParameters()).hasSize(1) //
-				.containsEntry("key", "value");
+	.containsEntry("key", "value");
 	}
 
 	/**
@@ -81,7 +81,7 @@ class HopUnitTest {
 		Hop hop = Hop.rel("rel").withParameter("key", "value").withParameters(Collections.singletonMap("foo", "bar"));
 
 		assertThat(hop.getParameters()).hasSize(1) //
-				.containsEntry("foo", "bar");
+	.containsEntry("foo", "bar");
 	}
 
 	/**
@@ -93,8 +93,8 @@ class HopUnitTest {
 		Hop hop = Hop.rel("rel").withParameter("key", "value");
 
 		assertThat(hop.getMergedParameters(Collections.singletonMap("foo", "bar"))).hasSize(2)//
-				.containsEntry("key", "value")//
-				.containsEntry("foo", "bar");
+	.containsEntry("key", "value")//
+	.containsEntry("foo", "bar");
 	}
 
 	/**
@@ -108,6 +108,6 @@ class HopUnitTest {
 		Map<String, Object> result = hop.getMergedParameters(Collections.singletonMap("key", "global"));
 
 		assertThat(result).hasSize(1) //
-				.containsEntry("key", "value");
+	.containsEntry("key", "value");
 	}
 }

@@ -66,14 +66,11 @@ public class Traverson {
 	static {
 
 		List<TraversonDefaults> ALL_DEFAULTS = SpringFactoriesLoader.loadFactories(TraversonDefaults.class,
-				Traverson.class.getClassLoader());
+	Traverson.class.getClassLoader());
 
 		Assert.isTrue(ALL_DEFAULTS.size() == 1,
-				() -> String.format("Expected to find only one TraversonDefaults instance, but found: %s", //
-						ALL_DEFAULTS.stream() //
-								.map(Object::getClass) //
-								.map(Class::getName) //
-								.collect(Collectors.joining(", "))));
+	() -> String.format("Expected to find only one TraversonDefaults instance, but found: %s", //
+ALL_DEFAULTS.stream() //.map(Object::getClass) //.map(Class::getName) //.collect(Collectors.joining(", "))));
 
 		DEFAULTS = ALL_DEFAULTS.get(0);
 	}
@@ -142,8 +139,8 @@ public class Traverson {
 	public Traverson setRestOperations(@Nullable RestOperations operations) {
 
 		this.operations = operations == null //
-				? createDefaultTemplate(this.mediaTypes) //
-				: operations;
+	? createDefaultTemplate(this.mediaTypes) //
+	: operations;
 
 		return this;
 	}
@@ -158,8 +155,8 @@ public class Traverson {
 	public Traverson setLinkDiscoverers(@Nullable List<? extends LinkDiscoverer> discoverer) {
 
 		List<? extends LinkDiscoverer> defaultedDiscoverers = discoverer == null //
-				? DEFAULTS.getLinkDiscoverers(mediaTypes) //
-				: discoverer;
+	? DEFAULTS.getLinkDiscoverers(mediaTypes) //
+	: discoverer;
 
 		this.discoverers = new LinkDiscoverers(PluginRegistry.of(defaultedDiscoverers));
 
@@ -213,7 +210,8 @@ public class Traverson {
 		private Map<String, Object> templateParameters = new HashMap<>();
 		private HttpHeaders headers = new HttpHeaders();
 
-		private TraversalBuilder() {}
+		private TraversalBuilder() {
+		}
 
 		/**
 		 * Follows the given rels one by one, which means a request per rel to discover the next resource with the rel in
@@ -227,8 +225,8 @@ public class Traverson {
 			Assert.notNull(rels, "Rels must not be null!");
 
 			Arrays.stream(rels) //
-					.map(Hop::rel) //
-					.forEach(this.rels::add);
+		.map(Hop::rel) //
+		.forEach(this.rels::add);
 
 			return this;
 		}
@@ -376,7 +374,7 @@ public class Traverson {
 			Assert.isTrue(rels.size() > 0, "At least one rel needs to be provided!");
 
 			return Link.of(expandFinalUrl ? traverseToExpandedFinalUrl().getUri().toString() : traverseToFinalUrl().getUri(),
-					rels.get(rels.size() - 1).getRel());
+		rels.get(rels.size() - 1).getRel());
 		}
 
 		private UriStringAndHeaders traverseToFinalUrl() {
@@ -391,7 +389,7 @@ public class Traverson {
 			UriStringAndHeaders uriAndHeaders = getAndFindLinkWithRel(baseUri.toString(), rels.iterator(), HttpHeaders.EMPTY);
 
 			return new URIAndHeaders(UriTemplate.of(uriAndHeaders.getUri()).expand(templateParameters),
-					uriAndHeaders.getHttpHeaders());
+		uriAndHeaders.getHttpHeaders());
 		}
 
 		private UriStringAndHeaders getAndFindLinkWithRel(String uri, Iterator<Hop> rels, HttpHeaders extraHeaders) {
@@ -416,11 +414,11 @@ public class Traverson {
 			Rel rel = Rels.getRelFor(thisHop.getRel(), discoverers);
 
 			Link link = rel.findInResponse(responseBody == null ? "" : responseBody, contentType) //
-					.orElseThrow(() -> new IllegalStateException(String.format(LINK_NOT_FOUND, rel, responseBody)));
+		.orElseThrow(() -> new IllegalStateException(String.format(LINK_NOT_FOUND, rel, responseBody)));
 
 			String linkTarget = thisHop.hasParameters() //
-					? link.expand(thisHop.getMergedParameters(templateParameters)).getHref() //
-					: link.getHref();
+		? link.expand(thisHop.getMergedParameters(templateParameters)).getHref() //
+		: link.getHref();
 
 			return getAndFindLinkWithRel(linkTarget, rels, thisHop.getHeaders());
 		}

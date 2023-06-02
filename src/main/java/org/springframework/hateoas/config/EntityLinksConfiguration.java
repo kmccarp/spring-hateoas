@@ -40,7 +40,7 @@ class EntityLinksConfiguration {
 		PluginRegistryFactoryBean<EntityLinks, Class<?>> registry = new PluginRegistryFactoryBean<>();
 		registry.setApplicationContext(context);
 		registry.setType(EntityLinks.class);
-		registry.setExclusions(new Class[] { DelegatingEntityLinks.class });
+		registry.setExclusions(new Class[]{DelegatingEntityLinks.class});
 		registry.afterPropertiesSet();
 
 		return registry.getObject();

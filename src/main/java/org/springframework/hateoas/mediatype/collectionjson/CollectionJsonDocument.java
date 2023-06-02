@@ -34,12 +34,12 @@ final class CollectionJsonDocument<T> {
 
 	@JsonCreator
 	CollectionJsonDocument(@JsonProperty("version") String version, //
-			@JsonProperty("href") String href, //
-			@JsonProperty("links") Links links, //
-			@JsonProperty("items") List<CollectionJsonItem<T>> items, //
-			@JsonProperty("queries") List<CollectionJsonQuery> queries, //
-			@JsonProperty("template") CollectionJsonTemplate template, //
-			@JsonProperty("error") CollectionJsonError error) {
+@JsonProperty("href") String href, //
+@JsonProperty("links") Links links, //
+@JsonProperty("items") List<CollectionJsonItem<T>> items, //
+@JsonProperty("queries") List<CollectionJsonQuery> queries, //
+@JsonProperty("template") CollectionJsonTemplate template, //
+@JsonProperty("error") CollectionJsonError error) {
 
 		this.collection = new CollectionJson<>(version, href, links, items, queries, template, error);
 	}

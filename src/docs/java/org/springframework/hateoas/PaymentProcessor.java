@@ -28,8 +28,8 @@ public class PaymentProcessor implements RepresentationModelProcessor<EntityMode
 	public EntityModel<Order> process(EntityModel<Order> model) {
 
 		model.add( // <2>
-				Link.of("/payments/{orderId}").withRel(LinkRelation.of("payments")) //
-						.expand(model.getContent().getOrderId()));
+	Link.of("/payments/{orderId}").withRel(LinkRelation.of("payments")) //
+.expand(model.getContent().getOrderId()));
 
 		return model; // <3>
 	}

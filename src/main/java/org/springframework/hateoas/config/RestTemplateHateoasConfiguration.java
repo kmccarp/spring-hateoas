@@ -35,7 +35,7 @@ class RestTemplateHateoasConfiguration {
 
 	@Bean
 	static HypermediaRestTemplateBeanPostProcessor hypermediaRestTemplateBeanPostProcessor(
-			ObjectFactory<HypermediaRestTemplateConfigurer> configurer) {
+ObjectFactory<HypermediaRestTemplateConfigurer> configurer) {
 		return new HypermediaRestTemplateBeanPostProcessor(configurer);
 	}
 
@@ -69,8 +69,8 @@ class RestTemplateHateoasConfiguration {
 		public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
 			return !RestTemplate.class.isInstance(bean) //
-					? bean
-					: this.configurer.getObject().registerHypermediaTypes((RestTemplate) bean);
+		? bean
+		: this.configurer.getObject().registerHypermediaTypes((RestTemplate) bean);
 		}
 	}
 }

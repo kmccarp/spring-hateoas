@@ -46,7 +46,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ContextConfiguration
 public class AlpsWebMvcIntegrationTest {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	MockMvc mockMvc;
 
@@ -59,31 +60,31 @@ public class AlpsWebMvcIntegrationTest {
 	void profileEndpointReturnsAlps() throws Exception {
 
 		this.mockMvc.perform(get("/profile").accept(MediaTypes.ALPS_JSON_VALUE)) //
-				.andExpect(status().isOk()) //
-				.andExpect(jsonPath("$.version", is("1.0"))) //
-				.andExpect(jsonPath("$.doc.format", is("TEXT")))
-				.andExpect(jsonPath("$.doc.href", is("https://example.org/samples/full/doc.html")))
-				.andExpect(jsonPath("$.doc.value", is("value goes here"))).andExpect(jsonPath("$.descriptor", hasSize(2)))
+	.andExpect(status().isOk()) //
+	.andExpect(jsonPath("$.version", is("1.0"))) //
+	.andExpect(jsonPath("$.doc.format", is("TEXT")))
+	.andExpect(jsonPath("$.doc.href", is("https://example.org/samples/full/doc.html")))
+	.andExpect(jsonPath("$.doc.value", is("value goes here"))).andExpect(jsonPath("$.descriptor", hasSize(2)))
 
-				.andExpect(jsonPath("$.descriptor[0].id", is("class field [name]")))
-				.andExpect(jsonPath("$.descriptor[0].name", is("name")))
-				.andExpect(jsonPath("$.descriptor[0].type", is("SEMANTIC")))
-				.andExpect(jsonPath("$.descriptor[0].descriptor", hasSize(1)))
-				.andExpect(jsonPath("$.descriptor[0].descriptor[0].id", is("embedded")))
-				.andExpect(jsonPath("$.descriptor[0].ext.id", is("ext [name]")))
-				.andExpect(jsonPath("$.descriptor[0].ext.href", is("https://example.org/samples/ext/name")))
-				.andExpect(jsonPath("$.descriptor[0].ext.value", is("value goes here")))
-				.andExpect(jsonPath("$.descriptor[0].rt", is("rt for [name]")))
+	.andExpect(jsonPath("$.descriptor[0].id", is("class field [name]")))
+	.andExpect(jsonPath("$.descriptor[0].name", is("name")))
+	.andExpect(jsonPath("$.descriptor[0].type", is("SEMANTIC")))
+	.andExpect(jsonPath("$.descriptor[0].descriptor", hasSize(1)))
+	.andExpect(jsonPath("$.descriptor[0].descriptor[0].id", is("embedded")))
+	.andExpect(jsonPath("$.descriptor[0].ext.id", is("ext [name]")))
+	.andExpect(jsonPath("$.descriptor[0].ext.href", is("https://example.org/samples/ext/name")))
+	.andExpect(jsonPath("$.descriptor[0].ext.value", is("value goes here")))
+	.andExpect(jsonPath("$.descriptor[0].rt", is("rt for [name]")))
 
-				.andExpect(jsonPath("$.descriptor[1].id", is("class field [role]")))
-				.andExpect(jsonPath("$.descriptor[1].name", is("role")))
-				.andExpect(jsonPath("$.descriptor[1].type", is("SEMANTIC")))
-				.andExpect(jsonPath("$.descriptor[1].descriptor", hasSize(1)))
-				.andExpect(jsonPath("$.descriptor[1].descriptor[0].id", is("embedded")))
-				.andExpect(jsonPath("$.descriptor[1].ext.id", is("ext [role]")))
-				.andExpect(jsonPath("$.descriptor[1].ext.href", is("https://example.org/samples/ext/role")))
-				.andExpect(jsonPath("$.descriptor[1].ext.value", is("value goes here")))
-				.andExpect(jsonPath("$.descriptor[1].rt", is("rt for [role]")));
+	.andExpect(jsonPath("$.descriptor[1].id", is("class field [role]")))
+	.andExpect(jsonPath("$.descriptor[1].name", is("role")))
+	.andExpect(jsonPath("$.descriptor[1].type", is("SEMANTIC")))
+	.andExpect(jsonPath("$.descriptor[1].descriptor", hasSize(1)))
+	.andExpect(jsonPath("$.descriptor[1].descriptor[0].id", is("embedded")))
+	.andExpect(jsonPath("$.descriptor[1].ext.id", is("ext [role]")))
+	.andExpect(jsonPath("$.descriptor[1].ext.href", is("https://example.org/samples/ext/role")))
+	.andExpect(jsonPath("$.descriptor[1].ext.value", is("value goes here")))
+	.andExpect(jsonPath("$.descriptor[1].rt", is("rt for [role]")));
 	}
 
 	@Configuration

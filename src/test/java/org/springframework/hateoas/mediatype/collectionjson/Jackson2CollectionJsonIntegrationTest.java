@@ -48,9 +48,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 class Jackson2CollectionJsonIntegrationTest {
 
 	static final Links PAGINATION_LINKS = Links.of( //
-			Link.of("localhost", IanaLinkRelations.SELF), //
-			Link.of("foo", IanaLinkRelations.NEXT), //
-			Link.of("bar", IanaLinkRelations.PREV));
+Link.of("localhost", IanaLinkRelations.SELF), //
+Link.of("foo", IanaLinkRelations.NEXT), //
+Link.of("bar", IanaLinkRelations.PREV));
 
 	MappingTestUtils.ContextualMapper mapper;
 
@@ -152,7 +152,7 @@ class Jackson2CollectionJsonIntegrationTest {
 	void renderResource() {
 
 		assertThat(mapper.writeObject(EntityModel.of("first", Link.of("localhost")))) //
-				.isEqualTo(mapper.readFileContent("resource.json"));
+	.isEqualTo(mapper.readFileContent("resource.json"));
 	}
 
 	@Test
@@ -189,7 +189,7 @@ class Jackson2CollectionJsonIntegrationTest {
 		expected.add(Link.of("/page/2").withRel("next"));
 
 		CollectionModel<?> actual = mapper.readFile("resources-with-resource-objects.json", CollectionModel.class,
-				EntityModel.class, String.class);
+	EntityModel.class, String.class);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -212,14 +212,14 @@ class Jackson2CollectionJsonIntegrationTest {
 	void serializesPagedResource() throws Exception {
 
 		assertThat(mapper.writeObject(setupAnnotatedPagedResources())) //
-				.isEqualTo(mapper.readFileContent("paged-resources.json"));
+	.isEqualTo(mapper.readFileContent("paged-resources.json"));
 	}
 
 	@Test
 	void deserializesPagedResource() throws Exception {
 
 		PagedModel<?> result = mapper.readFile("paged-resources.json", PagedModel.class, EntityModel.class,
-				SimplePojo.class);
+	SimplePojo.class);
 
 		assertThat(result).isEqualTo(setupAnnotatedPagedResources());
 	}

@@ -37,7 +37,7 @@ import org.springframework.lang.Nullable;
 class CollectionJsonAffordanceModel extends AffordanceModel {
 
 	private static final Set<HttpMethod> ENTITY_ALTERING_METHODS = Set.of(HttpMethod.POST, HttpMethod.PUT,
-			HttpMethod.PATCH);
+HttpMethod.PATCH);
 
 	private final List<CollectionJsonData> inputProperties;
 	private final List<CollectionJsonData> queryProperties;
@@ -45,8 +45,8 @@ class CollectionJsonAffordanceModel extends AffordanceModel {
 	CollectionJsonAffordanceModel(ConfiguredAffordance configured) {
 
 		super(configured.getNameOrDefault(), configured.getTarget(),
-				configured.getMethod(), configured.getInputMetadata(), configured.getQueryParameters(),
-				configured.getOutputMetadata());
+	configured.getMethod(), configured.getInputMetadata(), configured.getQueryParameters(),
+	configured.getOutputMetadata());
 
 		this.inputProperties = determineInputs();
 		this.queryProperties = determineQueryProperties();
@@ -63,10 +63,10 @@ class CollectionJsonAffordanceModel extends AffordanceModel {
 		}
 
 		return getInput().stream().map(PropertyMetadata::getName) //
-				.map(propertyName -> new CollectionJsonData() //
-						.withName(propertyName) //
-						.withValue("")) //
-				.collect(Collectors.toList());
+	.map(propertyName -> new CollectionJsonData() //
+.withName(propertyName) //
+.withValue("")) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -81,10 +81,10 @@ class CollectionJsonAffordanceModel extends AffordanceModel {
 		}
 
 		return getQueryMethodParameters().stream() //
-				.map(queryProperty -> new CollectionJsonData() //
-						.withName(queryProperty.getName()) //
-						.withValue("")) //
-				.collect(Collectors.toList());
+	.map(queryProperty -> new CollectionJsonData() //
+.withName(queryProperty.getName()) //
+.withValue("")) //
+	.collect(Collectors.toList());
 	}
 
 	public List<CollectionJsonData> getInputProperties() {
@@ -117,7 +117,7 @@ class CollectionJsonAffordanceModel extends AffordanceModel {
 		CollectionJsonAffordanceModel that = (CollectionJsonAffordanceModel) o;
 
 		return Objects.equals(this.inputProperties, that.inputProperties)
-				&& Objects.equals(this.queryProperties, that.queryProperties);
+	&& Objects.equals(this.queryProperties, that.queryProperties);
 	}
 
 	/*

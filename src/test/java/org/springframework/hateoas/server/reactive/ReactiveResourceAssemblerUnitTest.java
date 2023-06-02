@@ -64,14 +64,14 @@ class ReactiveResourceAssemblerUnitTest {
 	void simpleConversionShouldWork() {
 
 		this.assembler.toModel(this.employee, this.exchange).as(StepVerifier::create)
-				.expectNextMatches(employeeResource -> {
+	.expectNextMatches(employeeResource -> {
 
-					assertThat(employeeResource.getEmployee()).isEqualTo(new Employee("Frodo Baggins"));
-					AssertionsForInterfaceTypes.assertThat(employeeResource.getLinks())
-							.containsExactlyInAnyOrder(Link.of("/employees", "employees"));
+		assertThat(employeeResource.getEmployee()).isEqualTo(new Employee("Frodo Baggins"));
+		AssertionsForInterfaceTypes.assertThat(employeeResource.getLinks())
+	.containsExactlyInAnyOrder(Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 	}
 
 	/**
@@ -81,19 +81,19 @@ class ReactiveResourceAssemblerUnitTest {
 	void defaultResourcesConversionShouldWork() {
 
 		this.assembler.toCollectionModel(Flux.just(this.employee), this.exchange).as(StepVerifier::create)
-				.expectNextMatches(employeeResources -> {
+	.expectNextMatches(employeeResources -> {
 
-					Collection<EmployeeResource> content = employeeResources.getContent();
+		Collection<EmployeeResource> content = employeeResources.getContent();
 
-					assertThat(content) //
-							.extracting("employee") //
-							.containsExactly(new Employee("Frodo Baggins"));
+		assertThat(content) //
+	.extracting("employee") //
+	.containsExactly(new Employee("Frodo Baggins"));
 
-					assertThat(content.iterator().next().getLinks()).containsExactly(Link.of("/employees", "employees"));
-					assertThat(employeeResources.getLinks()).isEmpty();
+		assertThat(content.iterator().next().getLinks()).containsExactly(Link.of("/employees", "employees"));
+		assertThat(employeeResources.getLinks()).isEmpty();
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 	}
 
 	/**
@@ -103,19 +103,19 @@ class ReactiveResourceAssemblerUnitTest {
 	void customResourcesShouldWork() {
 
 		this.assemblerWithCustomResources.toCollectionModel(Flux.just(this.employee), this.exchange) //
-				.as(StepVerifier::create) //
-				.expectNextMatches(employeeResources -> {
+	.as(StepVerifier::create) //
+	.expectNextMatches(employeeResources -> {
 
-					assertThat(employeeResources.getLinks()) //
-							.containsExactlyInAnyOrder(Link.of("/employees").withSelfRel(), Link.of("/", "root"));
+		assertThat(employeeResources.getLinks()) //
+	.containsExactlyInAnyOrder(Link.of("/employees").withSelfRel(), Link.of("/", "root"));
 
-					EmployeeResource content = employeeResources.getContent().iterator().next();
+		EmployeeResource content = employeeResources.getContent().iterator().next();
 
-					assertThat(content.getEmployee()).isEqualTo(new Employee("Frodo Baggins"));
-					assertThat(content.getLinks()).containsExactly(Link.of("/employees", "employees"));
+		assertThat(content.getEmployee()).isEqualTo(new Employee("Frodo Baggins"));
+		assertThat(content.getLinks()).containsExactly(Link.of("/employees", "employees"));
 
-					return true;
-				}).verifyComplete();
+		return true;
+	}).verifyComplete();
 	}
 
 	class TestAssembler implements ReactiveRepresentationModelAssembler<Employee, EmployeeResource> {
@@ -134,12 +134,12 @@ class ReactiveResourceAssemblerUnitTest {
 
 		@Override
 		public Mono<CollectionModel<EmployeeResource>> toCollectionModel(Flux<? extends Employee> entities,
-				ServerWebExchange exchange) {
+	ServerWebExchange exchange) {
 
 			return entities.flatMap(entity -> toModel(entity, exchange)).collectList().map(listOfResources -> {
 
 				CollectionModel<EmployeeResource> employeeResources = CollectionModel.of(
-						listOfResources);
+			listOfResources);
 
 				employeeResources.add(Link.of("/employees").withSelfRel());
 				employeeResources.add(Link.of("/", "root"));

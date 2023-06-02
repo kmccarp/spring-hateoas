@@ -44,7 +44,7 @@ import org.springframework.util.Assert;
 public class Affordances implements AffordanceOperations {
 
 	private static List<AffordanceModelFactory> factories = SpringFactoriesLoader
-			.loadFactories(AffordanceModelFactory.class, Affordance.class.getClassLoader());
+.loadFactories(AffordanceModelFactory.class, Affordance.class.getClassLoader());
 
 	private final Link link;
 
@@ -77,7 +77,7 @@ public class Affordances implements AffordanceOperations {
 		Assert.notNull(httpMethod, "HTTP method must not be null!");
 
 		return new AffordanceBuilder(this, httpMethod, link, InputPayloadMetadata.NONE, PayloadMetadata.NONE,
-				Collections.emptyList(), null);
+	Collections.emptyList(), null);
 	}
 
 	/*
@@ -107,7 +107,7 @@ public class Affordances implements AffordanceOperations {
 		private @Nullable String name;
 
 		private AffordanceBuilder(Affordances context, HttpMethod method, Link target, InputPayloadMetadata inputMetdata,
-				PayloadMetadata outputMetadata, List<QueryParameter> parameters, @Nullable String name) {
+	PayloadMetadata outputMetadata, List<QueryParameter> parameters, @Nullable String name) {
 
 			this.context = context;
 			this.method = method;
@@ -268,8 +268,8 @@ public class Affordances implements AffordanceOperations {
 			Assert.notNull(target, "Target must not be null!");
 
 			return this.target == target ? this
-					: new AffordanceBuilder(this.context, this.method, target, this.inputMetdata, this.outputMetadata,
-							this.parameters, this.name);
+		: new AffordanceBuilder(this.context, this.method, target, this.inputMetdata, this.outputMetadata,
+		this.parameters, this.name);
 		}
 
 		/*
@@ -280,8 +280,8 @@ public class Affordances implements AffordanceOperations {
 		public ConfigurableAffordance withName(@Nullable String name) {
 
 			return this.name == name ? this
-					: new AffordanceBuilder(this.context, this.method, this.target, this.inputMetdata, this.outputMetadata,
-							this.parameters, name);
+		: new AffordanceBuilder(this.context, this.method, this.target, this.inputMetdata, this.outputMetadata,
+		this.parameters, name);
 		}
 
 		/*
@@ -324,8 +324,8 @@ public class Affordances implements AffordanceOperations {
 			String name = method.toString().toLowerCase();
 
 			Class<?> type = TypeBasedPayloadMetadata.class.isInstance(inputMetdata) //
-					? TypeBasedPayloadMetadata.class.cast(inputMetdata).getType() //
-					: null;
+		? TypeBasedPayloadMetadata.class.cast(inputMetdata).getType() //
+		: null;
 
 			return type == null ? name : name.concat(type.getSimpleName());
 		}
@@ -383,8 +383,8 @@ public class Affordances implements AffordanceOperations {
 		private Affordance buildAffordance() {
 
 			return factories.stream() //
-					.collect(collectingAndThen(toMap(AffordanceModelFactory::getMediaType, //
-							it -> it.getAffordanceModel(this)), Affordance::new));
+		.collect(collectingAndThen(toMap(AffordanceModelFactory::getMediaType, //
+	it -> it.getAffordanceModel(this)), Affordance::new));
 		}
 	}
 }

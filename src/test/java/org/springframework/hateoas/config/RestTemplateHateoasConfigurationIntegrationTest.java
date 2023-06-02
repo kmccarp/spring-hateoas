@@ -30,19 +30,23 @@ class RestTemplateHateoasConfigurationIntegrationTest {
 
 	@Test // #1119
 	void bootstrapsWithManualImports() {
-		ContextTester.withContext(WithImports.class, context -> {});
+		ContextTester.withContext(WithImports.class, context -> {
+		});
 	}
 
 	@Test // #1119
 	void bootstrapsViaAnnotationConfiguration() {
-		ContextTester.withContext(AnnotationConfig.class, context -> {});
+		ContextTester.withContext(AnnotationConfig.class, context -> {
+		});
 	}
 
 	@Configuration
-	@Import({ HateoasConfiguration.class, RestTemplateHateoasConfiguration.class })
-	static class WithImports {}
+	@Import({HateoasConfiguration.class, RestTemplateHateoasConfiguration.class})
+	static class WithImports {
+	}
 
 	@Configuration
 	@EnableHypermediaSupport(type = HypermediaType.HAL)
-	static class AnnotationConfig {}
+	static class AnnotationConfig {
+	}
 }

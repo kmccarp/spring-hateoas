@@ -100,7 +100,7 @@ public class WebFluxLinkBuilder extends TemplateVariableAwareLinkBuilderSupport<
 	 */
 	@Override
 	protected WebFluxLinkBuilder createNewInstance(UriComponents components, List<Affordance> affordances,
-			TemplateVariables variables) {
+TemplateVariables variables) {
 		return new WebFluxLinkBuilder(components, variables, affordances);
 	}
 
@@ -206,9 +206,9 @@ public class WebFluxLinkBuilder extends TemplateVariableAwareLinkBuilderSupport<
 			Mono<WebFluxLinkBuilder> builder = linkToInternal(invocation);
 
 			return new WebFluxLink(link.flatMap(it -> builder //
-					.flatMapIterable(WebFluxLinkBuilder::getAffordances) //
-					.singleOrEmpty() //
-					.map(it::andAffordance)));
+		.flatMapIterable(WebFluxLinkBuilder::getAffordances) //
+		.singleOrEmpty() //
+		.map(it::andAffordance)));
 		}
 
 		/**
@@ -251,8 +251,8 @@ public class WebFluxLinkBuilder extends TemplateVariableAwareLinkBuilderSupport<
 	private static Mono<WebFluxLinkBuilder> linkToInternal(Object invocation) {
 
 		return linkToInternal(invocation,
-				Mono.deferContextual(
-						context -> CurrentRequest.of(context.getOrDefault(EXCHANGE_CONTEXT_ATTRIBUTE, null))));
+	Mono.deferContextual(
+context -> CurrentRequest.of(context.getOrDefault(EXCHANGE_CONTEXT_ATTRIBUTE, null))));
 	}
 
 	private static Mono<WebFluxLinkBuilder> linkToInternal(Object invocation, Mono<CurrentRequest> builder) {
@@ -290,14 +290,14 @@ public class WebFluxLinkBuilder extends TemplateVariableAwareLinkBuilderSupport<
 			PathContainer contextPath = request.getPath().contextPath();
 
 			result.builder = UriComponentsBuilder.fromHttpRequest(request) //
-					.replacePath(contextPath.toString()) //
-					.replaceQuery("");
+		.replacePath(contextPath.toString()) //
+		.replaceQuery("");
 
 			ApplicationContext context = exchange.getApplicationContext();
 
 			result.conversionService = context != null && context.containsBean("webFluxConversionService")
-					? context.getBean("webFluxConversionService", ConversionService.class)
-					: FALLBACK_CONVERSION_SERVICE;
+		? context.getBean("webFluxConversionService", ConversionService.class)
+		: FALLBACK_CONVERSION_SERVICE;
 
 			return Mono.just(result);
 		}

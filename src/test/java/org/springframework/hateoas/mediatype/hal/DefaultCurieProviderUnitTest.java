@@ -90,21 +90,21 @@ class DefaultCurieProviderUnitTest {
 	void doesNotPrefixIanaRels() {
 
 		assertThat(provider.getNamespacedRelFrom(Link.of("https://amazon.com"))) //
-				.isEqualTo(HalLinkRelation.of(IanaLinkRelations.SELF));
+	.isEqualTo(HalLinkRelation.of(IanaLinkRelations.SELF));
 	}
 
 	@Test
 	void prefixesNormalRels() {
 
 		assertThat(provider.getNamespacedRelFrom(Link.of("https://amazon.com", "book"))) //
-				.isEqualTo(HalLinkRelation.curied("acme", "book"));
+	.isEqualTo(HalLinkRelation.curied("acme", "book"));
 	}
 
 	@Test
 	void doesNotPrefixQualifiedRels() {
 
 		assertThat(provider.getNamespacedRelFrom(Link.of("https://amazon.com", "custom:rel")))
-				.isEqualTo(HalLinkRelation.curied("custom", "rel"));
+	.isEqualTo(HalLinkRelation.curied("custom", "rel"));
 	}
 
 	/**
@@ -114,14 +114,14 @@ class DefaultCurieProviderUnitTest {
 	void prefixesNormalRelsThatHaveExtraRFC8288Attributes() {
 
 		Link link = Link.of("https://amazon.com", "custom:rel") //
-				.withHreflang("en") //
-				.withTitle("the title") //
-				.withMedia("the media") //
-				.withType("the type") //
-				.withDeprecation("https://example.com/custom/deprecated");
+	.withHreflang("en") //
+	.withTitle("the title") //
+	.withMedia("the media") //
+	.withType("the type") //
+	.withDeprecation("https://example.com/custom/deprecated");
 
 		assertThat(provider.getNamespacedRelFrom(link)) //
-				.isEqualTo(HalLinkRelation.curied("custom", "rel"));
+	.isEqualTo(HalLinkRelation.curied("custom", "rel"));
 	}
 
 	/**
@@ -131,7 +131,7 @@ class DefaultCurieProviderUnitTest {
 	void doesNotPrefixIanaRelsForRelAsString() {
 
 		assertThat(provider.getNamespacedRelFor(IanaLinkRelations.SELF)) //
-				.isEqualTo(HalLinkRelation.uncuried("self"));
+	.isEqualTo(HalLinkRelation.uncuried("self"));
 	}
 
 	/**
@@ -141,7 +141,7 @@ class DefaultCurieProviderUnitTest {
 	void prefixesNormalRelsForRelAsString() {
 
 		assertThat(provider.getNamespacedRelFor(LinkRelation.of("book"))) //
-				.isEqualTo(HalLinkRelation.curied("acme", "book"));
+	.isEqualTo(HalLinkRelation.curied("acme", "book"));
 	}
 
 	/**
@@ -151,7 +151,7 @@ class DefaultCurieProviderUnitTest {
 	void doesNotPrefixQualifiedRelsForRelAsString() {
 
 		assertThat(provider.getNamespacedRelFor(HalLinkRelation.curied("custom", "rel")))
-				.isEqualTo(HalLinkRelation.curied("custom", "rel"));
+	.isEqualTo(HalLinkRelation.curied("custom", "rel"));
 	}
 
 	/**
@@ -176,7 +176,7 @@ class DefaultCurieProviderUnitTest {
 
 		assertThat(provider.getCurieInformation(Links.of())).hasSize(2);
 		assertThat(provider.getNamespacedRelFor(LinkRelation.of("some"))) //
-				.isEqualTo(HalLinkRelation.curied("foo", "some"));
+	.isEqualTo(HalLinkRelation.curied("foo", "some"));
 	}
 
 	/**
@@ -198,7 +198,7 @@ class DefaultCurieProviderUnitTest {
 
 		Object curie = curies.iterator().next();
 		assertThat(curie).isInstanceOfSatisfying(Curie.class,
-				it -> assertThat(it.getHref()).startsWith("http://localhost"));
+	it -> assertThat(it.getHref()).startsWith("http://localhost"));
 	}
 
 	private static Map<String, UriTemplate> getCuries() {

@@ -32,7 +32,7 @@ class HttpEntityMatcher<T> extends BaseMatcher<HttpEntity<T>> {
 
 	private final @NonNull HttpEntity<T> expected;
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.hamcrest.Matcher#matches(java.lang.Object)
 	 */

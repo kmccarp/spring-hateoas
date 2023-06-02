@@ -58,12 +58,12 @@ public class HalLinkDiscoverer extends JsonPathLinkDiscoverer {
 		Map<String, String> json = (Map<String, String>) element;
 
 		return Link.of(json.get("href"), rel) //
-				.withHreflang(json.get("hreflang")) //
-				.withMedia(json.get("media")) //
-				.withTitle(json.get("title")) //
-				.withType(json.get("type")) //
-				.withDeprecation(json.get("deprecation")) //
-				.withProfile(json.get("profile")) //
-				.withName(json.get("name"));
+	.withHreflang(json.get("hreflang")) //
+	.withMedia(json.get("media")) //
+	.withTitle(json.get("title")) //
+	.withType(json.get("type")) //
+	.withDeprecation(json.get("deprecation")) //
+	.withProfile(json.get("profile")) //
+	.withName(json.get("name"));
 	}
 }

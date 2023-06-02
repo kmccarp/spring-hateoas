@@ -42,7 +42,7 @@ final class Uber {
 
 	@JsonCreator
 	Uber(@JsonProperty("version") String version, @JsonProperty("data") @Nullable List<UberData> data,
-			@JsonProperty("error") @Nullable UberError error) {
+@JsonProperty("error") @Nullable UberError error) {
 
 		this.version = version;
 		this.data = data;
@@ -96,8 +96,8 @@ final class Uber {
 		}
 
 		return data.stream() //
-				.flatMap(uberData -> uberData.getLinks().stream()) //
-				.collect(Links.collector());
+	.flatMap(uberData -> uberData.getLinks().stream()) //
+	.collect(Links.collector());
 	}
 
 	@JsonProperty
@@ -124,7 +124,7 @@ final class Uber {
 			return false;
 		Uber uber = (Uber) o;
 		return Objects.equals(this.version, uber.version) && Objects.equals(this.data, uber.data)
-				&& Objects.equals(this.error, uber.error);
+	&& Objects.equals(this.error, uber.error);
 	}
 
 	@Override

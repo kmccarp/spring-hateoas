@@ -69,13 +69,13 @@ class EntityModelIntegrationTest extends AbstractJackson2MarshallingIntegrationT
 
 		// Fail if we're supposed to
 		assertThatExceptionOfType(JsonMappingException.class) //
-				.isThrownBy(() -> mapper.enable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-						.writeValueAsString(EntityModel.of(new Empty())));
+	.isThrownBy(() -> mapper.enable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+.writeValueAsString(EntityModel.of(new Empty())));
 
 		// Ignore empty bean if we're supposed to
 		assertThatNoException() //
-				.isThrownBy(() -> mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-						.writeValueAsString(EntityModel.of(new Empty())));
+	.isThrownBy(() -> mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+.writeValueAsString(EntityModel.of(new Empty())));
 	}
 
 	static class PersonModel extends EntityModel<Person> {
@@ -84,7 +84,8 @@ class EntityModelIntegrationTest extends AbstractJackson2MarshallingIntegrationT
 			super(person);
 		}
 
-		protected PersonModel() {}
+		protected PersonModel() {
+		}
 	}
 
 	@JsonAutoDetect(fieldVisibility = Visibility.ANY)
@@ -94,5 +95,6 @@ class EntityModelIntegrationTest extends AbstractJackson2MarshallingIntegrationT
 		String lastname;
 	}
 
-	static class Empty {}
+	static class Empty {
+	}
 }

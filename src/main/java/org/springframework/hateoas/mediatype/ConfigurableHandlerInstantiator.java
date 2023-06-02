@@ -74,9 +74,9 @@ public class ConfigurableHandlerInstantiator extends HandlerInstantiator {
 		Object object = findInstance(type);
 
 		return object != null
-				? (T) object
-				: beanFactory.getBeanProvider(type)
-						.getIfAvailable(() -> beanFactory.createBean(type));
+	? (T) object
+	: beanFactory.getBeanProvider(type)
+	.getIfAvailable(() -> beanFactory.createBean(type));
 	}
 
 	/*
@@ -85,7 +85,7 @@ public class ConfigurableHandlerInstantiator extends HandlerInstantiator {
 	 */
 	@Override
 	public JsonDeserializer<?> deserializerInstance(DeserializationConfig config, Annotated annotated,
-			Class<?> deserClass) {
+Class<?> deserClass) {
 		return (JsonDeserializer<?>) findOrCreateInstance(deserClass);
 	}
 
@@ -95,7 +95,7 @@ public class ConfigurableHandlerInstantiator extends HandlerInstantiator {
 	 */
 	@Override
 	public KeyDeserializer keyDeserializerInstance(DeserializationConfig config, Annotated annotated,
-			Class<?> keyDeserClass) {
+Class<?> keyDeserClass) {
 		return (KeyDeserializer) findOrCreateInstance(keyDeserClass);
 	}
 
@@ -114,7 +114,7 @@ public class ConfigurableHandlerInstantiator extends HandlerInstantiator {
 	 */
 	@Override
 	public TypeResolverBuilder<?> typeResolverBuilderInstance(MapperConfig<?> config, Annotated annotated,
-			Class<?> builderClass) {
+Class<?> builderClass) {
 		return (TypeResolverBuilder<?>) findOrCreateInstance(builderClass);
 	}
 

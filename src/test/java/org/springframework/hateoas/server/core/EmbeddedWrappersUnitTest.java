@@ -88,7 +88,7 @@ class EmbeddedWrappersUnitTest {
 	private static void assertEmptyCollectionValue(EmbeddedWrapper wrapper) {
 
 		assertThat(wrapper.getValue()) //
-				.isInstanceOfSatisfying(Collection.class, it -> assertThat(it).isEmpty());
+	.isInstanceOfSatisfying(Collection.class, it -> assertThat(it).isEmpty());
 	}
 
 	@RequiredArgsConstructor

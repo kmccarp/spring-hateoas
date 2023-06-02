@@ -64,7 +64,7 @@ class HalFormsOptionsFactory {
 	 * @see HalFormsOptions#remote(org.springframework.hateoas.Link)
 	 */
 	HalFormsOptionsFactory withOptions(Class<?> type, String property,
-			Function<PropertyMetadata, HalFormsOptions> creator) {
+Function<PropertyMetadata, HalFormsOptions> creator) {
 
 		Assert.notNull(type, "Type must not be null!");
 		Assert.hasText(property, "Property must not be null or empty!");

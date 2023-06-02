@@ -177,7 +177,7 @@ public interface LinkRelationProvider extends Plugin<LookupContext> {
 			ResourceType resourceType = this.resourceType;
 
 			return String.format("LookupContext for %s for %s resource relations.", type.getName(),
-					resourceType == null ? "ITEM & COLLECTION" : resourceType.name());
+		resourceType == null ? "ITEM & COLLECTION" : resourceType.name());
 		}
 	}
 }

@@ -63,17 +63,17 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 	public BeanRegistrationAotContribution processAheadOfTime(RegisteredBean registeredBean) {
 
 		EnableHypermediaSupport annotation = AnnotatedElementUtils.findMergedAnnotation(registeredBean.getBeanClass(),
-				EnableHypermediaSupport.class);
+	EnableHypermediaSupport.class);
 
 		if (annotation == null) {
 			return null;
 		}
 
 		var fromConfig = Arrays.stream(annotation.type())
-				.map(HypermediaType::getLocalPackageName);
+	.map(HypermediaType::getLocalPackageName);
 
 		var mediaTypePackages = Stream.concat(fromConfig, Stream.of("alps", "problem"))
-				.map("org.springframework.hateoas.mediatype."::concat);
+	.map("org.springframework.hateoas.mediatype."::concat);
 
 		var packagesToScan = Stream.concat(Stream.of("org.springframework.hateoas"), mediaTypePackages).toList();
 
@@ -128,12 +128,12 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 				LOGGER.info("Registering Spring HATEOAS types in {} for reflection.", it);
 
 				provider.findCandidateComponents(it).stream()
-						.map(BeanDefinition::getBeanClassName)
-						.sorted()
-						.peek(type -> LOGGER.debug("> {}", type))
-						.map(TypeReference::of)
-						.forEach(reference -> reflection.registerType(reference, //
-								MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS));
+			.map(BeanDefinition::getBeanClassName)
+			.sorted()
+			.peek(type -> LOGGER.debug("> {}", type))
+			.map(TypeReference::of)
+			.forEach(reference -> reflection.registerType(reference, //
+		MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS));
 			});
 		}
 	}
@@ -174,9 +174,9 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 		 */
 		@Override
 		public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
-				throws IOException {
+	throws IOException {
 			return !referencePackage
-					.equals(ClassUtils.getPackageName(metadataReader.getClassMetadata().getClassName()));
+		.equals(ClassUtils.getPackageName(metadataReader.getClassMetadata().getClassName()));
 		}
 	}
 
@@ -188,7 +188,7 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 		 */
 		@Override
 		public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
-				throws IOException {
+	throws IOException {
 
 			if (doMatch(metadataReader, metadataReaderFactory)) {
 				return true;
@@ -199,7 +199,7 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 			String superClassName = classMetadata.getSuperClassName();
 
 			if (superClassName != null && !superClassName.startsWith("java")
-					&& match(metadataReaderFactory.getMetadataReader(superClassName), metadataReaderFactory)) {
+		&& match(metadataReaderFactory.getMetadataReader(superClassName), metadataReaderFactory)) {
 				return true;
 			}
 
@@ -233,16 +233,16 @@ class HypermediaTypeAotProcessor implements BeanRegistrationAotProcessor {
 
 			// Type annotations
 			return annotationMetadata
-					.getAnnotationTypes()
-					.stream()
-					.anyMatch(IS_JACKSON_ANNOTATION)
+		.getAnnotationTypes()
+		.stream()
+		.anyMatch(IS_JACKSON_ANNOTATION)
 
-					// Method annotations
-					|| annotationMetadata.getDeclaredMethods().stream()
-							.flatMap(it -> it.getAnnotations().stream())
-							.map(MergedAnnotation::getType)
-							.map(Class::getName)
-							.anyMatch(IS_JACKSON_ANNOTATION);
+		// Method annotations
+		|| annotationMetadata.getDeclaredMethods().stream()
+		.flatMap(it -> it.getAnnotations().stream())
+		.map(MergedAnnotation::getType)
+		.map(Class::getName)
+		.anyMatch(IS_JACKSON_ANNOTATION);
 		}
 	}
 

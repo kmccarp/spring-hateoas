@@ -41,8 +41,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @see https://rwcbook.github.io/hal-forms/#_the_code__templates_code_element
  */
 @JsonAutoDetect(getterVisibility = Visibility.NON_PRIVATE)
-@JsonIgnoreProperties({ "httpMethod", "contentTypes" })
-@JsonPropertyOrder({ "title", "method", "contentType", "properties" })
+@JsonIgnoreProperties({"httpMethod", "contentTypes"})
+@JsonPropertyOrder({"title", "method", "contentType", "properties"})
 final class HalFormsTemplate {
 
 	static final String DEFAULT_KEY = "default";
@@ -59,7 +59,7 @@ final class HalFormsTemplate {
 	}
 
 	private HalFormsTemplate(String title, HttpMethod httpMethod, List<HalFormsProperty> properties,
-			@Nullable MediaType contentType, String target) {
+@Nullable MediaType contentType, String target) {
 
 		this.title = title;
 		this.httpMethod = httpMethod;
@@ -75,13 +75,13 @@ final class HalFormsTemplate {
 	HalFormsTemplate withTitle(String title) {
 
 		return this.title == title ? this
-				: new HalFormsTemplate(title, this.httpMethod, this.properties, this.contentType, this.target);
+	: new HalFormsTemplate(title, this.httpMethod, this.properties, this.contentType, this.target);
 	}
 
 	private HalFormsTemplate withHttpMethod(HttpMethod httpMethod) {
 
 		return this.httpMethod == httpMethod ? this
-				: new HalFormsTemplate(this.title, httpMethod, this.properties, this.contentType, this.target);
+	: new HalFormsTemplate(this.title, httpMethod, this.properties, this.contentType, this.target);
 	}
 
 	/**
@@ -103,19 +103,19 @@ final class HalFormsTemplate {
 	HalFormsTemplate withProperties(List<HalFormsProperty> properties) {
 
 		return this.properties == properties ? this
-				: new HalFormsTemplate(title, httpMethod, properties, contentType, target);
+	: new HalFormsTemplate(title, httpMethod, properties, contentType, target);
 	}
 
 	HalFormsTemplate withContentType(@Nullable MediaType contentType) {
 
 		return this.contentType == contentType ? this
-				: new HalFormsTemplate(title, httpMethod, properties, contentType, target);
+	: new HalFormsTemplate(title, httpMethod, properties, contentType, target);
 	}
 
 	HalFormsTemplate withTarget(String target) {
 
 		return this.target == target ? this
-				: new HalFormsTemplate(title, httpMethod, properties, contentType, target);
+	: new HalFormsTemplate(title, httpMethod, properties, contentType, target);
 	}
 
 	@Nullable
@@ -140,8 +140,8 @@ final class HalFormsTemplate {
 	Optional<HalFormsProperty> getPropertyByName(String name) {
 
 		return properties.stream() //
-				.filter(it -> it.getName().equals(name)) //
-				.findFirst();
+	.filter(it -> it.getName().equals(name)) //
+	.findFirst();
 	}
 
 	HttpMethod getHttpMethod() {
@@ -180,9 +180,9 @@ final class HalFormsTemplate {
 		HalFormsTemplate that = (HalFormsTemplate) o;
 
 		return Objects.equals(this.title, that.title) //
-				&& this.httpMethod == that.httpMethod //
-				&& Objects.equals(this.properties, that.properties) //
-				&& Objects.equals(this.contentType, that.contentType);
+	&& this.httpMethod == that.httpMethod //
+	&& Objects.equals(this.properties, that.properties) //
+	&& Objects.equals(this.contentType, that.contentType);
 	}
 
 	/*
@@ -201,6 +201,6 @@ final class HalFormsTemplate {
 	@Override
 	public String toString() {
 		return "HalFormsTemplate(title=" + this.title + ", httpMethod=" + this.httpMethod + ", properties="
-				+ this.properties + ", contentTypes=" + this.contentType + ")";
+	+ this.properties + ", contentTypes=" + this.contentType + ")";
 	}
 }

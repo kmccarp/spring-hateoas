@@ -55,7 +55,7 @@ public class TypeConstrainedMappingJackson2HttpMessageConverter extends MappingJ
 	 * @param objectMapper
 	 */
 	public TypeConstrainedMappingJackson2HttpMessageConverter(Class<?> type, List<MediaType> supportedMediaTypes,
-			ObjectMapper objectMapper) {
+ObjectMapper objectMapper) {
 
 		this(type);
 		setSupportedMediaTypes(supportedMediaTypes);
@@ -78,7 +78,7 @@ public class TypeConstrainedMappingJackson2HttpMessageConverter extends MappingJ
 	@Override
 	public boolean canRead(Type type, @Nullable Class<?> contextClass, @Nullable MediaType mediaType) {
 		return this.type.isAssignableFrom(getJavaType(type, contextClass).getRawClass())
-				&& super.canRead(type, contextClass, mediaType);
+	&& super.canRead(type, contextClass, mediaType);
 	}
 
 	/*

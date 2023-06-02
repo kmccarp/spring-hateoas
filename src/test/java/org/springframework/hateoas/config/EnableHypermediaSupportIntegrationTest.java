@@ -109,7 +109,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 			assertThat(discoverers).isNotNull();
 			assertThat(discoverers.getLinkDiscovererFor(MediaTypes.HAL_JSON))
-					.hasValueSatisfying(HalLinkDiscoverer.class::isInstance);
+		.hasValueSatisfying(HalLinkDiscoverer.class::isInstance);
 			assertRelProvidersSetUp(context);
 		});
 	}
@@ -123,7 +123,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 			assertThat(discoverers).isNotNull();
 			assertThat(discoverers.getLinkDiscovererFor(MediaTypes.HAL_FORMS_JSON))
-					.hasValueSatisfying(HalFormsLinkDiscoverer.class::isInstance);
+		.hasValueSatisfying(HalFormsLinkDiscoverer.class::isInstance);
 			assertRelProvidersSetUp(context);
 		});
 	}
@@ -137,10 +137,10 @@ class EnableHypermediaSupportIntegrationTest {
 
 			assertThat(discoverers).isNotNull();
 			assertThat(discoverers.getLinkDiscovererFor(MediaTypes.HAL_JSON))
-					.hasValueSatisfying(HalLinkDiscoverer.class::isInstance);
+		.hasValueSatisfying(HalLinkDiscoverer.class::isInstance);
 
 			assertThat(discoverers.getLinkDiscovererFor(MediaTypes.HAL_FORMS_JSON))
-					.hasValueSatisfying(HalFormsLinkDiscoverer.class::isInstance);
+		.hasValueSatisfying(HalFormsLinkDiscoverer.class::isInstance);
 
 			assertRelProvidersSetUp(context);
 		});
@@ -155,7 +155,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 			assertThat(discoverers).isNotNull();
 			assertThat(discoverers.getLinkDiscovererFor(MediaTypes.COLLECTION_JSON))
-					.hasValueSatisfying(CollectionJsonLinkDiscoverer.class::isInstance);
+		.hasValueSatisfying(CollectionJsonLinkDiscoverer.class::isInstance);
 			assertRelProvidersSetUp(context);
 		});
 	}
@@ -169,7 +169,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 			assertThat(discoverers).isNotNull();
 			assertThat(discoverers.getLinkDiscovererFor(MediaTypes.UBER_JSON))
-					.hasValueSatisfying(UberLinkDiscoverer.class::isInstance);
+		.hasValueSatisfying(UberLinkDiscoverer.class::isInstance);
 			assertRelProvidersSetUp(context);
 		});
 	}
@@ -208,7 +208,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 	@Nullable
 	private static String assertMediaTypeSupported(ApplicationContext context, MediaType mediaType, Class<?> type,
-			@Nullable Object source) {
+@Nullable Object source) {
 
 		context.getBeanProvider(RestTemplate.class).ifAvailable(it -> {
 			assertMediaTypeSupported(it.getMessageConverters(), mediaType, type, source);
@@ -226,7 +226,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 				AbstractMessageConverterMethodArgumentResolver processor = (AbstractMessageConverterMethodArgumentResolver) resolver;
 				List<HttpMessageConverter<?>> converters = (List<HttpMessageConverter<?>>) ReflectionTestUtils
-						.getField(processor, "messageConverters");
+			.getField(processor, "messageConverters");
 
 				assertMediaTypeSupported(converters, MediaTypes.HAL_FORMS_JSON, RepresentationModel.class);
 			}
@@ -239,18 +239,18 @@ class EnableHypermediaSupportIntegrationTest {
 
 	@Nullable
 	private static Object assertMediaTypeSupported(List<HttpMessageConverter<?>> converters, MediaType mediaType,
-			Class<?> type) {
+Class<?> type) {
 		return assertMediaTypeSupported(converters, mediaType, type, null);
 	}
 
 	@Nullable
 	private static String assertMediaTypeSupported(List<HttpMessageConverter<?>> converters, MediaType mediaType,
-			Class<?> type, @Nullable Object source) {
+Class<?> type, @Nullable Object source) {
 
 		Optional<AbstractJackson2HttpMessageConverter> result = converters.stream()//
-				.filter(AbstractJackson2HttpMessageConverter.class::isInstance) //
-				.findFirst() //
-				.map(AbstractJackson2HttpMessageConverter.class::cast);
+	.filter(AbstractJackson2HttpMessageConverter.class::isInstance) //
+	.findFirst() //
+	.map(AbstractJackson2HttpMessageConverter.class::cast);
 
 		assertThat(result).hasValueSatisfying(it -> {
 			assertThat(it.getSupportedMediaTypes(type));
@@ -277,10 +277,10 @@ class EnableHypermediaSupportIntegrationTest {
 		withServletContext(HalConfig.class, context -> {
 
 			assertMediaTypeSupported(context.getBean(RestTemplate.class).getMessageConverters(), MediaTypes.HAL_FORMS_JSON,
-					RepresentationModel.class);
+		RepresentationModel.class);
 
 			String result = assertMediaTypeSupported(context, MediaTypes.HAL_JSON, RepresentationModel.class,
-					resourceSupport);
+		resourceSupport);
 
 			assertThat(result).isEqualTo("{\"_links\":{\"self\":{\"href\":\"localhost\"}}}");
 		});
@@ -304,9 +304,9 @@ class EnableHypermediaSupportIntegrationTest {
 	void registersNoOpMessageResolverIfMessagesBundleMissing() {
 
 		withServletContext(HateoasConfiguration.class, //
-				context -> {
-					assertThat(context.getBean(MessageResolver.class)).isEqualTo(MessageResolver.of(null));
-				});
+	context -> {
+		assertThat(context.getBean(MessageResolver.class)).isEqualTo(MessageResolver.of(null));
+	});
 	}
 
 	@Test // #1019
@@ -323,7 +323,7 @@ class EnableHypermediaSupportIntegrationTest {
 				MessageResolver bean = context.getBean(MessageResolver.class);
 
 				assertThat(bean).isNotEqualTo(MessageResolver.of(null));
-				assertThat(bean.resolve(() -> new String[] { "key" })).isEqualTo("Schlüssel");
+				assertThat(bean.resolve(() -> new String[]{"key"})).isEqualTo("Schlüssel");
 			});
 
 		} finally {
@@ -360,7 +360,7 @@ class EnableHypermediaSupportIntegrationTest {
 			WebConverters converters = context.getBean(WebConverters.class);
 
 			assertThat(converters.getSupportedMediaTypes()) //
-					.containsExactly(MediaTypes.UBER_JSON, MediaTypes.HAL_FORMS_JSON);
+		.containsExactly(MediaTypes.UBER_JSON, MediaTypes.HAL_FORMS_JSON);
 		});
 	}
 
@@ -368,20 +368,21 @@ class EnableHypermediaSupportIntegrationTest {
 	void bootstrapsWithOutDefaultMediaTypeEnabled() {
 
 		assertThatNoException().isThrownBy(() -> {
-			withServletContext(NoDefaultMediaTypes.class, context -> {});
+			withServletContext(NoDefaultMediaTypes.class, context -> {
+			});
 		});
 	}
 
 	private static void assertEntityLinksSetUp(ApplicationContext context) {
 
 		assertThat(context.getBeansOfType(EntityLinks.class).values()) //
-				.anySatisfy(it -> assertThat(it).isInstanceOf(DelegatingEntityLinks.class));
+	.anySatisfy(it -> assertThat(it).isInstanceOf(DelegatingEntityLinks.class));
 	}
 
 	private static void assertRelProvidersSetUp(ApplicationContext context) {
 
 		assertThat(context.getBeansOfType(LinkRelationProvider.class).values()) //
-				.anySatisfy(it -> assertThat(it).isInstanceOf(DelegatingLinkRelationProvider.class));
+	.anySatisfy(it -> assertThat(it).isInstanceOf(DelegatingLinkRelationProvider.class));
 	}
 
 	private static void assertHalSetupForConfigClass(Class<?> configClass) {
@@ -393,7 +394,7 @@ class EnableHypermediaSupportIntegrationTest {
 
 			RequestMappingHandlerAdapter rmha = context.getBean(RequestMappingHandlerAdapter.class);
 			assertThat(rmha.getMessageConverters())
-					.anySatisfy(it -> assertThat(it).isInstanceOf(MappingJackson2HttpMessageConverter.class));
+		.anySatisfy(it -> assertThat(it).isInstanceOf(MappingJackson2HttpMessageConverter.class));
 		});
 	}
 
@@ -457,13 +458,13 @@ class EnableHypermediaSupportIntegrationTest {
 			T spy = Mockito.spy(context);
 
 			ClassPathResource resource = new ClassPathResource("rest-messages.properties",
-					EnableHypermediaSupportIntegrationTest.class);
+		EnableHypermediaSupportIntegrationTest.class);
 			assertThat(resource.exists()).isTrue();
 
 			try {
 
 				doReturn(new Resource[0]).when(spy).getResources("classpath:rest-default-messages.properties");
-				doReturn(new Resource[] { resource }).when(spy).getResources(contains("rest-messages"));
+				doReturn(new Resource[]{resource}).when(spy).getResources(contains("rest-messages"));
 
 			} catch (IOException o_O) {
 				fail("Couldn't mock resource lookup!", o_O);
@@ -580,18 +581,19 @@ class EnableHypermediaSupportIntegrationTest {
 
 	}
 
-	@EnableHypermediaSupport(type = { HypermediaType.HAL, HypermediaType.HAL_FORMS })
+	@EnableHypermediaSupport(type = {HypermediaType.HAL, HypermediaType.HAL_FORMS})
 	static class HalAndHalFormsConfig {
 
 	}
 
 	@Configuration
-	@EnableHypermediaSupport(type = { HypermediaType.UBER, HypermediaType.HAL_FORMS })
+	@EnableHypermediaSupport(type = {HypermediaType.UBER, HypermediaType.HAL_FORMS})
 	static class MediaTypeOrdering {
 
 	}
 
 	@Configuration
 	@EnableHypermediaSupport(type = {})
-	static class NoDefaultMediaTypes {}
+	static class NoDefaultMediaTypes {
+	}
 }

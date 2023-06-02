@@ -194,7 +194,7 @@ public class EntityModel<T> extends RepresentationModel<EntityModel<T>> {
 	}
 
 	private static class MapSuppressingUnwrappingSerializer extends StdSerializer<Object>
-			implements ContextualSerializer {
+implements ContextualSerializer {
 
 		private static final long serialVersionUID = -8367255762553946324L;
 
@@ -217,9 +217,9 @@ public class EntityModel<T> extends RepresentationModel<EntityModel<T>> {
 		 * @see com.fasterxml.jackson.databind.ser.std.StdSerializer#serialize(java.lang.Object, com.fasterxml.jackson.core.JsonGenerator, com.fasterxml.jackson.databind.SerializerProvider)
 		 */
 		@Override
-		@SuppressWarnings({ "null", "unchecked" })
+		@SuppressWarnings({"null", "unchecked"})
 		public void serialize(@Nullable Object value, @Nullable JsonGenerator gen, @NonNull SerializerProvider provider)
-				throws IOException {
+	throws IOException {
 
 			if (value == null || Map.class.isInstance(value)) {
 				return;
@@ -228,13 +228,13 @@ public class EntityModel<T> extends RepresentationModel<EntityModel<T>> {
 			JsonSerializer<Object> serializer = provider.findValueSerializer(value.getClass());
 
 			if (UnknownSerializer.class.isInstance(serializer)
-					&& !provider.isEnabled(SerializationFeature.FAIL_ON_EMPTY_BEANS)) {
+		&& !provider.isEnabled(SerializationFeature.FAIL_ON_EMPTY_BEANS)) {
 				return;
 			}
 
 			if (JsonValueSerializer.class.isInstance(serializer)) {
 				throw new IllegalStateException(
-						"@JsonValue rendered classes can not be directly nested in EntityModel as they do not produce a document key!");
+			"@JsonValue rendered classes can not be directly nested in EntityModel as they do not produce a document key!");
 			}
 
 			if (ContextualSerializer.class.isInstance(serializer)) {
@@ -242,8 +242,8 @@ public class EntityModel<T> extends RepresentationModel<EntityModel<T>> {
 			}
 
 			serializer //
-					.unwrappingSerializer(NameTransformer.NOP) //
-					.serialize(value, gen, provider);
+		.unwrappingSerializer(NameTransformer.NOP) //
+		.serialize(value, gen, provider);
 		}
 
 		/*
@@ -252,7 +252,7 @@ public class EntityModel<T> extends RepresentationModel<EntityModel<T>> {
 		 */
 		@Override
 		public JsonSerializer<?> createContextual(@Nullable SerializerProvider prov, @Nullable BeanProperty property)
-				throws JsonMappingException {
+	throws JsonMappingException {
 			return new MapSuppressingUnwrappingSerializer(property);
 		}
 

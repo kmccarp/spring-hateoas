@@ -127,14 +127,14 @@ public interface HalFormsOptions {
 	Object getSelectedValue();
 
 	public static abstract class AbstractHalFormsOptions<T extends AbstractHalFormsOptions<T>>
-			implements HalFormsOptions {
+implements HalFormsOptions {
 
 		private final @Nullable String promptField, valueField;
 		private final @Nullable Long minItems, maxItems;
 		private final @Nullable Object selectedValue;
 
 		protected AbstractHalFormsOptions(@Nullable String promptRef, @Nullable String valueRef, @Nullable Long minItems,
-				@Nullable Long maxItems, @Nullable Object selectedValue) {
+	@Nullable Long maxItems, @Nullable Object selectedValue) {
 
 			Assert.isTrue(minItems == null || minItems >= 0, "MinItems must be greater than or equal to 0!");
 
@@ -276,7 +276,7 @@ public interface HalFormsOptions {
 		 * @return
 		 */
 		protected abstract T with(@Nullable String promptRef, @Nullable String valueRef, @Nullable Long minItems,
-				@Nullable Long maxItems, @Nullable Object selectedValue);
+	@Nullable Long maxItems, @Nullable Object selectedValue);
 	}
 
 	public static class Inline extends AbstractHalFormsOptions<Inline> {
@@ -289,7 +289,7 @@ public interface HalFormsOptions {
 		 * @param valueRef
 		 */
 		private Inline(Collection<? extends Object> values, @Nullable String promptRef, @Nullable String valueRef,
-				@Nullable Long minItems, @Nullable Long maxItems, @Nullable Object selectedValue) {
+	@Nullable Long minItems, @Nullable Long maxItems, @Nullable Object selectedValue) {
 
 			super(promptRef, valueRef, minItems, maxItems, selectedValue);
 
@@ -314,7 +314,7 @@ public interface HalFormsOptions {
 		 */
 		@Override
 		protected Inline with(@Nullable String promptRef, @Nullable String valueRef, @Nullable Long minItems,
-				@Nullable Long maxItems, @Nullable Object selectedValue) {
+	@Nullable Long maxItems, @Nullable Object selectedValue) {
 			return new Inline(inline, promptRef, valueRef, minItems, maxItems, selectedValue);
 		}
 	}
@@ -329,7 +329,7 @@ public interface HalFormsOptions {
 		private final Link link;
 
 		private Remote(Link link, @Nullable String promptRef, @Nullable String valueRef, @Nullable Long minItems,
-				@Nullable Long maxItems, @Nullable Object selectedValue) {
+	@Nullable Long maxItems, @Nullable Object selectedValue) {
 
 			super(promptRef, valueRef, minItems, maxItems, selectedValue);
 
@@ -354,7 +354,7 @@ public interface HalFormsOptions {
 		 */
 		@Override
 		protected Remote with(@Nullable String promptRef, @Nullable String valueRef, @Nullable Long minItems,
-				@Nullable Long maxItems, @Nullable Object selectedValue) {
+	@Nullable Long maxItems, @Nullable Object selectedValue) {
 			return new Remote(link, promptRef, valueRef, minItems, maxItems, selectedValue);
 		}
 	}

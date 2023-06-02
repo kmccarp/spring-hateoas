@@ -55,8 +55,8 @@ public class Problem {
 
 	@JsonCreator
 	public Problem(@JsonProperty("type") URI type, @JsonProperty("title") String title,
-			@JsonProperty("status") int status, @JsonProperty("detail") String detail,
-			@JsonProperty("instance") URI instance) {
+@JsonProperty("status") int status, @JsonProperty("detail") String detail,
+@JsonProperty("instance") URI instance) {
 
 		this(type, title, HttpStatus.resolve(status), detail, instance);
 	}
@@ -248,8 +248,8 @@ public class Problem {
 			return false;
 		Problem problem = (Problem) o;
 		return Objects.equals(this.type, problem.type) && Objects.equals(this.title, problem.title)
-				&& this.status == problem.status && Objects.equals(this.detail, problem.detail)
-				&& Objects.equals(this.instance, problem.instance);
+	&& this.status == problem.status && Objects.equals(this.detail, problem.detail)
+	&& Objects.equals(this.instance, problem.instance);
 	}
 
 	@Override
@@ -259,7 +259,7 @@ public class Problem {
 
 	public String toString() {
 		return "Problem(type=" + this.type + ", title=" + this.title + ", status=" + this.status + ", detail=" + this.detail
-				+ ", instance=" + this.instance + ")";
+	+ ", instance=" + this.instance + ")";
 	}
 
 	public static final class ExtendedProblem<T> extends Problem {
@@ -267,7 +267,7 @@ public class Problem {
 		private T extendedProperties;
 
 		ExtendedProblem(@Nullable URI type, @Nullable String title, @Nullable HttpStatus status, @Nullable String detail,
-				@Nullable URI instance, @Nullable T properties) {
+	@Nullable URI instance, @Nullable T properties) {
 
 			super(type, title, status, detail, instance);
 

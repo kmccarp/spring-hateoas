@@ -180,7 +180,7 @@ public final class Hop {
 		}
 		Hop hop = (Hop) o;
 		return Objects.equals(this.rel, hop.rel) && Objects.equals(this.parameters, hop.parameters)
-				&& Objects.equals(this.headers, hop.headers);
+	&& Objects.equals(this.headers, hop.headers);
 	}
 
 	@Override

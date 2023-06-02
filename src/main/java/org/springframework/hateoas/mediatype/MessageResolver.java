@@ -48,7 +48,7 @@ public interface MessageResolver {
 	static MessageResolver of(@Nullable MessageSource messageSource) {
 
 		return messageSource == null //
-				? DefaultOnlyMessageResolver.INSTANCE //
-				: new MessageSourceResolver(messageSource);
+	? DefaultOnlyMessageResolver.INSTANCE //
+	: new MessageSourceResolver(messageSource);
 	}
 }

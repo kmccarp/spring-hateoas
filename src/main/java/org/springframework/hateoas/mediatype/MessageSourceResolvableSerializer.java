@@ -55,7 +55,7 @@ public class MessageSourceResolvableSerializer extends StdSerializer<MessageSour
 	@Override
 	@SuppressWarnings("null")
 	public void serialize(MessageSourceResolvable value, JsonGenerator gen, SerializerProvider provider)
-			throws IOException {
+throws IOException {
 		gen.writeString(resolver.resolve(value));
 	}
 }

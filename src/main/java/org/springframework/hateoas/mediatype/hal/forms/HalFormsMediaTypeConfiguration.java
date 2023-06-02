@@ -53,9 +53,9 @@ class HalFormsMediaTypeConfiguration implements HypermediaMappingInformation {
 	private HalFormsConfiguration resolvedConfiguration;
 
 	public HalFormsMediaTypeConfiguration(DelegatingLinkRelationProvider relProvider,
-			ObjectProvider<CurieProvider> curieProvider, ObjectProvider<HalFormsConfiguration> halFormsConfiguration,
-			ObjectProvider<HalConfiguration> halConfiguration, MessageResolver resolver,
-			AbstractAutowireCapableBeanFactory beanFactory) {
+ObjectProvider<CurieProvider> curieProvider, ObjectProvider<HalFormsConfiguration> halFormsConfiguration,
+ObjectProvider<HalConfiguration> halConfiguration, MessageResolver resolver,
+AbstractAutowireCapableBeanFactory beanFactory) {
 
 		this.relProvider = relProvider;
 		this.curieProvider = curieProvider;
@@ -92,7 +92,7 @@ class HalFormsMediaTypeConfiguration implements HypermediaMappingInformation {
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		mapper.registerModule(new Jackson2HalFormsModule());
 		mapper.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(relProvider, provider,
-				resolver, halFormsConfig.getHalConfiguration(), beanFactory));
+	resolver, halFormsConfig.getHalConfiguration(), beanFactory));
 
 		halFormsConfig.customize(mapper);
 
@@ -111,7 +111,7 @@ class HalFormsMediaTypeConfiguration implements HypermediaMappingInformation {
 	HalFormsConfiguration getResolvedConfiguration() {
 
 		Supplier<HalFormsConfiguration> defaultConfig = () -> new HalFormsConfiguration(
-				halConfiguration.getIfAvailable(HalConfiguration::new));
+	halConfiguration.getIfAvailable(HalConfiguration::new));
 
 		if (resolvedConfiguration == null) {
 			this.resolvedConfiguration = halFormsConfiguration.getIfAvailable(defaultConfig);

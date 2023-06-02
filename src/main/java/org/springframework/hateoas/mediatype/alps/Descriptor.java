@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @since 0.15
  * @see http://alps.io/spec/#prop-descriptor
  */
-@JsonPropertyOrder({ "id", "href", "name", "type", "doc", "descriptor", "ext" })
+@JsonPropertyOrder({"id", "href", "name", "type", "doc", "descriptor", "ext"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class Descriptor {
 
@@ -46,9 +46,9 @@ public final class Descriptor {
 
 	@JsonCreator
 	private Descriptor(@JsonProperty("id") String id, @JsonProperty("href") String href,
-			@JsonProperty("name") String name, @JsonProperty("doc") Doc doc, @JsonProperty("type") Type type,
-			@JsonProperty("ext") Ext ext, @JsonProperty("rt") String rt,
-			@JsonProperty("descriptor") List<Descriptor> descriptor) {
+@JsonProperty("name") String name, @JsonProperty("doc") Doc doc, @JsonProperty("type") Type type,
+@JsonProperty("ext") Ext ext, @JsonProperty("rt") String rt,
+@JsonProperty("descriptor") List<Descriptor> descriptor) {
 
 		this.id = id;
 		this.href = href;
@@ -105,9 +105,9 @@ public final class Descriptor {
 			return false;
 		Descriptor that = (Descriptor) o;
 		return Objects.equals(this.id, that.id) && Objects.equals(this.href, that.href)
-				&& Objects.equals(this.name, that.name) && Objects.equals(this.doc, that.doc) && this.type == that.type
-				&& Objects.equals(this.ext, that.ext) && Objects.equals(this.rt, that.rt)
-				&& Objects.equals(this.descriptor, that.descriptor);
+	&& Objects.equals(this.name, that.name) && Objects.equals(this.doc, that.doc) && this.type == that.type
+	&& Objects.equals(this.ext, that.ext) && Objects.equals(this.rt, that.rt)
+	&& Objects.equals(this.descriptor, that.descriptor);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public final class Descriptor {
 	public String toString() {
 
 		return "Descriptor(id=" + this.id + ", href=" + this.href + ", name=" + this.name + ", doc=" + this.doc + ", type="
-				+ this.type + ", ext=" + this.ext + ", rt=" + this.rt + ", descriptor=" + this.descriptor + ")";
+	+ this.type + ", ext=" + this.ext + ", rt=" + this.rt + ", descriptor=" + this.descriptor + ")";
 	}
 
 	public static class DescriptorBuilder {
@@ -132,7 +132,8 @@ public final class Descriptor {
 		private String rt;
 		private List<Descriptor> descriptor;
 
-		DescriptorBuilder() {}
+		DescriptorBuilder() {
+		}
 
 		public Descriptor.DescriptorBuilder id(String id) {
 
@@ -189,8 +190,8 @@ public final class Descriptor {
 		public String toString() {
 
 			return "Descriptor.DescriptorBuilder(id=" + this.id + ", href=" + this.href + ", name=" + this.name + ", doc="
-					+ this.doc + ", type=" + this.type + ", ext=" + this.ext + ", rt=" + this.rt + ", descriptor="
-					+ this.descriptor + ")";
+		+ this.doc + ", type=" + this.type + ", ext=" + this.ext + ", rt=" + this.rt + ", descriptor="
+		+ this.descriptor + ")";
 		}
 	}
 }

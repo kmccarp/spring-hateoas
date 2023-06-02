@@ -55,8 +55,8 @@ public class UberLinkDiscoverer implements LinkDiscoverer {
 	public Optional<Link> findLinkWithRel(LinkRelation rel, String representation) {
 
 		return getLinks(representation).stream() //
-				.filter(it -> it.hasRel(rel)) //
-				.findFirst();
+	.filter(it -> it.hasRel(rel)) //
+	.findFirst();
 	}
 
 	/*
@@ -67,8 +67,8 @@ public class UberLinkDiscoverer implements LinkDiscoverer {
 	public Optional<Link> findLinkWithRel(LinkRelation rel, InputStream representation) {
 
 		return getLinks(representation).stream() //
-				.filter(it -> it.hasRel(rel)) //
-				.findFirst();
+	.filter(it -> it.hasRel(rel)) //
+	.findFirst();
 	}
 
 	/*
@@ -79,8 +79,8 @@ public class UberLinkDiscoverer implements LinkDiscoverer {
 	public Links findLinksWithRel(LinkRelation rel, String representation) {
 
 		return getLinks(representation).stream() //
-				.filter(it -> it.hasRel(rel)) //
-				.collect(Links.collector());
+	.filter(it -> it.hasRel(rel)) //
+	.collect(Links.collector());
 	}
 
 	/*
@@ -91,8 +91,8 @@ public class UberLinkDiscoverer implements LinkDiscoverer {
 	public Links findLinksWithRel(LinkRelation rel, InputStream representation) {
 
 		return getLinks(representation).stream() //
-				.filter(it -> it.hasRel(rel)) //
-				.collect(Links.collector());
+	.filter(it -> it.hasRel(rel)) //
+	.collect(Links.collector());
 	}
 
 	/*

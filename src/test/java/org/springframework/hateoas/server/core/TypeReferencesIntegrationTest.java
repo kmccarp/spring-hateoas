@@ -59,27 +59,25 @@ class TypeReferencesIntegrationTest {
 	private static final String COLLECTION_JSON_USER = "{ \"name\" : \"firstname\", \"value\" : \"Dave\" }, { \"name\" : \"lastname\", \"value\" : \"Matthews\" }";
 
 	private static final String RESOURCE_HAL = String.format(
-			"{ \"_links\" : { \"self\" : { \"href\" : \"/resource\" } }, %s }",
-			HAL_USER);
+"{ \"_links\" : { \"self\" : { \"href\" : \"/resource\" } }, %s }",
+HAL_USER);
 	private static final String RESOURCES_OF_USER_HAL = String
-			.format("{ \"_links\" : { \"self\" : { \"href\" : \"/resource\" } }, \"_embedded\" : { \"users\" : [ { %s } ] }}",
-					HAL_USER);
+.format("{ \"_links\" : { \"self\" : { \"href\" : \"/resource\" } }, \"_embedded\" : { \"users\" : [ { %s } ] }}",HAL_USER);
 	private static final String RESOURCES_OF_RESOURCE_HAL = String
-			.format("{ \"_links\" : { \"self\" : { \"href\" : \"/resource\" } }, \"_embedded\" : { \"users\" : [ %s ] }}",
-					RESOURCE_HAL);
+.format("{ \"_links\" : { \"self\" : { \"href\" : \"/resource\" } }, \"_embedded\" : { \"users\" : [ %s ] }}",RESOURCE_HAL);
 
 	private static final String RESOURCE_COLLECTION_JSON = String.format(
-			"{ \"collection\": { \"version\": \"1.0\", \"href\": \"localhost\", \"links\": [{ \"rel\": \"self\", \"href\": \"localhost\" }], \"items\": [{\"href\": \"localhost\", \"data\": [%s]}]}}",
-			COLLECTION_JSON_USER);
+"{ \"collection\": { \"version\": \"1.0\", \"href\": \"localhost\", \"links\": [{ \"rel\": \"self\", \"href\": \"localhost\" }], \"items\": [{\"href\": \"localhost\", \"data\": [%s]}]}}",
+COLLECTION_JSON_USER);
 	private static final String RESOURCES_OF_USER_COLLECTION_JSON = String.format(
-			"{ \"collection\": { \"version\": \"1.0\", \"href\": \"localhost\", \"links\": [{ \"rel\": \"self\", \"href\": \"localhost\" }], \"items\": [{\"href\": \"localhost\", \"data\": [%s]}]}}",
-			COLLECTION_JSON_USER);
+"{ \"collection\": { \"version\": \"1.0\", \"href\": \"localhost\", \"links\": [{ \"rel\": \"self\", \"href\": \"localhost\" }], \"items\": [{\"href\": \"localhost\", \"data\": [%s]}]}}",
+COLLECTION_JSON_USER);
 	private static final String RESOURCES_OF_RESOURCE_COLLECTION_JSON = String.format(
-			"{ \"collection\": { \"version\": \"1.0\", \"href\": \"localhost\", \"links\": [{ \"rel\": \"self\", \"href\": \"localhost\" }], \"items\": [{\"href\": \"localhost\", \"data\": [%s], \"links\": [{\"rel\":\"self\", \"href\": \"localhost\"}]}]}}",
-			COLLECTION_JSON_USER);
+"{ \"collection\": { \"version\": \"1.0\", \"href\": \"localhost\", \"links\": [{ \"rel\": \"self\", \"href\": \"localhost\" }], \"items\": [{\"href\": \"localhost\", \"data\": [%s], \"links\": [{\"rel\":\"self\", \"href\": \"localhost\"}]}]}}",
+COLLECTION_JSON_USER);
 
 	@Configuration
-	@EnableHypermediaSupport(type = { HypermediaType.HAL, HypermediaType.COLLECTION_JSON })
+	@EnableHypermediaSupport(type = {HypermediaType.HAL, HypermediaType.COLLECTION_JSON})
 	static class Config {
 
 		public @Bean RestTemplate template() {
@@ -87,7 +85,8 @@ class TypeReferencesIntegrationTest {
 		}
 	}
 
-	@Autowired RestTemplate template;
+	@Autowired
+	RestTemplate template;
 	MockRestServiceServer server;
 
 	@BeforeEach
@@ -104,7 +103,8 @@ class TypeReferencesIntegrationTest {
 		server.expect(requestTo("/resource")).andRespond(withSuccess(RESOURCE_HAL, MediaTypes.HAL_JSON));
 
 		ResponseEntity<EntityModel<User>> response = template.exchange("/resource", HttpMethod.GET, null,
-				new EntityModelType<User>() {});
+	new EntityModelType<User>() {
+	});
 
 		assertExpectedUserResource(response.getBody());
 	}
@@ -118,7 +118,8 @@ class TypeReferencesIntegrationTest {
 		server.expect(requestTo("/resource")).andRespond(withSuccess(RESOURCE_COLLECTION_JSON, MediaTypes.COLLECTION_JSON));
 
 		ResponseEntity<EntityModel<User>> response = template.exchange("/resource", HttpMethod.GET, null,
-				new EntityModelType<User>() {});
+	new EntityModelType<User>() {
+	});
 
 		assertExpectedUserResource(response.getBody());
 	}
@@ -132,7 +133,8 @@ class TypeReferencesIntegrationTest {
 		server.expect(requestTo("/resources")).andRespond(withSuccess(RESOURCES_OF_USER_HAL, MediaTypes.HAL_JSON));
 
 		ResponseEntity<CollectionModel<User>> response = template.exchange("/resources", HttpMethod.GET, null,
-				new CollectionModelType<User>() {});
+	new CollectionModelType<User>() {
+	});
 		CollectionModel<User> body = response.getBody();
 
 		assertThat(body.hasLink("self")).isTrue();
@@ -150,10 +152,11 @@ class TypeReferencesIntegrationTest {
 	void usesResourcesTypeReferenceWithCollectionJson() {
 
 		server.expect(requestTo("/resources"))
-				.andRespond(withSuccess(RESOURCES_OF_USER_COLLECTION_JSON, MediaTypes.COLLECTION_JSON));
+	.andRespond(withSuccess(RESOURCES_OF_USER_COLLECTION_JSON, MediaTypes.COLLECTION_JSON));
 
 		ResponseEntity<CollectionModel<User>> response = template.exchange("/resources", HttpMethod.GET, null,
-				new CollectionModelType<User>() {});
+	new CollectionModelType<User>() {
+	});
 		CollectionModel<User> body = response.getBody();
 
 		assertThat(body.hasLink("self")).isTrue();
@@ -173,7 +176,8 @@ class TypeReferencesIntegrationTest {
 		server.expect(requestTo("/resources")).andRespond(withSuccess(RESOURCES_OF_RESOURCE_HAL, MediaTypes.HAL_JSON));
 
 		ResponseEntity<CollectionModel<EntityModel<User>>> response = template.exchange("/resources", HttpMethod.GET, null,
-				new CollectionModelType<EntityModel<User>>() {});
+	new CollectionModelType<EntityModel<User>>() {
+	});
 		CollectionModel<EntityModel<User>> body = response.getBody();
 
 		assertThat(body.hasLink("self")).isTrue();
@@ -191,10 +195,11 @@ class TypeReferencesIntegrationTest {
 	void usesResourcesOfResourceTypeReferenceWithCollectionJson() {
 
 		server.expect(requestTo("/resources"))
-				.andRespond(withSuccess(RESOURCES_OF_RESOURCE_COLLECTION_JSON, MediaTypes.COLLECTION_JSON));
+	.andRespond(withSuccess(RESOURCES_OF_RESOURCE_COLLECTION_JSON, MediaTypes.COLLECTION_JSON));
 
 		ResponseEntity<CollectionModel<EntityModel<User>>> response = template.exchange("/resources", HttpMethod.GET, null,
-				new CollectionModelType<EntityModel<User>>() {});
+	new CollectionModelType<EntityModel<User>>() {
+	});
 		CollectionModel<EntityModel<User>> body = response.getBody();
 
 		assertThat(body.hasLink("self")).isTrue();

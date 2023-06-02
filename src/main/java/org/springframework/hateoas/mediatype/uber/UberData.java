@@ -78,16 +78,16 @@ final class UberData {
 	 * Set of all Spring HATEOAS resource types.
 	 */
 	private static final HashSet<Class<?>> RESOURCE_TYPES = new HashSet<>(
-			Arrays.asList(RepresentationModel.class, EntityModel.class, CollectionModel.class, PagedModel.class));
+Arrays.asList(RepresentationModel.class, EntityModel.class, CollectionModel.class, PagedModel.class));
 
 	@JsonCreator
 	UberData(@JsonProperty("id") @Nullable String id, @JsonProperty("name") @Nullable String name,
-			@JsonProperty("label") @Nullable String label, @JsonProperty("rel") @Nullable List<LinkRelation> rel,
-			@JsonProperty("url") @Nullable String url, @JsonProperty("action") UberAction action,
-			@JsonProperty("transclude") boolean transclude, @JsonProperty("model") @Nullable String model,
-			@JsonProperty("sending") @Nullable List<String> sending,
-			@JsonProperty("accepting") @Nullable List<String> accepting, @JsonProperty("value") @Nullable Object value,
-			@JsonProperty("data") @Nullable List<UberData> data) {
+@JsonProperty("label") @Nullable String label, @JsonProperty("rel") @Nullable List<LinkRelation> rel,
+@JsonProperty("url") @Nullable String url, @JsonProperty("action") UberAction action,
+@JsonProperty("transclude") boolean transclude, @JsonProperty("model") @Nullable String model,
+@JsonProperty("sending") @Nullable List<String> sending,
+@JsonProperty("accepting") @Nullable List<String> accepting, @JsonProperty("value") @Nullable Object value,
+@JsonProperty("data") @Nullable List<UberData> data) {
 
 		this.id = id;
 		this.name = name;
@@ -124,8 +124,8 @@ final class UberData {
 	public Boolean isTemplated() {
 
 		return Optional.ofNullable(this.url) //
-				.map(s -> s.contains("{?") ? true : null) //
-				.orElse(null);
+	.map(s -> s.contains("{?") ? true : null) //
+	.orElse(null);
 	}
 
 	/*
@@ -150,10 +150,10 @@ final class UberData {
 		}
 
 		return Optional.ofNullable(this.rel) //
-				.map(rels -> rels.stream() //
-						.map(rel -> Link.of(url, rel)) //
-						.collect(Collectors.toList())) //
-				.orElse(Collections.emptyList());
+	.map(rels -> rels.stream() //
+.map(rel -> Link.of(url, rel)) //
+.collect(Collectors.toList())) //
+	.orElse(Collections.emptyList());
 	}
 
 	private boolean hasUrl(@Nullable String url) {
@@ -201,7 +201,7 @@ final class UberData {
 		List<UberData> data = extractLinks(resources);
 
 		data.addAll(resources.getContent().stream().map(UberData::doExtractLinksAndContent)
-				.map(uberData -> new UberData().withData(uberData)).collect(Collectors.toList()));
+	.map(uberData -> new UberData().withData(uberData)).collect(Collectors.toList()));
 
 		return data;
 	}
@@ -214,10 +214,10 @@ final class UberData {
 		if (resources.getMetadata() != null) {
 
 			collectionOfResources.add(new UberData().withName("page")
-					.withData(Arrays.asList(new UberData().withName("number").withValue(resources.getMetadata().getNumber()),
-							new UberData().withName("size").withValue(resources.getMetadata().getSize()),
-							new UberData().withName("totalElements").withValue(resources.getMetadata().getTotalElements()),
-							new UberData().withName("totalPages").withValue(resources.getMetadata().getTotalPages()))));
+		.withData(Arrays.asList(new UberData().withName("number").withValue(resources.getMetadata().getNumber()),
+	new UberData().withName("size").withValue(resources.getMetadata().getSize()),
+	new UberData().withName("totalElements").withValue(resources.getMetadata().getTotalElements()),
+	new UberData().withName("totalPages").withValue(resources.getMetadata().getTotalPages()))));
 		}
 
 		return collectionOfResources;
@@ -232,10 +232,10 @@ final class UberData {
 	private static List<UberData> extractLinks(Links links) {
 
 		return urlRelMap(links).entrySet().stream() //
-				.map(entry -> new UberData() //
-						.withUrl(entry.getKey()) //
-						.withRel(entry.getValue().getRels())) //
-				.collect(Collectors.toList());
+	.map(entry -> new UberData() //
+.withUrl(entry.getKey()) //
+.withRel(entry.getValue().getRels())) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -269,10 +269,10 @@ final class UberData {
 	private static Optional<UberData> extractContent(@Nullable Object content) {
 
 		return Optional.ofNullable(content) //
-				.filter(it -> !RESOURCE_TYPES.contains(it.getClass())) //
-				.map(it -> new UberData() //
-						.withName(StringUtils.uncapitalize(it.getClass().getSimpleName())) //
-						.withData(extractProperties(it)));
+	.filter(it -> !RESOURCE_TYPES.contains(it.getClass())) //
+	.map(it -> new UberData() //
+.withName(StringUtils.uncapitalize(it.getClass().getSimpleName())) //
+.withData(extractProperties(it)));
 	}
 
 	/**
@@ -319,38 +319,38 @@ final class UberData {
 	private static List<UberData> extractAffordances(Links links) {
 
 		return links.stream() //
-				.flatMap(it -> it.getAffordances().stream()) //
-				.map(it -> it.getAffordanceModel(MediaTypes.UBER_JSON)) //
-				.map(UberAffordanceModel.class::cast) //
-				.map(it -> {
+	.flatMap(it -> it.getAffordances().stream()) //
+	.map(it -> it.getAffordanceModel(MediaTypes.UBER_JSON)) //
+	.map(UberAffordanceModel.class::cast) //
+	.map(it -> {
 
-					if (it.hasHttpMethod(HttpMethod.GET)) {
+		if (it.hasHttpMethod(HttpMethod.GET)) {
 
-						String suffix = it.getQueryProperties().stream() //
-								.map(UberData::getName) //
-								.collect(Collectors.joining(","));
+			String suffix = it.getQueryProperties().stream() //
+		.map(UberData::getName) //
+		.collect(Collectors.joining(","));
 
-						if (!it.getQueryMethodParameters().isEmpty()) {
-							suffix = "{?" + suffix + "}";
-						}
+			if (!it.getQueryMethodParameters().isEmpty()) {
+				suffix = "{?" + suffix + "}";
+			}
 
-						return new UberData() //
-								.withName(it.getName()) //
-								.withRel(Collections.singletonList(LinkRelation.of(it.getName())))
-								.withUrl(it.getLink().expand().getHref() + suffix) //
-								.withAction(it.getAction());
+			return new UberData() //
+		.withName(it.getName()) //
+		.withRel(Collections.singletonList(LinkRelation.of(it.getName())))
+		.withUrl(it.getLink().expand().getHref() + suffix) //
+		.withAction(it.getAction());
 
-					} else {
+		} else {
 
-						return new UberData() //
-								.withName(it.getName()) //
-								.withRel(Collections.singletonList(LinkRelation.of(it.getName())))
-								.withUrl(it.getLink().expand().getHref()).withModel(it.getInputProperties().stream() //
-										.map(UberData::getName).map(property -> property + "={" + property + "}") //
-										.collect(Collectors.joining("&")))
-								.withAction(it.getAction());
-					}
-				}).collect(Collectors.toList());
+			return new UberData() //
+		.withName(it.getName()) //
+		.withRel(Collections.singletonList(LinkRelation.of(it.getName())))
+		.withUrl(it.getLink().expand().getHref()).withModel(it.getInputProperties().stream() //
+		.map(UberData::getName).map(property -> property + "={" + property + "}") //
+		.collect(Collectors.joining("&")))
+		.withAction(it.getAction());
+		}
+	}).collect(Collectors.toList());
 	}
 
 	/**
@@ -361,25 +361,25 @@ final class UberData {
 	 * @return
 	 */
 	private static List<UberData> mergeDeclaredLinksIntoAffordanceLinks(List<UberData> affordanceBasedLinks,
-			List<UberData> links) {
+List<UberData> links) {
 
 		return affordanceBasedLinks.stream() //
-				.flatMap(affordance -> links.stream() //
-						.filter(data -> data.hasUrl(affordance.getUrl())) //
-						.map(data -> {
+	.flatMap(affordance -> links.stream() //
+.filter(data -> data.hasUrl(affordance.getUrl())) //
+.map(data -> {
 
-							if (data.getAction() == affordance.getAction()) {
+	if (data.getAction() == affordance.getAction()) {
 
-								List<LinkRelation> rels = new ArrayList<>(data.getRel());
-								rels.addAll(affordance.getRel());
+		List<LinkRelation> rels = new ArrayList<>(data.getRel());
+		rels.addAll(affordance.getRel());
 
-								return affordance.withName(rels.get(0).value()) //
-										.withRel(rels);
-							} else {
-								return affordance;
-							}
-						}))
-				.collect(Collectors.toList());
+		return affordance.withName(rels.get(0).value()) //
+	.withRel(rels);
+	} else {
+		return affordance;
+	}
+}))
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -395,7 +395,7 @@ final class UberData {
 		}
 
 		return PropertyUtils.extractPropertyValues(obj).entrySet().stream()
-				.map(entry -> new UberData().withName(entry.getKey()).withValue(entry.getValue())).collect(Collectors.toList());
+	.map(entry -> new UberData().withName(entry.getKey()).withValue(entry.getValue())).collect(Collectors.toList());
 	}
 
 	/**
@@ -407,8 +407,8 @@ final class UberData {
 	UberData withId(@Nullable String id) {
 
 		return this.id == id ? this
-				: new UberData(id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -419,8 +419,8 @@ final class UberData {
 	 */
 	UberData withName(@Nullable String name) {
 		return this.name == name ? this
-				: new UberData(this.id, name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -432,8 +432,8 @@ final class UberData {
 	UberData withLabel(@Nullable String label) {
 
 		return this.label == label ? this
-				: new UberData(this.id, this.name, label, this.rel, this.url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, label, this.rel, this.url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -445,8 +445,8 @@ final class UberData {
 	UberData withRel(@Nullable List<LinkRelation> rel) {
 
 		return this.rel == rel ? this
-				: new UberData(this.id, this.name, this.label, rel, this.url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, rel, this.url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -457,8 +457,8 @@ final class UberData {
 	 */
 	UberData withUrl(@Nullable String url) {
 		return this.url == url ? this
-				: new UberData(this.id, this.name, this.label, this.rel, url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -469,8 +469,8 @@ final class UberData {
 	 */
 	UberData withAction(@Nullable UberAction action) {
 		return this.action == action ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -482,8 +482,8 @@ final class UberData {
 	UberData withTransclude(boolean transclude) {
 
 		return this.transclude == transclude ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, transclude, this.model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, transclude, this.model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -495,8 +495,8 @@ final class UberData {
 	UberData withModel(@Nullable String model) {
 
 		return this.model == model ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, model,
-						this.sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, model,
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -507,8 +507,8 @@ final class UberData {
 	 */
 	UberData withSending(@Nullable List<String> sending) {
 		return this.sending == sending ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-						sending, this.accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
+	sending, this.accepting, this.value, this.data);
 	}
 
 	/**
@@ -520,8 +520,8 @@ final class UberData {
 	UberData withAccepting(@Nullable List<String> accepting) {
 
 		return this.accepting == accepting ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-						this.sending, accepting, this.value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
+	this.sending, accepting, this.value, this.data);
 	}
 
 	/**
@@ -533,8 +533,8 @@ final class UberData {
 	UberData withValue(@Nullable Object value) {
 
 		return this.value == value ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, value, this.data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, value, this.data);
 	}
 
 	/**
@@ -546,8 +546,8 @@ final class UberData {
 	UberData withData(@Nullable List<UberData> data) {
 
 		return this.data == data ? this
-				: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-						this.sending, this.accepting, this.value, data);
+	: new UberData(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
+	this.sending, this.accepting, this.value, data);
 	}
 
 	@JsonProperty
@@ -619,27 +619,27 @@ final class UberData {
 			return false;
 		UberData uberData = (UberData) o;
 		return this.transclude == uberData.transclude && Objects.equals(this.id, uberData.id)
-				&& Objects.equals(this.name, uberData.name) && Objects.equals(this.label, uberData.label)
-				&& Objects.equals(this.rel, uberData.rel) && Objects.equals(this.url, uberData.url)
-				&& this.action == uberData.action && Objects.equals(this.model, uberData.model)
-				&& Objects.equals(this.sending, uberData.sending) && Objects.equals(this.accepting, uberData.accepting)
-				&& Objects.equals(this.value, uberData.value) && Objects.equals(this.data, uberData.data);
+	&& Objects.equals(this.name, uberData.name) && Objects.equals(this.label, uberData.label)
+	&& Objects.equals(this.rel, uberData.rel) && Objects.equals(this.url, uberData.url)
+	&& this.action == uberData.action && Objects.equals(this.model, uberData.model)
+	&& Objects.equals(this.sending, uberData.sending) && Objects.equals(this.accepting, uberData.accepting)
+	&& Objects.equals(this.value, uberData.value) && Objects.equals(this.data, uberData.data);
 	}
 
 	@Override
 	public int hashCode() {
 
 		return Objects.hash(this.id, this.name, this.label, this.rel, this.url, this.action, this.transclude, this.model,
-				this.sending, this.accepting, this.value, this.data);
+	this.sending, this.accepting, this.value, this.data);
 	}
 
 	@Override
 	public String toString() {
 
 		return "UberData(id='" + this.id + '\'' + ", name='" + this.name + '\'' + ", label='" + this.label + '\'' + ", rel="
-				+ this.rel + ", url='" + this.url + '\'' + ", action=" + this.action + ", transclude=" + this.transclude
-				+ ", model='" + this.model + '\'' + ", sending=" + this.sending + ", accepting=" + this.accepting + ", value="
-				+ this.value + ", data=" + this.data + ')';
+	+ this.rel + ", url='" + this.url + '\'' + ", action=" + this.action + ", transclude=" + this.transclude
+	+ ", model='" + this.model + '\'' + ", sending=" + this.sending + ", accepting=" + this.accepting + ", value="
+	+ this.value + ", data=" + this.data + ')';
 	}
 
 	/**
@@ -650,7 +650,8 @@ final class UberData {
 		private Link link;
 		private List<LinkRelation> rels = new ArrayList<>();
 
-		public LinkAndRels() {}
+		public LinkAndRels() {
+		}
 
 		public Link getLink() {
 			return this.link;

@@ -72,7 +72,7 @@ class HalEmbeddedBuilder {
 	}
 
 	private HalEmbeddedBuilder(LinkRelationProvider provider, CurieProvider curieProvider, EmbeddedWrappers wrappers,
-			Function<String, String> relationTransformer) {
+Function<String, String> relationTransformer) {
 
 		this.provider = provider;
 		this.curieProvider = curieProvider;
@@ -121,32 +121,32 @@ class HalEmbeddedBuilder {
 	private Collection<Object> asCollection(@Nullable Object source) {
 
 		return source instanceof Collection //
-				? (Collection<Object>) source //
-				: source == null ? Collections.emptySet() : Collections.singleton(source);
+	? (Collection<Object>) source //
+	: source == null ? Collections.emptySet() : Collections.singleton(source);
 	}
 
 	private HalLinkRelation getDefaultedRelFor(EmbeddedWrapper wrapper, boolean forCollection) {
 
 		return wrapper.getRel() //
-				.map(HalLinkRelation::of) //
-				.orElseGet(() -> {
+	.map(HalLinkRelation::of) //
+	.orElseGet(() -> {
 
-					Class<?> type = wrapper.getRelTargetType();
+		Class<?> type = wrapper.getRelTargetType();
 
-					if (type == null) {
-						throw new IllegalStateException(String.format(INVALID_EMBEDDED_WRAPPER, wrapper));
-					}
+		if (type == null) {
+			throw new IllegalStateException(String.format(INVALID_EMBEDDED_WRAPPER, wrapper));
+		}
 
-					LinkRelation rel = forCollection //
-							? provider.getCollectionResourceRelFor(type) //
-							: provider.getItemResourceRelFor(type);
+		LinkRelation rel = forCollection //
+	? provider.getCollectionResourceRelFor(type) //
+	: provider.getItemResourceRelFor(type);
 
-					rel = relationTransformer == NO_TRANSFORMER ? rel : rel.map(relationTransformer);
+		rel = relationTransformer == NO_TRANSFORMER ? rel : rel.map(relationTransformer);
 
-					return curieProvider != CurieProvider.NONE //
-							? curieProvider.getNamespacedRelFor(rel) //
-							: HalLinkRelation.of(rel);
-				});
+		return curieProvider != CurieProvider.NONE //
+	? curieProvider.getNamespacedRelFor(rel) //
+	: HalLinkRelation.of(rel);
+	});
 	}
 
 	/**
@@ -167,6 +167,6 @@ class HalEmbeddedBuilder {
 	HalEmbeddedBuilder withRelationTransformer(Function<String, String> relationTransformer) {
 
 		return this.relationTransformer == relationTransformer ? this
-				: new HalEmbeddedBuilder(this.provider, this.curieProvider, this.wrappers, relationTransformer);
+	: new HalEmbeddedBuilder(this.provider, this.curieProvider, this.wrappers, relationTransformer);
 	}
 }

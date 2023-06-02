@@ -54,8 +54,8 @@ class UriComponentsBuilderFactory {
 		URI baseUri = getCachedBaseUri();
 
 		return baseUri != null //
-				? UriComponentsBuilder.fromUri(baseUri) //
-				: cacheBaseUri(ServletUriComponentsBuilder.fromCurrentServletMapping());
+	? UriComponentsBuilder.fromUri(baseUri) //
+	: cacheBaseUri(ServletUriComponentsBuilder.fromCurrentServletMapping());
 	}
 
 	public static UriComponentsBuilder forMapping(UriMapping mapping) {

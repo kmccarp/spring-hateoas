@@ -62,7 +62,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @since 0.19
  */
 @Configuration(proxyBeanMethods = false)
-@EnablePluginRegistries({ LinkDiscoverer.class })
+@EnablePluginRegistries({LinkDiscoverer.class})
 public class HateoasConfiguration {
 
 	static String I18N_BASE_NAME = "rest-messages";
@@ -77,7 +77,7 @@ public class HateoasConfiguration {
 
 	@Bean
 	WebConverters hypermediaWebMvcConverters(ObjectProvider<ObjectMapper> mapper,
-			List<HypermediaMappingInformation> information, Optional<HypermediaMappingInformationComparator> comparator) {
+List<HypermediaMappingInformation> information, Optional<HypermediaMappingInformationComparator> comparator) {
 
 		comparator.ifPresent(information::sort);
 
@@ -90,8 +90,8 @@ public class HateoasConfiguration {
 	LinkRelationProvider defaultRelProvider() {
 
 		return ClassUtils.isPresent("org.atteo.evo.inflector.English", null) //
-				? new EvoInflectorLinkRelationProvider()
-				: new DefaultLinkRelationProvider();
+	? new EvoInflectorLinkRelationProvider()
+	: new DefaultLinkRelationProvider();
 	}
 
 	@Bean
@@ -102,7 +102,7 @@ public class HateoasConfiguration {
 	@Primary
 	@Bean
 	DelegatingLinkRelationProvider _relProvider(
-			PluginRegistry<LinkRelationProvider, LookupContext> relProviderPluginRegistry) {
+PluginRegistry<LinkRelationProvider, LookupContext> relProviderPluginRegistry) {
 		return new DelegatingLinkRelationProvider(relProviderPluginRegistry);
 	}
 
@@ -112,7 +112,7 @@ public class HateoasConfiguration {
 		PluginRegistryFactoryBean<LinkRelationProvider, LookupContext> factory = new PluginRegistryFactoryBean<>();
 		factory.setApplicationContext(context);
 		factory.setType(LinkRelationProvider.class);
-		factory.setExclusions(new Class[] { DelegatingLinkRelationProvider.class });
+		factory.setExclusions(new Class[]{DelegatingLinkRelationProvider.class});
 		factory.afterPropertiesSet();
 
 		return factory.getObject();
@@ -172,9 +172,9 @@ public class HateoasConfiguration {
 
 		try {
 			return Arrays //
-					.stream(context.getResources(String.format("classpath:%s%s.properties", baseName, withWildcard ? "*" : ""))) //
-					.filter(Resource::exists) //
-					.collect(Collectors.toList());
+		.stream(context.getResources(String.format("classpath:%s%s.properties", baseName, withWildcard ? "*" : ""))) //
+		.filter(Resource::exists) //
+		.collect(Collectors.toList());
 
 		} catch (IOException e) {
 			return Collections.emptyList();

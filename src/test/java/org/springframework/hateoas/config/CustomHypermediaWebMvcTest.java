@@ -66,10 +66,10 @@ class CustomHypermediaWebMvcTest {
 	void getUsingCustomMediaType() throws Exception {
 
 		String results = this.mockMvc.perform(get("/employees/1").accept(FRODO_MEDIATYPE)) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, FRODO_MEDIATYPE.toString())) //
-				.andReturn() //
-				.getResponse() //
-				.getContentAsString();
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, FRODO_MEDIATYPE.toString())) //
+	.andReturn() //
+	.getResponse() //
+	.getContentAsString();
 
 		assertThat(results).isEqualTo(read(new ClassPathResource("webmvc-frodo.json", getClass())));
 	}
@@ -96,7 +96,7 @@ class CustomHypermediaWebMvcTest {
 		@GetMapping("/employees/1")
 		public EntityModel<Employee> findOne() {
 			return EntityModel.of(new Employee("Frodo Baggins", "ring bearer"),
-					linkTo(methodOn(EmployeeController.class).findOne()).withSelfRel());
+		linkTo(methodOn(EmployeeController.class).findOne()).withSelfRel());
 		}
 	}
 }

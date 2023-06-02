@@ -61,13 +61,14 @@ public class HalFormsConfiguration {
 	 * @param halConfiguration must not be {@literal null}.
 	 */
 	public HalFormsConfiguration(HalConfiguration halConfiguration) {
-		this(halConfiguration, new HashMap<>(), new HalFormsOptionsFactory(), __ -> {},
-				Collections.singletonList(MediaTypes.HAL_FORMS_JSON));
+		this(halConfiguration, new HashMap<>(), new HalFormsOptionsFactory(), __ -> {
+	},
+	Collections.singletonList(MediaTypes.HAL_FORMS_JSON));
 	}
 
 	private HalFormsConfiguration(HalConfiguration halConfiguration, Map<Class<?>, String> patterns,
-			HalFormsOptionsFactory options, @Nullable Consumer<ObjectMapper> objectMapperCustomizer,
-			List<MediaType> mediaTypes) {
+HalFormsOptionsFactory options, @Nullable Consumer<ObjectMapper> objectMapperCustomizer,
+List<MediaType> mediaTypes) {
 
 		Assert.notNull(halConfiguration, "HalConfiguration must not be null!");
 		Assert.notNull(patterns, "Patterns must not be null!");
@@ -112,8 +113,8 @@ public class HalFormsConfiguration {
 		Assert.notNull(objectMapperCustomizer, "ObjectMapper customizer must not be null!");
 
 		return this.objectMapperCustomizer == objectMapperCustomizer //
-				? this //
-				: new HalFormsConfiguration(halConfiguration, patterns, options, objectMapperCustomizer, mediaTypes);
+	? this //
+	: new HalFormsConfiguration(halConfiguration, patterns, options, objectMapperCustomizer, mediaTypes);
 	}
 
 	/**
@@ -165,10 +166,10 @@ public class HalFormsConfiguration {
 	 * @return
 	 */
 	public <T> HalFormsConfiguration withOptions(Class<T> type, String property,
-			Function<PropertyMetadata, HalFormsOptions> creator) {
+Function<PropertyMetadata, HalFormsOptions> creator) {
 
 		return new HalFormsConfiguration(halConfiguration, patterns, options.withOptions(type, property, creator),
-				objectMapperCustomizer, mediaTypes);
+	objectMapperCustomizer, mediaTypes);
 	}
 
 	/**

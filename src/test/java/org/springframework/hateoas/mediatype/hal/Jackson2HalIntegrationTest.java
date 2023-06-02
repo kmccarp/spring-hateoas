@@ -92,7 +92,7 @@ class Jackson2HalIntegrationTest {
 	static final String ANNOTATED_PAGED_RESOURCES = "{\"_embedded\":{\"pojos\":[{\"text\":\"test1\",\"number\":1,\"_links\":{\"self\":{\"href\":\"localhost\"}}},{\"text\":\"test2\",\"number\":2,\"_links\":{\"self\":{\"href\":\"localhost\"}}}]},\"_links\":{\"next\":{\"href\":\"foo\"},\"prev\":{\"href\":\"bar\"}},\"page\":{\"size\":2,\"totalElements\":4,\"totalPages\":2,\"number\":0}}";
 
 	static final Links PAGINATION_LINKS = Links.of(Link.of("foo", IanaLinkRelations.NEXT.value()),
-			Link.of("bar", IanaLinkRelations.PREV.value()));
+Link.of("bar", IanaLinkRelations.PREV.value()));
 
 	static final String CURIED_DOCUMENT = "{\"_links\":{\"self\":{\"href\":\"foo\"},\"foo:myrel\":{\"href\":\"bar\"},\"curies\":[{\"href\":\"http://localhost:8080/rels/{rel}\",\"name\":\"foo\",\"templated\":true}]}}";
 	static final String MULTIPLE_CURIES_DOCUMENT = "{\"_links\":{\"default:myrel\":{\"href\":\"foo\"},\"curies\":[{\"href\":\"bar\",\"name\":\"foo\"},{\"href\":\"foo\",\"name\":\"bar\"}]}}";
@@ -133,11 +133,11 @@ class Jackson2HalIntegrationTest {
 
 		RepresentationModel<?> resourceSupport = new RepresentationModel<>();
 		resourceSupport.add(Link.of("localhost", "self") //
-				.withHreflang("en") //
-				.withTitle("the title") //
-				.withType("the type") //
-				.withMedia("the media") //
-				.withDeprecation("/customers/deprecated"));
+	.withHreflang("en") //
+	.withTitle("the title") //
+	.withType("the type") //
+	.withMedia("the media") //
+	.withDeprecation("/customers/deprecated"));
 
 		assertThat(mapper.writeValueAsString(resourceSupport)).isEqualTo(SINGLE_WITH_ALL_EXTRA_ATTRIBUTES);
 	}
@@ -152,10 +152,10 @@ class Jackson2HalIntegrationTest {
 
 		RepresentationModel<?> expected = new RepresentationModel<>();
 		expected.add(Link.of("localhost", "self") //
-				.withHreflang("en") //
-				.withTitle("the title") //
-				.withType("the type") //
-				.withDeprecation("/customers/deprecated"));
+	.withHreflang("en") //
+	.withTitle("the title") //
+	.withType("the type") //
+	.withDeprecation("/customers/deprecated"));
 
 		assertThat(mapper.readValue(SINGLE_WITH_ALL_EXTRA_ATTRIBUTES, RepresentationModel.class)).isEqualTo(expected);
 	}
@@ -235,7 +235,7 @@ class Jackson2HalIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<String> result = mapper.readValue(SIMPLE_EMBEDDED_RESOURCE_REFERENCE,
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class, String.class));
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class, String.class));
 
 		assertThat(result).isEqualTo(expected);
 
@@ -264,8 +264,8 @@ class Jackson2HalIntegrationTest {
 
 		TypeFactory typeFactory = mapper.getTypeFactory();
 		CollectionModel<EntityModel<SimplePojo>> result = mapper.readValue(SINGLE_EMBEDDED_RESOURCE_REFERENCE,
-				typeFactory.constructParametricType(CollectionModel.class,
-						typeFactory.constructParametricType(EntityModel.class, SimplePojo.class)));
+	typeFactory.constructParametricType(CollectionModel.class,
+typeFactory.constructParametricType(EntityModel.class, SimplePojo.class)));
 
 		assertThat(result).isEqualTo(expected);
 
@@ -287,8 +287,8 @@ class Jackson2HalIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<EntityModel<SimplePojo>> result = mapper.readValue(LIST_EMBEDDED_RESOURCE_REFERENCE,
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, SimplePojo.class)));
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, SimplePojo.class)));
 
 		assertThat(result).isEqualTo(expected);
 	}
@@ -321,8 +321,8 @@ class Jackson2HalIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<EntityModel<SimpleAnnotatedPojo>> result = mapper.readValue(ANNOTATED_EMBEDDED_RESOURCE_REFERENCE,
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, SimpleAnnotatedPojo.class)));
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, SimpleAnnotatedPojo.class)));
 
 		assertThat(result).isEqualTo(expected);
 	}
@@ -342,8 +342,8 @@ class Jackson2HalIntegrationTest {
 	void deserializesMultipleAnnotatedResourceResourcesAsEmbedded() throws Exception {
 
 		CollectionModel<EntityModel<SimpleAnnotatedPojo>> result = mapper.readValue(ANNOTATED_EMBEDDED_RESOURCES_REFERENCE,
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, SimpleAnnotatedPojo.class)));
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, SimpleAnnotatedPojo.class)));
 
 		assertThat(result).isEqualTo(setupAnnotatedResources());
 	}
@@ -362,8 +362,8 @@ class Jackson2HalIntegrationTest {
 	@Test
 	void deserializesPagedResource() throws Exception {
 		PagedModel<EntityModel<SimpleAnnotatedPojo>> result = mapper.readValue(ANNOTATED_PAGED_RESOURCES,
-				mapper.getTypeFactory().constructParametricType(PagedModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, SimpleAnnotatedPojo.class)));
+	mapper.getTypeFactory().constructParametricType(PagedModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, SimpleAnnotatedPojo.class)));
 
 		assertThat(result).isEqualTo(setupAnnotatedPagedResources());
 	}
@@ -375,7 +375,7 @@ class Jackson2HalIntegrationTest {
 	void rendersCuriesCorrectly() throws Exception {
 
 		CollectionModel<Object> resources = CollectionModel.of(Collections.emptySet(), Link.of("foo"),
-				Link.of("bar", "myrel"));
+	Link.of("bar", "myrel"));
 
 		assertThat(getCuriedObjectMapper().writeValueAsString(resources)).isEqualTo(CURIED_DOCUMENT);
 	}
@@ -469,13 +469,13 @@ class Jackson2HalIntegrationTest {
 	void rendersSingleLinkAsArrayWhenConfigured() throws Exception {
 
 		ObjectMapper mapper = HalTestUtils
-				.halObjectMapper(new HalConfiguration().withRenderSingleLinks(RenderSingleLinks.AS_ARRAY));
+	.halObjectMapper(new HalConfiguration().withRenderSingleLinks(RenderSingleLinks.AS_ARRAY));
 
 		RepresentationModel<?> resourceSupport = new RepresentationModel<>();
 		resourceSupport.add(Link.of("localhost").withSelfRel());
 
 		assertThat(mapper.writeValueAsString(resourceSupport))
-				.isEqualTo("{\"_links\":{\"self\":[{\"href\":\"localhost\"}]}}");
+	.isEqualTo("{\"_links\":{\"self\":[{\"href\":\"localhost\"}]}}");
 	}
 
 	/**
@@ -500,13 +500,13 @@ class Jackson2HalIntegrationTest {
 	void rendersSpecificRelWithSingleLinkAsArrayIfConfigured() throws Exception {
 
 		ObjectMapper mapper = HalTestUtils
-				.halObjectMapper(new HalConfiguration().withRenderSingleLinksFor("foo", RenderSingleLinks.AS_ARRAY));
+	.halObjectMapper(new HalConfiguration().withRenderSingleLinksFor("foo", RenderSingleLinks.AS_ARRAY));
 
 		RepresentationModel<?> resource = new RepresentationModel<>();
 		resource.add(Link.of("/some-href", "foo"));
 
 		assertThat(mapper.writeValueAsString(resource)) //
-				.isEqualTo("{\"_links\":{\"foo\":[{\"href\":\"/some-href\"}]}}");
+	.isEqualTo("{\"_links\":{\"foo\":[{\"href\":\"/some-href\"}]}}");
 	}
 
 	@Test // #1019
@@ -515,7 +515,7 @@ class Jackson2HalIntegrationTest {
 		Link link = Link.of("/some-href", "foo");
 
 		assertThat(mapper.writeValueAsString(new Jackson2HalModule.HalLink(link, ""))) //
-				.isEqualTo("{\"href\":\"/some-href\"}");
+	.isEqualTo("{\"href\":\"/some-href\"}");
 	}
 
 	@Test // #1019
@@ -538,18 +538,18 @@ class Jackson2HalIntegrationTest {
 		model.add(Link.of("/foo/form", IanaLinkRelations.EDIT_FORM));
 
 		ObjectMapper objectMapper = mapper.copy() //
-				.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE) //
-				.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+	.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE) //
+	.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
 		String result = objectMapper.writeValueAsString(model);
 
 		Stream.of("$._embedded", "$._links") //
-				.map(JsonPath::compile) //
-				.map(it -> it.<Map<String, Object>> read(result)) //
-				.forEach(it -> assertThat(it).containsKey("some_sample"));
+	.map(JsonPath::compile) //
+	.map(it -> it.<Map<String, Object>>read(result)) //
+	.forEach(it -> assertThat(it).containsKey("some_sample"));
 
-		assertThat(JsonPath.compile("$._links").<Map<String, Object>> read(result)) //
-				.containsKey(IanaLinkRelations.EDIT_FORM.value());
+		assertThat(JsonPath.compile("$._links").<Map<String, Object>>read(result)) //
+	.containsKey(IanaLinkRelations.EDIT_FORM.value());
 	}
 
 	@Test // #1132
@@ -559,16 +559,16 @@ class Jackson2HalIntegrationTest {
 		model.add(Link.of("/foo", LinkRelation.of("someSample")));
 
 		ObjectMapper mapper = HalTestUtils.halObjectMapper(new HalConfiguration() //
-				.withApplyPropertyNamingStrategy(false)) //
-				.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE) //
-				.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+	.withApplyPropertyNamingStrategy(false)) //
+	.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE) //
+	.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
 		String result = mapper.writeValueAsString(model);
 
 		Stream.of("$._embedded", "$._links") //
-				.map(JsonPath::compile) //
-				.map(it -> it.<Map<String, Object>> read(result)) //
-				.forEach(it -> assertThat(it).containsKey("someSample"));
+	.map(JsonPath::compile) //
+	.map(it -> it.<Map<String, Object>>read(result)) //
+	.forEach(it -> assertThat(it).containsKey("someSample"));
 	}
 
 	@Test // #1157, #1352
@@ -581,7 +581,7 @@ class Jackson2HalIntegrationTest {
 		EntityModel<?> model = EntityModel.of(map, Link.of("foo", IanaLinkRelations.SELF));
 
 		DocumentContext context = JsonPath.parse(mapper.writeValueAsString(model),
-				Configuration.defaultConfiguration().addOptions(Option.SUPPRESS_EXCEPTIONS));
+	Configuration.defaultConfiguration().addOptions(Option.SUPPRESS_EXCEPTIONS));
 
 		assertThat(context.read("$.key", String.class)).isEqualTo("value");
 		assertThat(context.read("$.anotherKey", String.class)).isEqualTo("anotherValue");
@@ -634,14 +634,14 @@ class Jackson2HalIntegrationTest {
 		DocumentContext document = JsonPath.parse(mapper.writeValueAsString(model));
 
 		assertThatExceptionOfType(PathNotFoundException.class)
-				.isThrownBy(() -> document.read("$.curies", JSONObject.class));
+	.isThrownBy(() -> document.read("$.curies", JSONObject.class));
 	}
 
 	@Test // #1515
 	void rendersLinksWhenMapEntrySortingIsEnabled() throws Exception {
 
 		mapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
-				.writeValueAsString(new RepresentationModel<>().add(Link.of("/href")));
+	.writeValueAsString(new RepresentationModel<>().add(Link.of("/href")));
 	}
 
 	@Test // #1515
@@ -650,19 +650,20 @@ class Jackson2HalIntegrationTest {
 		List<SimplePojo> embbededs = Arrays.asList(new SimplePojo(), new SimpleAnnotatedPojo());
 
 		mapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
-				.writeValueAsString(CollectionModel.of(embbededs));
+	.writeValueAsString(CollectionModel.of(embbededs));
 	}
 
 	@Test // #1516
 	void considersNamingBase() throws Exception {
 
 		mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
-				.writeValueAsString(new RepresentationModel<>().add(Link.of("/href", "fooBar")));
+	.writeValueAsString(new RepresentationModel<>().add(Link.of("/href", "fooBar")));
 	}
 
 	@Relation(collectionRelation = "someSample")
 	static class SomeSample {
-		@JsonProperty String name;
+		@JsonProperty
+		String name;
 	}
 
 	private void verifyResolvedTitle(String resourceBundleKey) throws Exception {
@@ -720,7 +721,7 @@ class Jackson2HalIntegrationTest {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new Jackson2HalModule());
 		mapper.setHandlerInstantiator(
-				new HalHandlerInstantiator(new AnnotationLinkRelationProvider(), provider, MessageResolver.of(messageSource)));
+	new HalHandlerInstantiator(new AnnotationLinkRelationProvider(), provider, MessageResolver.of(messageSource)));
 
 		return mapper;
 	}

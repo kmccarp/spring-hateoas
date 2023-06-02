@@ -53,7 +53,7 @@ public class Links implements Iterable<Link> {
 		Assert.notNull(links, "Links must not be null!");
 
 		this.links = StreamSupport.stream(links.spliterator(), false) //
-				.collect(Collectors.toList());
+	.collect(Collectors.toList());
 	}
 
 	private Links(Link... links) {
@@ -290,8 +290,8 @@ public class Links implements Iterable<Link> {
 		Assert.notNull(links, "Links must not be null!");
 
 		List<Link> newLinks = MergeMode.REPLACE_BY_REL.equals(mode) //
-				? allWithoutRels(links)
-				: new ArrayList<>(this.links);
+	? allWithoutRels(links)
+	: new ArrayList<>(this.links);
 
 		links.forEach(it -> {
 
@@ -322,8 +322,8 @@ public class Links implements Iterable<Link> {
 		Assert.notNull(relation, "LinkRelation must not be null!");
 
 		return this.links.stream() //
-				.filter(it -> !it.hasRel(relation)) //
-				.collect(Links.collector());
+	.filter(it -> !it.hasRel(relation)) //
+	.collect(Links.collector());
 	}
 
 	/**
@@ -346,8 +346,8 @@ public class Links implements Iterable<Link> {
 	public Optional<Link> getLink(LinkRelation rel) {
 
 		return links.stream() //
-				.filter(it -> it.hasRel(rel)) //
-				.findFirst();
+	.filter(it -> it.hasRel(rel)) //
+	.findFirst();
 	}
 
 	/**
@@ -372,7 +372,7 @@ public class Links implements Iterable<Link> {
 	public Link getRequiredLink(LinkRelation relation) {
 
 		return getLink(relation) //
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Couldn't find link with rel '%s'!", relation)));
+	.orElseThrow(() -> new IllegalArgumentException(String.format("Couldn't find link with rel '%s'!", relation)));
 	}
 
 	/**
@@ -534,12 +534,12 @@ public class Links implements Iterable<Link> {
 	private List<Link> allWithoutRels(Iterable<Link> links) {
 
 		Set<LinkRelation> toFilter = StreamSupport.stream(links.spliterator(), false) //
-				.map(Link::getRel) //
-				.collect(Collectors.toSet());
+	.map(Link::getRel) //
+	.collect(Collectors.toSet());
 
 		return this.links.stream() //
-				.filter(it -> !toFilter.contains(it.getRel())) //
-				.collect(Collectors.toList());
+	.filter(it -> !toFilter.contains(it.getRel())) //
+	.collect(Collectors.toList());
 	}
 
 	/**

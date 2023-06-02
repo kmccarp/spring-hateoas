@@ -44,8 +44,8 @@ class AlpsLinkDiscoverUnitTest extends LinkDiscovererUnitTest {
 		Optional<Link> link = getDiscoverer().findLinkWithRel("http://www.foo.com/bar", getInputString());
 
 		assertThat(link) //
-				.map(Link::getHref) //
-				.hasValue("fullRelHref");
+	.map(Link::getHref) //
+	.hasValue("fullRelHref");
 	}
 
 	/**
@@ -68,7 +68,7 @@ class AlpsLinkDiscoverUnitTest extends LinkDiscovererUnitTest {
 
 		try {
 			return StreamUtils.copyToString(new ClassPathResource("link-discoverer.json", getClass()).getInputStream(),
-					Charset.defaultCharset());
+		Charset.defaultCharset());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

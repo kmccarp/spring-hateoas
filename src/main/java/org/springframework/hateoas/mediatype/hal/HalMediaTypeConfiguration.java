@@ -49,8 +49,8 @@ public class HalMediaTypeConfiguration implements HypermediaMappingInformation {
 	private HalConfiguration resolvedConfiguration;
 
 	public HalMediaTypeConfiguration(LinkRelationProvider relProvider, ObjectProvider<CurieProvider> curieProvider,
-			ObjectProvider<HalConfiguration> halConfiguration, MessageResolver resolver,
-			AutowireCapableBeanFactory beanFactory) {
+ObjectProvider<HalConfiguration> halConfiguration, MessageResolver resolver,
+AutowireCapableBeanFactory beanFactory) {
 
 		this.relProvider = relProvider;
 		this.curieProvider = curieProvider;
@@ -85,7 +85,7 @@ public class HalMediaTypeConfiguration implements HypermediaMappingInformation {
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		mapper.registerModule(new Jackson2HalModule());
 		mapper.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(relProvider,
-				curieProvider.getIfAvailable(() -> CurieProvider.NONE), resolver, halConfiguration, beanFactory));
+	curieProvider.getIfAvailable(() -> CurieProvider.NONE), resolver, halConfiguration, beanFactory));
 
 		halConfiguration.customize(mapper);
 

@@ -38,7 +38,7 @@ public abstract class LinkDiscovererUnitTest {
 	void findsSingleLink() {
 
 		assertThat(getDiscoverer().findLinkWithRel("self", getInputString())) //
-				.hasValue(Link.of("selfHref"));
+	.hasValue(Link.of("selfHref"));
 
 		Links links = getDiscoverer().findLinksWithRel("self", getInputString());
 
@@ -50,7 +50,7 @@ public abstract class LinkDiscovererUnitTest {
 	void findsFirstLink() {
 
 		assertThat(getDiscoverer().findLinkWithRel("relation", getInputString()))
-				.hasValue(Link.of("firstHref", "relation"));
+	.hasValue(Link.of("firstHref", "relation"));
 	}
 
 	@Test
@@ -87,7 +87,7 @@ public abstract class LinkDiscovererUnitTest {
 		LinkDiscoverer discoverer = getDiscoverer();
 
 		assertThatExceptionOfType(IllegalArgumentException.class) //
-				.isThrownBy(() -> discoverer.findRequiredLinkWithRel(LinkRelation.of("something-obscure"), getInputString()));
+	.isThrownBy(() -> discoverer.findRequiredLinkWithRel(LinkRelation.of("something-obscure"), getInputString()));
 	}
 
 	@Test // #840
@@ -98,7 +98,7 @@ public abstract class LinkDiscovererUnitTest {
 		try (InputStream stream = new ByteArrayInputStream(getInputString().getBytes(StandardCharsets.UTF_8))) {
 
 			assertThatExceptionOfType(IllegalArgumentException.class) //
-					.isThrownBy(() -> discoverer.findRequiredLinkWithRel(LinkRelation.of("something-obscure"), stream));
+		.isThrownBy(() -> discoverer.findRequiredLinkWithRel(LinkRelation.of("something-obscure"), stream));
 		}
 	}
 

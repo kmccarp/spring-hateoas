@@ -41,8 +41,8 @@ public class HypermediaRestTemplateConfigurerTest {
 			RestTemplate restTemplate = configurer.registerHypermediaTypes(new RestTemplate());
 
 			assertThat(getSupportedHypermediaTypes(restTemplate.getMessageConverters())) //
-					.contains(MediaTypes.HAL_JSON) //
-					.doesNotContain(MediaTypes.HAL_FORMS_JSON, MediaTypes.COLLECTION_JSON, MediaTypes.UBER_JSON);
+		.contains(MediaTypes.HAL_JSON) //
+		.doesNotContain(MediaTypes.HAL_FORMS_JSON, MediaTypes.COLLECTION_JSON, MediaTypes.UBER_JSON);
 		});
 	}
 
@@ -55,7 +55,7 @@ public class HypermediaRestTemplateConfigurerTest {
 			RestTemplate restTemplate = configurer.registerHypermediaTypes(new RestTemplate());
 
 			assertThat(getSupportedHypermediaTypes(restTemplate.getMessageConverters())) //
-					.contains(MediaTypes.HAL_JSON, MediaTypes.HAL_FORMS_JSON, MediaTypes.COLLECTION_JSON, MediaTypes.UBER_JSON);
+		.contains(MediaTypes.HAL_JSON, MediaTypes.HAL_FORMS_JSON, MediaTypes.COLLECTION_JSON, MediaTypes.UBER_JSON);
 		});
 	}
 
@@ -68,8 +68,8 @@ public class HypermediaRestTemplateConfigurerTest {
 			RestTemplate restTemplate = configurer.registerHypermediaTypes(new RestTemplate());
 
 			assertThat(getSupportedHypermediaTypes(restTemplate.getMessageConverters())) //
-					.contains(MediaTypes.HAL_JSON, FRODO_JSON) //
-					.doesNotContain(MediaTypes.HAL_FORMS_JSON, MediaTypes.COLLECTION_JSON, MediaTypes.UBER_JSON);
+		.contains(MediaTypes.HAL_JSON, FRODO_JSON) //
+		.doesNotContain(MediaTypes.HAL_FORMS_JSON, MediaTypes.COLLECTION_JSON, MediaTypes.UBER_JSON);
 		});
 	}
 
@@ -78,7 +78,7 @@ public class HypermediaRestTemplateConfigurerTest {
 
 	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS, COLLECTION_JSON, UBER })
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS, COLLECTION_JSON, UBER})
 	static class AllHypermediaConfig {
 
 	}

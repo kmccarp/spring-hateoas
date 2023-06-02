@@ -168,7 +168,7 @@ class JacksonSerializationTest {
 		Problem problem = Problem.create().withDetail("test detail");
 
 		assertThat(this.mapper.writeValueAsString(problem)) //
-				.isEqualTo(MappingUtils.read(new ClassPathResource("detail-only.json", getClass())));
+	.isEqualTo(MappingUtils.read(new ClassPathResource("detail-only.json", getClass())));
 	}
 
 	@Test // #786
@@ -189,10 +189,10 @@ class JacksonSerializationTest {
 	void instanceOnlySerialize() throws IOException {
 
 		Problem problem = Problem.create() //
-				.withInstance(URI.create("http://example.com/employees/1471"));
+	.withInstance(URI.create("http://example.com/employees/1471"));
 
 		assertThat(mapper.writeValueAsString(problem)) //
-				.isEqualTo(MappingUtils.read(new ClassPathResource("instance-only.json", getClass())));
+	.isEqualTo(MappingUtils.read(new ClassPathResource("instance-only.json", getClass())));
 	}
 
 	@Test // #786
@@ -213,15 +213,15 @@ class JacksonSerializationTest {
 	void extensionSerialize() throws IOException {
 
 		AccountProblemDetails details = AccountProblemDetails.empty() //
-				.withBalance(30) //
-				.withAccounts("/account/12345", "/account/67890");
+	.withBalance(30) //
+	.withAccounts("/account/12345", "/account/67890");
 
 		ExtendedProblem<AccountProblemDetails> problem = Problem.create(details)
-				.withType(URI.create("https://example.com/probs/out-of-credit")) //
-				.withTitle("You do not have enough credit.") //
-				.withStatus(HttpStatus.BAD_REQUEST) //
-				.withDetail("Your current balance is 30, but that costs 50.") //
-				.withInstance(URI.create("/account/12345/msgs/abc"));
+	.withType(URI.create("https://example.com/probs/out-of-credit")) //
+	.withTitle("You do not have enough credit.") //
+	.withStatus(HttpStatus.BAD_REQUEST) //
+	.withDetail("Your current balance is 30, but that costs 50.") //
+	.withInstance(URI.create("/account/12345/msgs/abc"));
 
 		String actual = this.mapper.writeValueAsString(problem);
 
@@ -234,7 +234,7 @@ class JacksonSerializationTest {
 		String expected = MappingUtils.read(new ClassPathResource("extension.json", getClass()));
 
 		JavaType type = this.mapper.getTypeFactory().constructParametricType(ExtendedProblem.class,
-				AccountProblemDetails.class);
+	AccountProblemDetails.class);
 
 		ExtendedProblem<AccountProblemDetails> actual = this.mapper.readValue(expected, type);
 
@@ -253,7 +253,7 @@ class JacksonSerializationTest {
 		JavaType type = mapper.getTypeFactory().constructParametricType(ExtendedProblem.class, AccountProblemDetails.class);
 
 		ExtendedProblem<AccountProblemDetails> accountProblem = this.mapper
-				.readValue(MappingUtils.read(new ClassPathResource("reference-1.json", getClass())), type);
+	.readValue(MappingUtils.read(new ClassPathResource("reference-1.json", getClass())), type);
 
 		assertThat(accountProblem.getType()).isEqualTo(URI.create("https://example.com/probs/out-of-credit"));
 		assertThat(accountProblem.getTitle()).isEqualTo("You do not have enough credit.");
@@ -272,7 +272,7 @@ class JacksonSerializationTest {
 		JavaType type = mapper.getTypeFactory().constructParametricType(ExtendedProblem.class, InvalidParameters.class);
 
 		ExtendedProblem<InvalidParameters> invalidParameters = this.mapper
-				.readValue(MappingUtils.read(new ClassPathResource("reference-2.json", getClass())), type);
+	.readValue(MappingUtils.read(new ClassPathResource("reference-2.json", getClass())), type);
 
 		assertThat(invalidParameters.getType()).isEqualTo(URI.create("https://example.net/validation-error"));
 		assertThat(invalidParameters.getTitle()).isEqualTo("Your request parameters didn't validate.");
@@ -283,8 +283,8 @@ class JacksonSerializationTest {
 
 		assertThat(parameters).hasSize(2);
 		assertThat(parameters).containsExactly( //
-				new InvalidParameter("age", "must be a positive integer"), //
-				new InvalidParameter("color", "must be 'green', 'red' or 'blue'") //
+	new InvalidParameter("age", "must be a positive integer"), //
+	new InvalidParameter("color", "must be 'green', 'red' or 'blue'") //
 		);
 	}
 
@@ -292,10 +292,10 @@ class JacksonSerializationTest {
 	public void addsPropertiesViaCallback() throws JsonProcessingException {
 
 		ExtendedProblem<Map<String, Object>> problem = Problem.create() //
-				.withStatus(HttpStatus.BAD_GATEWAY) //
-				.withProperties(map -> {
-					map.put("key", "value");
-				});
+	.withStatus(HttpStatus.BAD_GATEWAY) //
+	.withProperties(map -> {
+		map.put("key", "value");
+	});
 
 		DocumentContext parse = JsonPath.parse(mapper.writeValueAsString(problem));
 
@@ -312,7 +312,7 @@ class JacksonSerializationTest {
 		JavaType problemType = factory.constructParametricType(ExtendedProblem.class, mapType);
 
 		ExtendedProblem<Map<String, Object>> result = mapper
-				.readValue("{ \"balance\" : 30, \"accounts\" : [ \"/first\", \"/second\" ] }", problemType);
+	.readValue("{ \"balance\" : 30, \"accounts\" : [ \"/first\", \"/second\" ] }", problemType);
 
 		assertThat(result.getProperties()).containsEntry("balance", 30);
 		assertThat(result.getProperties()).containsEntry("accounts", Arrays.asList("/first", "/second"));

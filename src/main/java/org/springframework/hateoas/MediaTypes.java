@@ -76,7 +76,7 @@ public class MediaTypes {
 	 * Public constant media type for {@code application/vnd.amundsen-uber+json}.
 	 */
 	public static final MediaType UBER_JSON = MediaType.parseMediaType(UBER_JSON_VALUE);
-	
+
 	/**
 	 * A String equivalent of {@link MediaTypes#VND_ERROR_JSON}.
 	 */

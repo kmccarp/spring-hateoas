@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @since 0.15
  * @see http://alps.io/spec/#prop-doc
  */
-@JsonPropertyOrder({ "format", "href", "value" })
+@JsonPropertyOrder({"format", "href", "value"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class Doc {
 
@@ -58,7 +58,7 @@ public final class Doc {
 
 	@JsonCreator
 	private Doc(@JsonProperty("href") String href, @JsonProperty("value") String value,
-			@JsonProperty("format") Format format) {
+@JsonProperty("format") Format format) {
 
 		this.href = href;
 		this.value = value;
@@ -107,7 +107,8 @@ public final class Doc {
 		private String value;
 		private Format format;
 
-		DocBuilder() {}
+		DocBuilder() {
+		}
 
 		public Doc.DocBuilder href(String href) {
 

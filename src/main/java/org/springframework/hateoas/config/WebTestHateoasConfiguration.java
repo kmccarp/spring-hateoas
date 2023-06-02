@@ -37,7 +37,7 @@ class WebTestHateoasConfiguration {
 	@Bean
 	@Lazy
 	HypermediaWebTestClientConfigurer webTestClientConfigurer(ObjectProvider<ObjectMapper> mapper,
-			List<HypermediaMappingInformation> hypermediaTypes) {
+List<HypermediaMappingInformation> hypermediaTypes) {
 		return new HypermediaWebTestClientConfigurer(mapper.getIfAvailable(ObjectMapper::new), hypermediaTypes);
 	}
 }

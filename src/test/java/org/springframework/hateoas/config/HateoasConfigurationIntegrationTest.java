@@ -36,7 +36,7 @@ class HateoasConfigurationIntegrationTest {
 		var original = (String) ReflectionTestUtils.getField(HateoasConfiguration.class, "I18N_BASE_NAME");
 
 		ReflectionTestUtils.setField(HateoasConfiguration.class, "I18N_BASE_NAME",
-				"org/springframework/hateoas/config/rest-messages");
+	"org/springframework/hateoas/config/rest-messages");
 
 		try (AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext()) {
 
@@ -46,7 +46,7 @@ class HateoasConfigurationIntegrationTest {
 
 			MessageResolver resolver = context.getBean(MessageResolver.class);
 
-			assertThat(resolver.resolve(() -> new String[] { "key" })).isEqualTo("Schlüssel");
+			assertThat(resolver.resolve(() -> new String[]{"key"})).isEqualTo("Schlüssel");
 
 		} finally {
 			ReflectionTestUtils.setField(HateoasConfiguration.class, "I18N_BASE_NAME", original);

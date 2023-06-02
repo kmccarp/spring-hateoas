@@ -88,11 +88,11 @@ public class EmbeddedWrappers {
 		}
 
 		return source instanceof Collection //
-				|| source instanceof Stream //
-				|| preferCollections //
-				|| SUPPLIER_OF_STREAM.isAssignableFrom(source.getClass()) //
-						? new EmbeddedCollection(asCollection(source), rel) //
-						: new EmbeddedElement(source, rel);
+	|| source instanceof Stream //
+	|| preferCollections //
+	|| SUPPLIER_OF_STREAM.isAssignableFrom(source.getClass()) //
+	? new EmbeddedCollection(asCollection(source), rel) //
+	: new EmbeddedElement(source, rel);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -146,7 +146,7 @@ public class EmbeddedWrappers {
 		public Optional<LinkRelation> getRel() {
 
 			return Optional.ofNullable(rel) //
-					.filter(it -> !it.equals(NO_REL));
+		.filter(it -> !it.equals(NO_REL));
 		}
 
 		/*

@@ -162,8 +162,8 @@ public class AnnotationMappingDiscoverer implements MappingDiscoverer {
 		String[] mediaTypes = (String[]) getValue(annotation, "consumes");
 
 		return mediaTypes == null
-				? Collections.emptyList()
-				: Arrays.stream(mediaTypes).map(MediaType::parseMediaType).collect(Collectors.toList());
+	? Collections.emptyList()
+	: Arrays.stream(mediaTypes).map(MediaType::parseMediaType).collect(Collectors.toList());
 	}
 
 	/*
@@ -188,7 +188,7 @@ public class AnnotationMappingDiscoverer implements MappingDiscoverer {
 		Object value = mappingAttributeName == null ? getValue(annotation) : getValue(annotation, mappingAttributeName);
 
 		if (value instanceof String) {
-			return new String[] { (String) value };
+			return new String[]{(String) value};
 		} else if (value instanceof String[]) {
 			return (String[]) value;
 		} else if (value == null) {
@@ -196,7 +196,7 @@ public class AnnotationMappingDiscoverer implements MappingDiscoverer {
 		}
 
 		throw new IllegalStateException(String.format(
-				"Unsupported type for the mapping attribute! Support String and String[] but got %s!", value.getClass()));
+	"Unsupported type for the mapping attribute! Support String and String[] but got %s!", value.getClass()));
 	}
 
 	/**

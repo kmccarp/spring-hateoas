@@ -74,18 +74,18 @@ public class WebMvcEmployeeController {
 		WebMvcEmployeeController controller = methodOn(WebMvcEmployeeController.class);
 
 		Link selfLink = linkTo(controller.all()).withSelfRel() //
-				.andAffordance(afford(controller.newEmployee(null))) //
-				.andAffordance(afford(controller.search(null, null)));
+	.andAffordance(afford(controller.newEmployee(null))) //
+	.andAffordance(afford(controller.search(null, null)));
 
 		// Return the collection of employee resources along with the composite affordance
 		return IntStream.range(0, EMPLOYEES.size()) //
-				.mapToObj(this::findOne) //
-				.collect(Collectors.collectingAndThen(Collectors.toList(), it -> CollectionModel.of(it, selfLink)));
+	.mapToObj(this::findOne) //
+	.collect(Collectors.collectingAndThen(Collectors.toList(), it -> CollectionModel.of(it, selfLink)));
 	}
 
 	@GetMapping("/employees/search")
 	public CollectionModel<EntityModel<Employee>> search(@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "role", required = false) String role) {
+@RequestParam(value = "role", required = false) String role) {
 
 		// Create a list of Resource<Employee>'s to return
 		List<EntityModel<Employee>> employees = new ArrayList<>();
@@ -96,12 +96,12 @@ public class WebMvcEmployeeController {
 			EntityModel<Employee> employeeResource = findOne(i);
 
 			boolean nameMatches = Optional.ofNullable(name) //
-					.map(s -> employeeResource.getContent().getName().contains(s)) //
-					.orElse(true);
+		.map(s -> employeeResource.getContent().getName().contains(s)) //
+		.orElse(true);
 
 			boolean roleMatches = Optional.ofNullable(role) //
-					.map(s -> employeeResource.getContent().getRole().contains(s)) //
-					.orElse(true);
+		.map(s -> employeeResource.getContent().getRole().contains(s)) //
+		.orElse(true);
 
 			if (nameMatches && roleMatches) {
 				employees.add(employeeResource);
@@ -112,9 +112,9 @@ public class WebMvcEmployeeController {
 		WebMvcEmployeeController controller = methodOn(WebMvcEmployeeController.class);
 
 		Link selfLink = linkTo(controller.all()) //
-				.withSelfRel() //
-				.andAffordance(afford(controller.newEmployee(null))) //
-				.andAffordance(afford(controller.search(null, null)));
+	.withSelfRel() //
+	.andAffordance(afford(controller.newEmployee(null))) //
+	.andAffordance(afford(controller.search(null, null)));
 
 		// Return the collection of employee resources along with the composite affordance
 		return CollectionModel.of(employees, selfLink);
@@ -133,10 +133,10 @@ public class WebMvcEmployeeController {
 
 		// Return the affordance + a link back to the entire collection resource.
 		return EntityModel.of(EMPLOYEES.get(id), //
-				findOneLink //
-						.andAffordance(afford(controller.updateEmployee(null, id))) // //
-						.andAffordance(afford(controller.partiallyUpdateEmployee(null, id))), //
-				employeesLink);
+	findOneLink //
+.andAffordance(afford(controller.updateEmployee(null, id))) // //
+.andAffordance(afford(controller.partiallyUpdateEmployee(null, id))), //
+	employeesLink);
 	}
 
 	@PostMapping("/employees")
@@ -159,13 +159,13 @@ public class WebMvcEmployeeController {
 		Link link = linkTo(methodOn(getClass()).findOne(id)).withSelfRel().expand();
 
 		return ResponseEntity.noContent() //
-				.location(link.toUri()) //
-				.build();
+	.location(link.toUri()) //
+	.build();
 	}
 
 	@PatchMapping("/employees/{id}")
 	public ResponseEntity<?> partiallyUpdateEmployee(@RequestBody EntityModel<Employee> employee,
-			@PathVariable Integer id) {
+@PathVariable Integer id) {
 
 		Employee newEmployee = EMPLOYEES.get(id);
 
@@ -180,11 +180,11 @@ public class WebMvcEmployeeController {
 		EMPLOYEES.put(id, newEmployee);
 
 		return ResponseEntity //
-				.noContent() //
-				.location(findOne(id) //
-						.getRequiredLink(IanaLinkRelations.SELF) //
-						.toUri()) //
-				.build();
+	.noContent() //
+	.location(findOne(id) //
+.getRequiredLink(IanaLinkRelations.SELF) //
+.toUri()) //
+	.build();
 	}
 
 	// tag::alps-profile[]
@@ -192,36 +192,30 @@ public class WebMvcEmployeeController {
 	Alps profile() {
 
 		return Alps.alps() //
-				.doc(doc() //
-						.href("https://example.org/samples/full/doc.html") //
-						.value("value goes here") //
-						.format(Format.TEXT) //
-						.build()) //
-				.descriptor(getExposedProperties(Employee.class).stream() //
-						.map(property -> Descriptor.builder() //
-								.id("class field [" + property.getName() + "]") //
-								.name(property.getName()) //
-								.type(Type.SEMANTIC) //
-								.ext(Ext.builder() //
+	.doc(doc() //
+.href("https://example.org/samples/full/doc.html") //
+.value("value goes here") //
+.format(Format.TEXT) //
+.build()) //
+	.descriptor(getExposedProperties(Employee.class).stream() //
+.map(property -> Descriptor.builder() //.id("class field [" + property.getName() + "]") //.name(property.getName()) //.type(Type.SEMANTIC) //.ext(Ext.builder() //
 										.id("ext [" + property.getName() + "]") //
 										.href("https://example.org/samples/ext/" + property.getName()) //
 										.value("value goes here") //
-										.build()) //
-								.rt("rt for [" + property.getName() + "]") //
-								.descriptor(Collections.singletonList(Descriptor.builder().id("embedded").build())) //
-								.build()) //
-						.collect(Collectors.toList()))
-				.build();
+										.build()) //.rt("rt for [" + property.getName() + "]") //.descriptor(Collections.singletonList(Descriptor.builder().id("embedded").build())) //.build()) //
+.collect(Collectors.toList()))
+	.build();
 	}
+
 	// end::alps-profile[]
 
 	@GetMapping("/employees/problem")
 	public ResponseEntity<?> problem() {
 
 		return ResponseEntity.badRequest().body(Problem.create() //
-				.withType(URI.create("http://example.com/problem")) //
-				.withTitle("Employee-based problem") //
-				.withStatus(HttpStatus.BAD_REQUEST) //
-				.withDetail("This is a test case"));
+	.withType(URI.create("http://example.com/problem")) //
+	.withTitle("Employee-based problem") //
+	.withStatus(HttpStatus.BAD_REQUEST) //
+	.withDetail("This is a test case"));
 	}
 }

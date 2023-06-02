@@ -90,9 +90,9 @@ enum UberAction {
 	static UberAction fromMethod(HttpMethod method) {
 
 		return Arrays.stream(UberAction.values()) //
-				.filter(action -> action.httpMethod == method) //
-				.findFirst() //
-				.orElseThrow(() -> new IllegalArgumentException("Unsupported method: " + method));
+	.filter(action -> action.httpMethod == method) //
+	.findFirst() //
+	.orElseThrow(() -> new IllegalArgumentException("Unsupported method: " + method));
 	}
 
 	/**

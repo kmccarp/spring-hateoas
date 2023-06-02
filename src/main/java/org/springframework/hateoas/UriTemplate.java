@@ -51,7 +51,7 @@ import org.springframework.web.util.UriUtils;
 public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 
 	private static final Pattern VARIABLE_REGEX = Pattern
-			.compile("\\{([\\?\\&#/\\.\\+\\;]?)([\\w\\.(\\:\\d+)*%\\,*]+)\\}");
+.compile("\\{([\\?\\&#/\\.\\+\\;]?)([\\w\\.(\\:\\d+)*%\\,*]+)\\}");
 	private static final Pattern ELEMENT_REGEX = Pattern.compile("([\\w\\.\\%]+)(\\:\\d+)?(\\*)?");
 	private static final long serialVersionUID = -1007874653930162262L;
 
@@ -257,8 +257,8 @@ public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 	public static boolean isTemplate(String candidate) {
 
 		return StringUtils.hasText(candidate) //
-				? VARIABLE_REGEX.matcher(candidate).find()
-				: false;
+	? VARIABLE_REGEX.matcher(candidate).find()
+	: false;
 	}
 
 	/**
@@ -278,8 +278,8 @@ public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 	public List<String> getVariableNames() {
 
 		return variables.asList().stream() //
-				.map(TemplateVariable::getName) //
-				.collect(Collectors.toList());
+	.map(TemplateVariable::getName) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -300,12 +300,12 @@ public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 		Map<String, Object> foo = new HashMap<>();
 
 		variables.stream()
-				.map(TemplateVariable::getName)
-				.forEach(it -> {
+	.map(TemplateVariable::getName)
+	.forEach(it -> {
 
-					Object value = iterator.hasNext() ? iterator.next() : null;
-					foo.put(it, value);
-				});
+		Object value = iterator.hasNext() ? iterator.next() : null;
+		foo.put(it, value);
+	});
 
 		return expand(foo);
 	}
@@ -372,11 +372,11 @@ public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 
 		// Encode head if it's more than just the scheme
 		String encodedBase = head.endsWith("://") && tail.startsWith("{")
-				? head
-				: UriComponentsBuilder.fromUriString(head)
-						.encode()
-						.build()
-						.toUriString();
+	? head
+	: UriComponentsBuilder.fromUriString(head)
+	.encode()
+	.build()
+	.toUriString();
 
 		head = encodedBase.length() > head.length() ? encodedBase : head;
 
@@ -461,9 +461,9 @@ public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 		public String expand(Map<String, ?> parameters) {
 
 			return type.join(variables.stream()
-					.map(it -> it.expand(parameters))
-					.filter(it -> it != null)
-					.collect(Collectors.toList()));
+		.map(it -> it.expand(parameters))
+		.filter(it -> it != null)
+		.collect(Collectors.toList()));
 		}
 
 		boolean canBeCombinedWith(VariableType type) {
@@ -478,7 +478,7 @@ public class UriTemplate implements Iterable<TemplateVariable>, Serializable {
 		public String asString() {
 
 			return variables.stream().map(TemplateVariable::essence)
-					.collect(Collectors.joining(",", "{".concat(type.toString()), "}"));
+		.collect(Collectors.joining(",", "{".concat(type.toString()), "}"));
 		}
 
 		/*

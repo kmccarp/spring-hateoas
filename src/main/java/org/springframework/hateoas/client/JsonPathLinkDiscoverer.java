@@ -128,7 +128,7 @@ public class JsonPathLinkDiscoverer implements LinkDiscoverer {
 	public boolean supports(@NonNull MediaType delimiter) {
 
 		return this.mediaTypes.stream() //
-				.anyMatch(mediaType -> mediaType.isCompatibleWith(delimiter));
+	.anyMatch(mediaType -> mediaType.isCompatibleWith(delimiter));
 	}
 
 	/**
@@ -166,14 +166,14 @@ public class JsonPathLinkDiscoverer implements LinkDiscoverer {
 			JSONArray jsonArray = (JSONArray) parseResult;
 
 			return jsonArray.stream() //
-					.flatMap(it -> JSONArray.class.isInstance(it) ? ((JSONArray) it).stream() : Stream.of(it)) //
-					.map(it -> extractLink(it, rel)) //
-					.collect(Links.collector());
+		.flatMap(it -> JSONArray.class.isInstance(it) ? ((JSONArray) it).stream() : Stream.of(it)) //
+		.map(it -> extractLink(it, rel)) //
+		.collect(Links.collector());
 		}
 
 		return Links.of(Map.class.isInstance(parseResult) //
-				? extractLink(parseResult, rel) //
-				: Link.of(parseResult.toString(), rel));
+	? extractLink(parseResult, rel) //
+	: Link.of(parseResult.toString(), rel));
 	}
 
 	private static <T> Optional<T> firstOrEmpty(Iterable<T> source) {

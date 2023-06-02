@@ -69,7 +69,7 @@ public abstract class AffordanceModel {
 	private PayloadMetadata output;
 
 	public AffordanceModel(String name, Link link, HttpMethod httpMethod, InputPayloadMetadata input,
-			List<QueryParameter> queryMethodParameters, PayloadMetadata output) {
+List<QueryParameter> queryMethodParameters, PayloadMetadata output) {
 
 		this.name = name;
 		this.link = link;
@@ -150,8 +150,8 @@ public abstract class AffordanceModel {
 	public <T> List<T> createProperties(BiFunction<InputPayloadMetadata, PropertyMetadata, T> creator) {
 
 		return input.stream() //
-				.map(it -> creator.apply(input, it)) //
-				.collect(Collectors.toList());
+	.map(it -> creator.apply(input, it)) //
+	.collect(Collectors.toList());
 	}
 
 	/*
@@ -172,11 +172,11 @@ public abstract class AffordanceModel {
 		AffordanceModel that = (AffordanceModel) o;
 
 		return Objects.equals(this.name, that.name) //
-				&& Objects.equals(this.link, that.link) //
-				&& this.httpMethod == that.httpMethod //
-				&& Objects.equals(this.input, that.input) //
-				&& Objects.equals(this.queryMethodParameters, that.queryMethodParameters) //
-				&& Objects.equals(this.output, that.output);
+	&& Objects.equals(this.link, that.link) //
+	&& this.httpMethod == that.httpMethod //
+	&& Objects.equals(this.input, that.input) //
+	&& Objects.equals(this.queryMethodParameters, that.queryMethodParameters) //
+	&& Objects.equals(this.output, that.output);
 	}
 
 	/*
@@ -231,8 +231,8 @@ public abstract class AffordanceModel {
 		static InputPayloadMetadata from(PayloadMetadata metadata) {
 
 			return InputPayloadMetadata.class.isInstance(metadata) //
-					? InputPayloadMetadata.class.cast(metadata)
-					: DelegatingInputPayloadMetadata.of(metadata);
+		? InputPayloadMetadata.class.cast(metadata)
+		: DelegatingInputPayloadMetadata.of(metadata);
 		}
 
 		/**
@@ -248,8 +248,8 @@ public abstract class AffordanceModel {
 		default <T extends PropertyMetadataConfigured<T> & Named> T applyTo(T target) {
 
 			return getPropertyMetadata(target.getName()) //
-					.map(it -> target.apply(it)) //
-					.orElse(target);
+		.map(it -> target.apply(it)) //
+		.orElse(target);
 		}
 
 		<T extends Named> T customize(T target, Function<PropertyMetadata, T> customizer);

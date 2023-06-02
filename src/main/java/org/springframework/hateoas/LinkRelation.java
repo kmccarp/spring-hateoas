@@ -59,8 +59,8 @@ public interface LinkRelation {
 	static Iterable<LinkRelation> manyOf(String... others) {
 
 		return Arrays.stream(others) //
-				.map(LinkRelation::of) //
-				.collect(Collectors.toList());
+	.map(LinkRelation::of) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -87,7 +87,7 @@ public interface LinkRelation {
 	 */
 	default LinkRelation map(Function<String, String> mapper) {
 
-		if (mapper == Function.<String> identity() || IanaLinkRelations.isIanaRel(this)) {
+		if (mapper == Function.<String>identity() || IanaLinkRelations.isIanaRel(this)) {
 			return this;
 		}
 
@@ -97,7 +97,7 @@ public interface LinkRelation {
 		String mapped = mapper.apply(source);
 
 		return source.equals(mapped) //
-				? this //
-				: LinkRelation.of(mapper.apply(value()));
+	? this //
+	: LinkRelation.of(mapper.apply(value()));
 	}
 }

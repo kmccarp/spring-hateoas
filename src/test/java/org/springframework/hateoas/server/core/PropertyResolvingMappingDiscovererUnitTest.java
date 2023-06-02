@@ -38,10 +38,11 @@ import org.springframework.web.context.WebApplicationContext;
  * @author Oliver Drotbohm
  */
 @SpringJUnitWebConfig(classes = PropertyResolvingMappingDiscovererUnitTest.Config.class)
-@TestPropertySource(properties = { "test.parent=resolvedparent", "test.child=resolvedchild" })
+@TestPropertySource(properties = {"test.parent=resolvedparent", "test.child=resolvedchild"})
 class PropertyResolvingMappingDiscovererUnitTest extends TestUtils {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	@BeforeEach
 	void contextLoading() {
@@ -60,20 +61,21 @@ class PropertyResolvingMappingDiscovererUnitTest extends TestUtils {
 		// Test plain AnnotationMappingDiscoverer first
 		assertThat(annotationMappingDiscoverer.getMapping(ResolveEndpointController.class)).isEqualTo("/${test.parent}");
 		assertThat(annotationMappingDiscoverer.getMapping(ResolveMethodEndpointController.class, method))
-				.isEqualTo("/${test.parent}/${test.child}");
+	.isEqualTo("/${test.parent}/${test.child}");
 
 		PropertyResolvingMappingDiscoverer propertyResolvingMappingDiscoverer = new PropertyResolvingMappingDiscoverer(
-				annotationMappingDiscoverer);
+	annotationMappingDiscoverer);
 
 		assertThat(propertyResolvingMappingDiscoverer.getMapping(ResolveEndpointController.class))
-				.isEqualTo("/resolvedparent");
+	.isEqualTo("/resolvedparent");
 		assertThat(propertyResolvingMappingDiscoverer.getMapping(method)).isEqualTo("/resolvedparent/resolvedchild");
 		assertThat(propertyResolvingMappingDiscoverer.getMapping(ResolveMethodEndpointController.class, method))
-				.isEqualTo("/resolvedparent/resolvedchild");
+	.isEqualTo("/resolvedparent/resolvedchild");
 	}
 
 	@RequestMapping("/${test.parent}")
-	interface ResolveEndpointController {}
+	interface ResolveEndpointController {
+	}
 
 	@RequestMapping("/${test.parent}")
 	interface ResolveMethodEndpointController {
@@ -83,5 +85,6 @@ class PropertyResolvingMappingDiscovererUnitTest extends TestUtils {
 	}
 
 	@Configuration
-	public static class Config {}
+	public static class Config {
+	}
 }

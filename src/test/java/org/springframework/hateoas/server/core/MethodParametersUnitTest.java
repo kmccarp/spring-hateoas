@@ -58,7 +58,8 @@ class MethodParametersUnitTest {
 
 	static class Sample {
 
-		public void method(String param, @Qualifier("foo") String another, Object object) {}
+		public void method(String param, @Qualifier("foo") String another, Object object) {
+		}
 	}
 
 }

@@ -69,13 +69,14 @@ public class HalConfiguration {
 	 */
 	public HalConfiguration() {
 
-		this(RenderSingleLinks.AS_SINGLE, new LinkedHashMap<>(), true, true, __ -> {},
-				Collections.singletonList(MediaTypes.HAL_JSON));
+		this(RenderSingleLinks.AS_SINGLE, new LinkedHashMap<>(), true, true, __ -> {
+	},
+	Collections.singletonList(MediaTypes.HAL_JSON));
 	}
 
 	private HalConfiguration(RenderSingleLinks renderSingleLinks, Map<String, RenderSingleLinks> singleLinksPerPattern,
-			boolean applyPropertyNamingStrategy, boolean enforceEmbeddedCollections,
-			Consumer<ObjectMapper> objectMapperCustomizer, List<MediaType> mediaTypes) {
+boolean applyPropertyNamingStrategy, boolean enforceEmbeddedCollections,
+Consumer<ObjectMapper> objectMapperCustomizer, List<MediaType> mediaTypes) {
 
 		Assert.notNull(renderSingleLinks, "RenderSingleLinks must not be null!");
 		Assert.notNull(singleLinksPerPattern, "Single links per pattern map must not be null!");
@@ -135,10 +136,10 @@ public class HalConfiguration {
 	RenderSingleLinks getSingleLinkRenderModeFor(LinkRelation relation) {
 
 		return singleLinksPerPattern.entrySet().stream() //
-				.filter(entry -> MATCHER.match(entry.getKey(), relation.value())) //
-				.map(Entry::getValue) //
-				.findFirst() //
-				.orElse(renderSingleLinks);
+	.filter(entry -> MATCHER.match(entry.getKey(), relation.value())) //
+	.map(Entry::getValue) //
+	.findFirst() //
+	.orElse(renderSingleLinks);
 	}
 
 	/**
@@ -152,9 +153,9 @@ public class HalConfiguration {
 		Assert.notNull(renderSingleLinks, "RenderSingleLinks must not be null!");
 
 		return this.renderSingleLinks == renderSingleLinks //
-				? this //
-				: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
-						enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
+	? this //
+	: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
+	enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
 	}
 
 	/**
@@ -168,9 +169,9 @@ public class HalConfiguration {
 		Assert.notNull(singleLinksPerPattern, "Single links per pattern map must not be null!");
 
 		return this.singleLinksPerPattern == singleLinksPerPattern //
-				? this //
-				: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
-						enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
+	? this //
+	: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
+	enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
 	}
 
 	/**
@@ -183,9 +184,9 @@ public class HalConfiguration {
 	public HalConfiguration withApplyPropertyNamingStrategy(boolean applyPropertyNamingStrategy) {
 
 		return this.applyPropertyNamingStrategy == applyPropertyNamingStrategy //
-				? this //
-				: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
-						enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
+	? this //
+	: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
+	enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
 	}
 
 	/**
@@ -198,9 +199,9 @@ public class HalConfiguration {
 	public HalConfiguration withEnforceEmbeddedCollections(boolean enforceEmbeddedCollections) {
 
 		return this.enforceEmbeddedCollections == enforceEmbeddedCollections //
-				? this //
-				: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
-						enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
+	? this //
+	: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
+	enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
 	}
 
 	/**
@@ -213,9 +214,9 @@ public class HalConfiguration {
 	public HalConfiguration withObjectMapperCustomizer(Consumer<ObjectMapper> objectMapperCustomizer) {
 
 		return this.objectMapperCustomizer == objectMapperCustomizer //
-				? this //
-				: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
-						enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
+	? this //
+	: new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
+	enforceEmbeddedCollections, objectMapperCustomizer, mediaTypes);
 	}
 
 	/**
@@ -239,7 +240,7 @@ public class HalConfiguration {
 		newMediaTypes.add(mediaTypes.size() - 1, mediaType);
 
 		return new HalConfiguration(renderSingleLinks, singleLinksPerPattern, applyPropertyNamingStrategy,
-				enforceEmbeddedCollections, objectMapperCustomizer, newMediaTypes);
+	enforceEmbeddedCollections, objectMapperCustomizer, newMediaTypes);
 	}
 
 	public RenderSingleLinks getRenderSingleLinks() {

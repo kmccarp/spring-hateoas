@@ -57,8 +57,8 @@ public class HidingClassLoader extends ShadowingClassLoader {
 		Assert.notNull(packages, "Packages must not be null!");
 
 		return new HidingClassLoader(Arrays.stream(packages)//
-				.map(it -> it.getPackage().getName())//
-				.collect(Collectors.toList()));
+	.map(it -> it.getPackage().getName())//
+	.collect(Collectors.toList()));
 	}
 
 	/*

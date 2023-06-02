@@ -33,7 +33,7 @@ final class CollectionJsonError {
 
 	@JsonCreator
 	CollectionJsonError(@JsonProperty("title") @Nullable String title, @JsonProperty("code") @Nullable String code,
-			@JsonProperty("message") @Nullable String message) {
+@JsonProperty("message") @Nullable String message) {
 
 		this.title = title;
 		this.code = code;
@@ -95,7 +95,7 @@ final class CollectionJsonError {
 			return false;
 		CollectionJsonError that = (CollectionJsonError) o;
 		return Objects.equals(this.title, that.title) && Objects.equals(this.code, that.code)
-				&& Objects.equals(this.message, that.message);
+	&& Objects.equals(this.message, that.message);
 	}
 
 	@Override

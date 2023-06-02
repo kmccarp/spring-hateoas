@@ -77,23 +77,23 @@ class HypermediaConfigurationImportSelector implements ImportSelector, ResourceL
 		Map<String, Object> attributes = metadata.getAnnotationAttributes(EnableHypermediaSupport.class.getName());
 
 		List<MediaType> types = attributes == null //
-				? Collections.emptyList() //
-				: Arrays.stream((HypermediaType[]) attributes.get("type")) //
-						.map(it -> it.getMediaType()) //
-						.collect(Collectors.toList());
+	? Collections.emptyList() //
+	: Arrays.stream((HypermediaType[]) attributes.get("type")) //
+	.map(it -> it.getMediaType()) //
+	.collect(Collectors.toList());
 
 		if (!beanFactory.containsBean("hateoasMediaTypeConfigurer")) {
 			beanFactory.registerSingleton("hateoasMediaTypeConfigurer", new HypermediaMappingInformationComparator(types));
 		}
 
 		List<MediaTypeConfigurationProvider> configurationProviders = SpringFactoriesLoader.loadFactories(
-				MediaTypeConfigurationProvider.class, HypermediaConfigurationImportSelector.class.getClassLoader());
+	MediaTypeConfigurationProvider.class, HypermediaConfigurationImportSelector.class.getClassLoader());
 
 		// Filter the ones supporting the given media types
 		Stream<String> imports = configurationProviders.stream() //
-				.filter(it -> it.supportsAny(types)) //
-				.map(MediaTypeConfigurationProvider::getConfiguration) //
-				.map(Class::getName);
+	.filter(it -> it.supportsAny(types)) //
+	.map(MediaTypeConfigurationProvider::getConfiguration) //
+	.map(Class::getName);
 
 		// Conditionally apply other configurations
 		if (ClassUtils.isPresent(SPRING_TEST, resourceLoader.getClassLoader())) {
@@ -104,6 +104,6 @@ class HypermediaConfigurationImportSelector implements ImportSelector, ResourceL
 	}
 
 	public String[] selectImports(List<MediaType> mediaType) {
-		return new String[] {};
+		return new String[]{};
 	}
 }

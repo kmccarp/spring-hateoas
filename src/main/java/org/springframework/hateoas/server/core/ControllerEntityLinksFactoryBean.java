@@ -37,8 +37,7 @@ import org.springframework.util.Assert;
  *
  * @author Oliver Gierke
  */
-public class ControllerEntityLinksFactoryBean extends AbstractFactoryBean<ControllerEntityLinks>
-		implements ApplicationContextAware {
+public class ControllerEntityLinksFactoryBean extends AbstractFactoryBean<ControllerEntityLinks>implements ApplicationContextAware {
 
 	private Class<? extends Annotation> annotation;
 	private LinkBuilderFactory<? extends LinkBuilder> linkBuilderFactory;

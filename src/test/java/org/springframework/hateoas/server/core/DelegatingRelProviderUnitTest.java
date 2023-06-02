@@ -33,7 +33,7 @@ class DelegatingRelProviderUnitTest {
 	void foo() {
 
 		LinkRelationProvider delegatingProvider = new DelegatingLinkRelationProvider(new AnnotationLinkRelationProvider(),
-				new DefaultLinkRelationProvider());
+	new DefaultLinkRelationProvider());
 
 		assertThat(delegatingProvider.supports(LookupContext.forCollectionResourceRelLookup(Sample.class))).isTrue();
 		assertThat(delegatingProvider.supports(LookupContext.forItemResourceRelLookup(Sample.class))).isTrue();
@@ -47,5 +47,6 @@ class DelegatingRelProviderUnitTest {
 	}
 
 	@Relation(itemRelation = "foo", collectionRelation = "bar")
-	static class Sample {}
+	static class Sample {
+	}
 }

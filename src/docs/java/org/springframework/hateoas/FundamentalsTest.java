@@ -54,7 +54,7 @@ public class FundamentalsTest {
 		values.put("parameter", 42);
 
 		assertThat(link.expand(values).getHref()) // <3>
-				.isEqualTo("/path/something?parameter=42");
+	.isEqualTo("/path/something?parameter=42");
 		// end::templatedLinks[]
 	}
 }

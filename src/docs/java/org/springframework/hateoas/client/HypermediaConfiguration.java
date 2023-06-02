@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class HypermediaConfiguration {
 
-    // tag::rest-template[]
+	// tag::rest-template[]
 	/**
 	 * Use the {@link HypermediaRestTemplateConfigurer} to configure a {@link RestTemplate}.
 	 */
@@ -18,12 +18,13 @@ public class HypermediaConfiguration {
 	RestTemplate hypermediaRestTemplate(HypermediaRestTemplateConfigurer configurer) { // <1>
 		return configurer.registerHypermediaTypes(new RestTemplate()); // <2>
 	}
-    // end::rest-template[]
 
-    // tag::web-client[]
-    @Bean
-    WebClient.Builder hypermediaWebClient(HypermediaWebClientConfigurer configurer) { // <1>
-	    return configurer.registerHypermediaTypes(WebClient.builder()); // <2>
-    }
-    // end::web-client[]
+	// end::rest-template[]
+
+	// tag::web-client[]
+	@Bean
+	WebClient.Builder hypermediaWebClient(HypermediaWebClientConfigurer configurer) { // <1>
+		return configurer.registerHypermediaTypes(WebClient.builder()); // <2>
+	}
+	// end::web-client[]
 }

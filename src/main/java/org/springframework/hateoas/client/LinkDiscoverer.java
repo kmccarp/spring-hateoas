@@ -62,7 +62,7 @@ public interface LinkDiscoverer extends Plugin<MediaType> {
 	default Link findRequiredLinkWithRel(LinkRelation relation, String representation) {
 
 		return findLinkWithRel(relation, representation).orElseThrow(
-				() -> new IllegalArgumentException(String.format("Did not find link with relation '%s'!", relation.value())));
+	() -> new IllegalArgumentException(String.format("Did not find link with relation '%s'!", relation.value())));
 	}
 
 	/**
@@ -97,7 +97,7 @@ public interface LinkDiscoverer extends Plugin<MediaType> {
 	default Link findRequiredLinkWithRel(LinkRelation relation, InputStream representation) {
 
 		return findLinkWithRel(relation, representation).orElseThrow(
-				() -> new IllegalArgumentException(String.format("Did not find link with relation '%s'!", relation.value())));
+	() -> new IllegalArgumentException(String.format("Did not find link with relation '%s'!", relation.value())));
 	}
 
 	/**

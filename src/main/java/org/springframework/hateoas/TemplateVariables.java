@@ -70,8 +70,8 @@ public final class TemplateVariables implements Iterable<TemplateVariable>, Seri
 			boolean isRequestParameter = variable.isRequestParameterVariable();
 
 			processed.add(isRequestParameter && requestParameterFound
-					? variable.withType(REQUEST_PARAM_CONTINUED)
-					: variable);
+		? variable.withType(REQUEST_PARAM_CONTINUED)
+		: variable);
 
 			if (isRequestParameter) {
 				requestParameterFound = true;

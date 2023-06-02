@@ -53,8 +53,8 @@ final class CollectionJsonItem<T> {
 
 	@JsonCreator
 	CollectionJsonItem(@JsonProperty("href") @Nullable String href, //
-			@JsonProperty("data") @Nullable List<CollectionJsonData> data, //
-			@JsonProperty("links") @Nullable Links links) {
+@JsonProperty("data") @Nullable List<CollectionJsonData> data, //
+@JsonProperty("links") @Nullable Links links) {
 
 		this.href = href;
 		this.data = data == null ? Collections.emptyList() : data;
@@ -168,10 +168,10 @@ final class CollectionJsonItem<T> {
 		}
 
 		return PropertyUtils.extractPropertyValues(this.rawData).entrySet().stream() //
-				.map(entry -> new CollectionJsonData() //
-						.withName(entry.getKey()) //
-						.withValue(entry.getValue())) //
-				.collect(Collectors.toList());
+	.map(entry -> new CollectionJsonData() //
+.withName(entry.getKey()) //
+.withValue(entry.getValue())) //
+	.collect(Collectors.toList());
 	}
 
 	@JsonProperty
@@ -203,8 +203,8 @@ final class CollectionJsonItem<T> {
 		}
 
 		return PropertyUtils.createObjectFromProperties(javaType.getRawClass(), //
-				this.data.stream() //
-						.collect(Collectors.toMap(CollectionJsonData::getName, CollectionJsonData::getValue)));
+	this.data.stream() //
+.collect(Collectors.toMap(CollectionJsonData::getName, CollectionJsonData::getValue)));
 	}
 
 	@Override
@@ -216,7 +216,7 @@ final class CollectionJsonItem<T> {
 			return false;
 		CollectionJsonItem<?> that = (CollectionJsonItem<?>) o;
 		return Objects.equals(this.href, that.href) && Objects.equals(this.data, that.data)
-				&& Objects.equals(this.links, that.links) && Objects.equals(this.rawData, that.rawData);
+	&& Objects.equals(this.links, that.links) && Objects.equals(this.rawData, that.rawData);
 	}
 
 	@Override
@@ -227,7 +227,7 @@ final class CollectionJsonItem<T> {
 	public String toString() {
 
 		return "CollectionJsonItem(href=" + this.href + ", data=" + this.data + ", links=" + this.links + ", rawData="
-				+ this.rawData + ")";
+	+ this.rawData + ")";
 	}
 
 }

@@ -63,7 +63,7 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 	}
 
 	TemplateVariable(String name, TemplateVariable.VariableType type, String description,
-			Cardinality cardinality) {
+Cardinality cardinality) {
 		this(name, type, description, cardinality, -1);
 	}
 
@@ -76,7 +76,7 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 	 * @since 1.4
 	 */
 	TemplateVariable(String name, TemplateVariable.VariableType type, String description,
-			Cardinality cardinality, int limit) {
+Cardinality cardinality, int limit) {
 
 		Assert.hasText(name, "Variable name must not be null or empty!");
 		Assert.notNull(type, "Variable type must not be null!");
@@ -351,16 +351,16 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 			}
 
 			return StreamSupport.stream(source.spliterator(), false)
-					.map(it -> prepareElement(it, false))
-					.collect(Collectors.joining(separator));
+		.map(it -> prepareElement(it, false))
+		.collect(Collectors.joining(separator));
 
 		} else if (value instanceof Map) {
 
 			String keyValueSeparator = isComposite() ? "=" : DEFAULT_SEPARATOR;
 
 			return ((Map<Object, Object>) value).entrySet().stream()
-					.map(it -> it.getKey().toString().concat(keyValueSeparator).concat(prepareElement(it.getValue(), true)))
-					.collect(Collectors.joining(separator));
+		.map(it -> it.getKey().toString().concat(keyValueSeparator).concat(prepareElement(it.getValue(), true)))
+		.collect(Collectors.joining(separator));
 
 		} else {
 			return prepareElement(value, false);
@@ -426,8 +426,8 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 				}
 
 				return StringUtils.hasText(value)
-						? name.concat("=").concat(value)
-						: name;
+			? name.concat("=").concat(value)
+			: name;
 
 			default:
 				return value;
@@ -450,10 +450,10 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 		TemplateVariable that = (TemplateVariable) o;
 
 		return Objects.equals(this.name, that.name) //
-				&& this.type == that.type
-				&& this.limit == that.limit
-				&& this.cardinality == that.cardinality
-				&& Objects.equals(this.description, that.description);
+	&& this.type == that.type
+	&& this.limit == that.limit
+	&& this.cardinality == that.cardinality
+	&& Objects.equals(this.description, that.description);
 	}
 
 	/*
@@ -547,7 +547,7 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 			String prefix = this.equals(RESERVED_STRING) ? "" : key;
 
 			return values.stream()
-					.collect(Collectors.joining(combiner, prefix, ""));
+		.collect(Collectors.joining(combiner, prefix, ""));
 		}
 
 		boolean canBeCombinedWith(VariableType type) {
@@ -563,9 +563,9 @@ public final class TemplateVariable implements Serializable, UriTemplate.Expanda
 		public static TemplateVariable.VariableType from(String key) {
 
 			return Arrays.stream(values()) //
-					.filter(type -> type.key.equals(key)) //
-					.findFirst() //
-					.orElseThrow(() -> new IllegalArgumentException("Unsupported variable type " + key + "!"));
+		.filter(type -> type.key.equals(key)) //
+		.findFirst() //
+		.orElseThrow(() -> new IllegalArgumentException("Unsupported variable type " + key + "!"));
 		}
 
 		/*

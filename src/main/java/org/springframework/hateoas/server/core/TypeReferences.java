@@ -42,7 +42,8 @@ public class TypeReferences {
 	 * @since 0.17
 	 */
 	public static class EntityModelType<T>
-			extends SyntheticParameterizedTypeReference<org.springframework.hateoas.EntityModel<T>> {}
+extends SyntheticParameterizedTypeReference<org.springframework.hateoas.EntityModel<T>> {
+	}
 
 	/**
 	 * A {@link ParameterizedTypeReference} to return a {@link org.springframework.hateoas.CollectionModel} of some type.
@@ -51,7 +52,8 @@ public class TypeReferences {
 	 * @since 0.17
 	 */
 	public static class CollectionModelType<T>
-			extends SyntheticParameterizedTypeReference<org.springframework.hateoas.CollectionModel<T>> {}
+extends SyntheticParameterizedTypeReference<org.springframework.hateoas.CollectionModel<T>> {
+	}
 
 	/**
 	 * A {@link ParameterizedTypeReference} to return a {@link org.springframework.hateoas.PagedModel} of some type.
@@ -60,7 +62,8 @@ public class TypeReferences {
 	 * @since 0.17
 	 */
 	public static class PagedModelType<T>
-			extends SyntheticParameterizedTypeReference<org.springframework.hateoas.PagedModel<T>> {}
+extends SyntheticParameterizedTypeReference<org.springframework.hateoas.PagedModel<T>> {
+	}
 
 	/**
 	 * Special {@link ParameterizedTypeReference} to customize the generic type detection and eventually return a
@@ -86,11 +89,11 @@ public class TypeReferences {
 			Assert.isInstanceOf(ParameterizedType.class, type);
 			ParameterizedType parameterizedType = (ParameterizedType) type;
 			Assert.isTrue(parameterizedType.getActualTypeArguments().length == 1,
-					String.format("Type must have exactly one generic type argument but has %s.",
-							parameterizedType.getActualTypeArguments().length));
+		String.format("Type must have exactly one generic type argument but has %s.",
+	parameterizedType.getActualTypeArguments().length));
 
 			Class<?> resourceType = GenericTypeResolver.resolveType(parameterizedType.getActualTypeArguments()[0],
-					new HashMap<>());
+		new HashMap<>());
 
 			this.type = new SyntheticParameterizedType(resourceType, domainType);
 		}
@@ -111,7 +114,7 @@ public class TypeReferences {
 		@Override
 		public boolean equals(@Nullable Object obj) {
 			return this == obj || obj instanceof SyntheticParameterizedTypeReference
-					&& this.type.equals(((SyntheticParameterizedTypeReference<?>) obj).type);
+		&& this.type.equals(((SyntheticParameterizedTypeReference<?>) obj).type);
 		}
 
 		/*

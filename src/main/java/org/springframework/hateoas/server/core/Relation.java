@@ -31,7 +31,7 @@ import org.springframework.hateoas.EntityModel;
  * @author Alexander Baetz
  * @author Oliver Gierke
  */
-@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Relation {
 

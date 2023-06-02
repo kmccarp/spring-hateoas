@@ -86,16 +86,17 @@ class CollectionModelUnitTest {
 	static class Fixture {
 
 		CollectionModel<?> model;
-		@Nullable Class<?> expectedElementType;
+		@Nullable
+		Class<?> expectedElementType;
 
 		static Stream<Fixture> probes() {
 
 			return Stream.of(
-					$(CollectionModel.empty(), null),
-					$(CollectionModel.empty(String.class), String.class),
-					$(CollectionModel.of(Arrays.asList(new Person())).withFallbackType(Contact.class), Person.class),
-					$(CollectionModel.of(Arrays.asList(new Person(), new Company())).withFallbackType(Object.class),
-							Contact.class));
+		$(CollectionModel.empty(), null),
+		$(CollectionModel.empty(String.class), String.class),
+		$(CollectionModel.of(Arrays.asList(new Person())).withFallbackType(Contact.class), Person.class),
+		$(CollectionModel.of(Arrays.asList(new Person(), new Company())).withFallbackType(Object.class),
+	Contact.class));
 		}
 
 		void verify() {
@@ -108,10 +109,13 @@ class CollectionModelUnitTest {
 		}
 	}
 
-	static class Contact {}
+	static class Contact {
+	}
 
-	static class Person extends Contact {}
+	static class Person extends Contact {
+	}
 
-	static class Company extends Contact {}
+	static class Company extends Contact {
+	}
 
 }

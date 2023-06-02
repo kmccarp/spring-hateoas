@@ -26,13 +26,12 @@ import org.springframework.web.util.UriComponents;
  *
  * @author Oliver Gierke
  */
-public abstract class TemplateVariableAwareLinkBuilderSupport<T extends TemplateVariableAwareLinkBuilderSupport<T>>
-		extends LinkBuilderSupport<T> {
+public abstract class TemplateVariableAwareLinkBuilderSupport<T extends TemplateVariableAwareLinkBuilderSupport<T>>extends LinkBuilderSupport<T> {
 
 	private final TemplateVariables variables;
 
 	protected TemplateVariableAwareLinkBuilderSupport(UriComponents components, TemplateVariables variables,
-			List<Affordance> affordances) {
+List<Affordance> affordances) {
 
 		super(components, affordances);
 
@@ -49,7 +48,7 @@ public abstract class TemplateVariableAwareLinkBuilderSupport<T extends Template
 	}
 
 	protected abstract T createNewInstance(UriComponents components, List<Affordance> affordances,
-			TemplateVariables variables);
+TemplateVariables variables);
 
 	/*
 	 * (non-Javadoc)

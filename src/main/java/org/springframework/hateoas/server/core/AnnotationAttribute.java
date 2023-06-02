@@ -92,7 +92,7 @@ public class AnnotationAttribute {
 		Assert.notNull(annotation, "Annotation must not be null!");
 
 		return (String) (attributeName == null //
-				? AnnotationUtils.getValue(annotation) //
-				: AnnotationUtils.getValue(annotation, attributeName));
+	? AnnotationUtils.getValue(annotation) //
+	: AnnotationUtils.getValue(annotation, attributeName));
 	}
 }

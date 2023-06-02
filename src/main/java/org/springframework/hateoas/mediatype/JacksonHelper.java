@@ -49,8 +49,8 @@ public final class JacksonHelper {
 	public static boolean isResourcesOfResource(JavaType type) {
 
 		return
-			CollectionModel.class.isAssignableFrom(type.getRawClass())
-			&&
-			EntityModel.class.isAssignableFrom(type.containedType(0).getRawClass());
+	CollectionModel.class.isAssignableFrom(type.getRawClass())
+&&
+EntityModel.class.isAssignableFrom(type.containedType(0).getRawClass());
 	}
 }

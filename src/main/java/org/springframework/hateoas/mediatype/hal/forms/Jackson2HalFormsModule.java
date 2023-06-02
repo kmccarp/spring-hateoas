@@ -54,10 +54,12 @@ public class Jackson2HalFormsModule extends SimpleModule {
 	}
 
 	@JsonAppend(
-			props = @Prop(name = "_templates", value = HalFormsTemplatePropertyWriter.class, include = Include.NON_EMPTY))
-	abstract class RepresentationModelMixin extends org.springframework.hateoas.mediatype.hal.RepresentationModelMixin {}
+props = @Prop(name = "_templates", value = HalFormsTemplatePropertyWriter.class, include = Include.NON_EMPTY))
+	abstract class RepresentationModelMixin extends org.springframework.hateoas.mediatype.hal.RepresentationModelMixin {
+	}
 
 	@JsonSerialize(using = ToStringSerializer.class)
 	@JsonDeserialize(using = MediaTypeDeserializer.class)
-	interface MediaTypeMixin {}
+	interface MediaTypeMixin {
+	}
 }

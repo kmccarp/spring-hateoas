@@ -241,8 +241,8 @@ public class RepresentationModel<T extends RepresentationModel<? extends T>> {
 	public Optional<Link> getLink(LinkRelation relation) {
 
 		return links.stream() //
-				.filter(it -> it.hasRel(relation)) //
-				.findFirst();
+	.filter(it -> it.hasRel(relation)) //
+	.findFirst();
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class RepresentationModel<T extends RepresentationModel<? extends T>> {
 	public Link getRequiredLink(String relation) {
 
 		return getLink(relation) //
-				.orElseThrow(() -> new IllegalArgumentException(String.format("No link with rel %s found!", relation)));
+	.orElseThrow(() -> new IllegalArgumentException(String.format("No link with rel %s found!", relation)));
 	}
 
 	/**
@@ -283,8 +283,8 @@ public class RepresentationModel<T extends RepresentationModel<? extends T>> {
 		Assert.hasText(relation, "Link relation must not be null or empty!");
 
 		return links.stream() //
-				.filter(link -> link.hasRel(relation)) //
-				.collect(Collectors.toList());
+	.filter(link -> link.hasRel(relation)) //
+	.collect(Collectors.toList());
 	}
 
 	/**

@@ -41,17 +41,17 @@ class WebClientHateoasConfiguration {
 	@Bean
 	@Lazy
 	HypermediaWebClientConfigurer webClientConfigurer(ObjectProvider<ObjectMapper> mapper,
-			List<HypermediaMappingInformation> hypermediaTypes) {
+List<HypermediaMappingInformation> hypermediaTypes) {
 
 		WebfluxCodecCustomizer withGenericJsonTypes = new WebfluxCodecCustomizer(hypermediaTypes,
-				mapper.getIfAvailable(ObjectMapper::new)).withGenericJsonTypes();
+	mapper.getIfAvailable(ObjectMapper::new)).withGenericJsonTypes();
 
 		return new HypermediaWebClientConfigurer(withGenericJsonTypes);
 	}
 
 	@Bean
 	static HypermediaWebClientBeanPostProcessor webClientBeanPostProcessor(
-			ObjectFactory<HypermediaWebClientConfigurer> configurer) {
+ObjectFactory<HypermediaWebClientConfigurer> configurer) {
 		return new HypermediaWebClientBeanPostProcessor(configurer);
 	}
 
@@ -79,8 +79,8 @@ class WebClientHateoasConfiguration {
 		public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
 			return !WebClient.class.isInstance(bean) //
-					? bean //
-					: this.configurer.getObject().registerHypermediaTypes(((WebClient) bean).mutate()).build();
+		? bean //
+		: this.configurer.getObject().registerHypermediaTypes(((WebClient) bean).mutate()).build();
 		}
 	}
 }

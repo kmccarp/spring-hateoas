@@ -70,8 +70,8 @@ public class WebConverters {
 	List<MediaType> getSupportedMediaTypes() {
 
 		return infos.stream() //
-				.flatMap(it -> it.getMediaTypes().stream())
-				.collect(Collectors.toList());
+	.flatMap(it -> it.getMediaTypes().stream())
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -92,10 +92,10 @@ public class WebConverters {
 		Assert.notNull(converters, "HttpMessageConverters must not be null!");
 
 		MappingJackson2HttpMessageConverter converter = converters.stream()
-				.filter(it -> MappingJackson2HttpMessageConverter.class.equals(it.getClass()))
-				.map(MappingJackson2HttpMessageConverter.class::cast)
-				.findFirst()
-				.orElseGet(() -> new MappingJackson2HttpMessageConverter(mapper));
+	.filter(it -> MappingJackson2HttpMessageConverter.class.equals(it.getClass()))
+	.map(MappingJackson2HttpMessageConverter.class::cast)
+	.findFirst()
+	.orElseGet(() -> new MappingJackson2HttpMessageConverter(mapper));
 
 		ObjectMapper first = null;
 
@@ -109,7 +109,7 @@ public class WebConverters {
 			}
 
 			Map<MediaType, ObjectMapper> mappers = info.getMediaTypes().stream().distinct()
-					.collect(Collectors.toMap(Function.identity(), __ -> objectMapper));
+		.collect(Collectors.toMap(Function.identity(), __ -> objectMapper));
 
 			converter.registerObjectMappersForType(rootType, map -> map.putAll(mappers));
 		}
@@ -123,7 +123,7 @@ public class WebConverters {
 
 		converter.registerObjectMappersForType(rootType, map -> {
 			Stream.of(MediaType.APPLICATION_JSON, ANY_JSON)
-					.forEach(it -> map.put(it, mapper));
+		.forEach(it -> map.put(it, mapper));
 		});
 	}
 }

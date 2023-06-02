@@ -82,8 +82,8 @@ public class HalLinkRelation implements LinkRelation, MessageSourceResolvable {
 		String curie = firstColonIndex == -1 ? null : relation.substring(0, firstColonIndex);
 
 		return curie == null || IanaUriSchemes.isIanaUriScheme(curie)
-				? new HalLinkRelation(null, relation)
-				: new HalLinkRelation(curie, relation.substring(firstColonIndex + 1));
+	? new HalLinkRelation(null, relation)
+	: new HalLinkRelation(curie, relation.substring(firstColonIndex + 1));
 	}
 
 	/**
@@ -165,8 +165,8 @@ public class HalLinkRelation implements LinkRelation, MessageSourceResolvable {
 		String mappedLocalPart = mapper.apply(localPart);
 
 		return localPart.equals(mappedLocalPart) //
-				? this //
-				: new HalLinkRelation(curie, mappedLocalPart);
+	? this //
+	: new HalLinkRelation(curie, mappedLocalPart);
 	}
 
 	/*
@@ -188,8 +188,8 @@ public class HalLinkRelation implements LinkRelation, MessageSourceResolvable {
 	public String[] getCodes() {
 
 		return Stream.of(value(), localPart) //
-				.map(it -> String.format(RELATION_MESSAGE_TEMPLATE, it)) //
-				.toArray(String[]::new);
+	.map(it -> String.format(RELATION_MESSAGE_TEMPLATE, it)) //
+	.toArray(String[]::new);
 	}
 
 	/*
@@ -240,7 +240,7 @@ public class HalLinkRelation implements LinkRelation, MessageSourceResolvable {
 		HalLinkRelation that = (HalLinkRelation) o;
 
 		return Objects.equals(this.curie, that.curie) //
-				&& Objects.equals(this.localPart, that.localPart);
+	&& Objects.equals(this.localPart, that.localPart);
 	}
 
 	/*

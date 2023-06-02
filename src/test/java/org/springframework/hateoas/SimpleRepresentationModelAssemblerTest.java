@@ -51,7 +51,7 @@ class SimpleRepresentationModelAssemblerTest {
 
 		TestResourceAssembler assembler = new TestResourceAssembler();
 		CollectionModel<EntityModel<Employee>> resources = assembler
-				.toCollectionModel(Collections.singletonList(new Employee("Frodo")));
+	.toCollectionModel(Collections.singletonList(new Employee("Frodo")));
 
 		assertThat(resources.getContent()).containsExactly(EntityModel.of(new Employee("Frodo")));
 		assertThat(resources.getLinks()).isEmpty();
@@ -78,20 +78,22 @@ class SimpleRepresentationModelAssemblerTest {
 
 		ResourceAssemblerWithCustomLink assembler = new ResourceAssemblerWithCustomLink();
 		CollectionModel<EntityModel<Employee>> resources = assembler
-				.toCollectionModel(Collections.singletonList(new Employee("Frodo")));
+	.toCollectionModel(Collections.singletonList(new Employee("Frodo")));
 
 		assertThat(resources.getContent()).containsExactly(
-				EntityModel.of(new Employee("Frodo"), Link.of("/employees").withRel("employees")));
+	EntityModel.of(new Employee("Frodo"), Link.of("/employees").withRel("employees")));
 		assertThat(resources.getLinks()).isEmpty();
 	}
 
 	class TestResourceAssembler implements SimpleRepresentationModelAssembler<Employee> {
 
 		@Override
-		public void addLinks(EntityModel<Employee> resource) {}
+		public void addLinks(EntityModel<Employee> resource) {
+		}
 
 		@Override
-		public void addLinks(CollectionModel<EntityModel<Employee>> resources) {}
+		public void addLinks(CollectionModel<EntityModel<Employee>> resources) {
+		}
 	}
 
 	class ResourceAssemblerWithCustomLink implements SimpleRepresentationModelAssembler<Employee> {
@@ -102,7 +104,8 @@ class SimpleRepresentationModelAssemblerTest {
 		}
 
 		@Override
-		public void addLinks(CollectionModel<EntityModel<Employee>> resources) {}
+		public void addLinks(CollectionModel<EntityModel<Employee>> resources) {
+		}
 	}
 
 	@Data

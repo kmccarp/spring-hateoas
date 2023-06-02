@@ -39,8 +39,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Oliver Gierke
  * @author Greg Turnquist
  */
-public class CollectionModel<T> extends RepresentationModel<CollectionModel<T>>
-		implements Iterable<T>, ResolvableTypeProvider {
+public class CollectionModel<T> extends RepresentationModel<CollectionModel<T>>implements Iterable<T>, ResolvableTypeProvider {
 
 	private final Collection<T> content;
 	private final @Nullable ResolvableType fallbackType;
@@ -276,8 +275,8 @@ public class CollectionModel<T> extends RepresentationModel<CollectionModel<T>>
 			Class<?> type = this.getClass();
 
 			this.fullType = elementType == null || type.getTypeParameters().length == 0 //
-					? ResolvableType.forClass(type) //
-					: ResolvableType.forClassWithGenerics(type, elementType);
+		? ResolvableType.forClass(type) //
+		: ResolvableType.forClassWithGenerics(type, elementType);
 		}
 
 		return fullType;
@@ -300,7 +299,7 @@ public class CollectionModel<T> extends RepresentationModel<CollectionModel<T>>
 	public String toString() {
 
 		return String.format("CollectionModel { content: %s, fallbackType: %s, %s }", //
-				getContent(), fallbackType, super.toString());
+	getContent(), fallbackType, super.toString());
 	}
 
 	/*
@@ -321,8 +320,8 @@ public class CollectionModel<T> extends RepresentationModel<CollectionModel<T>>
 		CollectionModel<?> that = (CollectionModel<?>) obj;
 
 		return Objects.equals(this.content, that.content)
-				&& Objects.equals(this.fallbackType, that.fallbackType)
-				&& super.equals(obj);
+	&& Objects.equals(this.fallbackType, that.fallbackType)
+	&& super.equals(obj);
 	}
 
 	/*
@@ -349,10 +348,10 @@ public class CollectionModel<T> extends RepresentationModel<CollectionModel<T>>
 		}
 
 		return elements.stream()
-				.filter(it -> it != null)
-				.<Class<?>> map(Object::getClass)
-				.reduce(ClassUtils::determineCommonAncestor)
-				.map(ResolvableType::forClass)
-				.orElse(fallbackType);
+	.filter(it -> it != null)
+	.<Class<?>>map(Object::getClass)
+	.reduce(ClassUtils::determineCommonAncestor)
+	.map(ResolvableType::forClass)
+	.orElse(fallbackType);
 	}
 }

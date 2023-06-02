@@ -28,7 +28,7 @@ public class ClassUtils {
 
 		try {
 			return (Class<T>) org.springframework.util.ClassUtils.forName(type,
-					org.springframework.hateoas.support.ClassUtils.class.getClassLoader());
+		org.springframework.hateoas.support.ClassUtils.class.getClassLoader());
 		} catch (ClassNotFoundException | LinkageError e) {
 			return null;
 		}

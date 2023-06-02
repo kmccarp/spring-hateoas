@@ -86,8 +86,8 @@ class EntityModelUnitTest {
 		EntityModel<?> model = EntityModel.of(new ValueType());
 
 		assertThatExceptionOfType(JsonMappingException.class)
-				.isThrownBy(() -> new ObjectMapper().writeValueAsString(model))
-				.withMessageContaining("@JsonValue");
+	.isThrownBy(() -> new ObjectMapper().writeValueAsString(model))
+	.withMessageContaining("@JsonValue");
 	}
 
 	@Test // #1371
@@ -96,13 +96,14 @@ class EntityModelUnitTest {
 		EntityModel<?> model = EntityModel.of(new TypeWithId());
 
 		assertThatNoException()
-				.isThrownBy(() -> new ObjectMapper().writeValueAsString(model));
+	.isThrownBy(() -> new ObjectMapper().writeValueAsString(model));
 	}
 
 	// #1371
 
 	static class ValueType {
-		@JsonValue String type;
+		@JsonValue
+		String type;
 	}
 
 	@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@jsonObjectId")

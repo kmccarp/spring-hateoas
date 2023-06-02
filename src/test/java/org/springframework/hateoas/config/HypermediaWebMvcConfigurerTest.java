@@ -254,7 +254,7 @@ class HypermediaWebMvcConfigurerTest {
 		setUp(HalWebMvcConfig.class);
 
 		this.mockMvc.perform(get("/").accept(MediaTypes.UBER_JSON))
-				.andExpect(status().isNotAcceptable());
+	.andExpect(status().isNotAcceptable());
 	}
 
 	@Test // #118
@@ -263,7 +263,7 @@ class HypermediaWebMvcConfigurerTest {
 		setUp(WithConversionService.class);
 
 		this.mockMvc.perform(get("/sample/4711"))
-				.andExpect(status().isIAmATeapot());
+	.andExpect(status().isIAmATeapot());
 	}
 
 	@Test // #1830
@@ -272,10 +272,10 @@ class HypermediaWebMvcConfigurerTest {
 		setUp(HalWebMvcConfig.class);
 
 		this.mockMvc.perform(get("/dynamicLink"))
-				.andExpect(status().isOk());
+	.andExpect(status().isOk());
 
 		var cache = (ThreadLocal<ConcurrentLruCache<?, ?>>) ReflectionTestUtils.getField(null, DummyInvocationUtils.class,
-				"CACHE");
+	"CACHE");
 
 		assertThat(cache.get().size()).isZero();
 	}
@@ -287,17 +287,17 @@ class HypermediaWebMvcConfigurerTest {
 	private void verifyRootUriServesHypermedia(MediaType requestType, MediaType responseType) throws Exception {
 
 		String json = this.mockMvc.perform(get("/").accept(requestType)) //
-				.andExpect(status().isOk()) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
-				.andReturn() //
-				.getResponse().getContentAsString(); //
+	.andExpect(status().isOk()) //
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
+	.andReturn() //
+	.getResponse().getContentAsString(); //
 
 		ObjectMapper mapper = getMapper(responseType);
 
 		RepresentationModel<?> model = mapper.readValue(json, RepresentationModel.class);
 
 		assertThat(model.getLinks()) //
-				.containsExactlyInAnyOrder(Link.of("/", IanaLinkRelations.SELF), Link.of("/employees", "employees"));
+	.containsExactlyInAnyOrder(Link.of("/", IanaLinkRelations.SELF), Link.of("/employees", "employees"));
 	}
 
 	private void verifyAggregateRootServesHypermedia(MediaType mediaType) throws Exception {
@@ -307,15 +307,15 @@ class HypermediaWebMvcConfigurerTest {
 	private void verifyAggregateRootServesHypermedia(MediaType requestType, MediaType responseType) throws Exception {
 
 		String json = this.mockMvc.perform(get("/employees").accept(requestType)) //
-				.andExpect(status().isOk()) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
-				.andReturn().getResponse().getContentAsString();
+	.andExpect(status().isOk()) //
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
+	.andReturn().getResponse().getContentAsString();
 
 		ObjectMapper mapper = getMapper(responseType);
 
 		JavaType entityModelType = mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class);
 		JavaType collectionModelType = mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-				entityModelType);
+	entityModelType);
 
 		CollectionModel<EntityModel<Employee>> resources = mapper.readValue(json, collectionModelType);
 
@@ -328,8 +328,8 @@ class HypermediaWebMvcConfigurerTest {
 
 		assertThat(resource.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
 		assertThat(resource.getLinks()) //
-				.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-						Link.of("/employees", "employees"));
+	.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
+Link.of("/employees", "employees"));
 	}
 
 	private void verifySingleItemResourceServesHypermedia(MediaType mediaType) throws Exception {
@@ -337,12 +337,12 @@ class HypermediaWebMvcConfigurerTest {
 	}
 
 	private void verifySingleItemResourceServesHypermedia(MediaType requestType, MediaType responseType)
-			throws Exception {
+throws Exception {
 
 		String json = this.mockMvc.perform(get("/employees/1").accept(requestType)) //
-				.andExpect(status().isOk()) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
-				.andReturn().getResponse().getContentAsString();
+	.andExpect(status().isOk()) //
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
+	.andReturn().getResponse().getContentAsString();
 
 		ObjectMapper mapper = getMapper(responseType);
 
@@ -352,7 +352,7 @@ class HypermediaWebMvcConfigurerTest {
 
 		assertThat(employeeResource.getContent()).isEqualTo(new Employee("Frodo Baggins", "ring bearer"));
 		assertThat(employeeResource.getLinks()).containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-				Link.of("/employees", "employees"));
+	Link.of("/employees", "employees"));
 	}
 
 	private void verifyCreatingNewEntityWorks(MediaType mediaType) throws Exception {
@@ -368,13 +368,13 @@ class HypermediaWebMvcConfigurerTest {
 		ObjectMapper mapper = getMapper(responseType);
 
 		String json = this.mockMvc.perform( //
-				post(uri) //
-						.accept(contentType) //
-						.contentType(contentType) //
-						.content(mapper.writeValueAsBytes(new Employee("Samwise Gamgee", "gardener")))) //
-				.andExpect(status().isOk()) //
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
-				.andReturn().getResponse().getContentAsString();
+	post(uri) //
+.accept(contentType) //
+.contentType(contentType) //
+.content(mapper.writeValueAsBytes(new Employee("Samwise Gamgee", "gardener")))) //
+	.andExpect(status().isOk()) //
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, responseType.toString())) //
+	.andReturn().getResponse().getContentAsString();
 
 		JavaType entityModelType = mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class);
 
@@ -382,8 +382,8 @@ class HypermediaWebMvcConfigurerTest {
 
 		assertThat(resource.getContent()).isEqualTo(new Employee("Samwise Gamgee", "gardener"));
 		assertThat(resource.getLinks()) //
-				.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
-						Link.of("/employees", "employees"));
+	.containsExactlyInAnyOrder(Link.of("/employees/1", IanaLinkRelations.SELF),
+Link.of("/employees", "employees"));
 	}
 
 	private static ObjectMapper getMapper(MediaType mediaType) {
@@ -417,25 +417,32 @@ class HypermediaWebMvcConfigurerTest {
 	}
 
 	@EnableHypermediaSupport(type = HAL)
-	static class HalWebMvcConfig extends BaseConfig {}
+	static class HalWebMvcConfig extends BaseConfig {
+	}
 
 	@EnableHypermediaSupport(type = HAL_FORMS)
-	static class HalFormsWebMvcConfig extends BaseConfig {}
+	static class HalFormsWebMvcConfig extends BaseConfig {
+	}
 
 	@EnableHypermediaSupport(type = COLLECTION_JSON)
-	static class CollectionJsonWebMvcConfig extends BaseConfig {}
+	static class CollectionJsonWebMvcConfig extends BaseConfig {
+	}
 
 	@EnableHypermediaSupport(type = UBER)
-	static class UberWebMvcConfig extends BaseConfig {}
+	static class UberWebMvcConfig extends BaseConfig {
+	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS })
-	static class AllHalWebMvcConfig extends BaseConfig {}
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS})
+	static class AllHalWebMvcConfig extends BaseConfig {
+	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS, COLLECTION_JSON })
-	static class HalAndCollectionJsonWebMvcConfig extends BaseConfig {}
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS, COLLECTION_JSON})
+	static class HalAndCollectionJsonWebMvcConfig extends BaseConfig {
+	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS, COLLECTION_JSON, UBER })
-	static class AllHypermediaTypesWebMvcConfig extends BaseConfig {}
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS, COLLECTION_JSON, UBER})
+	static class AllHypermediaTypesWebMvcConfig extends BaseConfig {
+	}
 
 	@RestController
 	static class TestController {
@@ -489,7 +496,7 @@ class HypermediaWebMvcConfigurerTest {
 		@GetMapping("/dynamicLink")
 		EntityModel<Employee> dynamicLink() {
 			return EntityModel.of(employees.get(0)) //
-					.add(linkTo(methodOn(TestController.class).employee("1")).withSelfRel());
+		.add(linkTo(methodOn(TestController.class).employee("1")).withSelfRel());
 		}
 	}
 
@@ -523,7 +530,8 @@ class HypermediaWebMvcConfigurerTest {
 			registry.addConverter(String.class, Sample.class, source -> new Sample());
 		}
 
-		static class Sample {}
+		static class Sample {
+		}
 
 		@Controller
 		static class SampleController {

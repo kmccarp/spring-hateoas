@@ -97,8 +97,8 @@ class Rels {
 		public Optional<Link> findInResponse(String response, MediaType mediaType) {
 
 			return discoverers //
-					.getRequiredLinkDiscovererFor(mediaType) //
-					.findLinkWithRel(rel, response);
+		.getRequiredLinkDiscovererFor(mediaType) //
+		.findLinkWithRel(rel, response);
 		}
 
 		/*

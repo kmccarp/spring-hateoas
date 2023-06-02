@@ -47,7 +47,7 @@ public interface RepresentationModelAssembler<T, D extends RepresentationModel<?
 	default CollectionModel<D> toCollectionModel(Iterable<? extends T> entities) {
 
 		return StreamSupport.stream(entities.spliterator(), false) //
-				.map(this::toModel) //
-				.collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel::of));
+	.map(this::toModel) //
+	.collect(Collectors.collectingAndThen(Collectors.toList(), CollectionModel::of));
 	}
 }

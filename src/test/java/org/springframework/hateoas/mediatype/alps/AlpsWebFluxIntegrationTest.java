@@ -42,48 +42,49 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @ContextConfiguration
 public class AlpsWebFluxIntegrationTest {
 
-	@Autowired WebTestClient testClient;
+	@Autowired
+	WebTestClient testClient;
 
 	@Test
 	void profileEndpointReturnsAlps() {
 
 		this.testClient.get().uri("/profile") //
-				.accept(MediaTypes.ALPS_JSON) //
-				.exchange() //
-				.expectStatus().isOk() //
-				.returnResult(Alps.class).getResponseBody() //
-				.as(StepVerifier::create) //
-				.expectNextMatches(alps -> {
+	.accept(MediaTypes.ALPS_JSON) //
+	.exchange() //
+	.expectStatus().isOk() //
+	.returnResult(Alps.class).getResponseBody() //
+	.as(StepVerifier::create) //
+	.expectNextMatches(alps -> {
 
-					assertThat(alps.getVersion()).isEqualTo("1.0");
-					assertThat(alps.getDoc().getFormat()).isEqualByComparingTo(Format.TEXT);
-					assertThat(alps.getDoc().getHref()).isEqualTo("https://example.org/samples/full/doc.html");
-					assertThat(alps.getDoc().getValue()).isEqualTo("value goes here");
-					assertThat(alps.getDescriptor()).hasSize(2);
+		assertThat(alps.getVersion()).isEqualTo("1.0");
+		assertThat(alps.getDoc().getFormat()).isEqualByComparingTo(Format.TEXT);
+		assertThat(alps.getDoc().getHref()).isEqualTo("https://example.org/samples/full/doc.html");
+		assertThat(alps.getDoc().getValue()).isEqualTo("value goes here");
+		assertThat(alps.getDescriptor()).hasSize(2);
 
-					assertThat(alps.getDescriptor().get(0).getId()).isEqualTo("class field [name]");
-					assertThat(alps.getDescriptor().get(0).getName()).isEqualTo("name");
-					assertThat(alps.getDescriptor().get(0).getType()).isEqualByComparingTo(Type.SEMANTIC);
-					assertThat(alps.getDescriptor().get(0).getDescriptor()).hasSize(1);
-					assertThat(alps.getDescriptor().get(0).getDescriptor().get(0).getId()).isEqualTo("embedded");
-					assertThat(alps.getDescriptor().get(0).getExt().getId()).isEqualTo("ext [name]");
-					assertThat(alps.getDescriptor().get(0).getExt().getHref()).isEqualTo("https://example.org/samples/ext/name");
-					assertThat(alps.getDescriptor().get(0).getExt().getValue()).isEqualTo("value goes here");
-					assertThat(alps.getDescriptor().get(0).getRt()).isEqualTo("rt for [name]");
+		assertThat(alps.getDescriptor().get(0).getId()).isEqualTo("class field [name]");
+		assertThat(alps.getDescriptor().get(0).getName()).isEqualTo("name");
+		assertThat(alps.getDescriptor().get(0).getType()).isEqualByComparingTo(Type.SEMANTIC);
+		assertThat(alps.getDescriptor().get(0).getDescriptor()).hasSize(1);
+		assertThat(alps.getDescriptor().get(0).getDescriptor().get(0).getId()).isEqualTo("embedded");
+		assertThat(alps.getDescriptor().get(0).getExt().getId()).isEqualTo("ext [name]");
+		assertThat(alps.getDescriptor().get(0).getExt().getHref()).isEqualTo("https://example.org/samples/ext/name");
+		assertThat(alps.getDescriptor().get(0).getExt().getValue()).isEqualTo("value goes here");
+		assertThat(alps.getDescriptor().get(0).getRt()).isEqualTo("rt for [name]");
 
-					assertThat(alps.getDescriptor().get(1).getId()).isEqualTo("class field [role]");
-					assertThat(alps.getDescriptor().get(1).getName()).isEqualTo("role");
-					assertThat(alps.getDescriptor().get(1).getType()).isEqualByComparingTo(Type.SEMANTIC);
-					assertThat(alps.getDescriptor().get(1).getDescriptor()).hasSize(1);
-					assertThat(alps.getDescriptor().get(1).getDescriptor().get(0).getId()).isEqualTo("embedded");
-					assertThat(alps.getDescriptor().get(1).getExt().getId()).isEqualTo("ext [role]");
-					assertThat(alps.getDescriptor().get(1).getExt().getHref()).isEqualTo("https://example.org/samples/ext/role");
-					assertThat(alps.getDescriptor().get(1).getExt().getValue()).isEqualTo("value goes here");
-					assertThat(alps.getDescriptor().get(1).getRt()).isEqualTo("rt for [role]");
+		assertThat(alps.getDescriptor().get(1).getId()).isEqualTo("class field [role]");
+		assertThat(alps.getDescriptor().get(1).getName()).isEqualTo("role");
+		assertThat(alps.getDescriptor().get(1).getType()).isEqualByComparingTo(Type.SEMANTIC);
+		assertThat(alps.getDescriptor().get(1).getDescriptor()).hasSize(1);
+		assertThat(alps.getDescriptor().get(1).getDescriptor().get(0).getId()).isEqualTo("embedded");
+		assertThat(alps.getDescriptor().get(1).getExt().getId()).isEqualTo("ext [role]");
+		assertThat(alps.getDescriptor().get(1).getExt().getHref()).isEqualTo("https://example.org/samples/ext/role");
+		assertThat(alps.getDescriptor().get(1).getExt().getValue()).isEqualTo("value goes here");
+		assertThat(alps.getDescriptor().get(1).getRt()).isEqualTo("rt for [role]");
 
-					return true;
-				}) //
-				.verifyComplete();
+		return true;
+	}) //
+	.verifyComplete();
 	}
 
 	@Configuration

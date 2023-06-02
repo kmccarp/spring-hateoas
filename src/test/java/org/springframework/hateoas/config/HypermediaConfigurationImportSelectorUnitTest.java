@@ -49,7 +49,7 @@ class HypermediaConfigurationImportSelectorUnitTest {
 			Map<String, LinkDiscoverer> linkDiscoverers = context.getBeansOfType(LinkDiscoverer.class);
 
 			assertThat(linkDiscoverers.values()).extracting("class") //
-					.containsExactly(HalLinkDiscoverer.class);
+		.containsExactly(HalLinkDiscoverer.class);
 		});
 	}
 
@@ -61,7 +61,7 @@ class HypermediaConfigurationImportSelectorUnitTest {
 			Map<String, LinkDiscoverer> linkDiscoverers = context.getBeansOfType(LinkDiscoverer.class);
 
 			assertThat(linkDiscoverers.values()).extracting("class") //
-					.containsExactly(HalFormsLinkDiscoverer.class);
+		.containsExactly(HalFormsLinkDiscoverer.class);
 		});
 	}
 
@@ -73,9 +73,9 @@ class HypermediaConfigurationImportSelectorUnitTest {
 			Map<String, LinkDiscoverer> linkDiscoverers = context.getBeansOfType(LinkDiscoverer.class);
 
 			assertThat(linkDiscoverers.values()).extracting("class") //
-					.containsExactlyInAnyOrder( //
-							HalLinkDiscoverer.class, //
-							HalFormsLinkDiscoverer.class);
+		.containsExactlyInAnyOrder( //
+	HalLinkDiscoverer.class, //
+	HalFormsLinkDiscoverer.class);
 		});
 	}
 
@@ -87,11 +87,11 @@ class HypermediaConfigurationImportSelectorUnitTest {
 			Map<String, LinkDiscoverer> linkDiscoverers = context.getBeansOfType(LinkDiscoverer.class);
 
 			assertThat(linkDiscoverers.values()).extracting("class") //
-					.containsExactlyInAnyOrder( //
-							HalLinkDiscoverer.class, //
-							HalFormsLinkDiscoverer.class, //
-							UberLinkDiscoverer.class, //
-							CollectionJsonLinkDiscoverer.class);
+		.containsExactlyInAnyOrder( //
+	HalLinkDiscoverer.class, //
+	HalFormsLinkDiscoverer.class, //
+	UberLinkDiscoverer.class, //
+	CollectionJsonLinkDiscoverer.class);
 		});
 	}
 
@@ -113,7 +113,7 @@ class HypermediaConfigurationImportSelectorUnitTest {
 		withContext(HalConfig.class, context -> {
 
 			assertThatExceptionOfType(NoSuchBeanDefinitionException.class)
-					.isThrownBy(() -> context.getBean(WebTestHateoasConfiguration.class));
+		.isThrownBy(() -> context.getBean(WebTestHateoasConfiguration.class));
 
 		}, loader);
 	}
@@ -128,12 +128,12 @@ class HypermediaConfigurationImportSelectorUnitTest {
 
 	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS })
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS})
 	static class HalAndHalFormsConfig {
 
 	}
 
-	@EnableHypermediaSupport(type = { HAL, HAL_FORMS, UBER, COLLECTION_JSON })
+	@EnableHypermediaSupport(type = {HAL, HAL_FORMS, UBER, COLLECTION_JSON})
 	static class AllConfig {
 
 	}

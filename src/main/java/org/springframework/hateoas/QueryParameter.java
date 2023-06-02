@@ -54,20 +54,20 @@ public final class QueryParameter {
 	public static QueryParameter of(MethodParameter parameter) {
 
 		MergedAnnotation<RequestParam> annotation = MergedAnnotations //
-				.from(parameter.getParameter()) //
-				.get(RequestParam.class);
+	.from(parameter.getParameter()) //
+	.get(RequestParam.class);
 
 		String name = annotation.isPresent() && annotation.hasNonDefaultValue("name") //
-				? annotation.getString("name") //
-				: parameter.getParameterName();
+	? annotation.getString("name") //
+	: parameter.getParameterName();
 
 		if (name == null || !StringUtils.hasText(name)) {
 			throw new IllegalStateException(String.format("Couldn't determine parameter name for %s!", parameter));
 		}
 
 		boolean required = annotation.isPresent() && annotation.hasNonDefaultValue("required") //
-				? annotation.getBoolean("required") //
-				: !Optional.class.equals(parameter.getParameterType()); //
+	? annotation.getBoolean("required") //
+	: !Optional.class.equals(parameter.getParameterType()); //
 
 		return required ? required(name) : optional(name);
 	}
@@ -129,7 +129,7 @@ public final class QueryParameter {
 		}
 		QueryParameter that = (QueryParameter) o;
 		return this.required == that.required && Objects.equals(this.name, that.name)
-				&& Objects.equals(this.value, that.value);
+	&& Objects.equals(this.value, that.value);
 	}
 
 	@Override

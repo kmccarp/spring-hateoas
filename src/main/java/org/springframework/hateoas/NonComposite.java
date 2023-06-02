@@ -32,5 +32,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 1.4
  */
 @Retention(RUNTIME)
-@Target({ PARAMETER, ANNOTATION_TYPE })
-public @interface NonComposite {}
+@Target({PARAMETER, ANNOTATION_TYPE})
+public @interface NonComposite {
+}

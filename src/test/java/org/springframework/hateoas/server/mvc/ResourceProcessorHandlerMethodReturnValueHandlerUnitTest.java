@@ -88,7 +88,8 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 		doWithMethods(Controller.class, method -> METHOD_PARAMS.put(method.getName(), new MethodParameter(method, -1)));
 	}
 
-	@Mock HandlerMethodReturnValueHandler delegate;
+	@Mock
+	HandlerMethodReturnValueHandler delegate;
 	List<RepresentationModelProcessor<?>> resourceProcessors;
 
 	@BeforeEach
@@ -254,12 +255,12 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 		MethodParameter parameter = METHOD_PARAMS.get("resource");
 
 		RepresentationModelProcessorHandlerMethodReturnValueHandler handler = new RepresentationModelProcessorHandlerMethodReturnValueHandler(
-				delegate, () -> new RepresentationModelProcessorInvoker(resourceProcessors));
+	delegate, () -> new RepresentationModelProcessorInvoker(resourceProcessors));
 		handler.setRootLinksAsHeaders(true);
 		handler.handleReturnValue(mapper.apply(resource), parameter, null, null);
 
 		verify(delegate, times(1)).handleReturnValue(any(HeaderLinksResponseEntity.class), eq(parameter), isNull(),
-				isNull());
+	isNull());
 	}
 
 	/**
@@ -270,7 +271,7 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 
 		ResolvableType type = ResolvableType.forClass(PagedStringResources.class);
 		CollectionModelProcessorWrapper wrapper = new CollectionModelProcessorWrapper(
-				mock(RepresentationModelProcessor.class));
+	mock(RepresentationModelProcessor.class));
 
 		assertThat(wrapper.isValueTypeMatch(FOO_PAGE, type)).isTrue();
 	}
@@ -302,7 +303,7 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 		resourceProcessors.add((RepresentationModelProcessor<?>) factory.getProxy());
 
 		new RepresentationModelProcessorHandlerMethodReturnValueHandler(delegate,
-				() -> new RepresentationModelProcessorInvoker(resourceProcessors));
+	() -> new RepresentationModelProcessorInvoker(resourceProcessors));
 	}
 
 	/**
@@ -325,7 +326,7 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 		}
 
 		HandlerMethodReturnValueHandler handler = new RepresentationModelProcessorHandlerMethodReturnValueHandler(delegate,
-				() -> new RepresentationModelProcessorInvoker(resourceProcessors));
+	() -> new RepresentationModelProcessorInvoker(resourceProcessors));
 		handler.handleReturnValue(returnValue, methodParam, null, null);
 
 		verify(delegate, times(1)).handleReturnValue(expected, methodParam, null, null);
@@ -337,7 +338,7 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 		when(delegate.supportsReturnType(Mockito.any(MethodParameter.class))).thenReturn(value);
 
 		HandlerMethodReturnValueHandler handler = new RepresentationModelProcessorHandlerMethodReturnValueHandler(delegate,
-				() -> new RepresentationModelProcessorInvoker(resourceProcessors));
+	() -> new RepresentationModelProcessorInvoker(resourceProcessors));
 
 		assertThat(handler.supportsReturnType(parameter)).isEqualTo(value);
 	}
@@ -434,7 +435,8 @@ class ResourceProcessorHandlerMethodReturnValueHandlerUnitTest {
 		}
 	}
 
-	static class PagedStringResources extends PagedModel<EntityModel<String>> {}
+	static class PagedStringResources extends PagedModel<EntityModel<String>> {
+	}
 
 	static class Sample {
 

@@ -49,15 +49,15 @@ class AotUtils {
 	 * @param context must not be {@literal null}.
 	 */
 	public static void registerModelDomainTypesForReflection(ResolvableType type, ReflectionHints reflection,
-			Class<?> context) {
+Class<?> context) {
 
 		if (HttpEntity.class.isAssignableFrom(type.resolve(Object.class))) {
 			registerModelDomainTypesForReflection(type.as(HttpEntity.class).getGeneric(0), reflection, context);
 		}
 
 		MODEL_TYPES.stream()
-				.flatMap(it -> extractGenerics(it, type).stream())
-				.forEach(it -> registerTypeForReflection(it, reflection, context));
+	.flatMap(it -> extractGenerics(it, type).stream())
+	.forEach(it -> registerTypeForReflection(it, reflection, context));
 	}
 
 	/**
@@ -76,8 +76,8 @@ class AotUtils {
 		LOGGER.info("Registering {} for reflection (for {})", type.getName(), context.getName());
 
 		reflection.registerType(type,
-				MemberCategory.INVOKE_DECLARED_METHODS,
-				MemberCategory.INTROSPECT_DECLARED_CONSTRUCTORS);
+	MemberCategory.INVOKE_DECLARED_METHODS,
+	MemberCategory.INTROSPECT_DECLARED_CONSTRUCTORS);
 
 		SEEN_TYPES.add(type);
 	}
@@ -103,8 +103,8 @@ class AotUtils {
 		}
 
 		var nested = MODEL_TYPES.stream()
-				.filter(it -> it.isAssignableFrom(resolved))
-				.toList();
+	.filter(it -> it.isAssignableFrom(resolved))
+	.toList();
 
 		// No nested matches -> return original
 		if (nested.isEmpty()) {
@@ -112,7 +112,7 @@ class AotUtils {
 		}
 
 		return nested.stream()
-				.flatMap(it -> extractGenerics(it, unresolved).stream())
-				.findFirst();
+	.flatMap(it -> extractGenerics(it, unresolved).stream())
+	.findFirst();
 	}
 }

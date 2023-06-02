@@ -47,7 +47,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @ContextConfiguration
 class HalFormsObjectMapperCustomizerTest {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	MockMvc mockMvc;
 	ContextualMapper mapper = MappingTestUtils.createMapper(getClass());
@@ -63,7 +64,7 @@ class HalFormsObjectMapperCustomizerTest {
 	void objectMapperCustomizerShouldBeApplied() throws Exception {
 
 		String actualHalFormsJson = mockMvc.perform(get("/employees/0")).andReturn().getResponse()
-				.getContentAsString();
+	.getContentAsString();
 		String expectedHalFormsJson = mapper.readFileContent("hal-forms-custom.json");
 
 		assertThat(actualHalFormsJson).isEqualTo(expectedHalFormsJson);
@@ -78,7 +79,7 @@ class HalFormsObjectMapperCustomizerTest {
 		@Bean
 		HalFormsConfiguration halFormsConfiguration() {
 			return new HalFormsConfiguration()
-					.withObjectMapperCustomizer(objectMapper -> objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true));
+		.withObjectMapperCustomizer(objectMapper -> objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true));
 		}
 	}
 }

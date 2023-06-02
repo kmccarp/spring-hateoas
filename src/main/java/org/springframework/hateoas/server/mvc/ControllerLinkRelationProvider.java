@@ -40,7 +40,7 @@ public class ControllerLinkRelationProvider implements LinkRelationProvider {
 	 * @param providers must not be {@literal null}.
 	 */
 	public ControllerLinkRelationProvider(Class<?> controller,
-			PluginRegistry<LinkRelationProvider, LookupContext> providers) {
+PluginRegistry<LinkRelationProvider, LookupContext> providers) {
 
 		Assert.notNull(controller, "Controller must not be null!");
 		Assert.notNull(providers, "LinkRelationProviders must not be null!");
@@ -49,7 +49,7 @@ public class ControllerLinkRelationProvider implements LinkRelationProvider {
 
 		if (annotation == null) {
 			throw new IllegalArgumentException(
-					String.format("Controller %s must be annotated with @ExposesResourceFor(…)!", controller.getName()));
+		String.format("Controller %s must be annotated with @ExposesResourceFor(…)!", controller.getName()));
 		}
 
 		this.controllerType = controller;

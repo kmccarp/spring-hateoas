@@ -48,15 +48,9 @@ class JacksonSerializationTest {
 	void createSimpleCollection() throws IOException {
 
 		CollectionJson<?> collection = new CollectionJson<>().withVersion("1.0").withHref("localhost")
-				.withLinks(Links.of(Link.of("foo").withSelfRel())) //
-				.withItems(new CollectionJsonItem<>() //
-						.withHref("localhost") //
-						.withRawData("Greetings programs") //
-						.withLinks(Link.of("localhost").withSelfRel()), //
-						new CollectionJsonItem<>() //
-								.withHref("localhost") //
-								.withRawData("Yo") //
-								.withLinks(Link.of("localhost/orders").withRel("orders")));
+	.withLinks(Links.of(Link.of("foo").withSelfRel())) //
+	.withItems(new CollectionJsonItem<>() //.withHref("localhost") //.withRawData("Greetings programs") //.withLinks(Link.of("localhost").withSelfRel()), //
+new CollectionJsonItem<>() //.withHref("localhost") //.withRawData("Yo") //.withLinks(Link.of("localhost/orders").withRel("orders")));
 
 		String actual = mapper.writeValueAsString(collection);
 

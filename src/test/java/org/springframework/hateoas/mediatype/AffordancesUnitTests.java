@@ -41,10 +41,10 @@ public class AffordancesUnitTests {
 	void affordanceConvenienceMethodChainsExistingLink() {
 
 		Link link = Affordances.of(Link.of("/")) //
-				.afford(HttpMethod.POST) //
-				.withInputAndOutput(Employee.class) //
-				.withName("name") //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInputAndOutput(Employee.class) //
+	.withName("name") //
+	.toLink();
 
 		assertThat(link.getHref()).isEqualTo("/");
 		assertThat(link.hasRel(IanaLinkRelations.SELF)).isTrue();
@@ -63,9 +63,9 @@ public class AffordancesUnitTests {
 	void affordanceConvenienceMethodDefaultsNameBasedOnHttpVerb() {
 
 		Link link = Affordances.of(Link.of("/")) //
-				.afford(HttpMethod.POST) //
-				.withInputAndOutput(Employee.class) //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInputAndOutput(Employee.class) //
+	.toLink();
 
 		assertThat(link.getHref()).isEqualTo("/");
 		assertThat(link.hasRel(IanaLinkRelations.SELF)).isTrue();
@@ -95,9 +95,9 @@ public class AffordancesUnitTests {
 	private static void assertAffordanceModel(Affordance affordance, Consumer<AffordanceModel> assertions) {
 
 		Stream.of(MediaTypes.COLLECTION_JSON, MediaTypes.HAL_FORMS_JSON, MediaTypes.UBER_JSON) //
-				.map(affordance::getAffordanceModel) //
-				.map(AffordanceModel.class::cast) //
-				.forEach(assertions);
+	.map(affordance::getAffordanceModel) //
+	.map(AffordanceModel.class::cast) //
+	.forEach(assertions);
 	}
 
 	private static PayloadMetadataAssert assertThatPayload(PayloadMetadata metadata) {

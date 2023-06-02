@@ -61,23 +61,24 @@ public class HttpProblemDetailsIntegrationTest {
 	void returnsSimpleProblemDetails() throws Exception {
 
 		mvc.perform(get("/problem")) //
-				.andExpect(status().isOk()) //
-				.andExpect(jsonPath("$.title").value("Title"))
-				.andExpect(content().contentType(MediaTypes.HTTP_PROBLEM_DETAILS_JSON)); //
+	.andExpect(status().isOk()) //
+	.andExpect(jsonPath("$.title").value("Title"))
+	.andExpect(content().contentType(MediaTypes.HTTP_PROBLEM_DETAILS_JSON)); //
 	}
 
 	@Test // #786
 	void returnsProblemWrappedInResponseEntity() throws Exception {
 
 		mvc.perform(get("/problemInEntity")) //
-				.andExpect(status().isIAmATeapot()) //
-				.andExpect(jsonPath("$.title").value("WithinResponseEntity")) //
-				.andExpect(content().contentType(MediaTypes.HTTP_PROBLEM_DETAILS_JSON)); //
+	.andExpect(status().isIAmATeapot()) //
+	.andExpect(jsonPath("$.title").value("WithinResponseEntity")) //
+	.andExpect(content().contentType(MediaTypes.HTTP_PROBLEM_DETAILS_JSON)); //
 	}
 
 	@EnableWebMvc
 	@EnableHypermediaSupport(type = HypermediaType.HTTP_PROBLEM_DETAILS)
-	static class Config {}
+	static class Config {
+	}
 
 	@RestController
 	static class TestController {
@@ -90,7 +91,7 @@ public class HttpProblemDetailsIntegrationTest {
 		@GetMapping("/problemInEntity")
 		ResponseEntity<?> produceEntityOfProblem() {
 			return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT) //
-					.body(Problem.create().withTitle("WithinResponseEntity"));
+		.body(Problem.create().withTitle("WithinResponseEntity"));
 		}
 	}
 }

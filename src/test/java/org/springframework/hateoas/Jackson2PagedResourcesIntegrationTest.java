@@ -48,8 +48,9 @@ class Jackson2PagedResourcesIntegrationTest {
 
 		try {
 			SPRING_4_2_WRITE_METHOD = MappingJackson2HttpMessageConverter.class.getMethod("write", Object.class, Type.class,
-					MediaType.class, HttpOutputMessage.class);
-		} catch (Exception e) {}
+		MediaType.class, HttpOutputMessage.class);
+		} catch (Exception e) {
+		}
 	}
 
 	/**
@@ -77,7 +78,7 @@ class Jackson2PagedResourcesIntegrationTest {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 
 		ReflectionUtils.invokeMethod(SPRING_4_2_WRITE_METHOD, converter, resources, method.getGenericReturnType(),
-				MediaType.APPLICATION_JSON, outputMessage);
+	MediaType.APPLICATION_JSON, outputMessage);
 
 		assertThat(writer.toString()).isEqualTo(REFERENCE);
 	}

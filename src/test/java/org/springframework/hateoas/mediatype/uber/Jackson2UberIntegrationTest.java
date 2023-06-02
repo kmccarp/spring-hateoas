@@ -51,9 +51,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegrationTest {
 
 	static final Links PAGINATION_LINKS = Links.of( //
-			Link.of("localhost", IanaLinkRelations.SELF), //
-			Link.of("foo", IanaLinkRelations.NEXT), //
-			Link.of("bar", IanaLinkRelations.PREV) //
+Link.of("localhost", IanaLinkRelations.SELF), //
+Link.of("foo", IanaLinkRelations.NEXT), //
+Link.of("bar", IanaLinkRelations.PREV) //
 	);
 
 	@BeforeEach
@@ -73,7 +73,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		resourceSupport.add(Link.of("localhost").withSelfRel());
 
 		assertThat(write(resourceSupport))
-				.isEqualTo(MappingUtils.read(new ClassPathResource("resource-support.json", getClass())));
+	.isEqualTo(MappingUtils.read(new ClassPathResource("resource-support.json", getClass())));
 	}
 
 	/**
@@ -86,8 +86,8 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("localhost"));
 
 		assertThat(
-				read(MappingUtils.read(new ClassPathResource("resource-support.json", getClass())), RepresentationModel.class))
-						.isEqualTo(expected);
+	read(MappingUtils.read(new ClassPathResource("resource-support.json", getClass())), RepresentationModel.class))
+	.isEqualTo(expected);
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		resourceSupport.add(Link.of("localhost2").withRel("orders"));
 
 		assertThat(write(resourceSupport))
-				.isEqualTo(MappingUtils.read(new ClassPathResource("resource-support-2.json", getClass())));
+	.isEqualTo(MappingUtils.read(new ClassPathResource("resource-support-2.json", getClass())));
 	}
 
 	/**
@@ -115,7 +115,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("localhost2").withRel("orders"));
 
 		assertThat(read(MappingUtils.read(new ClassPathResource("resource-support-2.json", getClass())),
-				RepresentationModel.class)).isEqualTo(expected);
+	RepresentationModel.class)).isEqualTo(expected);
 	}
 
 	/**
@@ -170,7 +170,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		String resourcesJson = MappingUtils.read(new ClassPathResource("resources.json", getClass()));
 
 		JavaType resourcesType = mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-				mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class));
+	mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class));
 
 		CollectionModel<EntityModel<String>> result = mapper.readValue(resourcesJson, resourcesType);
 
@@ -206,7 +206,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 	void renderResourceWithMultipleLinks() throws Exception {
 
 		EntityModel<String> data3 = EntityModel.of("third", Link.of("localhost"), Link.of("second").withRel("second"),
-				Link.of("third").withRel("third"));
+	Link.of("third").withRel("third"));
 
 		assertThat(write(data3)).isEqualTo(MappingUtils.read(new ClassPathResource("resource3.json", getClass())));
 	}
@@ -218,8 +218,8 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 	void renderResourceWithMultipleRels() throws Exception {
 
 		EntityModel<String> data4 = EntityModel.of("third", Link.of("localhost"),
-				Link.of("localhost").withRel("https://example.org/rels/todo"), Link.of("second").withRel("second"),
-				Link.of("third").withRel("third"));
+	Link.of("localhost").withRel("https://example.org/rels/todo"), Link.of("second").withRel("second"),
+	Link.of("third").withRel("third"));
 
 		assertThat(write(data4)).isEqualTo(MappingUtils.read(new ClassPathResource("resource4.json", getClass())));
 	}
@@ -234,28 +234,28 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 
 		EntityModel<?> expected = EntityModel.of("first", Link.of("localhost"));
 		EntityModel<String> actual = mapper.readValue(MappingUtils.read(new ClassPathResource("resource.json", getClass())),
-				resourceStringType);
+	resourceStringType);
 
 		assertThat(actual).isEqualTo(expected);
 
 		EntityModel<String> expected2 = EntityModel.of("second", Link.of("localhost").withRel("custom"));
 		EntityModel<String> actual2 = mapper
-				.readValue(MappingUtils.read(new ClassPathResource("resource2.json", getClass())), resourceStringType);
+	.readValue(MappingUtils.read(new ClassPathResource("resource2.json", getClass())), resourceStringType);
 
 		assertThat(actual2).isEqualTo(expected2);
 
 		EntityModel<String> expected3 = EntityModel.of("third", Link.of("localhost"),
-				Link.of("second").withRel("second"), Link.of("third").withRel("third"));
+	Link.of("second").withRel("second"), Link.of("third").withRel("third"));
 		EntityModel<String> actual3 = mapper
-				.readValue(MappingUtils.read(new ClassPathResource("resource3.json", getClass())), resourceStringType);
+	.readValue(MappingUtils.read(new ClassPathResource("resource3.json", getClass())), resourceStringType);
 
 		assertThat(actual3).isEqualTo(expected3);
 
 		EntityModel<String> expected4 = EntityModel.of("third", Link.of("localhost"),
-				Link.of("localhost").withRel("https://example.org/rels/todo"), Link.of("second").withRel("second"),
-				Link.of("third").withRel("third"));
+	Link.of("localhost").withRel("https://example.org/rels/todo"), Link.of("second").withRel("second"),
+	Link.of("third").withRel("third"));
 		EntityModel<String> actual4 = mapper
-				.readValue(MappingUtils.read(new ClassPathResource("resource4.json", getClass())), resourceStringType);
+	.readValue(MappingUtils.read(new ClassPathResource("resource4.json", getClass())), resourceStringType);
 
 		assertThat(actual4).isEqualTo(expected4);
 	}
@@ -275,7 +275,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		resources.add(Link.of("/page/2").withRel("next"));
 
 		assertThat(write(resources))
-				.isEqualTo(MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())));
+	.isEqualTo(MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())));
 	}
 
 	/**
@@ -293,9 +293,9 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("/page/2").withRel("next"));
 
 		CollectionModel<EntityModel<String>> actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class)));
+	MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class)));
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -315,9 +315,9 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("/page/2").withRel("next"));
 
 		CollectionModel<EntityModel<String>> actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resources-with-resource-objects-and-empty-value.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class)));
+	MappingUtils.read(new ClassPathResource("resources-with-resource-objects-and-empty-value.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class)));
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -337,7 +337,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		source.add(Link.of("/page/2").withRel("next"));
 
 		assertThat(write(source))
-				.isEqualTo(MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())));
+	.isEqualTo(MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())));
 	}
 
 	/**
@@ -355,12 +355,10 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("/page/2").withRel("next"));
 
 		assertThatThrownBy(() -> mapper.readValue( //
-				MappingUtils.read(new ClassPathResource("resources-with-empty-resource-objects.json", getClass())), //
-				mapper.getTypeFactory() //
-						.constructParametricType( //
-								CollectionModel.class, //
-								mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class) //
-						) //
+	MappingUtils.read(new ClassPathResource("resources-with-empty-resource-objects.json", getClass())), //
+	mapper.getTypeFactory() //
+.constructParametricType( //CollectionModel.class, //mapper.getTypeFactory().constructParametricType(EntityModel.class, String.class) //
+) //
 		)).isInstanceOf(RuntimeException.class);
 	}
 
@@ -379,8 +377,8 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("/page/2").withRel("next"));
 
 		CollectionModel<String> actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(CollectionModel.class, String.class));
+	MappingUtils.read(new ClassPathResource("resources-with-resource-objects.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(CollectionModel.class, String.class));
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -409,8 +407,8 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		EntityModel<Employee> expected = EntityModel.of(employee, Link.of("/employees/1").withSelfRel());
 
 		EntityModel<Employee> actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resource-with-simple-pojo.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class));
+	MappingUtils.read(new ClassPathResource("resource-with-simple-pojo.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class));
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -425,8 +423,8 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		EntityModel<Employee> expected = EntityModel.of(employee, Link.of("/employees/1").withSelfRel());
 
 		EntityModel<Employee> actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resource-with-empty-pojo.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class));
+	MappingUtils.read(new ClassPathResource("resource-with-empty-pojo.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class));
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -457,7 +455,7 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("/employees").withRel("employees"));
 
 		EmployeeResource actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resource-support-pojo.json", getClass())), EmployeeResource.class);
+	MappingUtils.read(new ClassPathResource("resource-support-pojo.json", getClass())), EmployeeResource.class);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -473,8 +471,8 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 		expected.add(Link.of("/employees").withRel("employees"));
 
 		EmployeeResource actual = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("resource-support-pojo-empty.json", getClass())),
-				EmployeeResource.class);
+	MappingUtils.read(new ClassPathResource("resource-support-pojo-empty.json", getClass())),
+	EmployeeResource.class);
 
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -496,9 +494,9 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 	void deserializesPagedResource() throws Exception {
 
 		PagedModel<EntityModel<Employee>> result = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("paged-resources.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(PagedModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class)));
+	MappingUtils.read(new ClassPathResource("paged-resources.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(PagedModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class)));
 
 		assertThat(result).isEqualTo(setupAnnotatedPagedResources());
 	}
@@ -510,9 +508,9 @@ class Jackson2UberIntegrationTest extends AbstractJackson2MarshallingIntegration
 	void deserializesPagedResourceWithEmptyPageInformation() throws Exception {
 
 		PagedModel<EntityModel<Employee>> result = mapper.readValue(
-				MappingUtils.read(new ClassPathResource("paged-resources-empty-page.json", getClass())),
-				mapper.getTypeFactory().constructParametricType(PagedModel.class,
-						mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class)));
+	MappingUtils.read(new ClassPathResource("paged-resources-empty-page.json", getClass())),
+	mapper.getTypeFactory().constructParametricType(PagedModel.class,
+mapper.getTypeFactory().constructParametricType(EntityModel.class, Employee.class)));
 
 		assertThat(result).isEqualTo(setupAnnotatedPagedResources(0, 0));
 	}

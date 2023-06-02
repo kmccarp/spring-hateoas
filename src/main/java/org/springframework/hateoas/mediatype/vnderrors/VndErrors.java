@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @deprecated since 1.1, use {@link org.springframework.hateoas.mediatype.problem.Problem} to form vendor neutral error
  *             messages.
  */
-@JsonPropertyOrder({ "message", "logref", "total", "_links", "_embedded" })
+@JsonPropertyOrder({"message", "logref", "total", "_links", "_embedded"})
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Deprecated
 public class VndErrors extends CollectionModel<VndErrors.VndError> {
@@ -55,17 +55,20 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 	/**
 	 * @deprecated Use {@link org.springframework.hateoas.IanaLinkRelations#HELP}
 	 */
-	@Deprecated public static final String REL_HELP = "help";
+	@Deprecated
+	public static final String REL_HELP = "help";
 
 	/**
 	 * @deprecated Use {@link org.springframework.hateoas.IanaLinkRelations#DESCRIBES}
 	 */
-	@Deprecated public static final String REL_DESCRIBES = "describes";
+	@Deprecated
+	public static final String REL_DESCRIBES = "describes";
 
 	/**
 	 * @deprecated Use {@link org.springframework.hateoas.IanaLinkRelations#ABOUT}
 	 */
-	@Deprecated public static final String REL_ABOUT = "about";
+	@Deprecated
+	public static final String REL_ABOUT = "about";
 
 	private final List<VndError> errors;
 
@@ -113,7 +116,7 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 	 */
 	@JsonCreator
 	public VndErrors(@JsonProperty("_embedded") List<VndError> errors, @JsonProperty("message") String message,
-			@JsonProperty("logref") Object logref, @JsonProperty("_links") Links links) {
+@JsonProperty("logref") Object logref, @JsonProperty("_links") Links links) {
 
 		Assert.notNull(errors, "Errors must not be null!"); // Retain for compatibility
 		Assert.notEmpty(errors, "Errors must not be empty!");
@@ -185,8 +188,8 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 		}
 
 		return this.errors.size() > 1 //
-				? this.errors.size() //
-				: null; //
+	? this.errors.size() //
+	: null; //
 	}
 
 	/**
@@ -236,7 +239,7 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 		}
 		VndErrors vndErrors = (VndErrors) o;
 		return Objects.equals(this.errors, vndErrors.errors) && Objects.equals(this.message, vndErrors.message)
-				&& Objects.equals(this.logref, vndErrors.logref);
+	&& Objects.equals(this.logref, vndErrors.logref);
 	}
 
 	@Override
@@ -252,7 +255,7 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 	 * @deprecated Use {@link org.springframework.hateoas.mediatype.problem.Problem} to form vendor neutral error
 	 *             messages.
 	 */
-	@JsonPropertyOrder({ "message", "path", "logref" })
+	@JsonPropertyOrder({"message", "path", "logref"})
 	@Relation(collectionRelation = "errors")
 	@Deprecated
 	public static class VndError extends RepresentationModel<VndError> {
@@ -273,7 +276,7 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 		 */
 		@JsonCreator
 		public VndError(@JsonProperty("message") String message, @JsonProperty("path") @Nullable String path,
-				@JsonProperty("logref") Object logref, @JsonProperty("_links") List<Link> links) {
+	@JsonProperty("logref") Object logref, @JsonProperty("_links") List<Link> links) {
 
 			Assert.hasText(message, "Message must not be null or empty!");
 
@@ -324,7 +327,7 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 			}
 			VndError vndError = (VndError) o;
 			return Objects.equals(this.message, vndError.message) && Objects.equals(this.path, vndError.path)
-					&& Objects.equals(this.logref, vndError.logref);
+		&& Objects.equals(this.logref, vndError.logref);
 		}
 
 		@Override
@@ -336,7 +339,7 @@ public class VndErrors extends CollectionModel<VndErrors.VndError> {
 		public String toString() {
 
 			return String.format("VndError[logref: %s, message: %s, links: [%s]]", this.logref, this.message,
-					getLinks().toString());
+		getLinks().toString());
 		}
 	}
 }

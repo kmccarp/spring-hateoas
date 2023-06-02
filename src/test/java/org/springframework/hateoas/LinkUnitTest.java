@@ -131,24 +131,24 @@ class LinkUnitTest {
 
 			softly.assertThat(Link.valueOf("</something>;rel=\"foo\"")).isEqualTo(Link.of("/something", "foo"));
 			softly.assertThat(Link.valueOf("</something>;rel=\"foo\";title=\"Some title\""))
-					.isEqualTo(Link.of("/something", "foo").withTitle("Some title"));
+		.isEqualTo(Link.of("/something", "foo").withTitle("Some title"));
 			softly.assertThat(Link.valueOf("</customer/1>;" //
-					+ "rel=\"self\";" //
-					+ "hreflang=\"en\";" //
-					+ "media=\"pdf\";" //
-					+ "title=\"pdf customer copy\";" //
-					+ "type=\"portable document\";" //
-					+ "deprecation=\"https://example.com/customers/deprecated\";" //
-					+ "profile=\"my-profile\";" //
-					+ "name=\"my-name\";")) //
-					.isEqualTo(Link.of("/customer/1") //
-							.withHreflang("en") //
-							.withMedia("pdf") //
-							.withTitle("pdf customer copy") //
-							.withType("portable document") //
-							.withDeprecation("https://example.com/customers/deprecated") //
-							.withProfile("my-profile") //
-							.withName("my-name"));
+		+ "rel=\"self\";" //
+		+ "hreflang=\"en\";" //
+		+ "media=\"pdf\";" //
+		+ "title=\"pdf customer copy\";" //
+		+ "type=\"portable document\";" //
+		+ "deprecation=\"https://example.com/customers/deprecated\";" //
+		+ "profile=\"my-profile\";" //
+		+ "name=\"my-name\";")) //
+		.isEqualTo(Link.of("/customer/1") //
+	.withHreflang("en") //
+	.withMedia("pdf") //
+	.withTitle("pdf customer copy") //
+	.withType("portable document") //
+	.withDeprecation("https://example.com/customers/deprecated") //
+	.withProfile("my-profile") //
+	.withName("my-name"));
 		});
 	}
 
@@ -253,7 +253,7 @@ class LinkUnitTest {
 	void parsesLinkRelationWithDotAndMinus() {
 
 		assertThat(Link.valueOf("<http://localhost>; rel=\"rel-with-minus-and-.\"").hasRel("rel-with-minus-and-."))
-				.isTrue();
+	.isTrue();
 	}
 
 	/**
@@ -263,7 +263,7 @@ class LinkUnitTest {
 	void parsesUriLinkRelations() {
 
 		assertThat(Link.valueOf("<http://localhost>; rel=\"https://acme.com/rels/foo-bar\"").getRel()) //
-				.isEqualTo(LinkRelation.of("https://acme.com/rels/foo-bar"));
+	.isEqualTo(LinkRelation.of("https://acme.com/rels/foo-bar"));
 	}
 
 	/**

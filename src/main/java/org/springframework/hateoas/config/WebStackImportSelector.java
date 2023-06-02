@@ -53,7 +53,7 @@ class WebStackImportSelector implements ImportSelector {
 		}
 
 		return Arrays.stream(stacks) //
-				.flatMap(webStack -> webStack.getAvailableConfigurations().stream()) //
-				.toArray(String[]::new);
+	.flatMap(webStack -> webStack.getAvailableConfigurations().stream()) //
+	.toArray(String[]::new);
 	}
 }

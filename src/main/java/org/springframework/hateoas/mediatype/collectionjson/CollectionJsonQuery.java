@@ -37,7 +37,7 @@ final class CollectionJsonQuery {
 
 	@JsonCreator
 	CollectionJsonQuery(@JsonProperty("rel") @Nullable String rel, @JsonProperty("href") @Nullable String href,
-			@JsonProperty("prompt") @Nullable String prompt, @JsonProperty("data") @Nullable List<CollectionJsonData> data) {
+@JsonProperty("prompt") @Nullable String prompt, @JsonProperty("data") @Nullable List<CollectionJsonData> data) {
 
 		this.rel = rel;
 		this.href = href;
@@ -114,7 +114,7 @@ final class CollectionJsonQuery {
 			return false;
 		CollectionJsonQuery that = (CollectionJsonQuery) o;
 		return Objects.equals(this.rel, that.rel) && Objects.equals(this.href, that.href)
-				&& Objects.equals(this.prompt, that.prompt) && Objects.equals(this.data, that.data);
+	&& Objects.equals(this.prompt, that.prompt) && Objects.equals(this.data, that.data);
 	}
 
 	@Override
@@ -125,7 +125,7 @@ final class CollectionJsonQuery {
 	public String toString() {
 
 		return "CollectionJsonQuery(rel=" + this.rel + ", href=" + this.href + ", prompt=" + this.prompt + ", data="
-				+ this.data + ")";
+	+ this.data + ")";
 	}
 
 }

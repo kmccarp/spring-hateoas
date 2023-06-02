@@ -51,7 +51,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ContextConfiguration
 class HalFormsWebMvcIntegrationTest {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	MockMvc mockMvc;
 
@@ -67,49 +68,49 @@ class HalFormsWebMvcIntegrationTest {
 
 		this.mockMvc.perform(get("/employees/0").accept(MediaTypes.HAL_FORMS_JSON)) //
 
-				.andExpect(status().isOk()) //
-				.andExpect(jsonPath("$.name", is("Frodo Baggins"))) //
-				.andExpect(jsonPath("$.role", is("ring bearer")))
+	.andExpect(status().isOk()) //
+	.andExpect(jsonPath("$.name", is("Frodo Baggins"))) //
+	.andExpect(jsonPath("$.role", is("ring bearer")))
 
-				.andExpect(jsonPath("$._links.*", hasSize(2)))
-				.andExpect(jsonPath("$._links['self'].href", is("http://localhost/employees/0")))
-				.andExpect(jsonPath("$._links['employees'].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$._links.*", hasSize(2)))
+	.andExpect(jsonPath("$._links['self'].href", is("http://localhost/employees/0")))
+	.andExpect(jsonPath("$._links['employees'].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$._templates.*", hasSize(2)))
-				.andExpect(jsonPath("$._templates['default'].method", is("PUT")))
-				.andExpect(jsonPath("$._templates['default'].properties[0].name", is("name")))
-				.andExpect(jsonPath("$._templates['default'].properties[0].required").value(true))
-				.andExpect(jsonPath("$._templates['default'].properties[1].name", is("role")))
-				.andExpect(jsonPath("$._templates['default'].properties[1].required").doesNotExist())
+	.andExpect(jsonPath("$._templates.*", hasSize(2)))
+	.andExpect(jsonPath("$._templates['default'].method", is("PUT")))
+	.andExpect(jsonPath("$._templates['default'].properties[0].name", is("name")))
+	.andExpect(jsonPath("$._templates['default'].properties[0].required").value(true))
+	.andExpect(jsonPath("$._templates['default'].properties[1].name", is("role")))
+	.andExpect(jsonPath("$._templates['default'].properties[1].required").doesNotExist())
 
-				.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].method", is("PATCH")))
-				.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[0].name", is("name")))
-				.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[0].required").doesNotExist())
-				.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[1].name", is("role")))
-				.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[1].required").doesNotExist());
+	.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].method", is("PATCH")))
+	.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[0].name", is("name")))
+	.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[0].required").doesNotExist())
+	.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[1].name", is("role")))
+	.andExpect(jsonPath("$._templates['partiallyUpdateEmployee'].properties[1].required").doesNotExist());
 	}
 
 	@Test
 	void collectionOfEmployees() throws Exception {
 
 		this.mockMvc.perform(get("/employees").accept(MediaTypes.HAL_FORMS_JSON)) //
-				.andExpect(status().isOk()) //
-				.andExpect(jsonPath("$._embedded.employees[0].name", is("Frodo Baggins")))
-				.andExpect(jsonPath("$._embedded.employees[0].role", is("ring bearer")))
-				.andExpect(jsonPath("$._embedded.employees[0]._links['self'].href", is("http://localhost/employees/0")))
-				.andExpect(jsonPath("$._embedded.employees[1].name", is("Bilbo Baggins")))
-				.andExpect(jsonPath("$._embedded.employees[1].role", is("burglar")))
-				.andExpect(jsonPath("$._embedded.employees[1]._links['self'].href", is("http://localhost/employees/1")))
+	.andExpect(status().isOk()) //
+	.andExpect(jsonPath("$._embedded.employees[0].name", is("Frodo Baggins")))
+	.andExpect(jsonPath("$._embedded.employees[0].role", is("ring bearer")))
+	.andExpect(jsonPath("$._embedded.employees[0]._links['self'].href", is("http://localhost/employees/0")))
+	.andExpect(jsonPath("$._embedded.employees[1].name", is("Bilbo Baggins")))
+	.andExpect(jsonPath("$._embedded.employees[1].role", is("burglar")))
+	.andExpect(jsonPath("$._embedded.employees[1]._links['self'].href", is("http://localhost/employees/1")))
 
-				.andExpect(jsonPath("$._links.*", hasSize(1)))
-				.andExpect(jsonPath("$._links['self'].href", is("http://localhost/employees")))
+	.andExpect(jsonPath("$._links.*", hasSize(1)))
+	.andExpect(jsonPath("$._links['self'].href", is("http://localhost/employees")))
 
-				.andExpect(jsonPath("$._templates.*", hasSize(1)))
-				.andExpect(jsonPath("$._templates['default'].method", is("POST")))
-				.andExpect(jsonPath("$._templates['default'].properties[0].name", is("name")))
-				.andExpect(jsonPath("$._templates['default'].properties[0].required").value(true))
-				.andExpect(jsonPath("$._templates['default'].properties[1].name", is("role")))
-				.andExpect(jsonPath("$._templates['default'].properties[1].required").doesNotExist());
+	.andExpect(jsonPath("$._templates.*", hasSize(1)))
+	.andExpect(jsonPath("$._templates['default'].method", is("POST")))
+	.andExpect(jsonPath("$._templates['default'].properties[0].name", is("name")))
+	.andExpect(jsonPath("$._templates['default'].properties[0].required").value(true))
+	.andExpect(jsonPath("$._templates['default'].properties[1].name", is("role")))
+	.andExpect(jsonPath("$._templates['default'].properties[1].required").doesNotExist());
 	}
 
 	@Test
@@ -118,10 +119,10 @@ class HalFormsWebMvcIntegrationTest {
 		String specBasedJson = MappingTestUtils.createMapper(getClass()).readFileContent("new-employee.json");
 
 		this.mockMvc.perform(post("/employees") //
-				.content(specBasedJson) //
-				.contentType(MediaTypes.HAL_FORMS_JSON_VALUE)) //
-				.andExpect(status().isCreated())
-				.andExpect(header().stringValues(HttpHeaders.LOCATION, "http://localhost/employees/2"));
+	.content(specBasedJson) //
+	.contentType(MediaTypes.HAL_FORMS_JSON_VALUE)) //
+	.andExpect(status().isCreated())
+	.andExpect(header().stringValues(HttpHeaders.LOCATION, "http://localhost/employees/2"));
 	}
 
 	@Test // #832
@@ -147,7 +148,7 @@ class HalFormsWebMvcIntegrationTest {
 
 	@Configuration
 	@EnableWebMvc
-	@EnableHypermediaSupport(type = { HypermediaType.HAL_FORMS })
+	@EnableHypermediaSupport(type = {HypermediaType.HAL_FORMS})
 	static class TestConfig {
 
 		@Bean

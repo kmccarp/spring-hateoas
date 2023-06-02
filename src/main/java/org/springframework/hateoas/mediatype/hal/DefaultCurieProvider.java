@@ -84,11 +84,11 @@ public class DefaultCurieProvider implements CurieProvider {
 			Assert.hasText(name, "Curie name must not be null or empty!");
 			Assert.notNull(template, "UriTemplate must not be null!");
 			Assert.isTrue(template.getVariableNames().size() == 1,
-					String.format("Expected a single template variable in the UriTemplate %s!", template.toString()));
+		String.format("Expected a single template variable in the UriTemplate %s!", template.toString()));
 		});
 
 		this.defaultCurie = StringUtils.hasText(defaultCurieName) ? defaultCurieName
-				: curies.size() == 1 ? curies.keySet().iterator().next() : null;
+	: curies.size() == 1 ? curies.keySet().iterator().next() : null;
 		this.curies = Collections.unmodifiableMap(curies);
 	}
 
@@ -100,8 +100,8 @@ public class DefaultCurieProvider implements CurieProvider {
 	public Collection<?> getCurieInformation(Links links) {
 
 		return curies.entrySet().stream() //
-				.map(it -> new Curie(it.getKey(), getCurieHref(it.getKey(), it.getValue()))) //
-				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableCollection));
+	.map(it -> new Curie(it.getKey(), getCurieHref(it.getKey(), it.getValue()))) //
+	.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableCollection));
 	}
 
 	/*

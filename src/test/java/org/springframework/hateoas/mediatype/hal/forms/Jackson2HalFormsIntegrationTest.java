@@ -88,12 +88,12 @@ import com.jayway.jsonpath.PathNotFoundException;
 class Jackson2HalFormsIntegrationTest {
 
 	static final Links PAGINATION_LINKS = Links.of( //
-			Link.of("foo", IanaLinkRelations.NEXT), //
-			Link.of("bar", IanaLinkRelations.PREV) //
+Link.of("foo", IanaLinkRelations.NEXT), //
+Link.of("bar", IanaLinkRelations.PREV) //
 	);
 
 	final LinkRelationProvider provider = new DelegatingLinkRelationProvider(new AnnotationLinkRelationProvider(),
-			HalTestUtils.DefaultLinkRelationProvider.INSTANCE);
+HalTestUtils.DefaultLinkRelationProvider.INSTANCE);
 	final Consumer<ObjectMapper> configurer = it -> {
 
 		it.registerModule(new Jackson2HalFormsModule());
@@ -101,14 +101,14 @@ class Jackson2HalFormsIntegrationTest {
 	};
 
 	final ContextualMapper mapper = MappingTestUtils.createMapper(Jackson2HalFormsIntegrationTest.class,
-			configurer.andThen(it -> {
+configurer.andThen(it -> {
 
-				GenericApplicationContext context = new AnnotationConfigApplicationContext(
-						HalFormsMediaTypeConfiguration.class, HateoasConfiguration.class);
+	GenericApplicationContext context = new AnnotationConfigApplicationContext(
+HalFormsMediaTypeConfiguration.class, HateoasConfiguration.class);
 
-				it.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(provider, CurieProvider.NONE,
-						MessageResolver.DEFAULTS_ONLY, new HalConfiguration(), context.getAutowireCapableBeanFactory()));
-			}));
+	it.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(provider, CurieProvider.NONE,
+MessageResolver.DEFAULTS_ONLY, new HalConfiguration(), context.getAutowireCapableBeanFactory()));
+}));
 
 	@BeforeEach
 	void setUpModule() {
@@ -122,7 +122,7 @@ class Jackson2HalFormsIntegrationTest {
 		resourceSupport.add(Link.of("localhost"));
 
 		assertThat(mapper.writeObject(resourceSupport))
-				.isEqualTo(mapper.readFileContent("single-link-reference.json"));
+	.isEqualTo(mapper.readFileContent("single-link-reference.json"));
 	}
 
 	@Test
@@ -142,7 +142,7 @@ class Jackson2HalFormsIntegrationTest {
 		resourceSupport.add(Link.of("localhost2"));
 
 		assertThat(mapper.writeObject(resourceSupport))
-				.isEqualTo(mapper.readFileContent("list-link-reference.json"));
+	.isEqualTo(mapper.readFileContent("list-link-reference.json"));
 	}
 
 	@Test
@@ -161,15 +161,15 @@ class Jackson2HalFormsIntegrationTest {
 		EmployeeResource resource = new EmployeeResource("Frodo Baggins");
 
 		Link link = Affordances.of(Link.of("/employees/1")) //
-				.afford(HttpMethod.POST) //
-				.withInputAndOutput(EmployeeResource.class) //
-				.withName("foo") //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInputAndOutput(EmployeeResource.class) //
+	.withName("foo") //
+	.toLink();
 
 		resource.add(link);
 
 		assertThat(mapper.writeObject(resource))
-				.isEqualTo(mapper.readFileContent("employee-resource-support.json"));
+	.isEqualTo(mapper.readFileContent("employee-resource-support.json"));
 	}
 
 	@Test
@@ -178,14 +178,14 @@ class Jackson2HalFormsIntegrationTest {
 		EntityModel<SimplePojo> resource = EntityModel.of(new SimplePojo("test1", 1), Link.of("localhost"));
 
 		assertThat(mapper.writeObject(resource))
-				.isEqualTo(mapper.readFileContent("simple-resource-unwrapped.json"));
+	.isEqualTo(mapper.readFileContent("simple-resource-unwrapped.json"));
 	}
 
 	@Test
 	void deserializesResource() throws IOException {
 
 		EntityModel<SimplePojo> result = mapper.readFile("simple-resource-unwrapped.json", EntityModel.class,
-				SimplePojo.class);
+	SimplePojo.class);
 
 		assertThat(result).isEqualTo(EntityModel.of(new SimplePojo("test1", 1), Link.of("localhost")));
 	}
@@ -201,7 +201,7 @@ class Jackson2HalFormsIntegrationTest {
 		resources.add(Link.of("localhost"));
 
 		assertThat(mapper.writeObject(resources))
-				.isEqualTo(mapper.readFileContent("simple-embedded-resource-reference.json"));
+	.isEqualTo(mapper.readFileContent("simple-embedded-resource-reference.json"));
 	}
 
 	@Test
@@ -215,7 +215,7 @@ class Jackson2HalFormsIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<String> result = mapper.readFile("simple-embedded-resource-reference.json", CollectionModel.class,
-				String.class);
+	String.class);
 
 		assertThat(result).isEqualTo(expected);
 
@@ -231,7 +231,7 @@ class Jackson2HalFormsIntegrationTest {
 		resources.add(Link.of("localhost"));
 
 		assertThat(mapper.writeObject(resources))
-				.isEqualTo(mapper.readFileContent("single-embedded-resource-reference.json"));
+	.isEqualTo(mapper.readFileContent("single-embedded-resource-reference.json"));
 	}
 
 	@Test
@@ -244,7 +244,7 @@ class Jackson2HalFormsIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<EntityModel<SimplePojo>> result = mapper.readFile("single-embedded-resource-reference.json",
-				CollectionModel.class, EntityModel.class, SimplePojo.class);
+	CollectionModel.class, EntityModel.class, SimplePojo.class);
 
 		assertThat(result).isEqualTo(expected);
 	}
@@ -256,7 +256,7 @@ class Jackson2HalFormsIntegrationTest {
 		resources.add(Link.of("localhost"));
 
 		assertThat(mapper.writeObject(resources))
-				.isEqualTo(mapper.readFileContent("multiple-resource-resources.json"));
+	.isEqualTo(mapper.readFileContent("multiple-resource-resources.json"));
 	}
 
 	@Test
@@ -266,7 +266,7 @@ class Jackson2HalFormsIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<EntityModel<SimplePojo>> result = mapper.readFile("multiple-resource-resources.json",
-				CollectionModel.class, EntityModel.class, SimplePojo.class);
+	CollectionModel.class, EntityModel.class, SimplePojo.class);
 
 		assertThat(result).isEqualTo(expected);
 	}
@@ -293,7 +293,7 @@ class Jackson2HalFormsIntegrationTest {
 		expected.add(Link.of("localhost"));
 
 		CollectionModel<EntityModel<SimpleAnnotatedPojo>> result = mapper.readFile("annotated-resource-resources.json",
-				CollectionModel.class, EntityModel.class, SimpleAnnotatedPojo.class);
+	CollectionModel.class, EntityModel.class, SimpleAnnotatedPojo.class);
 
 		assertThat(result).isEqualTo(expected);
 	}
@@ -301,15 +301,15 @@ class Jackson2HalFormsIntegrationTest {
 	@Test
 	void serializesMultipleAnnotatedResourceResourcesAsEmbedded() throws Exception {
 		assertThat(mapper.writeObject(setupAnnotatedResources()))
-				.isEqualTo(mapper.readFileContent("annotated-embedded-resources-reference.json"));
+	.isEqualTo(mapper.readFileContent("annotated-embedded-resources-reference.json"));
 	}
 
 	@Test
 	void deserializesMultipleAnnotatedResourceResourcesAsEmbedded() throws Exception {
 
 		CollectionModel<EntityModel<SimpleAnnotatedPojo>> result = mapper.readFile(
-				"annotated-embedded-resources-reference.json", CollectionModel.class, EntityModel.class,
-				SimpleAnnotatedPojo.class);
+	"annotated-embedded-resources-reference.json", CollectionModel.class, EntityModel.class,
+	SimpleAnnotatedPojo.class);
 
 		assertThat(result).isEqualTo(setupAnnotatedResources());
 	}
@@ -318,14 +318,14 @@ class Jackson2HalFormsIntegrationTest {
 	void serializesPagedResource() throws Exception {
 
 		assertThat(mapper.writeObject(setupAnnotatedPagedResources()))
-				.isEqualTo(mapper.readFileContent("annotated-paged-resources.json"));
+	.isEqualTo(mapper.readFileContent("annotated-paged-resources.json"));
 	}
 
 	@Test
 	void deserializesPagedResource() throws Exception {
 
 		PagedModel<EntityModel<SimpleAnnotatedPojo>> result = mapper.readFile("annotated-paged-resources.json",
-				PagedModel.class, EntityModel.class, SimpleAnnotatedPojo.class);
+	PagedModel.class, EntityModel.class, SimpleAnnotatedPojo.class);
 
 		assertThat(result).isEqualTo(setupAnnotatedPagedResources());
 	}
@@ -334,10 +334,10 @@ class Jackson2HalFormsIntegrationTest {
 	void rendersCuriesCorrectly() throws Exception {
 
 		CollectionModel<Object> resources = CollectionModel.of(Collections.emptySet(), Link.of("foo"),
-				Link.of("bar", "myrel"));
+	Link.of("bar", "myrel"));
 
 		assertThat(getCuriedObjectMapper().writeObject(resources))
-				.isEqualTo(mapper.readFileContent("curied-document.json"));
+	.isEqualTo(mapper.readFileContent("curied-document.json"));
 	}
 
 	@Test
@@ -345,7 +345,7 @@ class Jackson2HalFormsIntegrationTest {
 
 		CollectionModel<Object> resources = CollectionModel.of(Collections.emptySet());
 		assertThat(getCuriedObjectMapper().writeObject(resources))
-				.isEqualTo(mapper.readFileContent("empty-document.json"));
+	.isEqualTo(mapper.readFileContent("empty-document.json"));
 	}
 
 	@Test
@@ -355,7 +355,7 @@ class Jackson2HalFormsIntegrationTest {
 		resources.add(Link.of("foo"));
 
 		assertThat(getCuriedObjectMapper().writeObject(resources))
-				.isEqualTo(mapper.readFileContent("single-non-curie-document.json"));
+	.isEqualTo(mapper.readFileContent("single-non-curie-document.json"));
 	}
 
 	@Test
@@ -381,7 +381,7 @@ class Jackson2HalFormsIntegrationTest {
 		};
 
 		assertThat(getCuriedObjectMapper(provider).writeObject(resources))
-				.isEqualTo(mapper.readFileContent("multiple-curies-document.json"));
+	.isEqualTo(mapper.readFileContent("multiple-curies-document.json"));
 	}
 
 	@Test
@@ -428,20 +428,20 @@ class Jackson2HalFormsIntegrationTest {
 	}
 
 	@ParameterizedTest // #979
-	@ValueSource(strings = { "firstname._prompt", //
-			"HalFormsPayload.firstname._prompt", //
-			"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload.firstname._prompt" })
+	@ValueSource(strings = {"firstname._prompt", //
+"HalFormsPayload.firstname._prompt", //
+"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload.firstname._prompt"})
 	void usesResourceBundleToCreatePropertyPrompts(String key) {
 
 		StaticMessageSource source = new StaticMessageSource();
 		source.addMessage(key, Locale.US, "Vorname");
 
 		Link link = Affordances.of(Link.of("some:link")) //
-				.afford(HttpMethod.POST) //
-				.withInput(HalFormsPayload.class) //
-				.withOutput(Object.class) //
-				.withName("sample") //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInput(HalFormsPayload.class) //
+	.withOutput(Object.class) //
+	.withName("sample") //
+	.toLink();
 
 		EntityModel<HalFormsPayload> model = EntityModel.of(new HalFormsPayload(), link);
 		ContextualMapper mapper = getCuriedObjectMapper(CurieProvider.NONE, source);
@@ -449,7 +449,7 @@ class Jackson2HalFormsIntegrationTest {
 		assertThatCode(() -> {
 
 			String promptString = JsonPath.compile("$._templates.default.properties[0].prompt") //
-					.read(mapper.writeObject(model));
+		.read(mapper.writeObject(model));
 
 			assertThat(promptString).isEqualTo("Vorname");
 
@@ -458,21 +458,21 @@ class Jackson2HalFormsIntegrationTest {
 
 	@ParameterizedTest // #849
 	@ValueSource(strings = { //
-			"_templates.postHalFormsPayload.title", //
-			"HalFormsPayload._templates.postHalFormsPayload.title", //
-			"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload._templates.postHalFormsPayload.title", //
-			"_templates.default.title", //
-			"HalFormsPayload._templates.default.title", //
-			"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload._templates.default.title" })
+"_templates.postHalFormsPayload.title", //
+"HalFormsPayload._templates.postHalFormsPayload.title", //
+"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload._templates.postHalFormsPayload.title", //
+"_templates.default.title", //
+"HalFormsPayload._templates.default.title", //
+"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload._templates.default.title"})
 	void usesResourceBundleToCreateTemplateTitle(String key) {
 
 		StaticMessageSource source = new StaticMessageSource();
 		source.addMessage(key, Locale.US, "Template title");
 
 		Link link = Affordances.of(Link.of("some:link")) //
-				.afford(HttpMethod.POST) //
-				.withInput(HalFormsPayload.class) //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInput(HalFormsPayload.class) //
+	.toLink();
 
 		EntityModel<HalFormsPayload> model = EntityModel.of(new HalFormsPayload(), link);
 		ContextualMapper mapper = getCuriedObjectMapper(CurieProvider.NONE, source);
@@ -480,7 +480,7 @@ class Jackson2HalFormsIntegrationTest {
 		assertThatCode(() -> {
 
 			String promptString = JsonPath.compile("$._templates.default.title") //
-					.read(mapper.writeObject(model));
+		.read(mapper.writeObject(model));
 
 			assertThat(promptString).isEqualTo("Template title");
 
@@ -509,9 +509,9 @@ class Jackson2HalFormsIntegrationTest {
 	void considersJsr303AnnotationsForTemplates() throws Exception {
 
 		Link link = Affordances.of(Link.of("localhost:8080")) //
-				.afford(HttpMethod.POST) //
-				.withInput(Jsr303Sample.class) //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInput(Jsr303Sample.class) //
+	.toLink();
 
 		EntityModel<Jsr303Sample> model = EntityModel.of(new Jsr303Sample(), link);
 
@@ -532,18 +532,18 @@ class Jackson2HalFormsIntegrationTest {
 	}
 
 	@ParameterizedTest // #1438
-	@ValueSource(strings = { "firstname._placeholder", //
-			"HalFormsPayload.firstname._placeholder", //
-			"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload.firstname._placeholder" })
+	@ValueSource(strings = {"firstname._placeholder", //
+"HalFormsPayload.firstname._placeholder", //
+"org.springframework.hateoas.mediatype.hal.forms.Jackson2HalFormsIntegrationTest$HalFormsPayload.firstname._placeholder"})
 	void usesResourceBundleToCreatePropertyPlaceholder(String key) {
 
 		StaticMessageSource source = new StaticMessageSource();
 		source.addMessage(key, Locale.US, "Property placeholder");
 
 		Link link = Affordances.of(Link.of("some:link")) //
-				.afford(HttpMethod.POST) //
-				.withInput(HalFormsPayload.class) //
-				.toLink();
+	.afford(HttpMethod.POST) //
+	.withInput(HalFormsPayload.class) //
+	.toLink();
 
 		EntityModel<HalFormsPayload> model = EntityModel.of(new HalFormsPayload(), link);
 		ContextualMapper mapper = getCuriedObjectMapper(CurieProvider.NONE, source);
@@ -551,7 +551,7 @@ class Jackson2HalFormsIntegrationTest {
 		assertThatCode(() -> {
 
 			String promptString = JsonPath.compile("$._templates.default.properties[0].placeholder") //
-					.read(mapper.writeObject(model));
+		.read(mapper.writeObject(model));
 
 			assertThat(promptString).isEqualTo("Property placeholder");
 
@@ -569,7 +569,7 @@ class Jackson2HalFormsIntegrationTest {
 		ContextualMapper mapper = getCuriedObjectMapper(CurieProvider.NONE, source);
 
 		assertThat(JsonPath.parse(mapper.writeObject(inline)).read("$.inline[0].prompt", String.class))
-				.isEqualTo("My Prompt");
+	.isEqualTo("My Prompt");
 	}
 
 	@Test // #1483
@@ -591,7 +591,7 @@ class Jackson2HalFormsIntegrationTest {
 		String json = getCuriedObjectMapper().writeObject(toMarshall);
 
 		assertThatExceptionOfType(PathNotFoundException.class) //
-				.isThrownBy(() -> JsonPath.compile(path).read(json));
+	.isThrownBy(() -> JsonPath.compile(path).read(json));
 	}
 
 	private void assertValueForPath(Object toMarshall, String path, Object expected) throws Exception {
@@ -601,8 +601,8 @@ class Jackson2HalFormsIntegrationTest {
 		Object actual = JsonPath.compile(path).read(json);
 
 		Object value = JSONArray.class.isInstance(actual) //
-				? JSONArray.class.cast(actual).get(0) //
-				: actual;
+	? JSONArray.class.cast(actual).get(0) //
+	: actual;
 
 		assertThat(value).isEqualTo(expected);
 	}
@@ -618,7 +618,7 @@ class Jackson2HalFormsIntegrationTest {
 		resource.add(Link.of("target", "ns:foobar"));
 
 		assertThat(objectMapper.writeObject(resource))
-				.isEqualTo(objectMapper.readFileContent("link-with-title.json"));
+	.isEqualTo(objectMapper.readFileContent("link-with-title.json"));
 	}
 
 	private static CollectionModel<EntityModel<SimplePojo>> setupResources() {
@@ -666,7 +666,7 @@ class Jackson2HalFormsIntegrationTest {
 
 		return MappingTestUtils.createMapper(Jackson2HalFormsIntegrationTest.class, configurer.andThen(it -> {
 			it.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(this.provider, provider,
-					resolver, new HalConfiguration(), factory));
+		resolver, new HalConfiguration(), factory));
 		}));
 	}
 

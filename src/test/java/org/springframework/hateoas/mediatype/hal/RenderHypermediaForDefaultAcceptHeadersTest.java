@@ -59,7 +59,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ContextConfiguration
 class RenderHypermediaForDefaultAcceptHeadersTest {
 
-	@Autowired WebApplicationContext context;
+	@Autowired
+	WebApplicationContext context;
 
 	MockMvc mockMvc;
 
@@ -77,8 +78,8 @@ class RenderHypermediaForDefaultAcceptHeadersTest {
 	void browserBasedDefaultAcceptHeadersShouldProduceHalJson() throws Exception {
 
 		this.mockMvc.perform(get("/employees").accept(MediaType.APPLICATION_XHTML_XML, MediaType.ALL)) //
-				.andExpect(status().isOk())
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE));
+	.andExpect(status().isOk())
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE));
 	}
 
 	/**
@@ -90,8 +91,8 @@ class RenderHypermediaForDefaultAcceptHeadersTest {
 	void curlBasedDefaultAcceptHeadersShouldProduceHalJson() throws Exception {
 
 		this.mockMvc.perform(get("/employees").accept(MediaType.ALL)) //
-				.andExpect(status().isOk())
-				.andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE));
+	.andExpect(status().isOk())
+	.andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE));
 	}
 
 	@RestController
@@ -138,7 +139,7 @@ class RenderHypermediaForDefaultAcceptHeadersTest {
 
 	@Configuration
 	@EnableWebMvc
-	@EnableHypermediaSupport(type = { HypermediaType.HAL })
+	@EnableHypermediaSupport(type = {HypermediaType.HAL})
 	static class TestConfig {
 
 		@Bean

@@ -61,7 +61,7 @@ public class SlicedModel<T> extends CollectionModel<T> {
 	}
 
 	protected SlicedModel(Collection<T> content, @Nullable SliceMetadata metadata, Iterable<Link> links,
-			@Nullable ResolvableType fallbackType) {
+@Nullable ResolvableType fallbackType) {
 
 		super(content, links, fallbackType);
 
@@ -160,7 +160,7 @@ public class SlicedModel<T> extends CollectionModel<T> {
 	 * @see #withFallbackType(Class, Class...)
 	 */
 	public static <T> SlicedModel<T> empty(@Nullable SliceMetadata metadata, Class<?> fallbackType,
-			Class<?>... generics) {
+Class<?>... generics) {
 
 		Assert.notNull(fallbackType, "Fallback type must not be null!");
 		Assert.notNull(generics, "Generics must not be null!");
@@ -177,7 +177,7 @@ public class SlicedModel<T> extends CollectionModel<T> {
 	 * @see #withFallbackType(ParameterizedTypeReference)
 	 */
 	public static <T> SlicedModel<T> empty(@Nullable SliceMetadata metadata,
-			ParameterizedTypeReference<T> fallbackType) {
+ParameterizedTypeReference<T> fallbackType) {
 
 		Assert.notNull(fallbackType, "Fallback type must not be null!");
 
@@ -356,7 +356,7 @@ public class SlicedModel<T> extends CollectionModel<T> {
 	@Override
 	public String toString() {
 		return String.format("SlicedModel { content: %s, fallbackType: %s, metadata: %s, links: %s }", //
-				getContent(), fallbackType, metadata, getLinks());
+	getContent(), fallbackType, metadata, getLinks());
 	}
 
 	/*
@@ -377,7 +377,7 @@ public class SlicedModel<T> extends CollectionModel<T> {
 		SlicedModel<?> that = (SlicedModel<?>) obj;
 
 		return Objects.equals(this.metadata, that.metadata) //
-				&& super.equals(obj);
+	&& super.equals(obj);
 	}
 
 	/*
@@ -403,7 +403,8 @@ public class SlicedModel<T> extends CollectionModel<T> {
 		@JsonProperty //
 		private long number;
 
-		protected SliceMetadata() {}
+		protected SliceMetadata() {
+		}
 
 		/**
 		 * Creates a new {@link SliceMetadata} from the given size, and slice number.
@@ -465,8 +466,8 @@ public class SlicedModel<T> extends CollectionModel<T> {
 			SliceMetadata that = (SliceMetadata) obj;
 
 			return super.equals(that) //
-					&& Objects.equals(this.number, that.number) //
-					&& Objects.equals(this.size, that.size);
+		&& Objects.equals(this.number, that.number) //
+		&& Objects.equals(this.size, that.size);
 		}
 
 		/*

@@ -34,10 +34,10 @@ import org.springframework.hateoas.RepresentationModel;
 class RepresentationModelRuntimeHints implements RuntimeHintsRegistrar {
 
 	private static final List<Class<?>> REPRESENTATION_MODELS = List.of(RepresentationModel.class, //
-			EntityModel.class, //
-			CollectionModel.class, //
-			PagedModel.class,
-			PagedModel.PageMetadata.class);
+EntityModel.class, //
+CollectionModel.class, //
+PagedModel.class,
+PagedModel.PageMetadata.class);
 
 	/*
 	 * (non-Javadoc)
@@ -49,6 +49,6 @@ class RepresentationModelRuntimeHints implements RuntimeHintsRegistrar {
 		ReflectionHints reflection = hints.reflection();
 
 		REPRESENTATION_MODELS.forEach(it -> reflection.registerType(it, //
-				MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS));
+	MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS));
 	}
 }

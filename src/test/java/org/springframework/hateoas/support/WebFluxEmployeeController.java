@@ -81,40 +81,40 @@ public class WebFluxEmployeeController {
 		WebFluxEmployeeController controller = methodOn(WebFluxEmployeeController.class);
 
 		return Flux.fromIterable(EMPLOYEES.keySet()) //
-				.flatMap(this::findOne) //
-				.collectList() //
-				.flatMap(resources -> linkTo(controller.all()).withSelfRel() //
-						.andAffordance(controller.newEmployee(null)) //
-						.andAffordance(controller.search(null, null)) //
-						.toMono() //
-						.map(selfLink -> CollectionModel.of(resources, selfLink)));
+	.flatMap(this::findOne) //
+	.collectList() //
+	.flatMap(resources -> linkTo(controller.all()).withSelfRel() //
+.andAffordance(controller.newEmployee(null)) //
+.andAffordance(controller.search(null, null)) //
+.toMono() //
+.map(selfLink -> CollectionModel.of(resources, selfLink)));
 	}
 
 	@GetMapping("/employees/search")
 	public Mono<CollectionModel<EntityModel<Employee>>> search( //
-			@RequestParam Optional<String> name, //
-			@RequestParam Optional<String> role) {
+@RequestParam Optional<String> name, //
+@RequestParam Optional<String> role) {
 
 		WebFluxEmployeeController controller = methodOn(WebFluxEmployeeController.class);
 
 		return Flux.fromIterable(EMPLOYEES.keySet()) //
-				.flatMap(this::findOne) //
-				.filter(resource -> {
+	.flatMap(this::findOne) //
+	.filter(resource -> {
 
-					boolean nameMatches = name //
-							.map(s -> resource.getContent().getName().contains(s)) //
-							.orElse(true);
+		boolean nameMatches = name //
+	.map(s -> resource.getContent().getName().contains(s)) //
+	.orElse(true);
 
-					boolean roleMatches = name.map(s -> resource.getContent().getRole().contains(s)) //
-							.orElse(true);
+		boolean roleMatches = name.map(s -> resource.getContent().getRole().contains(s)) //
+	.orElse(true);
 
-					return nameMatches && roleMatches;
-				}).collectList().flatMap(resources -> linkTo(controller.all()) //
-						.withSelfRel() //
-						.andAffordance(controller.newEmployee(null)) //
-						.andAffordance(controller.search(null, null)) //
-						.toMono() //
-						.map(selfLink -> CollectionModel.of(resources, selfLink)));
+		return nameMatches && roleMatches;
+	}).collectList().flatMap(resources -> linkTo(controller.all()) //
+	.withSelfRel() //
+	.andAffordance(controller.newEmployee(null)) //
+	.andAffordance(controller.search(null, null)) //
+	.toMono() //
+	.map(selfLink -> CollectionModel.of(resources, selfLink)));
 	}
 
 	@GetMapping("/employees/{id}")
@@ -129,106 +129,99 @@ public class WebFluxEmployeeController {
 		}
 
 		Mono<Link> selfLink = linkTo(controller.findOne(id)).withSelfRel() //
-				.andAffordance(controller.updateEmployee(null, id)) //
-				.andAffordance(controller.partiallyUpdateEmployee(null, id)) //
-				.toMono();
+	.andAffordance(controller.updateEmployee(null, id)) //
+	.andAffordance(controller.partiallyUpdateEmployee(null, id)) //
+	.toMono();
 
 		Mono<Link> employeesLink = linkTo(controller.all()).withRel("employees") //
-				.toMono();
+	.toMono();
 
 		return selfLink.zipWith(employeesLink) //
-				.map(function((left, right) -> Links.of(left, right))) //
-				.map(links -> EntityModel.of(employee, links));
+	.map(function((left, right) -> Links.of(left, right))) //
+	.map(links -> EntityModel.of(employee, links));
 	}
 
 	@PostMapping("/employees")
 	public Mono<ResponseEntity<?>> newEmployee(@RequestBody Mono<EntityModel<Employee>> employee) {
 
 		return employee //
-				.flatMap(resource -> {
+	.flatMap(resource -> {
 
-					int newEmployeeId = EMPLOYEES.size();
-					EMPLOYEES.put(newEmployeeId, resource.getContent());
-					return findOne(newEmployeeId);
-				}) //
-				.map(findOne -> ResponseEntity.created(findOne //
-						.getRequiredLink(IanaLinkRelations.SELF) //
-						.toUri()) //
-						.build());
+		int newEmployeeId = EMPLOYEES.size();
+		EMPLOYEES.put(newEmployeeId, resource.getContent());
+		return findOne(newEmployeeId);
+	}) //
+	.map(findOne -> ResponseEntity.created(findOne //
+.getRequiredLink(IanaLinkRelations.SELF) //
+.toUri()) //
+.build());
 	}
 
 	@PutMapping("/employees/{id}")
 	public Mono<ResponseEntity<?>> updateEmployee(@RequestBody Mono<EntityModel<Employee>> employee,
-			@PathVariable Integer id) {
+@PathVariable Integer id) {
 
 		return employee.flatMap(resource -> {
 
 			EMPLOYEES.put(id, resource.getContent());
 			return findOne(id);
 		}).map(findOne -> ResponseEntity.noContent() //
-				.location(findOne.getRequiredLink(IanaLinkRelations.SELF).toUri()).build());
+	.location(findOne.getRequiredLink(IanaLinkRelations.SELF).toUri()).build());
 	}
 
 	@PatchMapping("/employees/{id}")
 	public Mono<ResponseEntity<?>> partiallyUpdateEmployee( //
-			@RequestBody Mono<EntityModel<Employee>> employee, @PathVariable Integer id) {
+@RequestBody Mono<EntityModel<Employee>> employee, @PathVariable Integer id) {
 
 		return employee //
-				.flatMap(resource -> {
+	.flatMap(resource -> {
 
-					Employee newEmployee = EMPLOYEES.get(id);
+		Employee newEmployee = EMPLOYEES.get(id);
 
-					if (resource.getContent().getName() != null) {
-						newEmployee = newEmployee.withName(resource.getContent().getName());
-					}
+		if (resource.getContent().getName() != null) {
+			newEmployee = newEmployee.withName(resource.getContent().getName());
+		}
 
-					if (resource.getContent().getRole() != null) {
-						newEmployee = newEmployee.withRole(resource.getContent().getRole());
-					}
+		if (resource.getContent().getRole() != null) {
+			newEmployee = newEmployee.withRole(resource.getContent().getRole());
+		}
 
-					EMPLOYEES.put(id, newEmployee);
+		EMPLOYEES.put(id, newEmployee);
 
-					return findOne(id);
+		return findOne(id);
 
-				}).map(findOne -> ResponseEntity.noContent() //
-						.location(findOne.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
-						.build() //
-				);
+	}).map(findOne -> ResponseEntity.noContent() //
+.location(findOne.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+.build() //
+		);
 	}
 
 	@GetMapping(value = "/profile", produces = ALPS_JSON_VALUE)
 	Alps profile() {
 
 		return Alps.alps() //
-				.doc(doc() //
-						.href("https://example.org/samples/full/doc.html") //
-						.value("value goes here") //
-						.format(Format.TEXT) //
-						.build()) //
-				.descriptor(getExposedProperties(Employee.class).stream() //
-						.map(property -> Descriptor.builder() //
-								.id("class field [" + property.getName() + "]") //
-								.name(property.getName()) //
-								.type(Type.SEMANTIC) //
-								.ext(Ext.builder() //
+	.doc(doc() //
+.href("https://example.org/samples/full/doc.html") //
+.value("value goes here") //
+.format(Format.TEXT) //
+.build()) //
+	.descriptor(getExposedProperties(Employee.class).stream() //
+.map(property -> Descriptor.builder() //.id("class field [" + property.getName() + "]") //.name(property.getName()) //.type(Type.SEMANTIC) //.ext(Ext.builder() //
 										.id("ext [" + property.getName() + "]") //
 										.href("https://example.org/samples/ext/" + property.getName()) //
 										.value("value goes here") //
-										.build()) //
-								.rt("rt for [" + property.getName() + "]") //
-								.descriptor(Collections.singletonList(Descriptor.builder().id("embedded").build())) //
-								.build()) //
-						.collect(Collectors.toList()))
-				.build();
+										.build()) //.rt("rt for [" + property.getName() + "]") //.descriptor(Collections.singletonList(Descriptor.builder().id("embedded").build())) //.build()) //
+.collect(Collectors.toList()))
+	.build();
 	}
 
 	@GetMapping("/employees/problem")
 	public ResponseEntity<?> problem() {
 
 		return ResponseEntity.badRequest().body(Problem.create() //
-				.withType(URI.create("http://example.com/problem")) //
-				.withTitle("Employee-based problem") //
-				.withStatus(HttpStatus.BAD_REQUEST) //
-				.withDetail("This is a test case"));
+	.withType(URI.create("http://example.com/problem")) //
+	.withTitle("Employee-based problem") //
+	.withStatus(HttpStatus.BAD_REQUEST) //
+	.withDetail("This is a test case"));
 	}
 }

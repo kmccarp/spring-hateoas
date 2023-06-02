@@ -86,25 +86,25 @@ class HalFormsPropertyFactory {
 			HalFormsOptions options = optionsFactory.getOptions(payload, metadata);
 
 			HalFormsProperty property = new HalFormsProperty()
-					.withName(metadata.getName())
-					.withRequired(metadata.isRequired()) //
-					.withReadOnly(metadata.isReadOnly())
-					.withMin(metadata.getMin())
-					.withMax(metadata.getMax())
-					.withMinLength(metadata.getMinLength())
-					.withMaxLength(metadata.getMaxLength())
-					.withRegex(lookupRegex(metadata)) //
-					.withType(inputType) //
-					.withValue(options != null ? options.getSelectedValue() : null) //
-					.withOptions(options);
+		.withName(metadata.getName())
+		.withRequired(metadata.isRequired()) //
+		.withReadOnly(metadata.isReadOnly())
+		.withMin(metadata.getMin())
+		.withMax(metadata.getMax())
+		.withMinLength(metadata.getMinLength())
+		.withMaxLength(metadata.getMaxLength())
+		.withRegex(lookupRegex(metadata)) //
+		.withType(inputType) //
+		.withValue(options != null ? options.getSelectedValue() : null) //
+		.withOptions(options);
 
 			Function<String, I18nedPropertyMetadata> factory = I18nedPropertyMetadata.factory(payload, property);
 
 			return Optional.of(property)
-					.map(it -> i18n(it, factory.apply("_placeholder"), it::withPlaceholder))
-					.map(it -> i18n(it, factory.apply("_prompt"), it::withPrompt))
-					.map(it -> model.hasHttpMethod(HttpMethod.PATCH) ? it.withRequired(false) : it)
-					.orElse(property);
+		.map(it -> i18n(it, factory.apply("_placeholder"), it::withPlaceholder))
+		.map(it -> i18n(it, factory.apply("_prompt"), it::withPrompt))
+		.map(it -> model.hasHttpMethod(HttpMethod.PATCH) ? it.withRequired(false) : it)
+		.orElse(property);
 		});
 	}
 
@@ -120,13 +120,13 @@ class HalFormsPropertyFactory {
 	}
 
 	private HalFormsProperty i18n(HalFormsProperty property, MessageSourceResolvable metadata,
-			Function<String, HalFormsProperty> application) {
+Function<String, HalFormsProperty> application) {
 
 		String resolved = resolver.resolve(metadata);
 
 		return !StringUtils.hasText(resolved)
-				? property
-				: application.apply(resolved);
+	? property
+	: application.apply(resolved);
 	}
 
 	private static class I18nedPropertyMetadata implements MessageSourceResolvable {
@@ -143,7 +143,7 @@ class HalFormsPropertyFactory {
 		}
 
 		public static Function<String, I18nedPropertyMetadata> factory(InputPayloadMetadata metadata,
-				HalFormsProperty property) {
+	HalFormsProperty property) {
 			return suffix -> new I18nedPropertyMetadata("%s.".concat(suffix), metadata, property);
 		}
 
@@ -170,8 +170,8 @@ class HalFormsPropertyFactory {
 			List<String> codes = new ArrayList<>();
 
 			metadata.getI18nCodes().stream() //
-					.map(it -> String.format("%s.%s", it, globalCode)) //
-					.forEach(codes::add);
+		.map(it -> String.format("%s.%s", it, globalCode)) //
+		.forEach(codes::add);
 
 			codes.add(globalCode);
 

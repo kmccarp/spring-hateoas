@@ -46,14 +46,14 @@ class ArchitectureTest {
 
 	Collection<ImportOption> options = List.of(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS);
 	JavaClasses classes = new ClassFileImporter(options) //
-			.importPackages("org.springframework.hateoas", "org.springframework");
+.importPackages("org.springframework.hateoas", "org.springframework");
 
 	@Test
 	void assertNoCyclicPackageDependencies() {
 
 		SliceRule rule = SlicesRuleDefinition.slices() //
-				.matching("org.springframework.hateoas.(**)..") //
-				.should().beFreeOfCycles();
+	.matching("org.springframework.hateoas.(**)..") //
+	.should().beFreeOfCycles();
 
 		rule.check(classes);
 	}
@@ -62,19 +62,19 @@ class ArchitectureTest {
 	void onlyReactivePackagesReferToReactiveTypesInSpringFramework() {
 
 		DescribedPredicate<JavaClass> areSpringFrameworkClassesWithReactiveDependency = JavaClass.Predicates
-				.resideInAnyPackage("org.springframework..") //
-				.and(JavaClass.Predicates.resideOutsideOfPackage("..hateoas..")) //
-				.and(dependsOn(reactiveType()));
+	.resideInAnyPackage("org.springframework..") //
+	.and(JavaClass.Predicates.resideOutsideOfPackage("..hateoas..")) //
+	.and(dependsOn(reactiveType()));
 
 		ArchRuleDefinition.noClasses().that() //
-				.resideInAnyPackage("org.springframework.hateoas..") //
-				.and().resideOutsideOfPackages("..reactive") //
-				.and().haveSimpleNameNotStartingWith("WebFlux") //
-				.and().haveSimpleNameNotStartingWith("WebClient") //
-				.and().haveSimpleNameNotStartingWith("HypermediaWebClient") //
-				.and().haveSimpleNameNotStartingWith("HypermediaWebTestClient") //
-				.should().dependOnClassesThat(areSpringFrameworkClassesWithReactiveDependency) //
-				.check(classes);
+	.resideInAnyPackage("org.springframework.hateoas..") //
+	.and().resideOutsideOfPackages("..reactive") //
+	.and().haveSimpleNameNotStartingWith("WebFlux") //
+	.and().haveSimpleNameNotStartingWith("WebClient") //
+	.and().haveSimpleNameNotStartingWith("HypermediaWebClient") //
+	.and().haveSimpleNameNotStartingWith("HypermediaWebTestClient") //
+	.should().dependOnClassesThat(areSpringFrameworkClassesWithReactiveDependency) //
+	.check(classes);
 	}
 
 	static class Architecture {
@@ -107,8 +107,8 @@ class ArchitectureTest {
 				public boolean test(@Nullable JavaClass input) {
 
 					return input != null && input.getDirectDependenciesFromSelf().stream() //
-							.map(Dependency::getTargetClass) //
-							.anyMatch(predicate::test);
+				.map(Dependency::getTargetClass) //
+				.anyMatch(predicate::test);
 				}
 			};
 		}

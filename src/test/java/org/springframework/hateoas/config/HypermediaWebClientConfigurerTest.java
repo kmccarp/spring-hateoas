@@ -44,8 +44,8 @@ public class HypermediaWebClientConfigurerTest {
 			WebClient webClient = configurer.registerHypermediaTypes(WebClient.builder()).build();
 
 			assertThat(getSupportedHypermediaTypes(webClient)) //
-					.contains(HAL_JSON) //
-					.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
+		.contains(HAL_JSON) //
+		.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
 		});
 	}
 
@@ -58,7 +58,7 @@ public class HypermediaWebClientConfigurerTest {
 			WebClient webClient = configurer.registerHypermediaTypes(WebClient.builder()).build();
 
 			assertThat(getSupportedHypermediaTypes(webClient)) //
-					.contains(HAL_JSON, HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
+		.contains(HAL_JSON, HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
 		});
 	}
 
@@ -71,8 +71,8 @@ public class HypermediaWebClientConfigurerTest {
 			WebClient webClient = configurer.registerHypermediaTypes(WebClient.builder()).build();
 
 			assertThat(MediaTypeTestUtils.getSupportedHypermediaTypes(webClient)) //
-					.contains(HAL_JSON, FRODO_JSON) //
-					.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
+		.contains(HAL_JSON, FRODO_JSON) //
+		.doesNotContain(HAL_FORMS_JSON, COLLECTION_JSON, UBER_JSON);
 		});
 	}
 
@@ -82,8 +82,7 @@ public class HypermediaWebClientConfigurerTest {
 	}
 
 	@EnableHypermediaSupport(
-			type = { HypermediaType.HAL, HypermediaType.HAL_FORMS, HypermediaType.COLLECTION_JSON,
-					HypermediaType.UBER })
+type = {HypermediaType.HAL, HypermediaType.HAL_FORMS, HypermediaType.COLLECTION_JSON,HypermediaType.UBER})
 	static class AllHypermediaConfig {
 
 	}

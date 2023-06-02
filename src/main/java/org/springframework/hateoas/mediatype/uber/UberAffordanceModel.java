@@ -37,7 +37,7 @@ import org.springframework.lang.Nullable;
 class UberAffordanceModel extends AffordanceModel {
 
 	private static final Set<HttpMethod> ENTITY_ALTERING_METHODS = Set.of(HttpMethod.POST, HttpMethod.PUT,
-			HttpMethod.PATCH);
+HttpMethod.PATCH);
 
 	private final Collection<MediaType> mediaTypes = Collections.singleton(MediaTypes.UBER_JSON);
 
@@ -47,8 +47,8 @@ class UberAffordanceModel extends AffordanceModel {
 	UberAffordanceModel(ConfiguredAffordance configured) {
 
 		super(configured.getNameOrDefault(), configured.getTarget(),
-				configured.getMethod(), configured.getInputMetadata(), configured.getQueryParameters(),
-				configured.getOutputMetadata());
+	configured.getMethod(), configured.getInputMetadata(), configured.getQueryParameters(),
+	configured.getOutputMetadata());
 
 		this.inputProperties = determineAffordanceInputs();
 		this.queryProperties = determineQueryProperties();
@@ -61,11 +61,11 @@ class UberAffordanceModel extends AffordanceModel {
 		}
 
 		return getInput().stream()//
-				.map(PropertyMetadata::getName) //
-				.map(propertyName -> new UberData() //
-						.withName(propertyName) //
-						.withValue("")) //
-				.collect(Collectors.toList());
+	.map(PropertyMetadata::getName) //
+	.map(propertyName -> new UberData() //
+.withName(propertyName) //
+.withValue("")) //
+	.collect(Collectors.toList());
 	}
 
 	/**
@@ -79,8 +79,8 @@ class UberAffordanceModel extends AffordanceModel {
 
 		if (getHttpMethod().equals(HttpMethod.GET)) {
 			return getQueryMethodParameters().stream()
-					.map(queryParameter -> new UberData().withName(queryParameter.getName()).withValue(""))
-					.collect(Collectors.toList());
+		.map(queryParameter -> new UberData().withName(queryParameter.getName()).withValue(""))
+		.collect(Collectors.toList());
 		} else {
 			return Collections.emptyList();
 		}

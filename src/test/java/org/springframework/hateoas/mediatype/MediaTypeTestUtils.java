@@ -62,16 +62,16 @@ public class MediaTypeTestUtils {
 	public static List<MediaType> getSupportedHypermediaTypes(ApplicationContext context, Class<?> type) {
 
 		return getSupportedHypermediaTypes(context,
-				it -> it.getBean(RequestMappingHandlerAdapter.class).getMessageConverters(), type);
+	it -> it.getBean(RequestMappingHandlerAdapter.class).getMessageConverters(), type);
 	}
 
 	public static List<MediaType> getSupportedHypermediaTypes(ApplicationContext context,
-			Function<ApplicationContext, List<HttpMessageConverter<?>>> extractor) {
+Function<ApplicationContext, List<HttpMessageConverter<?>>> extractor) {
 		return getSupportedHypermediaTypes(context, extractor, RepresentationModel.class);
 	}
 
 	public static List<MediaType> getSupportedHypermediaTypes(ApplicationContext context,
-			Function<ApplicationContext, List<HttpMessageConverter<?>>> extractor, Class<?> type) {
+Function<ApplicationContext, List<HttpMessageConverter<?>>> extractor, Class<?> type) {
 		return getSupportedHypermediaTypes(extractor.apply(context), type);
 	}
 
@@ -82,11 +82,11 @@ public class MediaTypeTestUtils {
 	public static List<MediaType> getSupportedHypermediaTypes(List<HttpMessageConverter<?>> converters, Class<?> type) {
 
 		return converters.stream() //
-				.filter(MappingJackson2HttpMessageConverter.class::isInstance) //
-				.map(MappingJackson2HttpMessageConverter.class::cast) //
-				.findFirst() //
-				.map(it -> it.getSupportedMediaTypes(type)) //
-				.orElseGet(() -> Collections.emptyList()); //
+	.filter(MappingJackson2HttpMessageConverter.class::isInstance) //
+	.map(MappingJackson2HttpMessageConverter.class::cast) //
+	.findFirst() //
+	.map(it -> it.getSupportedMediaTypes(type)) //
+	.orElseGet(() -> Collections.emptyList()); //
 	}
 
 	public static List<MediaType> getSupportedHypermediaTypes(WebClient client) {
@@ -97,12 +97,12 @@ public class MediaTypeTestUtils {
 	public static List<MediaType> getSupportedHypermediaTypes(WebClient client, Class<?> type) {
 
 		return exchangeStrategies(client).messageReaders().stream() //
-				.filter(DecoderHttpMessageReader.class::isInstance) //
-				.map(DecoderHttpMessageReader.class::cast) //
-				.filter(it -> Jackson2JsonDecoder.class.isInstance(it.getDecoder()))
-				.findFirst() //
-				.map(it -> it.getReadableMediaTypes(ResolvableType.forClass(type))) //
-				.orElseGet(() -> Collections.emptyList());
+	.filter(DecoderHttpMessageReader.class::isInstance) //
+	.map(DecoderHttpMessageReader.class::cast) //
+	.filter(it -> Jackson2JsonDecoder.class.isInstance(it.getDecoder()))
+	.findFirst() //
+	.map(it -> it.getReadableMediaTypes(ResolvableType.forClass(type))) //
+	.orElseGet(() -> Collections.emptyList());
 	}
 
 	/**
@@ -116,6 +116,6 @@ public class MediaTypeTestUtils {
 	private static ExchangeStrategies exchangeStrategies(WebClient webClient) {
 
 		return (ExchangeStrategies) ReflectionTestUtils
-				.getField(ReflectionTestUtils.getField(webClient, "exchangeFunction"), "strategies");
+	.getField(ReflectionTestUtils.getField(webClient, "exchangeFunction"), "strategies");
 	}
 }

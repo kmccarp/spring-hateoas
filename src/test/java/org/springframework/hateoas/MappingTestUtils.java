@@ -43,16 +43,17 @@ public class MappingTestUtils {
 
 		// Disable auto-detection to make sure our model classes work in that scenario
 		mapper.disable(MapperFeature.AUTO_DETECT_CREATORS) //
-				.disable(MapperFeature.AUTO_DETECT_FIELDS) //
-				.disable(MapperFeature.AUTO_DETECT_GETTERS) //
-				.disable(MapperFeature.AUTO_DETECT_IS_GETTERS) //
-				.disable(MapperFeature.AUTO_DETECT_SETTERS);
+	.disable(MapperFeature.AUTO_DETECT_FIELDS) //
+	.disable(MapperFeature.AUTO_DETECT_GETTERS) //
+	.disable(MapperFeature.AUTO_DETECT_IS_GETTERS) //
+	.disable(MapperFeature.AUTO_DETECT_SETTERS);
 
 		return mapper;
 	}
 
 	public static ContextualMapper createMapper(Class<?> context) {
-		return createMapper(context, it -> {});
+		return createMapper(context, it -> {
+		});
 	}
 
 	public static ContextualMapper createMapper(Class<?> context, Consumer<ObjectMapper> configurer) {

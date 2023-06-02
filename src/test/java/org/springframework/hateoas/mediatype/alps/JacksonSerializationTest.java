@@ -55,19 +55,19 @@ class JacksonSerializationTest {
 	void writesSampleDocument() throws Exception {
 
 		Alps alps = alps().//
-				doc(doc().href("https://example.org/samples/full/doc.html").build()). //
-				descriptor(Arrays.asList(//
-						descriptor().id("search").type(Type.SAFE).//
+	doc(doc().href("https://example.org/samples/full/doc.html").build()). //
+	descriptor(Arrays.asList(//
+	descriptor().id("search").type(Type.SAFE).//
 								doc(new Doc("A search form with two inputs.", Format.TEXT)).//
 								descriptor(Arrays.asList( //
-										descriptor().href("#resultType").build(), //
-										descriptor().id("value").name("search").type(Type.SEMANTIC).build())//
-								).build(), //
-						descriptor().id("resultType").type(Type.SEMANTIC).//
+descriptor().href("#resultType").build(), //
+descriptor().id("value").name("search").type(Type.SEMANTIC).build())//
+	).build(), //
+	descriptor().id("resultType").type(Type.SEMANTIC).//
 								doc(doc().value("results format").build()).//
 								ext(ext().id("#ext-range").href("http://alps.io/ext/range").value("summary,detail").build()//
-								).build())//
-				).build();
+	).build())//
+		).build();
 
 		assertThat(mapper.writeValueAsString(alps)).isEqualTo(read(new ClassPathResource("reference.json", getClass())));
 	}

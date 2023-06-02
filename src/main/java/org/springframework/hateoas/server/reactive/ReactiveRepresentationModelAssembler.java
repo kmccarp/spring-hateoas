@@ -50,7 +50,7 @@ public interface ReactiveRepresentationModelAssembler<T, D extends Representatio
 	default Mono<CollectionModel<D>> toCollectionModel(Flux<? extends T> entities, ServerWebExchange exchange) {
 
 		return entities.flatMap(entity -> toModel(entity, exchange)) //
-				.collectList() //
-				.map(CollectionModel::of);
+	.collectList() //
+	.map(CollectionModel::of);
 	}
 }

@@ -35,18 +35,18 @@ public class AffordancesSample {
 
 		var link = Affordances.of(linkTo(methodInvocation).withSelfRel()) // <1>
 
-				.afford(HttpMethod.POST) // <2>
-				.withInputAndOutput(Employee.class) //
-				.withName("createEmployee") //
+	.afford(HttpMethod.POST) // <2>
+	.withInputAndOutput(Employee.class) //
+	.withName("createEmployee") //
 
-				.andAfford(HttpMethod.GET) // <3>
-				.withOutput(Employee.class) //
-				.addParameters(//
+	.andAfford(HttpMethod.GET) // <3>
+	.withOutput(Employee.class) //
+	.addParameters(//
 						QueryParameter.optional("name"), //
-						QueryParameter.optional("role")) //
-				.withName("search") //
+QueryParameter.optional("role")) //
+	.withName("search") //
 
-				.toLink();
+	.toLink();
 		// end::affordances[]
 	}
 }

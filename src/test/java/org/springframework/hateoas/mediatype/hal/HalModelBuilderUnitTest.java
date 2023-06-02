@@ -77,7 +77,7 @@ public class HalModelBuilderUnitTest {
 		this.mapper = new ObjectMapper();
 		this.mapper.registerModule(new Jackson2HalModule());
 		this.mapper.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(
-				new EvoInflectorLinkRelationProvider(), CurieProvider.NONE, MessageResolver.DEFAULTS_ONLY));
+	new EvoInflectorLinkRelationProvider(), CurieProvider.NONE, MessageResolver.DEFAULTS_ONLY));
 		this.mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		this.contextualMapper = createMapper(getClass());
@@ -87,50 +87,50 @@ public class HalModelBuilderUnitTest {
 	void embeddedSpecUsingHalModelBuilder() throws Exception {
 
 		RepresentationModel<?> model = halModel() //
-				.embed(halModel() //
-						.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
-						.link(ALAN_WATTS_SELF) //
-						.build(), AUTHOR_REL)
-				.embed(halModel() //
-						.entity(new Author("John Smith", null, null)) //
-						.link(JOHN_SMITH_SELF) //
-						.build(), ILLUSTRATOR_REL)
-				.link(Link.of("/books/the-way-of-zen")) //
-				.link(Link.of("/people/alan-watts", AUTHOR_REL)) //
-				.link(Link.of("/people/john-smith", ILLUSTRATOR_REL)) //
-				.build();
+	.embed(halModel() //
+.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
+.link(ALAN_WATTS_SELF) //
+.build(), AUTHOR_REL)
+	.embed(halModel() //
+.entity(new Author("John Smith", null, null)) //
+.link(JOHN_SMITH_SELF) //
+.build(), ILLUSTRATOR_REL)
+	.link(Link.of("/books/the-way-of-zen")) //
+	.link(Link.of("/people/alan-watts", AUTHOR_REL)) //
+	.link(Link.of("/people/john-smith", ILLUSTRATOR_REL)) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model))
-				.isEqualTo(contextualMapper.readFileContent("hal-embedded-author-illustrator.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-embedded-author-illustrator.json"));
 	}
 
 	@Test // #864
 	void previewForLinkRelationsUsingHalModelBuilder() throws Exception {
 
 		RepresentationModel<?> model = halModel() //
-				.link("/books/the-way-of-zen", IanaLinkRelations.SELF) //
-				.preview(halModel() //
-						.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
-						.link(ALAN_WATTS_SELF) //
-						.build())
-				.forLink(Link.of("/people/alan-watts", AUTHOR_REL)) //
-				.preview(halModel() //
-						.entity(new Author("John Smith", null, null)) //
-						.link(JOHN_SMITH_SELF) //
-						.build()) //
-				.forLink(Link.of("/people/john-smith", ILLUSTRATOR_REL)).build();
+	.link("/books/the-way-of-zen", IanaLinkRelations.SELF) //
+	.preview(halModel() //
+.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
+.link(ALAN_WATTS_SELF) //
+.build())
+	.forLink(Link.of("/people/alan-watts", AUTHOR_REL)) //
+	.preview(halModel() //
+.entity(new Author("John Smith", null, null)) //
+.link(JOHN_SMITH_SELF) //
+.build()) //
+	.forLink(Link.of("/people/john-smith", ILLUSTRATOR_REL)).build();
 
 		assertThat(this.mapper.writeValueAsString(model))
-				.isEqualTo(contextualMapper.readFileContent("hal-embedded-author-illustrator.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-embedded-author-illustrator.json"));
 	}
 
 	@Test // #864
 	void renderSingleItemUsingHalModelBuilder() throws Exception {
 
 		RepresentationModel<?> model = halModel() //
-				.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
-				.link(ALAN_WATTS_SELF) //
-				.build();
+	.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
+	.link(ALAN_WATTS_SELF) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model)).isEqualTo(contextualMapper.readFileContent("hal-single-item.json"));
 	}
@@ -139,12 +139,12 @@ public class HalModelBuilderUnitTest {
 	void renderSingleItemUsingDefaultModelBuilder() throws Exception {
 
 		RepresentationModel<?> model = halModel()//
-				.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
-				.link(ALAN_WATTS_SELF) //
-				.build();
+	.entity(new Author("Alan Watts", "January 6, 1915", "November 16, 1973")) //
+	.link(ALAN_WATTS_SELF) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model)) //
-				.isEqualTo(contextualMapper.readFileContent("hal-single-item.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-single-item.json"));
 	}
 
 	@Test // #864
@@ -153,55 +153,35 @@ public class HalModelBuilderUnitTest {
 		Link authorsLink = Link.of("http://localhost/authors", LinkRelation.of("authors"));
 
 		RepresentationModel<?> model = halModel() //
-				.embed( //
-						halModel() //
-								.entity(new Author("Greg L. Turnquist", null, null)) //
-								.link(Link.of("http://localhost/author/1")) //
-								.link(authorsLink) //
-								.build())
-				.embed( //
-						halModel() //
-								.entity(new Author("Craig Walls", null, null)) //
-								.link(Link.of("http://localhost/author/2")) //
-								.link(authorsLink) //
-								.build())
-				.embed( //
-						halModel() //
-								.entity(new Author("Oliver Drotbohm", null, null)) //
-								.link(Link.of("http://localhost/author/3")) //
-								.link(authorsLink) //
-								.build())
-				.link(Link.of("http://localhost/authors")) //
-				.build();
+	.embed( //
+halModel() //.entity(new Author("Greg L. Turnquist", null, null)) //.link(Link.of("http://localhost/author/1")) //.link(authorsLink) //.build())
+	.embed( //
+halModel() //.entity(new Author("Craig Walls", null, null)) //.link(Link.of("http://localhost/author/2")) //.link(authorsLink) //.build())
+	.embed( //
+halModel() //.entity(new Author("Oliver Drotbohm", null, null)) //.link(Link.of("http://localhost/author/3")) //.link(authorsLink) //.build())
+	.link(Link.of("http://localhost/authors")) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model))
-				.isEqualTo(contextualMapper.readFileContent("hal-embedded-collection.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-embedded-collection.json"));
 	}
 
 	@Test // #864
 	void renderCollectionUsingHalModelBuilder() throws Exception {
 
 		RepresentationModel<?> model = halModel() //
-				.embed( //
-						halModelOf(new Author("Greg L. Turnquist", null, null))
-								.link(Link.of("http://localhost/author/1")) //
-								.link(Link.of("http://localhost/authors", LinkRelation.of("authors"))) //
-								.build())
-				.embed( //
-						halModelOf(new Author("Craig Walls", null, null)) //
-								.links(Arrays.asList(Link.of("http://localhost/author/2"), //
-										Link.of("http://localhost/authors", LinkRelation.of("authors")))) //
-								.build())
-				.embed( //
-						halModelOf(new Author("Oliver Drotbohm", null, null)) //
-								.link(Link.of("http://localhost/author/3")) //
-								.link(Link.of("http://localhost/authors", LinkRelation.of("authors"))) //
-								.build())
-				.link(Link.of("http://localhost/authors")) //
-				.build();
+	.embed( //
+halModelOf(new Author("Greg L. Turnquist", null, null)).link(Link.of("http://localhost/author/1")) //.link(Link.of("http://localhost/authors", LinkRelation.of("authors"))) //.build())
+	.embed( //
+halModelOf(new Author("Craig Walls", null, null)) //.links(Arrays.asList(Link.of("http://localhost/author/2"), //
+										Link.of("http://localhost/authors", LinkRelation.of("authors")))) //.build())
+	.embed( //
+halModelOf(new Author("Oliver Drotbohm", null, null)) //.link(Link.of("http://localhost/author/3")) //.link(Link.of("http://localhost/authors", LinkRelation.of("authors"))) //.build())
+	.link(Link.of("http://localhost/authors")) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model))
-				.isEqualTo(contextualMapper.readFileContent("hal-embedded-collection.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-embedded-collection.json"));
 	}
 
 	@Test
@@ -210,38 +190,38 @@ public class HalModelBuilderUnitTest {
 		HalModelBuilder halModelBuilder = halModel();
 
 		assertThat(this.mapper.writeValueAsString(halModelBuilder.build()))
-				.isEqualTo(contextualMapper.readFileContent("hal-empty.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-empty.json"));
 
 		halModelBuilder //
-				.entity(halModel() //
-						.entity(new Author("Greg L. Turnquist", null, null)) //
-						.link(Link.of("http://localhost/author/1")) //
-						.link(Link.of("http://localhost/authors", LinkRelation.of("authors"))) //
-						.build());
+	.entity(halModel() //
+.entity(new Author("Greg L. Turnquist", null, null)) //
+.link(Link.of("http://localhost/author/1")) //
+.link(Link.of("http://localhost/authors", LinkRelation.of("authors"))) //
+.build());
 
 		assertThat(this.mapper.writeValueAsString(halModelBuilder.build()))
-				.isEqualTo(contextualMapper.readFileContent("hal-one-thing.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-one-thing.json"));
 
 		halModelBuilder //
-				.embed(new Product("Alf alarm clock", 19.99), LinkRelation.of("product")).build();
+	.embed(new Product("Alf alarm clock", 19.99), LinkRelation.of("product")).build();
 
 		assertThat(this.mapper.writeValueAsString(halModelBuilder.build()))
-				.isEqualTo(contextualMapper.readFileContent("hal-two-things.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-two-things.json"));
 	}
 
 	@Test // #193
 	void renderDifferentlyTypedEntities() throws Exception {
 
 		RepresentationModel<?> model = emptyHalModel() //
-				.embed(new Staff("Frodo Baggins", "ring bearer")) //
-				.embed(new Staff("Bilbo Baggins", "burglar")) //
-				.embed(new Product("ring of power", 999.99)) //
-				.embed(new Product("Saruman's staff", 9.99)) //
-				.link(ALAN_WATTS_SELF) //
-				.build();
+	.embed(new Staff("Frodo Baggins", "ring bearer")) //
+	.embed(new Staff("Bilbo Baggins", "burglar")) //
+	.embed(new Product("ring of power", 999.99)) //
+	.embed(new Product("Saruman's staff", 9.99)) //
+	.link(ALAN_WATTS_SELF) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model)) //
-				.isEqualTo(contextualMapper.readFileContent("hal-multiple-types.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-multiple-types.json"));
 	}
 
 	@Test // #193
@@ -251,18 +231,18 @@ public class HalModelBuilderUnitTest {
 		Staff staff2 = new Staff("Bilbo Baggins", "burglar");
 
 		RepresentationModel<?> model = halModel() //
-				.embed(staff1) //
-				.embed(staff2) //
-				.embed(new Product("ring of power", 999.99)) //
-				.embed(new Product("Saruman's staff", 9.99)) //
-				.link(ALAN_WATTS_SELF) //
-				.embed(staff1, LinkRelation.of("ring bearers")) //
-				.embed(staff2, LinkRelation.of("burglars")) //
-				.link(Link.of("/people/frodo-baggins", LinkRelation.of("frodo"))) //
-				.build();
+	.embed(staff1) //
+	.embed(staff2) //
+	.embed(new Product("ring of power", 999.99)) //
+	.embed(new Product("Saruman's staff", 9.99)) //
+	.link(ALAN_WATTS_SELF) //
+	.embed(staff1, LinkRelation.of("ring bearers")) //
+	.embed(staff2, LinkRelation.of("burglars")) //
+	.link(Link.of("/people/frodo-baggins", LinkRelation.of("frodo"))) //
+	.build();
 
 		assertThat(this.mapper.writeValueAsString(model))
-				.isEqualTo(contextualMapper.readFileContent("hal-explicit-and-implicit-relations.json"));
+	.isEqualTo(contextualMapper.readFileContent("hal-explicit-and-implicit-relations.json"));
 	}
 
 	@Test // #175 #864
@@ -280,8 +260,8 @@ public class HalModelBuilderUnitTest {
 		products.put(666, new ZoomProduct("someValue", false, true));
 
 		List<EntityModel<ZoomProduct>> productCollectionModel = products.keySet().stream() //
-				.map(id -> EntityModel.of(products.get(id), Link.of("http://localhost/products/{id}").expand(id))) //
-				.collect(Collectors.toList());
+	.map(id -> EntityModel.of(products.get(id), Link.of("http://localhost/products/{id}").expand(id))) //
+	.collect(Collectors.toList());
 
 		LinkRelation favoriteProducts = LinkRelation.of("favorite products");
 		LinkRelation purchasedProducts = LinkRelation.of("purchased products");
@@ -297,26 +277,26 @@ public class HalModelBuilderUnitTest {
 			if (content.isFavorite()) {
 
 				builder.embed(productEntityModel, favoriteProducts) //
-						.link(productEntityModel.getRequiredLink(SELF).withRel(favoriteProducts));
+			.link(productEntityModel.getRequiredLink(SELF).withRel(favoriteProducts));
 			}
 
 			if (content.isPurchased()) {
 
 				builder.embed(productEntityModel, purchasedProducts) //
-						.link(productEntityModel.getRequiredLink(SELF).withRel(purchasedProducts));
+			.link(productEntityModel.getRequiredLink(SELF).withRel(purchasedProducts));
 			}
 		}
 
 		assertThat(this.mapper.writeValueAsString(builder.build()))
-				.isEqualTo(contextualMapper.readFileContent("zoom-hypermedia.json"));
+	.isEqualTo(contextualMapper.readFileContent("zoom-hypermedia.json"));
 	}
 
 	@Test // #864
 	void addsTypedEmptyCollection() throws Exception {
 
 		RepresentationModel<?> model = halModel() //
-				.embed(Collections.emptyList(), Author.class) //
-				.build();
+	.embed(Collections.emptyList(), Author.class) //
+	.build();
 
 		assertEmptyEmbed(model, "authors");
 	}
@@ -325,8 +305,8 @@ public class HalModelBuilderUnitTest {
 	void addsEmptyCollectionForLinkRelation() throws Exception {
 
 		RepresentationModel<?> model = halModel() //
-				.embed(Collections.emptyList(), LinkRelation.of("authors")) //
-				.build();
+	.embed(Collections.emptyList(), LinkRelation.of("authors")) //
+	.build();
 
 		assertEmptyEmbed(model, "authors");
 	}
@@ -336,9 +316,9 @@ public class HalModelBuilderUnitTest {
 	void doesNotAddEmbeddForSimpleEmptyCollection() throws Exception {
 
 		RepresentationModel<?> model = halModel()
-				.embed(Stream.of(new Product("iPad", 699.0)))
-				.embed(Collections.emptyList())
-				.build();
+	.embed(Stream.of(new Product("iPad", 699.0)))
+	.embed(Collections.emptyList())
+	.build();
 
 		DocumentContext context = JsonPath.parse(mapper.writeValueAsString(model));
 
@@ -366,16 +346,16 @@ public class HalModelBuilderUnitTest {
 	void doesNotRenderAdditionalLinksBlockForCuriedEmbeds() throws Exception {
 
 		this.mapper.setHandlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator( //
-				new EvoInflectorLinkRelationProvider(), //
-				new DefaultCurieProvider("foo", UriTemplate.of("http://localhost/foo/{rel}")), //
-				MessageResolver.DEFAULTS_ONLY));
+	new EvoInflectorLinkRelationProvider(), //
+	new DefaultCurieProvider("foo", UriTemplate.of("http://localhost/foo/{rel}")), //
+	MessageResolver.DEFAULTS_ONLY));
 
 		RepresentationModel<?> model = halModel() //
-				.embed(new Staff("Frodo Baggins", "ring bearer")) //
-				.build();
+	.embed(new Staff("Frodo Baggins", "ring bearer")) //
+	.build();
 
 		assertThat(StringUtils.countOccurrencesOf(mapper.writeValueAsString(model), "_links")) //
-				.isEqualTo(1);
+	.isEqualTo(1);
 	}
 
 	private void assertEmptyEmbed(RepresentationModel<?> model, String name) throws Exception {
@@ -390,8 +370,10 @@ public class HalModelBuilderUnitTest {
 	static class Author {
 
 		private String name;
-		@Getter(onMethod = @__({ @JsonInclude(JsonInclude.Include.NON_NULL) })) private String born;
-		@Getter(onMethod = @__({ @JsonInclude(JsonInclude.Include.NON_NULL) })) private String died;
+		@Getter(onMethod = @__({@JsonInclude(JsonInclude.Include.NON_NULL)}))
+		private String born;
+		@Getter(onMethod = @__({@JsonInclude(JsonInclude.Include.NON_NULL)}))
+		private String died;
 	}
 
 	@Value
@@ -415,7 +397,9 @@ public class HalModelBuilderUnitTest {
 	static class ZoomProduct {
 
 		private String someProductProperty;
-		@Getter(onMethod = @__({ @JsonIgnore })) private boolean favorite = false;
-		@Getter(onMethod = @__({ @JsonIgnore })) private boolean purchased = false;
+		@Getter(onMethod = @__({@JsonIgnore}))
+		private boolean favorite = false;
+		@Getter(onMethod = @__({@JsonIgnore}))
+		private boolean purchased = false;
 	}
 }

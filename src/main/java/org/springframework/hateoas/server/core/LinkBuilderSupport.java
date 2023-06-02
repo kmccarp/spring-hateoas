@@ -138,7 +138,7 @@ public abstract class LinkBuilderSupport<T extends LinkBuilder> implements LinkB
 	public Link withRel(LinkRelation rel) {
 
 		return Link.of(toString(), rel) //
-				.withAffordances(affordances);
+	.withAffordances(affordances);
 	}
 
 	/*

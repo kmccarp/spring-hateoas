@@ -103,7 +103,7 @@ public class HtmlInputType {
 
 	private static final Constants CONSTANTS = new Constants(HtmlInputType.class);
 	static final Collection<Class<?>> NUMERIC_TYPES = Arrays.asList(int.class, long.class, float.class,
-			double.class, short.class, Integer.class, Long.class, Float.class, Double.class, Short.class, BigDecimal.class);
+double.class, short.class, Integer.class, Long.class, Float.class, Double.class, Short.class, BigDecimal.class);
 
 	@JsonValue //
 	private String value;

@@ -46,8 +46,8 @@ class WebMvcLinkBuilderOutsideSpringMvcUnitTest {
 	void requestingLinkOutsideWebRequest() {
 
 		Link link = linkTo(
-				methodOn(WebMvcLinkBuilderUnitTest.PersonsAddressesController.class, 15).getAddressesForCountry("DE"))
-						.withSelfRel();
+	methodOn(WebMvcLinkBuilderUnitTest.PersonsAddressesController.class, 15).getAddressesForCountry("DE"))
+	.withSelfRel();
 
 		assertThat(link).isEqualTo(Link.of("/people/15/addresses/DE").withSelfRel());
 	}

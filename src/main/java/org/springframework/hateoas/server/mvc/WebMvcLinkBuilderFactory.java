@@ -148,7 +148,7 @@ public class WebMvcLinkBuilderFactory implements MethodLinkBuilderFactory<WebMvc
 	public WebMvcLinkBuilder linkTo(Object invocationValue) {
 
 		Function<UriMapping, UriComponentsBuilder> builderFactory = mapping -> UriComponentsBuilderFactory
-				.forMapping(mapping);
+	.forMapping(mapping);
 
 		return WebHandler.linkTo(invocationValue, WebMvcLinkBuilder::new, (builder, invocation) -> {
 
@@ -207,8 +207,8 @@ public class WebMvcLinkBuilderFactory implements MethodLinkBuilderFactory<WebMvc
 			WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
 			return context == null || !context.containsBean("mvcConversionService")
-					? FALLBACK_CONVERSION_SERVICE
-					: context.getBean("mvcConversionService", ConversionService.class);
+		? FALLBACK_CONVERSION_SERVICE
+		: context.getBean("mvcConversionService", ConversionService.class);
 		};
 	}
 }

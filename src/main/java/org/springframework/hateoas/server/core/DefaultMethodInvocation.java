@@ -117,8 +117,8 @@ class DefaultMethodInvocation implements MethodInvocation, LastInvocationAware {
 		DefaultMethodInvocation that = (DefaultMethodInvocation) o;
 
 		return Objects.equals(this.type, that.type) //
-				&& Objects.equals(this.method, that.method) //
-				&& Arrays.equals(this.arguments, that.arguments);
+	&& Objects.equals(this.method, that.method) //
+	&& Arrays.equals(this.arguments, that.arguments);
 	}
 
 	/*
@@ -141,7 +141,7 @@ class DefaultMethodInvocation implements MethodInvocation, LastInvocationAware {
 	public String toString() {
 
 		return "DefaultMethodInvocation(targetType=" + this.type //
-				+ ", method=" + this.method //
-				+ ", arguments=" + Arrays.deepToString(this.arguments) + ")";
+	+ ", method=" + this.method //
+	+ ", arguments=" + Arrays.deepToString(this.arguments) + ")";
 	}
 }

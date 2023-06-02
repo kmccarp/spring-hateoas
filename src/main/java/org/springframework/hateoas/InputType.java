@@ -38,7 +38,7 @@ import org.springframework.hateoas.mediatype.html.HtmlInputType;
  */
 @Documented
 @Retention(RUNTIME)
-@Target({ FIELD, METHOD, ANNOTATION_TYPE })
+@Target({FIELD, METHOD, ANNOTATION_TYPE})
 public @interface InputType {
 	String value();
 }
