@@ -91,7 +91,7 @@ class HalFormsTemplateBuilder {
 				.orElse(template);
 	}
 
-	private static class TemplateTitle implements MessageSourceResolvable {
+	private static final class TemplateTitle implements MessageSourceResolvable {
 
 		private static final String TEMPLATE_TEMPLATE = "_templates.%s.title";
 

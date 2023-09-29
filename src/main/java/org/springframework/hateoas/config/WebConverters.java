@@ -33,9 +33,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Oliver Drotbohm
  */
-public class WebConverters {
+public final class WebConverters {
 
-	private static MediaType ANY_JSON = MediaType.parseMediaType("application/*+json");
+	private static final MediaType ANY_JSON = MediaType.parseMediaType("application/*+json");
 
 	private final List<HypermediaMappingInformation> infos;
 	private final ObjectMapper mapper;
