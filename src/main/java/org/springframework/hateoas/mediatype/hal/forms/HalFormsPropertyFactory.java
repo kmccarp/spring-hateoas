@@ -129,7 +129,7 @@ class HalFormsPropertyFactory {
 				: application.apply(resolved);
 	}
 
-	private static class I18nedPropertyMetadata implements MessageSourceResolvable {
+	private static final class I18nedPropertyMetadata implements MessageSourceResolvable {
 
 		private final String template;
 		private final InputPayloadMetadata metadata;
